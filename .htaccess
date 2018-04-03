@@ -1,0 +1,5 @@
+#turn rewirte engine on
+RewriteEngine on
+
+#rewrite for post
+RewriteRule ^admin site/admin/index.php [NC]

@@ -1,6 +1,11 @@
 <?php
 
-define("CORE_PDO","core:PDO");
+define("CORE_PDO","core:DPDO");
+define("CORE_STRING","core:String");
+define("CORE_TIMES","core:Times");
+define("CORE_PAGINATION","core:Pagination");
+define("CORE_FILEHANDLE","core:FileHandle");
+
 define("LOGIN_MEMBER", "session_login_member");
 
 

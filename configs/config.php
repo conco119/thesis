@@ -2,6 +2,7 @@
 
 define('FILE_CONF_DATABASE', '../../constant/database.ini');
 define('DB_INFO', get_db_info());
+define("THIS_LINK", "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]");
 // lay info db
 function get_db_info() {
   if(file_exists(FILE_CONF_DATABASE)){
