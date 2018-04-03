@@ -1,0 +1,3 @@
+#turn enigne on
+#RewriteEngine On
+#RewriteRule ^admin index.php [NC, L]
