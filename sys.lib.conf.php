@@ -11,4 +11,11 @@ function lib_use($path){
   $dir .= "/" . implode("/", $convToArray) . ".php";
   require_once $dir;
 }
+
+function pre($content) {
+  echo "<pre>";
+    print_r($content);
+  echo "</pre>";
+}
+
  ?>

@@ -29,7 +29,7 @@ var $query_id = 0;
 
 # -------------------------------- #
 #desc: constructor
-function __construct($conn = DB_MAIN , $pre=""){
+function __construct($conn = DB_INFO , $pre=""){
   $conn = explode(",", $conn);
   $this->server=$conn[0];
   $this->user=$conn[1];
@@ -43,14 +43,14 @@ function __construct($conn = DB_MAIN , $pre=""){
 # desc: connect and select database using vars above
 # Param: $new_link can force connect() to open a new link, even if mysql_connect() was called before with the same parameters
 function connect($new_link=false) {
-  $this->link_id=@mysql_connect($this->server,$this->user,$this->pass,$new_link);
-  @mysql_query("SET NAMES 'utf8'");
+  $this->link_id=mysql_connect($this->server,$this->user,$this->pass,$new_link);
+  mysql_query("SET NAMES 'utf8'");
 
   if (!$this->link_id) {//open failed
     $this->oops("Could not connect to server: <b>$this->server</b>.");
   }
 
-  if(!@mysql_select_db($this->database, $this->link_id)) {//no database
+  if(!mysql_select_db($this->database, $this->link_id)) {//no database
     $this->oops("Could not open database: <b>$this->database</b>.");
   }
 
@@ -65,7 +65,7 @@ function connect($new_link=false) {
 # -------------------------------- #
 # desc: close the connection
 function close() {
-  if(!@mysql_close($this->link_id)){
+  if(!mysql_close($this->link_id)){
     $this->oops("Connection close failed.");
   }
 }#-#close()
@@ -306,6 +306,7 @@ function oops($msg='') {
   else{
     $this->error=mysql_error();
     $this->errno=mysql_errno();
+    echo "im here";
   }
   if (preg_match('/renew\./i', $_SERVER['SERVER_NAME'])){
   ?>
