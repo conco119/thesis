@@ -1,0 +1,95 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : May 4, 2016, 9:22:00 AM
+    Author     : ngocthao
+*/
+
+.print-logo{
+    position: absolute; top: 5px; left:0px; width: 80px; height: 80px;
+}
+
+p{
+    margin: 0px;
+}
+*{font-size: 14px;}
+
+#Print .a5{
+    padding: 10px;
+}
+
+#Print .a5 .address{
+    
+}
+
+.name-cty{
+    font-size: 20px;
+    margin: 0px;
+    padding-bottom: 10px;
+}
+
+.h1-payment{
+    text-align: center;
+    font-size: 22px;
+    margin: 10px 0px;
+    display: block;
+    width: 100%;
+}
+
+.pull-right{
+    float: right;
+}
+
+.pull-right.p{
+    text-align: left;
+    width: 165px;
+    display: block;
+}
+
+p{
+    margin: 0px;
+}
+
+table{
+    width: 100%;
+    border: 1px #000 solid;
+    
+    border-right: 0px;
+    padding: 0px;
+    text-align: center;
+}
+
+table td, table th{
+    padding: 6px 0px;
+}
+
+table th{
+    border-top: 0px !important;
+}
+
+table td, table th{
+    border-top: 1px #000 solid;
+    border-right: 1px #000 solid;
+}
+
+.col3{
+    width: 24%;
+    display: inline-block;
+    padding-bottom: 100px;
+}
+.align-left{
+    text-align: left;
+}
+.align-right{
+    text-align: right;
+}
+.align-cen{
+    text-align: center;
+}
+
+.signature p{
+    font-size: 12px;
+}

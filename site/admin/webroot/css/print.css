@@ -1,0 +1,52 @@
+body {
+	background: #f9f6f1;
+	font: 11px/1.7em "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 11px;
+}
+    
+p { 
+	font: 11px/1.7em "Helvetica Neue",Helvetica,Arial,sans-serif;
+	line-height: 10px;
+	margin-bottom: 2px;
+}
+    
+h2 { 
+	font-size: 14px;
+	line-height: 17px;
+	margin-bottom: 6px;
+	margin-top: 6px;
+}
+h1{
+	font-size: 12px;
+	line-height: 18px;
+	margin-bottom: 2px;
+	margin-top: 6px;
+	font-weight: bold;
+}
+h3{
+	font-size: 11px;
+	line-height: 14px;
+	margin-bottom: 6px;
+}
+
+hr.line-big{
+	margin: 8px 0;
+}
+hr.line-dott{
+	border-top: 0;
+	border-bottom: 2px dotted #000; 
+	margin: 8px 0;
+}
+.clear{
+	clear: both;
+}
+
+.avatar{
+	width: 100%;
+}
+.bold{
+	font-weight: bold;
+}
+.table-bordered > tbody > tr > td, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > td, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > thead > tr > th {border: 1px solid #ddd;}.table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+	padding: 1px;
+}

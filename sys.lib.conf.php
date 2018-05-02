@@ -5,8 +5,9 @@ define("CORE_STRING","core:String");
 define("CORE_TIMES","core:Times");
 define("CORE_PAGINATION","core:Pagination");
 define("CORE_FILEHANDLE","core:FileHandle");
-
-define("LOGIN_MEMBER", "session_login_member");
+define('DEFAULT_LAYOUT', 'default.tpl');
+define("USER", "user");
+define("MACOS", '/~mtd/htaccess/');
 
 
 // require lib
@@ -22,5 +23,8 @@ function pre($content) {
     print_r($content);
   echo "</pre>";
 }
-
+function lib_redirect($url=THIS_LINK){
+  echo "<script> window.location = '".$url."' </script>";
+  exit();
+}
  ?>
