@@ -23,5 +23,13 @@ function get_db_info() {
   }
   return $conn;
 }
+//user group
+$user_group = [
+ 0 => 'Người dùng',
+ 1 => 'Quản trị',
+ 2 => 'Quản lý',
+ 3 => 'Nhân viên'
+];
+//status
 
  ?>

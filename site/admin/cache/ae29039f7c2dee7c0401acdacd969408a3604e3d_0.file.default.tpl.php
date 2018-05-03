@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-15 17:05:19
+/* Smarty version 3.1.30, created on 2018-05-03 20:06:34
   from "/Users/mtd/Sites/htaccess/site/admin/view/layouts/default.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ad323dfe151a4_95020343',
+  'unifunc' => 'content_5aeb095ad1e873_28983584',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ae29039f7c2dee7c0401acdacd969408a3604e3d' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/site/admin/view/layouts/default.tpl',
-      1 => 1523786718,
+      1 => 1525352794,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:includes/header.tpl' => 1,
   ),
 ),false)) {
-function content_5ad323dfe151a4_95020343 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aeb095ad1e873_28983584 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html>
@@ -84,6 +84,9 @@ js/notify/pnotify.buttons.js"><?php echo '</script'; ?>
             <div class="right_col">
                 <br />
                 <!-- site content -->
+                <?php $_smarty_tpl->_subTemplateRender($_smarty_tpl->tpl_vars['tpl_file']->value, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, true);
+?>
+
                 <!-- /site content -->
                 <!-- footer content -->
                 <!-- /footer content -->

@@ -68,7 +68,7 @@
 			<ul class="nav side-menu">
 				<li><a><i class="fa fa-cog"></i> Thiết lập <span class="fa fa-chevron-down"></span></a>
 					<ul class="nav child_menu" style="display: none">
-						<li><a href="?mc=user&site=index">Quản lý người dùng</a></li>
+						<li><a href="./admin?mc=user&site=index">Quản lý người dùng</a></li>
 						<li><a href="?mc=staff&site=index">Quản lý nhân viên kinh doanh</a></li>
 						<li><a href="?mc=setting&site=info">Thiết lập thông tin</a></li>
 						<li><a href="?mc=setting&site=others">Thiết lập bán hàng</a></li>

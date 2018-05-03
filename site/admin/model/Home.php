@@ -9,7 +9,7 @@ class Home extends Main
 
   public function index()
   {
-    pre($this->arg);
+    // pre($this->arg);
     $this->smarty->display(DEFAULT_LAYOUT);
   }
   public function denied()

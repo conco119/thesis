@@ -19,8 +19,11 @@
                         <div class="clearfix"></div>
                         <br />
                         <div>
-                            <!-- <h1><i class="fa fa-paw" style="font-size: 26px;"></i> HLSELLING</h1>
-              <p>Sales management software<br>HLSTAR ©2016 All Rights Reserved.</p> -->
+                        {if $status == 0}
+                            <h1 style='color: red'> Tài khoản bị vô hiệu hóa <h1>
+                        {/if}
+                            {* <h1><i class="fa fa-paw" style="font-size: 26px;"></i> HLSELLING</h1>
+              <p>Sales management software<br>HLSTAR ©2016 All Rights Reserved.</p> *}
                         </div>
                     </div>
                 </form>

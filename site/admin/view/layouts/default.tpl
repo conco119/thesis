@@ -37,6 +37,7 @@
             <div class="right_col">
                 <br />
                 <!-- site content -->
+                {include file=$tpl_file}
                 <!-- /site content -->
                 <!-- footer content -->
                 <!-- /footer content -->
