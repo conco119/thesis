@@ -40,6 +40,7 @@
                 {include file=$tpl_file}
                 <!-- /site content -->
                 <!-- footer content -->
+                {include file="includes/footer.tpl"}
                 <!-- /footer content -->
             </div>
             <!-- /page content -->

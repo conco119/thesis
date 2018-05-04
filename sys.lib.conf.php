@@ -27,4 +27,8 @@ function lib_redirect($url=THIS_LINK){
   echo "<script> window.location = '".$url."' </script>";
   exit();
 }
+function lib_redirect_back(){
+	echo "<script> history.go(-1); </script>";
+	exit();
+}
  ?>

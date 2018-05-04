@@ -62,11 +62,13 @@ class Main implements Init
   public function check_user()
   {
     global $site, $login_id, $mc;
-    if($login_id == 0 && !in_array($site,['login']))
+    $user = $this->pdo->fetch_one( "SELECT * FROM users a where id='$login_id'" );
+    if($login_id != 0 && $user['status'] == 0)
+      $login_id = 0;
+    if($login_id == 0 && !in_array($site,['login']) && $user['status'] == 0 )
     {
         lib_redirect(LOGIN_PAGE);
     }
-    $user = $this->pdo->fetch_one( "SELECT * FROM users a where id='$login_id'" );
     return $user;
   }
 }

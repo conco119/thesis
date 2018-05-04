@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-03 20:06:34
+/* Smarty version 3.1.30, created on 2018-05-05 00:11:10
   from "/Users/mtd/Sites/htaccess/site/admin/view/layouts/default.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aeb095ad1e873_28983584',
+  'unifunc' => 'content_5aec942e0c5d29_65498832',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ae29039f7c2dee7c0401acdacd969408a3604e3d' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/site/admin/view/layouts/default.tpl',
-      1 => 1525352794,
+      1 => 1525453868,
       2 => 'file',
     ),
   ),
@@ -20,9 +20,10 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
     'file:includes/sidebar.tpl' => 1,
     'file:includes/header.tpl' => 1,
+    'file:includes/footer.tpl' => 1,
   ),
 ),false)) {
-function content_5aeb095ad1e873_28983584 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aec942e0c5d29_65498832 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html>
@@ -89,6 +90,9 @@ js/notify/pnotify.buttons.js"><?php echo '</script'; ?>
 
                 <!-- /site content -->
                 <!-- footer content -->
+                <?php $_smarty_tpl->_subTemplateRender("file:includes/footer.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+?>
+
                 <!-- /footer content -->
             </div>
             <!-- /page content -->

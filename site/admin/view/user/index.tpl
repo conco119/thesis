@@ -3,7 +3,7 @@
     <div class="col-xs-12">
       <div class="x_panel">
         <div class="x_title">
-          <h2>Quản lý nhân viên</h2>
+          <h2>Quản lý người dùng</h2>
           <ul class="nav navbar-right panel_toolbox">
             <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
             </li>
@@ -22,7 +22,7 @@
 
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#UpdateFrom" onclick="LoadDataForForm(0);"><i class="fa fa-pencil"></i> Thêm mới</button>
             <!-- <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal"><i class="fa fa-check-square-o"></i> Kích hoạt</button> -->
-            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal"><i class="fa fa-times-circle"></i> Hủy</button>
+            {* <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal"><i class="fa fa-times-circle"></i> Hủy</button> *}
             <div class="clearfix"></div>
           </div>
 
@@ -49,13 +49,13 @@
                       </ul>
                     </td> -->
                     <td>{$data.code}</td>
-                    <td><a href="#">{$data.username} ({$data.name})</a> <br /> <small>Created {$data.created}</small></td>
-                    <td>{$user_group[$data.permission]}</td>
+                    <td><a href="#">{$data.username} ({$data.name})</a> <br /> <small>Created {$data.created_at}</small> <small>Updated {$data.updated_at}</small></td>
+                    <td>{$data.permission}</td>
                     <td class="text-center" id="stt{$data.id}">
                       {$data.status}
                     </td>
                     <td class="text-right">
-                      <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#ContentModal" onclick="LoadDataContent({$data.id});"><i class="fa fa-warning"></i></button>
+                      {* <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#ContentModal" onclick="LoadDataContent({$data.id});"><i class="fa fa-warning"></i></button> *}
                       <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#UpdateFrom" onclick="LoadDataForForm({$data.id});"><i class="fa fa-pencil"></i></button>
                       <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#DeleteForm" onclick="LoadDeleteItem('user', {$data.id}, '', 'nhân viên');"><i class="fa fa-trash-o"></i></button>
                     </td>
@@ -99,12 +99,12 @@
         <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
         <h4 class="modal-title" id="title"></h4>
       </div>
-      <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" action="">
+      <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" action='./admin?mc=user&site=edit_user'>
         <div class="modal-body">
 
           <div class="form-group">
             <div class="col-md-12 col-sm-12 col-xs-12">
-              <input type="hidden" name="id">
+              <input type='hidden' name='id'>
             </div>
           </div>
           <div class="form-group">
@@ -117,18 +117,12 @@
             </div>
           </div>
           <div class="form-group">
-            <label class="control-label col-md-2 col-sm-2 col-xs-12">Nhóm</label>
+            <label class="control-label col-md-2 col-sm-2 col-xs-12">Chức vụ</label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <select class="form-control" name="group_id"></select>
+              <select class="form-control" name="permission"></select>
             </div>
           </div><br>
 
-          <div class="form-group">
-            <label class="control-label col-md-2 col-sm-2 col-xs-12">Cấp độ</label>
-            <div class="col-md-4 col-sm-6 col-xs-12">
-              <select class="form-control" name="level"></select>
-            </div>
-          </div>
           <div class="form-group">
             <label class="control-label col-md-2 col-sm-2 col-xs-12">Giới tính</label>
             <div class="col-md-4 col-sm-6 col-xs-12">
@@ -148,6 +142,12 @@
             </div>
           </div>
           <div class="form-group">
+            <label class="control-label col-md-2 col-sm-2 col-xs-12">Email</label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <input type="email" class="form-control" name="email">
+            </div>
+          </div>
+          <div class="form-group">
             <label class="control-label col-md-2 col-sm-2 col-xs-12">Số điện thoại</label>
             <div class="col-md-6 col-sm-6 col-xs-12">
               <input type="tel" class="form-control" name="phone" pattern="[0-9]\d*" title="Số điện thoại">
@@ -157,12 +157,6 @@
             <label class="control-label col-md-2 col-sm-2 col-xs-12">Địa chỉ</label>
             <div class="col-md-8 col-sm-6 col-xs-12">
               <input class="form-control" type="text" name="address">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="control-label col-md-2 col-sm-2 col-xs-12">Sắp xếp</label>
-            <div class="col-md-2 col-sm-6 col-xs-12">
-              <input type="number" class="form-control" name="sort">
             </div>
           </div>
           <div class="form-group">
@@ -216,7 +210,8 @@
 function activeUser(table, id) {
     $.post("./admin?mc=user&site=ajax_active_user", {'table': table, 'id': id}).done(function (data) {
             if(data == 0)
-              alert('some thing wrong');
+              alert('You can not change');
+            else
             $("#stt" + id).html(data);
     });
 }
@@ -229,43 +224,50 @@ function LoadDataContent(id){
   });
 }
 
+
 function LoadDataForForm(id) {
-  $("#UpdateFrom input[type=text]").val('');
-  $.post("?mod=user&site=ajax_load_item", {'id' : id}).done(function(data) {
-    var data = JSON.parse(data);
-    console.log(data);
-    if (data.id == undefined) {
-      $("#UpdateFrom input[name=id]").val(0);
-      $("#UpdateFrom input[name=sort]").val(1);
-      $("#UpdateFrom input[name=status]").attr("checked", "checked");
-      $("#UpdateFrom input[name=status]").prop('checked', true);
-      $("#UpdateFrom input[name=username]").removeAttr("disabled","disabled");
-      $("#title").html('Thêm tài khoản');
-    } else {
-      $("#UpdateFrom input[name=id]").val(data.id);
-      $("#UpdateFrom input[name=name]").val(data.name);
-      $("#UpdateFrom input[name=username]").val(data.username);
-      $("#UpdateFrom input[name=username]").attr("disabled","disabled");
-      $("#UpdateFrom input[name=phone]").val(data.phone);
-      $("#UpdateFrom input[name=address]").val(data.address);
-      $("#UpdateFrom input[name=sort]").val(data.sort);
-      $("#title").html('Sửa thông tin tài khoản');
-      if (data.status == '1'){
+  $.post("./admin?mc=user&site=ajax_load_user", {'id' : id}).done(function(data) {
+      $("#UpdateFrom input[type=text]").val('');
+      var data = JSON.parse(data);
+      if (data.id == undefined)
+      {
+        $("#UpdateFrom input[name=id]").val(0);
         $("#UpdateFrom input[name=status]").attr("checked", "checked");
         $("#UpdateFrom input[name=status]").prop('checked', true);
+        $("#UpdateFrom input[name=username]").removeAttr("disabled","disabled");
+        $("#UpdateFrom input[name=email]").val('');
+        $("#UpdateFrom input[name=phone]").val('');
+        $("#title").html('Thêm tài khoản');
+        $("#demo-form2").attr("action", "./admin?mc=user&site=create_user");
       }
-      else{
-        $("#UpdateFrom input[name=status]").removeAttr("checked");
-        $("#UpdateFrom input[name=status]").prop('checked', false);
+      else
+      {
+        $("#UpdateFrom input[name=id]").val(data.id);
+        $("#UpdateFrom input[name=name]").val(data.name);
+        $("#UpdateFrom input[name=username]").val(data.username);
+        $("#UpdateFrom input[name=username]").attr("disabled","disabled");
+        $("#UpdateFrom input[name=email]").val(data.email);
+        $("#UpdateFrom input[name=phone]").val(data.phone);
+        $("#UpdateFrom input[name=address]").val(data.address);
+        $("#title").html('Sửa thông tin tài khoản');
+        $("#demo-form2").attr("action", "./admin?mc=user&site=edit_user");
+        if(data.status == 1)
+        {
+          $("#UpdateFrom input[name=status]").attr("checked", "checked");
+          $("#UpdateFrom input[name=status]").prop('checked', true);
+        }
+        else
+        {
+          $("#UpdateFrom input[name=status]").removeAttr("checked");
+          $("#UpdateFrom input[name=status]").prop('checked', false);
+        }
       }
-    }
-    $("#UpdateFrom select[name=level]").html(data.level);
-    $("#UpdateFrom select[name=group_id]").html(data.group);
-    $("#UpdateFrom select[name=office_id]").html(data.offices);
-    $("#UpdateFrom select[name=gender]").html(data.gender);
-    $("#UpdateFrom select[name=day]").html(data.birthday.day);
-    $("#UpdateFrom select[name=month]").html(data.birthday.month);
-    $("#UpdateFrom select[name=year]").html(data.birthday.year);
+      $("#UpdateFrom select[name=permission]").html(data.permission);
+      $("#UpdateFrom select[name=gender]").html(data.gender);
+      $("#UpdateFrom select[name=day]").html(data.birthday.day);
+      $("#UpdateFrom select[name=month]").html(data.birthday.month);
+      $("#UpdateFrom select[name=year]").html(data.birthday.year);
+
   });
 }
 </script>

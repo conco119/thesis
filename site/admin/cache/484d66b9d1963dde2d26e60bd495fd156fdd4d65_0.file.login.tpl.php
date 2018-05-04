@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-04 00:28:23
+/* Smarty version 3.1.30, created on 2018-05-04 09:55:43
   from "/Users/mtd/Sites/htaccess/site/admin/view/user/login.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aeb46b7570595_66872897',
+  'unifunc' => 'content_5aebcbaf68b009_27923404',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '484d66b9d1963dde2d26e60bd495fd156fdd4d65' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/site/admin/view/user/login.tpl',
-      1 => 1525368497,
+      1 => 1525402538,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5aeb46b7570595_66872897 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aebcbaf68b009_27923404 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="">
     <a class="hiddenanchor" id="toregister"></a> <a class="hiddenanchor" id="tologin"></a>
@@ -43,7 +43,7 @@ function content_5aeb46b7570595_66872897 (Smarty_Internal_Template $_smarty_tpl)
                         <div class="clearfix"></div>
                         <br />
                         <div>
-                        <?php if ($_smarty_tpl->tpl_vars['status']->value == 0) {?>
+                        <?php if ($_smarty_tpl->tpl_vars['status']->value == 1) {?>
                             <h1 style='color: red'> Tài khoản bị vô hiệu hóa <h1>
                         <?php }?>
                             

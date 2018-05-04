@@ -1,4 +1,4 @@
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -433,12 +433,12 @@ function SetMoney(obj){
 	var value = $(obj).val().replace(/,/g, "");
 	if(value==null || value=='')
 		value = 0;
-	
+
 	var re = '\\d(?=(\\d{' + (3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
     var rt = parseFloat(value).toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
 	if(rt==0)
 		rt = '';
-    
+
 	$(obj).val(rt);
 }
 
@@ -447,7 +447,7 @@ function ConvertMoney(money){
 	var n = 0;
 	if(money==null || money=='')
 		money = 0;
-	
+
 	var re = '\\d(?=(\\d{' + (3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
     var rt = parseFloat(money).toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
 	if(rt==0)
@@ -524,19 +524,19 @@ function sortItem(table, id, sort) {
  * Đưa vào mod và id của item cần xóa
  * Xây dựng hàm ajax_delete trong class mod dể xử lý xóa
  */
-function LoadDeleteItem(mod, id, site, target, reason) {
+function LoadDeleteItem(mc, id, site, target, reason) {
     PNotify.removeAll();
-    $("#DeleteItem").attr("onclick", "DeleteItem('" + mod + "', " + id + ", '" + site + "', '" + target + "', '" + reason + "');");
+    $("#DeleteItem").attr("onclick", "DeleteItem('" + mc + "', " + id + ", '" + site + "', '" + target + "', '" + reason + "');");
 }
 
-function DeleteItem(mod, id, site, target, reason) {
+function DeleteItem(mc, id, site, target, reason) {
     if (!site || site == '' || site == null || site == 'undefined')
         site = "ajax_delete";
     if (!target || target == '' || target == null || target == 'undefined')
         target = "mục";
     if (!reason || reason == '' || reason == null || reason == 'undefined')
         reason = "";
-    $.post("?mod=" + mod + "&site=" + site, {'id': id})
+    $.post("./admin?mc=" + mc + "&site=" + site, {'id': id})
     .done(function (data) {
         if (data == 0) {
             $('#DeleteForm').modal('hide');
