@@ -2,4 +2,4 @@
 RewriteEngine on
 
 #rewrite for post
-RewriteRule ^admin site/admin/index.php [NC]
+RewriteRule ^admin app/admin/index.php [NC]
