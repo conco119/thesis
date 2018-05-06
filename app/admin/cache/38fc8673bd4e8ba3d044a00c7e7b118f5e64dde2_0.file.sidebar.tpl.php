@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-05 15:46:47
+/* Smarty version 3.1.30, created on 2018-05-06 15:23:52
   from "/Users/mtd/Sites/htaccess/app/admin/view/layouts/includes/sidebar.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aed6f77a50bb3_44059247',
+  'unifunc' => 'content_5aeebb9850a9c3_30273206',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '38fc8673bd4e8ba3d044a00c7e7b118f5e64dde2' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/layouts/includes/sidebar.tpl',
-      1 => 1525510003,
+      1 => 1525595031,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5aed6f77a50bb3_44059247 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aeebb9850a9c3_30273206 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="left_col scroll-view">
 
@@ -52,12 +52,13 @@ function content_5aed6f77a50bb3_44059247 (Smarty_Internal_Template $_smarty_tpl)
 					<ul class="nav child_menu" style="display: none">
 						<li id="product_index_li"><a href="?mc=product&site=index">Quản lý sản phẩm</a></li>
 						<!--<li><a href="?mc=product&site=combo">Quản lý bộ sản phẩm</a></li> -->
-						<?php if ($_smarty_tpl->tpl_vars['arg']->value['setting']['use_service'] == 1) {?><li><a href="?mc=service&site=index">Quản lý dịch vụ</a></li><?php }?>
+
 						<li><a href="./admin?mc=productcat&site=index">Danh mục sản phẩm</a></li>
-						<li><a href="?mc=product&site=units">Đơn vị sản phẩm</a></li>
+						<li><a href="./admin?mc=productunit&site=index">Đơn vị sản phẩm</a></li>
 						<!--<li><a href="?mc=product&site=setup">Báo giá sản phẩm</a></li>-->
 					</ul>
 				</li>
+				<li><a href="./admin?mc=service&site=index"><i style="width:26px;" class="glyphicon glyphicon-list-alt"></i>    Quản lý dịch vụ</a></li>
 				<li><a><i class="fa fa-user-md"></i> Đối tác <span class="fa fa-chevron-down"></span></a>
 					<ul class="nav child_menu" style="display: none">
 						<li><a href="?mc=customer&site=index">Khách hàng</a></li>

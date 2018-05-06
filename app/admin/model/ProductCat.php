@@ -15,7 +15,7 @@ class Productcat extends Main
         $paging = $this->paging->get_content($this->pdo->count_rows($sql), 10);
         $sql .= $paging['sql_add'];
         $cats = $this->pdo->fetch_all($sql);
-        $cats_loop = $cats;
+        $cats_loop = $this->pdo->fetch_all("SELECT * from product_categories");
         foreach($cats as $key => $cat)
         {
             $cats[$key]['status'] = $this->helper->help_get_status($cat['status'], 'product_categories', $cat['id'], 'activeCat');
@@ -50,7 +50,6 @@ class Productcat extends Main
         $cat = $this->pdo->fetch_one("SELECT * from product_categories where id=" . $_POST['id']);
         if( isset($_POST['submit']) )
         {
-        // đổi mã người dùng khi đổi permission
         $data['code'] = $_POST['code'];
         $data['name'] = $_POST['name'];
         $data['parent_id'] = $_POST['parent_id'];

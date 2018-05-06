@@ -1,1 +1,2 @@
-constant/database.ini
+./constant/database.ini
+./cache

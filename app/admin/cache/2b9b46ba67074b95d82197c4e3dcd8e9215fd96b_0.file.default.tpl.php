@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-05 15:05:20
+/* Smarty version 3.1.30, created on 2018-05-06 11:41:24
   from "/Users/mtd/Sites/htaccess/app/admin/view/layouts/default.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aed65c01a3e73_44632202',
+  'unifunc' => 'content_5aee87745c8499_24202477',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '2b9b46ba67074b95d82197c4e3dcd8e9215fd96b' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/layouts/default.tpl',
-      1 => 1525453868,
+      1 => 1525581585,
       2 => 'file',
     ),
   ),
@@ -23,7 +23,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:includes/footer.tpl' => 1,
   ),
 ),false)) {
-function content_5aed65c01a3e73_44632202 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aee87745c8499_24202477 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html>
@@ -38,7 +38,7 @@ function content_5aed65c01a3e73_44632202 (Smarty_Internal_Template $_smarty_tpl)
 </title>
     <base href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['domain'];?>
 ">
-    <link href="./hlstar.ico" rel="shortcut icon">
+    <link href="./mtd.ico" rel="shortcut icon">
     <!-- Bootstrap core CSS -->
     <link href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['stylesheet'];?>
 css/bootstrap.min.css" rel="stylesheet">

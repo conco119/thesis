@@ -15,7 +15,7 @@ class ProductCatHelper extends HelpAbstract
     {
         if( $cat['parent_id'] != 0)
         {
-            $fullName = "<small><-</small> " . $cat['name']  .$fullName;
+            $fullName = " <- ". $cat['name']  .$fullName;
             foreach($cats as $key => $value)
                 if( $cat['parent_id'] == $value['id'] ) {
                     return $this->help_get_parent_name($cats, $value, $fullName);

@@ -420,8 +420,7 @@ function setPrice(obj) {
     var value = $(obj).val();
     value = value.replace(/,/gi, "");
     value = parseInt(value);
-
-    $.post('?mod=helps&site=ajax_get_number_format',
+    $.post('./admin?mc=helps&site=ajax_get_number_format',
             {'value': value}
     ).done(function (data) {
         $(obj).val(data);
@@ -559,8 +558,6 @@ function DeleteItem(mc, id, site, target, reason) {
         }
     });
 }
-
-
 
 
 

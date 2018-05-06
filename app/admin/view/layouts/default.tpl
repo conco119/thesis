@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{$arg.setting.name}</title>
     <base href="{$arg.domain}">
-    <link href="./hlstar.ico" rel="shortcut icon">
+    <link href="./mtd.ico" rel="shortcut icon">
     <!-- Bootstrap core CSS -->
     <link href="{$arg.stylesheet}css/bootstrap.min.css" rel="stylesheet">
     <link href="{$arg.stylesheet}fonts/css/font-awesome.min.css" rel="stylesheet">

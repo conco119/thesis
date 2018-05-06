@@ -2,7 +2,7 @@
 
 class Helper extends HelpAbstract
 {
-    public function help_get_status($status, $table, $id, $custom_function="activeItem")
+    public function help_get_status($status, $table, $id, $custom_function="activeStatus")
     {
         $status = $status == 1 ? 1 : 0;
         $result = "<button type=\"button\" class=\"btn ";

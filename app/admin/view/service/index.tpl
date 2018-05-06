@@ -19,8 +19,8 @@
                 <!--<a href="{$out.import}" class="btn btn-primary"><i class="fa fa-file-excel-o"></i>&ensp;Nhập</a>-->
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#UpdateForm" onclick="LoadDataForForm(0);"><i class="fa fa-pencil"></i>&ensp;Thêm mới</button>
                 <!--<button type="button" class="btn btn-success" onclick="HandleCopy();"><i class="fa fa-copy"></i>&ensp;Copy</button>-->
-                <button type="button" class="btn btn-success" onclick="HandleActive('services', 1);"><i class="fa fa-check-square-o"></i>&ensp;Kích hoạt</button>
-                <button type="button" class="btn btn-default" onclick="HandleActive('services', 0);"><i class="fa fa-times-circle"></i>&ensp;Hủy</button>
+                {* <button type="button" class="btn btn-success" onclick="HandleActive('services', 1);"><i class="fa fa-check-square-o"></i>&ensp;Kích hoạt</button> *}
+                {* <button type="button" class="btn btn-default" onclick="HandleActive('services', 0);"><i class="fa fa-times-circle"></i>&ensp;Hủy</button> *}
                 <div class="clearfix"></div>
             </div>
 
@@ -29,22 +29,22 @@
             <table class="table table-striped table-hover projects">
                 <thead>
                     <tr>
-                        <th><input type="checkbox" id="SelectAllRows"></th>
                         <th>Dịch vụ</th>
                         <th class="text-right">Giá bán</th>
                         <th class="text-center">Trạng thái</th>
                         <th class="text-right">Cập nhật</th>
+                        <th class="text-right">Tạo</th>
                         <th class="text-right">Hành động</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {foreach from=$result item=data}
+                    {foreach from=$services item=data}
                         <tr id="field{$data.id}">
-                            <td><input type="checkbox" class="item_checked" value="{$data.id}"></td>
                             <td>{$data.name}<br /> <small><i class="fa fa-star"></i> {$data.code}</small></td>
                             <td class="text-right">{$data.price}</td>
                             <td class="text-center" id="stt{$data.id}">{$data.status}</td>
-                            <td class="text-right">{$data.updated}</td>
+                            <td class="text-right">{$data.updated_at}</td>
+                            <td class="text-right">{$data.created_at}</td>
                             <td class="text-right">
                                 <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#UpdateForm" onclick="LoadDataForForm({$data.id});"><i class="fa fa-pencil"></i></button>
                                 <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#DeleteForm" onclick="LoadDeleteItem('service', {$data.id}, '', 'dịch vụ', 'vì còn tồn tại trong hóa đơn');"><i class="fa fa-trash-o"></i></button>
@@ -111,12 +111,6 @@
                             <input type="text" name="price" required="required" class="form-control" oninput="setPrice(this);" placeholder="Giá bán...">
                         </div>
                     </div>
-					<div class="form-group">
-						<label class="control-label col-md-2 col-sm-2 col-xs-12">Thể loại</label>
-						<div class="col-md-6 col-sm-6 col-xs-12">
-							<select class="form-control" name="type"></select>
-						</div>
-					</div>
                     <div class="form-group">
                         <label class="control-label col-md-2 col-sm-2 col-xs-12">Mô tả thêm</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
@@ -124,10 +118,10 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-2 col-sm-2 col-xs-12">Status</label>
+                        <label class="control-label col-md-2 col-sm-2 col-xs-12">Trạng thái</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
                             <div class="checkbox">
-                                <label> <input type="checkbox" name="status" value="1"> Kích hoạt / không kích hoạt dịch vụ</label>
+                                <label> <input type="checkbox" name="status" value="1"> Kích hoạt</label>
                             </div>
                         </div>
                     </div>
@@ -154,26 +148,27 @@ $(document).ready(function () {
     });
 });
 
-function filter() {
-    var key = $("#key").val();
-    //var category = $("#category").val();
-
-    var url = "./?mod=service&site=index";
-    //url += "&category=" + category;
-    url += "&key=" + key;
-    window.location.href = url;
+function activeStatus(table, id) {
+    $.post("./admin?mc=service&site=ajax_active", {'table': table, 'id': id}).done(function (data) {
+            if(data == 0)
+              alert('You can not change');
+            else
+            $("#stt" + id).html(data);
+    });
 }
 
 function LoadDataForForm(id) {
     $("#UpdateForm input[type=text]").val('');
     $("#UpdateForm textarea").val('');
-    $("#update_title").html('Thêm dịch vụ mới');
-    $.post("?mod=service&site=ajax_load_item", {'id': id}).done(function (data) {
+    $.post("./admin?mc=service&site=ajax_load", {'id': id}).done(function (data) {
         var data = JSON.parse(data);
         if (data.id == undefined) {
             $("#UpdateForm input[name=id]").val(0);
+            $("#UpdateForm input[name=name]").val("");
+            $("#UpdateForm input[name=price]").val("");
             $("#UpdateForm input[name=status]").attr("checked", "checked");
             $("#UpdateForm input[name=status]").prop('checked', true);
+            $("#update_title").html('Thêm dịch vụ mới');
         } else {
             $("#update_title").html('Sửa dịch vụ');
             $("#UpdateForm input[name=id]").val(data.id);
@@ -190,10 +185,28 @@ function LoadDataForForm(id) {
             }
         }
         $("#UpdateForm input[name=code]").val(data.code);
-        $("#UpdateForm select[name=type]").html(data.types);
     });
 }
 
 
 </script>
 {/literal}
+<script>
+$(document).ready(function() {
+	if( "{$notification.status}" == "success" || "{$notification.status}" == "error")
+	{
+		var notice = new PNotify({
+			title: "{$notification.title}",
+			text: "{$notification.text}",
+			type: "{$notification.status}",
+			mouse_reset: false,
+			buttons: {
+				sticker: false,
+		}
+		});
+		notice.get().click(function () {
+			notice.remove();
+		});
+	}
+})
+</script>
