@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-05 23:51:42
+/* Smarty version 3.1.30, created on 2018-05-08 19:12:01
   from "/Users/mtd/Sites/htaccess/app/admin/view/productcat/index.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aede11ed2d983_60315874',
+  'unifunc' => 'content_5af194110bcee2_98776708',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd46d0085d9a2f7eb73d042d29cb9cf1692fd628c' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/productcat/index.tpl',
-      1 => 1525539075,
+      1 => 1525781519,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5aede11ed2d983_60315874 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5af194110bcee2_98776708 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="">
 	<div class="row">
@@ -43,7 +43,7 @@ function content_5aede11ed2d983_60315874 (Smarty_Internal_Template $_smarty_tpl)
 					</div>
 
 					<!-- start project list -->
-					<table class="table table-striped projects">
+					<table class="table  projects">
 						<thead>
 							<tr>
 								<th>Mã</th>
@@ -63,8 +63,10 @@ foreach ($_from as $_smarty_tpl->tpl_vars['data']->value) {
 ">
 								<td><?php echo $_smarty_tpl->tpl_vars['data']->value['code'];?>
 </td>
-								<td><?php echo $_smarty_tpl->tpl_vars['data']->value['name'];?>
-</td>
+								<td>
+								<ol class="breadcrumb"><?php echo $_smarty_tpl->tpl_vars['data']->value['name'];?>
+</ol>
+								</td>
 								<td class="text-center" id="stt<?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
 "><?php echo $_smarty_tpl->tpl_vars['data']->value['status'];?>
 </td>
@@ -188,12 +190,10 @@ function LoadDataForForm(id) {
 			$("#UpdateFrom input[name=status]").attr("checked", "checked");
 			$("#UpdateFrom input[name=status]").prop('checked', true);
 			$("#title").html("<p>Thêm danh mục sản phẩm</p>");
-			$("#demo-form2").attr("action", "./admin?mc=productcat&site=create_cat");
 		} else {
 			$("#UpdateFrom input[name=id]").val(data.id);
 			$("#UpdateFrom input[name=name]").val(data.name);
 			$("#title").html("<p>Sửa danh mục sản phẩm</p>");
-			$("#demo-form2").attr("action", "./admin?mc=productcat&site=edit_cat");
 			if (data.status == '1'){
 				$("#UpdateFrom input[name=status]").attr("checked", "checked");
 				$("#UpdateFrom input[name=status]").prop('checked', true);
@@ -210,5 +210,30 @@ function LoadDataForForm(id) {
 <?php echo '</script'; ?>
 >
 
-<?php }
+<?php echo '<script'; ?>
+>
+$(document).ready(function() {
+	if( "<?php echo $_smarty_tpl->tpl_vars['notification']->value['status'];?>
+" == "success" || "<?php echo $_smarty_tpl->tpl_vars['notification']->value['status'];?>
+" == "error")
+	{
+		var notice = new PNotify({
+			title: "<?php echo $_smarty_tpl->tpl_vars['notification']->value['title'];?>
+",
+			text: "<?php echo $_smarty_tpl->tpl_vars['notification']->value['text'];?>
+",
+			type: "<?php echo $_smarty_tpl->tpl_vars['notification']->value['status'];?>
+",
+			mouse_reset: false,
+			buttons: {
+				sticker: false,
+		}
+		});
+		notice.get().click(function () {
+			notice.remove();
+		});
+	}
+})
+<?php echo '</script'; ?>
+><?php }
 }

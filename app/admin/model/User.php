@@ -2,14 +2,20 @@
 
 class User extends Main
 {
-
   function __construct()
   {
-    $this->userHelper = new UserHelper();
     parent::__construct();
+    $this->userHelper = new UserHelper();
+    $this->table = "users";
+
   }
   public function index()
   {
+    // pre($users);
+    // return;
+    //adding or editing
+    $this->create();
+    $this->edit();
     //searching
     $key = isset($_GET['key']) ? $_GET['key'] : "";
     $permission = isset($_GET['permission']) ? intval($_GET["permission"]) : 0;
@@ -46,9 +52,9 @@ class User extends Main
     $this->smarty->display(DEFAULT_LAYOUT);
   }
 
-  public function create_user()
+  public function create()
   {
-    if( isset($_POST['submit']) )
+    if( isset($_POST['submit']) && $_POST['id'] == 0)
     {
       $data['code'] = $this->userHelper->get_user_code($_POST['permission']);
       $data['name'] = $_POST['name'];
@@ -64,15 +70,33 @@ class User extends Main
 			$data['created_at'] = time();
 			$data['updated_at'] = time();
       $data['status'] = isset($_POST['status']) ? 1 : 0;
-      $this->pdo->insert('users', $data);
-      lib_redirect_back();
+      $isSucceed = $this->pdo->insert('users', $data);
+      if($isSucceed)
+      {
+          $notification = [
+              'status' => 'success',
+              'title'  => 'Thêm thành công',
+              'text'   => "Thêm người dùng thành công"
+          ];
+          $this->smarty->assign('notification', $notification );
+      }
+    else
+      {
+          $notification = [
+              'status' => 'error',
+              'title'  => 'Thêm không thành công',
+              'text'   => "Thêm người dùng không thành công"
+          ];
+          $this->smarty->assign('notification', $notification);
+      }
+
     }
   }
 
-  public function edit_user()
+  public function edit()
   {
     $user = $this->pdo->fetch_one("SELECT * from users where id=" . $_POST['id']);
-    if( isset($_POST['submit']) )
+    if( isset($_POST['submit']) && $_POST['id'] != 0)
     {
       // đổi mã người dùng khi đổi permission
       if($user['permission'] != $_POST["permission"])
@@ -86,8 +110,33 @@ class User extends Main
 			$data["phone"] = $_POST["phone"];
 			$data['updated_at'] = time();
       $data['status'] = isset($_POST['status']) ? 1 : 0;
-      $this->pdo->update('users', $data, "id=" . $_POST['id']);
-      lib_redirect_back();
+      try {
+        $updateStatement = $this->slim_pdo->update($data)->table($this->table)->where('id', '=', $_POST['id']);
+        $isSucceed = $updateStatement->execute();
+      }
+      catch(PDOException $e) {
+          $text = $e->getMessage();
+          $isSucceed = false;
+      }
+      if($isSucceed)
+      {
+          $notification = [
+              'status' => 'success',
+              'title'  => 'Sửa thành công',
+              'text'   => "Sửa người dùng thành công"
+          ];
+          $this->smarty->assign('notification', $notification );
+      }
+    else
+      {
+          $notification = [
+              'status' => 'error',
+              'title'  => 'Sửa không thành công',
+              'text'   => $text
+          ];
+          $this->smarty->assign('notification', $notification);
+      }
+
     }
 
   }

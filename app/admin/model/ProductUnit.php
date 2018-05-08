@@ -6,6 +6,7 @@ class ProductUnit extends Main
     {
         parent::__construct();
         $this->ProductUnitHelper = new ProductUnitHelper();
+        $this->table = 'product_units';
     }
 
     public function index()
@@ -75,7 +76,14 @@ class ProductUnit extends Main
             $data['name'] = $_POST['name'];
             $data['status'] = isset($_POST['status']) ? 1 : 0;
             $data['updated_at'] = time();
-            $isSucceed = $this->pdo->update('product_units', $data, "id=" . $_POST['id']);
+            try {
+                $updateStatement = $this->slim_pdo->update($data)->table($this->table)->where('id', '=', $_POST['id']);
+                $isSucceed = $updateStatement->execute();
+            }
+            catch(PDOException $e) {
+                $text = $e->getMessage();
+                $isSucceed = false;
+            }
             if($isSucceed)
             {
                 $notification = [
@@ -90,7 +98,7 @@ class ProductUnit extends Main
                 $notification = [
                     'status' => 'error',
                     'title'  => 'Sửa không thành công',
-                    'text'   => "Sửa đơn vị sản phẩm không thành công"
+                    'text'   => $text
                 ];
                 $this->smarty->assign('notification', $notification);
             }

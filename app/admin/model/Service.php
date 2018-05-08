@@ -6,6 +6,7 @@ class Service extends Main
     {
         parent::__construct();
         $this->ServiceHelper = new ServiceHelper();
+        $this->table = "services";
     }
 
     public function index()
@@ -80,7 +81,15 @@ class Service extends Main
             $data['description'] = $_POST['description'];
             $data['status'] = isset($_POST['status']) ? 1 : 0;
             $data['updated_at'] = time();
-            $isSucceed = $this->pdo->update('services', $data, "id=" . $_POST['id']);
+            try {
+                $updateStatement = $this->slim_pdo->update($data)->table($this->table)->where('id', '=', $_POST['id']);
+                $isSucceed = $updateStatement->execute();
+            }
+            catch(PDOException $e) {
+                $text = $e->getMessage();
+                $isSucceed = false;
+            }
+
             if($isSucceed)
             {
                 $notification = [
@@ -95,7 +104,7 @@ class Service extends Main
                 $notification = [
                     'status' => 'error',
                     'title'  => 'Sửa không thành công',
-                    'text'   => "Sửa dịch vụ không thành công"
+                    'text'   => $text
                 ];
                 $this->smarty->assign('notification', $notification);
             }

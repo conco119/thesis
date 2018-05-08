@@ -78,7 +78,6 @@
   </div>
 </div>
 
-
 <!-- Modal Delete -->
 <div class="modal fade" id="DeleteForm">
   <div class="modal-dialog">
@@ -104,7 +103,7 @@
         <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
         <h4 class="modal-title" id="title"></h4>
       </div>
-      <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" action='./admin?mc=user&site=edit_user'>
+      <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" action=''>
         <div class="modal-body">
 
           <div class="form-group">
@@ -243,7 +242,6 @@ function LoadDataForForm(id) {
         $("#UpdateFrom input[name=email]").val('');
         $("#UpdateFrom input[name=phone]").val('');
         $("#title").html('Thêm tài khoản');
-        $("#demo-form2").attr("action", "./admin?mc=user&site=create_user");
       }
       else
       {
@@ -255,7 +253,6 @@ function LoadDataForForm(id) {
         $("#UpdateFrom input[name=phone]").val(data.phone);
         $("#UpdateFrom input[name=address]").val(data.address);
         $("#title").html('Sửa thông tin tài khoản');
-        $("#demo-form2").attr("action", "./admin?mc=user&site=edit_user");
         if(data.status == 1)
         {
           $("#UpdateFrom input[name=status]").attr("checked", "checked");
@@ -286,3 +283,22 @@ function filter() {
 }
 </script>
 {/literal}
+<script>
+$(document).ready(function() {
+	if( "{$notification.status}" == "success" || "{$notification.status}" == "error")
+	{
+		var notice = new PNotify({
+			title: "{$notification.title}",
+			text: "{$notification.text}",
+			type: "{$notification.status}",
+			mouse_reset: false,
+			buttons: {
+				sticker: false,
+		}
+		});
+		notice.get().click(function () {
+			notice.remove();
+		});
+	}
+})
+</script>

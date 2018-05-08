@@ -1,4 +1,12 @@
 <?php
+require_once 'vendor/autoload.php';
+
+$dsn = 'mysql:host=localhost;dbname=htaccess3;charset=utf8';
+$usr = 'root';
+$pwd = '1234';
+
+$pdo = new \Slim\PDO\Database($dsn, $usr, $pwd);
+
 require_once('configs/config.php');
 require_once('sys.lib.conf.php');
 
@@ -20,22 +28,5 @@ $smarty->cache_lifetime = 1200;
 
  ?>
 <?php
-
-// define('FILE_CONF_DATABASE', '../constant/database.ini');
-// define('DB_INFO', get_db_info());
-// // lay info db
-// function get_db_info() {
-//   if(file_exists('constant/database.ini')){
-//     $info = parse_ini_file('constant/database.ini');
-//     if(count($info) > 1){
-//       $info[] = @$content['server'];
-//       $info[] = @$content['data_user'];
-//       $info[] = @$content['data_pass'];
-//       $info[] = @$content['data_name'];
-//       $conn = implode(",", $info);
-//     }
-//   }
-//   var_dump($info);
-// }
 
  ?>

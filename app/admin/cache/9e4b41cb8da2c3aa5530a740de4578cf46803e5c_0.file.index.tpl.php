@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-05 23:50:48
+/* Smarty version 3.1.30, created on 2018-05-08 19:10:42
   from "/Users/mtd/Sites/htaccess/app/admin/view/user/index.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aede0e81a1a95_33126131',
+  'unifunc' => 'content_5af193c21f9af5_85501758',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '9e4b41cb8da2c3aa5530a740de4578cf46803e5c' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/user/index.tpl',
-      1 => 1525538776,
+      1 => 1525773383,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5aede0e81a1a95_33126131 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5af193c21f9af5_85501758 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="">
   <div class="row">
@@ -126,7 +126,6 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
   </div>
 </div>
 
-
 <!-- Modal Delete -->
 <div class="modal fade" id="DeleteForm">
   <div class="modal-dialog">
@@ -152,7 +151,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
         <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
         <h4 class="modal-title" id="title"></h4>
       </div>
-      <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" action='./admin?mc=user&site=edit_user'>
+      <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" action=''>
         <div class="modal-body">
 
           <div class="form-group">
@@ -292,7 +291,6 @@ function LoadDataForForm(id) {
         $("#UpdateFrom input[name=email]").val('');
         $("#UpdateFrom input[name=phone]").val('');
         $("#title").html('Thêm tài khoản');
-        $("#demo-form2").attr("action", "./admin?mc=user&site=create_user");
       }
       else
       {
@@ -304,7 +302,6 @@ function LoadDataForForm(id) {
         $("#UpdateFrom input[name=phone]").val(data.phone);
         $("#UpdateFrom input[name=address]").val(data.address);
         $("#title").html('Sửa thông tin tài khoản');
-        $("#demo-form2").attr("action", "./admin?mc=user&site=edit_user");
         if(data.status == 1)
         {
           $("#UpdateFrom input[name=status]").attr("checked", "checked");
@@ -336,5 +333,30 @@ function filter() {
 <?php echo '</script'; ?>
 >
 
-<?php }
+<?php echo '<script'; ?>
+>
+$(document).ready(function() {
+	if( "<?php echo $_smarty_tpl->tpl_vars['notification']->value['status'];?>
+" == "success" || "<?php echo $_smarty_tpl->tpl_vars['notification']->value['status'];?>
+" == "error")
+	{
+		var notice = new PNotify({
+			title: "<?php echo $_smarty_tpl->tpl_vars['notification']->value['title'];?>
+",
+			text: "<?php echo $_smarty_tpl->tpl_vars['notification']->value['text'];?>
+",
+			type: "<?php echo $_smarty_tpl->tpl_vars['notification']->value['status'];?>
+",
+			mouse_reset: false,
+			buttons: {
+				sticker: false,
+		}
+		});
+		notice.get().click(function () {
+			notice.remove();
+		});
+	}
+})
+<?php echo '</script'; ?>
+><?php }
 }

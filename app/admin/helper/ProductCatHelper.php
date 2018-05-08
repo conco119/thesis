@@ -11,23 +11,28 @@ class ProductCatHelper extends HelpAbstract
     }
 
 
-    public function help_get_parent_name($cats, $cat, $fullName)
+    public function help_get_parent_name($cats, $cat, $fullName, $count)
     {
         if( $cat['parent_id'] != 0)
         {
-            $fullName = " <- ". $cat['name']  .$fullName;
+            if($count == 0) {
+                $fullName = "<li><a style='color:red' href='#'>". $cat['name'] . "</a></li>" . $fullName;
+                $count++;
+            }
+            else
+                $fullName = "<li><a href='#'>". $cat['name'] . "</a></li>" . $fullName;
             foreach($cats as $key => $value)
                 if( $cat['parent_id'] == $value['id'] ) {
-                    return $this->help_get_parent_name($cats, $value, $fullName);
+                    return $this->help_get_parent_name($cats, $value, $fullName, $count);
                 }
 
         }
         else
         {
             if ($fullName == '')
-                return $fullName = $cat['name'];
+                return $fullName = "<li class='active'><a style='color:red' href='#'>" .  $cat['name'] . "</a></li>";
             else
-                return  $cat['name'] . $fullName ;
+                return  "<li class='active'><a href='#'>". $cat['name'] .$fullName;
         }
     }
 
@@ -47,7 +52,7 @@ class ProductCatHelper extends HelpAbstract
 
     public function get_cat_code()
     {
-        $rows = $this->pdo->count_rows("SELECT * FROM product_categories");
-        return $this->code_prefix . ($rows+1);
+        $rows = $this->pdo->fetch_one("SELECT max(id) as id FROM product_categories");
+        return $this->code_prefix . ($rows['id'] +1);
     }
 }

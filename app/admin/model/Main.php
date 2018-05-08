@@ -5,12 +5,12 @@ lib_use(CORE_STRING);
 lib_use(CORE_PAGINATION);
 lib_use(CORE_FILEHANDLE);
 lib_use(CORE_TIMES);
-class Main implements Init
+class Main
 {
   protected $arg, $conf_info;
   function __construct()
   {
-    global $smarty, $tpl_file, $mc, $site, $login_id;
+    global $smarty, $tpl_file, $mc, $site, $login_id, $pdo;
 
     $this->currentUser = '';
 
@@ -18,6 +18,7 @@ class Main implements Init
     $this->mc = $mc;
     $this->site = $site;
 
+    $this->slim_pdo = $pdo;
     $this->pdo = new DPDO();
     $this->paging = new pagination();
     $this->filehanle = new FileHandle();

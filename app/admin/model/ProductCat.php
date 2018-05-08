@@ -6,11 +6,16 @@ class Productcat extends Main
     {
         parent::__construct();
         $this->ProductCatHelper = new ProductCatHelper();
+        $this->table = 'product_categories';
     }
 
     public function index()
     {
 
+        //add or edit
+        $this->create();
+        $this->edit();
+        //query
         $sql = "SELECT * FROM product_categories";
         $paging = $this->paging->get_content($this->pdo->count_rows($sql), 10);
         $sql .= $paging['sql_add'];
@@ -19,7 +24,7 @@ class Productcat extends Main
         foreach($cats as $key => $cat)
         {
             $cats[$key]['status'] = $this->helper->help_get_status($cat['status'], 'product_categories', $cat['id'], 'activeCat');
-            $cats[$key]['name'] = $this->ProductCatHelper->help_get_parent_name($cats_loop, $cat, '');
+            $cats[$key]['name'] = $this->ProductCatHelper->help_get_parent_name($cats_loop, $cat, '', 0);
             $cats[$key]['updated_at'] = gmdate('d.m.Y', $cat['updated_at'] + 7 * 3600);
         }
         // smarty
@@ -31,9 +36,9 @@ class Productcat extends Main
     }
     //not using view from here
 
-    public function create_cat()
+    public function create()
     {
-        if( isset($_POST['submit']) )
+        if( isset($_POST['submit']) && $_POST['id'] == 0 )
         {
           $data['code'] = $_POST['code'];
           $data['name'] = $_POST['name'];
@@ -41,22 +46,69 @@ class Productcat extends Main
           $data['status'] = isset($_POST['status']) ? 1 : 0;
           $data['created_at'] = time();
           $data['updated_at'] = time();
-          $this->pdo->insert('product_categories', $data);
-          lib_redirect_back();
+          $isSucceed = $this->pdo->insert('product_categories', $data);
+          if($isSucceed)
+          {
+              $notification = [
+                  'status' => 'success',
+                  'title'  => 'Thêm thành công',
+                  'text'   => "Thêm danh mục sản phẩm thành công"
+              ];
+              $this->smarty->assign('notification', $notification );
+          }
+        else
+          {
+              $notification = [
+                  'status' => 'error',
+                  'title'  => 'Thêm không thành công',
+                  'text'   => "Thêm danh mục sản phẩm không thành công"
+              ];
+              $this->smarty->assign('notification', $notification);
+          }
+
         }
     }
-    public function edit_cat()
+    public function edit()
     {
-        $cat = $this->pdo->fetch_one("SELECT * from product_categories where id=" . $_POST['id']);
-        if( isset($_POST['submit']) )
+        if( isset($_POST['submit']) && $_POST['id'] != 0 )
         {
         $data['code'] = $_POST['code'];
         $data['name'] = $_POST['name'];
         $data['parent_id'] = $_POST['parent_id'];
         $data['status'] = isset($_POST['status']) ? 1 : 0;
         $data['updated_at'] = time();
-        $this->pdo->update('product_categories', $data, "id=" . $_POST['id']);
-        lib_redirect_back();
+        // $sql = "UPDATE product_categories SET code = " . "{$data["code"]}" . "name = " . $data['name'] . "parent_id = " . $data['parent_id'] . "status = " . $data['status'];
+        // $sql = "UPDATE product_categories SET code = '{$data["code"]}' AND name = '{$data["name"]}' AND parent_id = '{$data['parent_id']}' AND status = {$data["status"]} AND updated_at = {$data['updated_at']} WHERE id = {$_POST['id']}";
+        // pre($sql);
+        // $isSucceed  = $this->pdo->query($sql);
+        // $isSucceed = $this->slim_pdo->update('product_categories', $data, "id=" . $_POST['id']);
+        try {
+            $updateStatement = $this->slim_pdo->update($data)->table($this->table)->where('id', '=', $_POST['id']);
+            $isSucceed = $updateStatement->execute();
+        }
+        catch(PDOException $e) {
+            $text = $e->getMessage();
+            $isSucceed = false;
+        }
+        if($isSucceed)
+            {
+                $notification = [
+                    'status' => 'success',
+                    'title'  => 'Sửa thành công',
+                    'text'   => "Sửa danh mục sản phẩm thành công"
+                ];
+                $this->smarty->assign('notification', $notification );
+            }
+        else
+            {
+                $notification = [
+                    'status' => 'error',
+                    'title'  => 'Sửa không thành công',
+                    'text'   => $text
+                ];
+                $this->smarty->assign('notification', $notification);
+            }
+
         }
     }
     public function ajax_active_cat()

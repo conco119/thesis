@@ -5,14 +5,14 @@
  *
  */
 class DPDO {
-	
+
 	private $server; // database server
 	private $username; // database login name
 	private $password; // database login password
 	private $database; // database name
 	private $conn;
 	private $query_id;
-	
+
 	/**
 	 * Build PDO connection
 	 * @param string $conn
@@ -29,8 +29,8 @@ class DPDO {
 			exit();
 		}
 	}
-	
-	
+
+
 	/**
 	 * Run query
 	 * @param unknown $sql
@@ -41,8 +41,8 @@ class DPDO {
 		$this->query_id = $stmt->execute();
 		return $this->query_id;
 	}
-	
-	
+
+
 	/**
 	 * Build query get one row
 	 * @param unknown $sql
@@ -52,7 +52,7 @@ class DPDO {
 		try {
 			$stmt = $this->conn->prepare($sql);
 			$stmt->execute();
-			
+
 			$row = $stmt->fetch();
 			return $row;
 		}
@@ -60,8 +60,8 @@ class DPDO {
 			return false;
 		}
 	}
-	
-	
+
+
 	/**
 	 * Get all row
 	 * @param unknown $sql
@@ -71,7 +71,7 @@ class DPDO {
 		try {
 			$stmt = $this->conn->prepare($sql);
 			$stmt->execute();
-			
+
 			$rows = $stmt->fetchAll();
 			return $rows;
 		}
@@ -79,8 +79,8 @@ class DPDO {
 			return false;
 		}
 	}
-	
-	
+
+
 	/**
 	 * Check exits row
 	 * @param unknown $sql
@@ -93,15 +93,15 @@ class DPDO {
 			$number = $stmt->rowCount();
 			if($number > 0)
 				return true;
-			else 
+			else
 				return false;
 		}
 		catch (PDOException $e){
 			return false;
 		}
 	}
-	
-		
+
+
 	/**
 	 * Insert values to table
 	 * @param unknown $table
@@ -121,8 +121,8 @@ class DPDO {
 			return false;
 		}
 	}
-	
-	
+
+
 	/**
 	 * Update values for table
 	 * @param unknown $table
@@ -134,18 +134,19 @@ class DPDO {
 		try {
 			if(count($data)==0)
 				return false;
-			
+
 			$values = array();
 			foreach ($data AS $key => $item){
 				$values[] = $key . "=:" . $key;
 			}
-			
+
 			$sql = "UPDATE $table SET " . implode(", ", $values);
-			
+
+
 			if($where != ""){
 				$sql .= " WHERE " . $where;
 			}
-			
+			// pre($sql);
 			$stmt = $this->conn->prepare($sql);
 			$stmt->execute($data);
 			return true;
@@ -154,8 +155,17 @@ class DPDO {
 			return false;
 		}
 	}
-	
-	
+
+	function new_update($table, $data, $where)
+	{
+		$sql = "UPDATE $table SET ";
+		foreach($data as $key => $value) {
+			if( is_numberic($value) ) {
+				$sql .= "$key = $value";
+			}
+		}
+	}
+
 	/**
 	 * Count row from query
 	 * @param unknown $sql
@@ -166,13 +176,13 @@ class DPDO {
 		$stmt->execute();
 		return $stmt->rowCount();
 	}
-	
-	
+
+
 	function close(){
 		$this->conn = NULL;
 	}
-	
-	
+
+
 	/**
 	 * Set values connection
 	 * @param string $conn
@@ -180,9 +190,9 @@ class DPDO {
 	function getConnection($conn=null){
 		if($conn==null || count(explode(",", $conn))!=4)
 			$conn = DB_INFO;
-		
+
 		$arr = explode(",", $conn);
-		
+
 		$this->server = $arr[0];
 		$this->username = $arr[1];
 		$this->password = $arr[2];

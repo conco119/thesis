@@ -20,7 +20,7 @@
 					</div>
 
 					<!-- start project list -->
-					<table class="table table-striped projects">
+					<table class="table  projects">
 						<thead>
 							<tr>
 								<th>Mã</th>
@@ -34,7 +34,9 @@
 							{foreach from=$cats item=data}
 							<tr id="field{$data.id}">
 								<td>{$data.code}</td>
-								<td>{$data.name}</td>
+								<td>
+								<ol class="breadcrumb">{$data.name}</ol>
+								</td>
 								<td class="text-center" id="stt{$data.id}">{$data.status}</td>
 								<td class="text-right">{$data.updated_at}</td>
 								<td class="text-right">
@@ -146,12 +148,10 @@ function LoadDataForForm(id) {
 			$("#UpdateFrom input[name=status]").attr("checked", "checked");
 			$("#UpdateFrom input[name=status]").prop('checked', true);
 			$("#title").html("<p>Thêm danh mục sản phẩm</p>");
-			$("#demo-form2").attr("action", "./admin?mc=productcat&site=create_cat");
 		} else {
 			$("#UpdateFrom input[name=id]").val(data.id);
 			$("#UpdateFrom input[name=name]").val(data.name);
 			$("#title").html("<p>Sửa danh mục sản phẩm</p>");
-			$("#demo-form2").attr("action", "./admin?mc=productcat&site=edit_cat");
 			if (data.status == '1'){
 				$("#UpdateFrom input[name=status]").attr("checked", "checked");
 				$("#UpdateFrom input[name=status]").prop('checked', true);
@@ -167,3 +167,22 @@ function LoadDataForForm(id) {
 }
 </script>
 {/literal}
+<script>
+$(document).ready(function() {
+	if( "{$notification.status}" == "success" || "{$notification.status}" == "error")
+	{
+		var notice = new PNotify({
+			title: "{$notification.title}",
+			text: "{$notification.text}",
+			type: "{$notification.status}",
+			mouse_reset: false,
+			buttons: {
+				sticker: false,
+		}
+		});
+		notice.get().click(function () {
+			notice.remove();
+		});
+	}
+})
+</script>
