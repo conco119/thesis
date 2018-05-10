@@ -5,12 +5,13 @@ lib_use(CORE_STRING);
 lib_use(CORE_PAGINATION);
 lib_use(CORE_FILEHANDLE);
 lib_use(CORE_TIMES);
-class Main
+lib_use(CORE_ZEBRA);
+class Main implements Init
 {
   protected $arg, $conf_info;
   function __construct()
   {
-    global $smarty, $tpl_file, $mc, $site, $login_id, $pdo;
+    global $smarty, $tpl_file, $mc, $site, $login_id, $pdo, $manager;
 
     $this->currentUser = '';
 
@@ -18,7 +19,9 @@ class Main
     $this->mc = $mc;
     $this->site = $site;
 
+    $this->image = $manager;
     $this->slim_pdo = $pdo;
+    $this->zebra = new Zebra();
     $this->pdo = new DPDO();
     $this->paging = new pagination();
     $this->filehanle = new FileHandle();
@@ -40,13 +43,14 @@ class Main
     $content = array();
     if (file_exists($this->file_setting)) {
         $content = parse_ini_file($this->file_setting, true);
-
     }
     $this->conf_info = $content;
     //end content getting
     $this->currentUser = $this->check_user();
     $this->arg = array(
-            'stylesheet' => DOMAIN . "app/admin/webroot/",
+            'stylesheet' => DOMAIN . "app/webroot/",
+            'image_folder_link' => DOMAIN . 'upload/image/',
+            'image_folder_path' => ROOT_PATH . "/upload/image/",
             'today' => gmdate("d-m-Y", time() + 7 * 3600),
             'this_month' => gmdate("m", time() + 7 * 3600),
             'this_year' => gmdate("Y", time() + 7 * 3600),
@@ -56,7 +60,9 @@ class Main
             'site' => $this->site,
             'user' => $this->currentUser,
             'setting' => $content['info'],
-            'macos' => MACOS
+            'macos' => MACOS,
+            'prefix_admin' => "./admin?",
+            'cwd' => getcwd()
     );
     $this->smarty->assign('arg', $this->arg);
   }

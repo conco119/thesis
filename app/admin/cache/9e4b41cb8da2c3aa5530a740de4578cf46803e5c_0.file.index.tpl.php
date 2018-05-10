@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-08 19:10:42
+/* Smarty version 3.1.30, created on 2018-05-10 00:31:50
   from "/Users/mtd/Sites/htaccess/app/admin/view/user/index.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5af193c21f9af5_85501758',
+  'unifunc' => 'content_5af33086e02718_73980075',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '9e4b41cb8da2c3aa5530a740de4578cf46803e5c' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/user/index.tpl',
-      1 => 1525773383,
+      1 => 1525887102,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5af193c21f9af5_85501758 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5af33086e02718_73980075 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="">
   <div class="row">
@@ -151,7 +151,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
         <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
         <h4 class="modal-title" id="title"></h4>
       </div>
-      <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" action=''>
+      <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" action='' enctype="multipart/form-data">
         <div class="modal-body">
 
           <div class="form-group">
@@ -209,6 +209,12 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
             <label class="control-label col-md-2 col-sm-2 col-xs-12">Địa chỉ</label>
             <div class="col-md-8 col-sm-6 col-xs-12">
               <input class="form-control" type="text" name="address">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-md-2 col-sm-2 col-xs-12">Avatar</label>
+            <div class="col-md-8 col-sm-6 col-xs-12">
+              <input class="form-control" type="file" name="avatar">
             </div>
           </div>
           <div class="form-group">

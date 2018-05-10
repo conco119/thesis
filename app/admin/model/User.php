@@ -56,6 +56,16 @@ class User extends Main
   {
     if( isset($_POST['submit']) && $_POST['id'] == 0)
     {
+
+      // $img = $_FILES['avatar'];
+      // pre($img);
+      // if($img['error'] == UPLOAD_ERR_OK) {
+      //   $az = explode(".", $img['name']);
+			// 	$type = $az[count($az)-1];
+			// 	$name = gmdate("Y.m.d.His", time()+7*3600) . "." . $type;
+      //   move_uploaded_file($img['tmp_name'], "/Users/mtd/Sites/htaccess/app/upload/image/xxx.jpg");
+      //   echo "ok1";
+      // }
       $data['code'] = $this->userHelper->get_user_code($_POST['permission']);
       $data['name'] = $_POST['name'];
       $data['username'] = $_POST['username'];
@@ -222,6 +232,187 @@ class User extends Main
 		echo 0;
 		exit;
   }
+
+  function profile(){
+    $this->change_avatar();
+    $this->delete_avatar();
+    $sql = "SELECT * FROM users where id = {$this->currentUser['id']}";
+    $user = $this->pdo->fetch_one($sql);
+    $user['avatar'] = $this->userHelper->get_user_avatar($this->arg['image_folder_link'], $user['avatar']);
+    $this->smarty->assign('result', $user);
+		// $this->dbo->connect();
+		// global $smarty, $login;
+		// $sql_where = "AND 1=1";
+
+		// $sql = "SELECT a.id,a.username,a.name,a.office_id,a.male,a.level,a.birthday,a.address,a.phone,a.email,a.position,a.group_id,a.image
+		// FROM users AS a
+		// WHERE a.id=$login";
+		// $result = $this->dbo->fetch_one_array($sql);
+		// $result['avatar'] = $this->user->get_avatar($result['image']);
+		// //echo $result['avatar'];
+
+		// $smarty->assign("result", $result);
+
+		// $date_export = isset($_GET['date']) ? intval($_GET["date"]) : 0;
+
+		// if($date_export != 0)
+		// {
+		// 	if($date_export ==1)
+		// 	{
+
+		// 		$time= time();
+		// 		$time = date("Y-m-d");
+		// 		$sql_where .= " AND b.date='".$time."'";
+		// 	}
+		// 	if($date_export ==2)
+		// 	{
+		// 		$sql_where .= " AND b.week= WEEKOFYEAR(CURDATE()) AND b.year= YEAR(CURDATE()) ";
+		// 	}
+		// 	if($date_export ==3 )
+		// 	{
+		// 		$sql_where .= " AND b.month= MONTH(CURDATE()) AND b.year= YEAR(CURDATE()) ";
+		// 	}
+
+		// }
+		// $out['select_export'] = $this->help->get_select_from_array($this->select_export,$date_export);
+
+		// $sql_export = "SELECT a.id,a.username,a.name,a.office_id,a.male,b.money,b.description as dis,c.name AS customer,a.level,a.birthday,a.address,a.phone,b.code,a.email,a.position,a.group_id,a.image
+		// FROM users AS a LEFT JOIN wh_export b ON a.id=b.creator
+		// LEFT JOIN customers c ON b.customer_id=c.id
+		// WHERE a.id=".$login." ".$sql_where;
+		// $paging = $this->paging->get_content($this->dbo->number_result_from_sql($sql), 10);
+		// $sql .= $paging['sql_add'];
+		// $smarty->assign('paging', $paging);
+    //     @$query_export = $this->dbo->query($sql_export);
+    //     while ($item = $this->dbo->fetch_array(@$query_export)) {
+		// 	$item['code'] = $this->help->get_code($item['id'], 'exp');
+    //         $result_export[] = $item;
+    //     }
+		// $smarty->assign("result_export", @$result_export);
+
+
+		// $out['gender'] = $this->get_user_gender($result['male']);
+		// $out['birthday'] = $this->get_birthday_select($result['birthday']);
+		// $smarty->assign('out', $out);
+
+
+
+		if(isset($_POST["submit"])){
+			$data["name"] = $_POST["name"];
+			$data["male"] = $_POST["gender"];
+			$data["birthday"] = $_POST["year"] . "-" . $_POST["month"] . "-" . $_POST["day"];
+			$data["address"] = $_POST["address"];
+			$data["email"] = $_POST["email"];
+			$data["phone"] = $_POST["phone"];
+			$data['updated'] = time();
+
+			if(!checkdate($_POST['month'], $_POST['day'], $_POST['year'])){
+				lib_alert("Ngay sinh khong dung, vui long chon lai !");
+				lib_redirect_back();
+			}
+			else {
+				if($this->dbo->query_update("users", $data, "id=$login")){
+					lib_alert("Hoan thanh");
+					lib_redirect(THIS_LINK);
+				}
+				else{
+					lib_alert("Error !");
+					lib_redirect_back();
+					exit();
+				}
+			}
+		}
+
+		if(isset($_POST["pass"])){
+			$data["password"] = $_POST["password"];
+			$pass_old = $_POST["pass_old"];
+			if(!$this->dbo->check_exist_fields("SELECT id FROM users WHERE id=$login && password= '$pass_old'")){
+				lib_alert("Mat khau cu khong dung vui long nhap lai");
+				lib_redirect_back();
+			}
+			elseif($_POST["password"] != $_POST["Re_password"]) {
+				lib_alert("Nhap lai khong trung vui long nhap lai");
+				lib_redirect_back();
+			}
+			else
+			{
+				if($this->dbo->query_update("users", $data, "id=$login")){
+					lib_alert("Hoan thanh");
+					lib_redirect(THIS_LINK);
+				}
+				else{
+					lib_alert("Error !");
+					lib_redirect_back();
+					exit();
+				}
+			}
+		}
+
+
+		// $this->dbo->close();
+		$this->smarty->display(DEFAULT_LAYOUT);
+  }
+  // end profile function
+  public function change_avatar()
+  {
+    if(isset($_POST['avatar_change']))
+    {
+			$data = array();
+      $avatar = new Zebra();
+      if ( isset($_FILES['avatar_file']) && $this->userHelper->check_type($_FILES['avatar_file']['type']) )
+      {
+        // echo "ok";
+        // die();
+				$avatar->source_path = $_FILES['avatar_file']['tmp_name'];
+				$upload_file_name = $this->userHelper->get_image_name_upload_from_dollar_files($_FILES['avatar_file']['type']);
+        $avatar->target_path = $this->arg['image_folder_path'] . $upload_file_name;
+        $avatar->jpeg_quality = 100;
+        $avatar->preserve_aspect_ratio = true;
+        $do = $avatar->crop($_POST['avatar_x'], $_POST['avatar_y'], $_POST['avatar_width']+$_POST['avatar_x'], $_POST['avatar_height']+$_POST['avatar_y']);
+        $data['avatar'] = $upload_file_name;
+        if($this->currentUser['avatar'] != '' && $this->currentUser['avatar'] != $upload_file_name)
+        {
+          unlink($this->arg['image_folder_path'] . $this->currentUser['avatar'] );
+          // chmod($this->arg['image_folder_path'] . $this->['avatar'], 0777);
+        }
+        $this->pdo->update('users', $data, 'id='.$this->currentUser['id']);
+     }
+     else if($this->currentUser['avatar'] != '')
+     {
+      $avatar->source_path = $this->userHelper->get_avatar_path($this->arg['image_folder_path'], $this->currentUser['avatar']);
+      $ext = pathinfo($this->currentUser['avatar'], PATHINFO_EXTENSION);
+      $upload_file_name = $this->userHelper->get_image_name_upload_from_extension($ext);
+      $avatar->target_path = $this->arg['image_folder_path'] . $upload_file_name;
+      $avatar->jpeg_quality = 100;
+      $avatar->preserve_aspect_ratio = true;
+      $do = $avatar->crop($_POST['avatar_x'], $_POST['avatar_y'], $_POST['avatar_width']+$_POST['avatar_x'], $_POST['avatar_height']+$_POST['avatar_y']);
+      // pre($avatar);
+      // die();
+      $data['avatar'] = $upload_file_name;
+      if($this->currentUser['avatar'] != '' && $this->currentUser['avatar'] != $upload_file_name)
+      {
+        unlink($this->arg['image_folder_path'] . $this->currentUser['avatar'] );
+        // chmod($this->arg['image_folder_path'] . $this->['avatar'], 0777);
+      }
+      $this->pdo->update('users', $data, 'id='.$this->currentUser['id']);
+     }
+
+		}
+  }
+  // end of change avatar
+
+  public function delete_avatar()
+  {
+    if(isset($_POST['delete_avatar']))
+    {
+			$data['avatar'] = '';
+			if($this->currentUser['avatar'] != ''){
+        unlink($this->arg['image_folder_path'] . $this->currentUser['avatar'] );
+			}
+			$this->pdo->update('users', $data, 'id=' . $this->currentUser['id'] );
+		}
+  }
+
 }
 
  ?>

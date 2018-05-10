@@ -16,11 +16,11 @@
 					<ul class="nav child_menu" style="display: none">
 						<!--<li id="home_li"><a href="./">Điều khiển</a></li> -->
 						<!--<li><a href="?mc=room&site=manager">Phòng hát</a></li>-->
-						<li><a href="./admin?mc=export&site=index">Bán hàng</a></li>
-						<li><a href="./admin?mc=import&site=create">Nhập hàng</a></li>
-						<li><a href="./admin?mc=import&site=reimport">Khách trả hàng</a></li>
-						<li><a href="./admin?mc=export&site=distroy">Hủy hàng</a></li>
-						<li><a href="./admin?mc=export&site=export_sup">Trả hàng NCC</a></li>
+						<li><a href="{$arg.prefix_admin}mc=export&site=index">Bán hàng</a></li>
+						<li><a href="{$arg.prefix_admin}mc=import&site=create">Nhập hàng</a></li>
+						<li><a href="{$arg.prefix_admin}mc=import&site=reimport">Khách trả hàng</a></li>
+						<li><a href="{$arg.prefix_admin}mc=export&site=distroy">Hủy hàng</a></li>
+						<li><a href="{$arg.prefix_admin}mc=export&site=export_sup">Trả hàng NCC</a></li>
 					</ul>
 				</li>
 				<li><a href="?mc=money&site=index"><i class="fa fa-dollar"></i> Sổ thu chi</a></li>
@@ -29,15 +29,16 @@
 						<li id="product_index_li"><a href="?mc=product&site=index">Quản lý sản phẩm</a></li>
 						<!--<li><a href="?mc=product&site=combo">Quản lý bộ sản phẩm</a></li> -->
 
-						<li><a href="./admin?mc=productcat&site=index">Danh mục sản phẩm</a></li>
-						<li><a href="./admin?mc=productunit&site=index">Đơn vị sản phẩm</a></li>
+						<li><a href="{$arg.prefix_admin}mc=productcat&site=index">Danh mục sản phẩm</a></li>
+						<li><a href="{$arg.prefix_admin}mc=productunit&site=index">Đơn vị sản phẩm</a></li>
 						<!--<li><a href="?mc=product&site=setup">Báo giá sản phẩm</a></li>-->
 					</ul>
 				</li>
-				<li><a href="./admin?mc=service&site=index"><i style="width:26px;" class="glyphicon glyphicon-list-alt"></i>    Quản lý dịch vụ</a></li>
+				<li><a href="{$arg.prefix_admin}mc=service&site=index"><i style="width:26px;" class="glyphicon glyphicon-list-alt"></i>    Quản lý dịch vụ</a></li>
 				<li><a><i class="fa fa-user-md"></i> Đối tác <span class="fa fa-chevron-down"></span></a>
 					<ul class="nav child_menu" style="display: none">
 						<li><a href="?mc=customer&site=index">Khách hàng</a></li>
+						<li><a href="{$arg.prefix_admin}mc=customergroup&site=index">Nhóm khách hàng</a></li>
 						<li><a href="?mc=supplier&site=index">Nhà cung cấp</a></li>
 					</ul>
 				</li>
@@ -69,7 +70,7 @@
 			<ul class="nav side-menu">
 				<li><a><i class="fa fa-cog"></i> Thiết lập <span class="fa fa-chevron-down"></span></a>
 					<ul class="nav child_menu" style="display: none">
-						<li><a href="./admin?mc=user&site=index">Quản lý người dùng</a></li>
+						<li><a href="{$arg.prefix_admin}mc=user&site=index">Quản lý người dùng</a></li>
 						<li><a href="?mc=staff&site=index">Quản lý nhân viên kinh doanh</a></li>
 						<li><a href="?mc=setting&site=info">Thiết lập thông tin</a></li>
 						<li><a href="?mc=setting&site=others">Thiết lập bán hàng</a></li>

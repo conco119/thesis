@@ -1,2 +1,2 @@
 ./constant/database.ini
-./cache
+./app/admin/cache

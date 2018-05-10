@@ -5,10 +5,12 @@ define("CORE_STRING","core:String");
 define("CORE_TIMES","core:Times");
 define("CORE_PAGINATION","core:Pagination");
 define("CORE_FILEHANDLE","core:FileHandle");
+define("CORE_ZEBRA","core:Zebra");
 define('DEFAULT_LAYOUT', 'default.tpl');
 define("USER", "user");
 define("MACOS", '/~mtd/htaccess/');
-
+define("ROOT_PATH", __DIR__);
+// define()
 
 // require lib
 function lib_use($path){

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-06 20:03:49
+/* Smarty version 3.1.30, created on 2018-05-09 16:43:33
   from "/Users/mtd/Sites/htaccess/app/admin/view/service/index.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aeefd357dbb07_25450493',
+  'unifunc' => 'content_5af2c2c501ee58_09124182',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd41c0b1d1e018600d2554eff765303f4038ad116' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/service/index.tpl',
-      1 => 1525611828,
+      1 => 1525858998,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5aeefd357dbb07_25450493 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5af2c2c501ee58_09124182 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="">
     <div class="x_panel">
@@ -86,7 +86,8 @@ foreach ($_from as $_smarty_tpl->tpl_vars['data']->value) {
                             <td class="text-right">
                                 <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#UpdateForm" onclick="LoadDataForForm(<?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
 );"><i class="fa fa-pencil"></i></button>
-                                <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#DeleteForm" onclick="LoadDeleteItem('service', <?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
+                                <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#DeleteForm" onclick="LoadDeleteItem('<?php echo $_smarty_tpl->tpl_vars['arg']->value['mc'];?>
+', <?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
 , '', 'dịch vụ', 'vì còn tồn tại trong hóa đơn');"><i class="fa fa-trash-o"></i></button>
                             </td>
                         </tr>

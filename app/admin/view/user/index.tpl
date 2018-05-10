@@ -103,7 +103,7 @@
         <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
         <h4 class="modal-title" id="title"></h4>
       </div>
-      <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" action=''>
+      <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" action='' enctype="multipart/form-data">
         <div class="modal-body">
 
           <div class="form-group">
@@ -161,6 +161,12 @@
             <label class="control-label col-md-2 col-sm-2 col-xs-12">Địa chỉ</label>
             <div class="col-md-8 col-sm-6 col-xs-12">
               <input class="form-control" type="text" name="address">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-md-2 col-sm-2 col-xs-12">Avatar</label>
+            <div class="col-md-8 col-sm-6 col-xs-12">
+              <input class="form-control" type="file" name="avatar">
             </div>
           </div>
           <div class="form-group">

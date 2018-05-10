@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-05 15:05:20
+/* Smarty version 3.1.30, created on 2018-05-10 09:32:52
   from "/Users/mtd/Sites/htaccess/app/admin/view/layouts/includes/header.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aed65c01d1e77_63223118',
+  'unifunc' => 'content_5af3af540556c2_12125176',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'b301ea25a38633316e818345db96e213a8545257' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/layouts/includes/header.tpl',
-      1 => 1524912320,
+      1 => 1525919570,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5aed65c01d1e77_63223118 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5af3af540556c2_12125176 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 
 <div class="top_nav">
@@ -39,7 +39,8 @@ images/img.jpg" alt=""><?php echo $_smarty_tpl->tpl_vars['arg']->value['user']['
  <span class=" fa fa-angle-down"></span>
 					</a>
 					<ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
-						<li><a href="?mod=account&site=profile"> Tài khoản</a></li>
+						<li><a href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['prefix_admin'];?>
+mc=user&site=profile"> Tài khoản</a></li>
 						<li><a href="?mod=install&site=index"> Thông tin sử dụng</a></li>
             <li><a href="?mod=upgrade&site=index"> Phiên bản</a></li>
 						<li><a href="admin?mc=user&site=logout"><i class="fa fa-sign-out pull-right"></i> Đăng xuất</a></li>

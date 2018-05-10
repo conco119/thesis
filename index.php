@@ -1,5 +1,5 @@
 <?php
-require_once 'vendor/autoload.php';
+require 'vendor/autoload.php';
 
 $dsn = 'mysql:host=localhost;dbname=htaccess3;charset=utf8';
 $usr = 'root';
