@@ -188,17 +188,17 @@
                             <div class="col-lg-2"><label class="control-label" for="selectError3">Sinh nhật</label></div>
                             <div class="col-lg-3">
                                 <select id="" name="day" class="form-control required">
-                                    {$out.birthday.day}
+                                    {$result.birthday.day}
                                 </select>
                             </div>
                             <div class="col-lg-3">
                                 <select id="" name="month" class="form-control required">
-                                    {$out.birthday.month}
+                                    {$result.birthday.month}
                                 </select>
                                 </div>
                                 <div class="col-lg-4">
                                 <select id="" name="year" class="form-control required">
-                                    {$out.birthday.year}
+                                    {$result.birthday.year}
                                 </select>
                                 </div>
                     </div>
@@ -208,7 +208,7 @@
                         </div>
                         <div class="col-lg-10">
                             <select id="" name="gender" class="form-control required">
-                                {$out.gender}
+                                {$result.gender}
                             </select>
                         </div>
                     </div>
@@ -296,4 +296,22 @@
     </script>
 {/literal}
 <!-- image cropping -->
-
+<script>
+$(document).ready(function() {
+	if( "{$notification.status}" == "success" || "{$notification.status}" == "error")
+	{
+		var notice = new PNotify({
+			title: "{$notification.title}",
+			text: "{$notification.text}",
+			type: "{$notification.status}",
+			mouse_reset: false,
+			buttons: {
+				sticker: false,
+		}
+		});
+		notice.get().click(function () {
+			notice.remove();
+		});
+	}
+})
+</script>

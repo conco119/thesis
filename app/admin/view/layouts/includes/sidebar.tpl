@@ -37,7 +37,7 @@
 				<li><a href="{$arg.prefix_admin}mc=service&site=index"><i style="width:26px;" class="glyphicon glyphicon-list-alt"></i>    Quản lý dịch vụ</a></li>
 				<li><a><i class="fa fa-user-md"></i> Đối tác <span class="fa fa-chevron-down"></span></a>
 					<ul class="nav child_menu" style="display: none">
-						<li><a href="?mc=customer&site=index">Khách hàng</a></li>
+						<li><a href="{$arg.prefix_admin}mc=customer&site=index">Khách hàng</a></li>
 						<li><a href="{$arg.prefix_admin}mc=customergroup&site=index">Nhóm khách hàng</a></li>
 						<li><a href="?mc=supplier&site=index">Nhà cung cấp</a></li>
 					</ul>

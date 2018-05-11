@@ -13,22 +13,22 @@
                 <div class="form-group form-inline">
                     <select class="form-control left" id="group" >
                         <option value="">Tất cả khách hàng</option>
-                        {$out.categories}
+                        {$customer_groups}
                     </select>
                 </div>
                 <div class="form-group form-inline">
                     <input class="form-control left" id="key" placeholder="Mã, Tên, SĐT" >
                 </div>
                 <button type="button" class="btn btn-primary left" onclick="filter();"><i class="fa fa-search"></i></button>
-                  
-                  <a href="?mod=customer&site=groups" class="btn btn-primary left"><i class="fa fa-pencil"></i> Quản lý nhóm</a>
-                <form method="post" style="display: inline; float: left;">
+
+                  <a href="{$arg.prefix_admin}mc=customergroup&site=index" class="btn btn-primary left"><i class="fa fa-pencil"></i> Quản lý nhóm</a>
+                {* <form method="post" style="display: inline; float: left;">
                     <input type="hidden" name="export_request" />
                     <button type="submit" class="btn btn-success"><i class="fa fa-share-square-o"></i> Xuất file Excel</a></button>
-                </form>
+                </form> *}
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#UpdateFrom" onclick="LoadDataForForm(0);"><i class="fa fa-pencil"></i> Thêm mới</button>
-                <button type="button" class="btn btn-success" onclick="HandleActive('customers', 1);"><i class="fa fa-check-square-o"></i> Kích hoạt</button>
-                <button type="button" class="btn btn-default" onclick="HandleActive('customers', 0);"><i class="fa fa-times-circle"></i> Hủy</button>
+                {* <button type="button" class="btn btn-success" onclick="HandleActive('customers', 1);"><i class="fa fa-check-square-o"></i> Kích hoạt</button>
+                <button type="button" class="btn btn-default" onclick="HandleActive('customers', 0);"><i class="fa fa-times-circle"></i> Hủy</button> *}
                 <div class="clearfix"></div>
             </div>
 
@@ -37,7 +37,6 @@
                 <table class="table table-striped table-bordered">
                     <thead>
                         <tr>
-                            <th class="text-center"><input type="checkbox" id="SelectAllRows"></th>
                             <th>Khách hàng</th>
                             <th>Nhóm</th>
                             <th class="text-right">Tài khoản / Ghi nợ</th>
@@ -48,12 +47,14 @@
                         </tr>
                     </thead>
                     <tbody>
-    
-                        {foreach from=$result item=list}
+
+                        {foreach from=$customers item=list}
                             <tr id="field{$list.id}">
-                                <td class="text-center"><input type="checkbox" class="item_checked" value="{$list.id}"></td>
-                                <td>[{$list.code}] {$list.name}</td>
-                                <td>{$list.group_name}</td>
+                                <td>
+                                [{$list.code}] {$list.name} <br>
+                                <small>Created by: {$list.creator.username} - {$list.creator.name}</small>
+                                </td>
+                                <td>{$list.group.name}</td>
                                 <td class="text-right">
                                 	{$list.money|number_format}
                                 </td>
@@ -134,6 +135,8 @@
                     <div class="form-group">
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <input type="hidden" name="id">
+							<input type="hidden" name="prefix_admin" value='{$arg.prefix_admin}'>
+							<input type="hidden" name="mc" value='{$arg.mc}'>
                         </div>
                     </div>
                     <div class="form-group">
@@ -155,6 +158,24 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="control-label col-md-2 col-sm-2 col-xs-12">Giới tính</label>
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <select class="form-control" name="gender"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2 col-sm-2 col-xs-12">Ngày sinh</label>
+                        <div class="col-md-2 col-sm-3 col-xs-12">
+                            <select class="form-control" name="day"></select>
+                        </div>
+                        <div class="col-md-2 col-sm-3 col-xs-12">
+                            <select class="form-control" name="month"></select>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                            <select class="form-control" name="year"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="control-label col-md-2 col-sm-2 col-xs-12">Điện thoại</label>
                         <div class="col-md-4 col-sm-6 col-xs-12">
                             <input type="tel" class="form-control" name="phone" pattern="[0-9]\d*" title="Số điện thoại">
@@ -164,6 +185,12 @@
                         <label class="control-label col-md-2 col-sm-2 col-xs-12">Địa chỉ</label>
                         <div class="col-md-9 col-sm-6 col-xs-12">
                             <input type="text" class="form-control" name="address">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2 col-sm-2 col-xs-12">Email</label>
+                        <div class="col-md-9 col-sm-6 col-xs-12">
+                            <input type="email" class="form-control" name="email">
                         </div>
                     </div>
                     <div class="form-group">
@@ -205,15 +232,25 @@ $(document).ready(function () {
     });
 });
 
+function activeStatus(table, id) {
+	let prefix_admin = $("#UpdateFrom input[name=prefix_admin]").val();
+    $.post(`${prefix_admin}mc=customer&site=ajax_active`, {'table': table, 'id': id}).done(function (data) {
+            if(data == 0)
+              alert('You can not change');
+            else
+            $("#stt" + id).html(data);
+    });
+}
 
 function LoadDataForForm(id) {
+    let mc = $("#UpdateFrom input[name=mc]").val();
+	let prefix_admin = $("#UpdateFrom input[name=prefix_admin]").val();
     $("#UpdateFrom input[type=text]").val('');
-    $.post("?mod=customer&site=ajax_load_item", {'id': id}).done(function (data) {
+    $.post(`${prefix_admin}mc=${mc}&site=ajax_load`, {'id' : id}).done(function(data) {
         var data = JSON.parse(data);
         console.log(data);
         if (data.id == undefined) {
             $("#UpdateFrom input[name=id]").val(0);
-            $("#UpdateFrom input[name=sort]").val(1);
             $("#UpdateFrom input[name=status]").attr("checked", "checked");
             $("#UpdateFrom input[name=status]").prop('checked', true);
             $("#title").html('Thêm khách hàng');
@@ -222,6 +259,7 @@ function LoadDataForForm(id) {
             $("#UpdateFrom input[name=name]").val(data.name);
             $("#UpdateFrom input[name=phone]").val(data.phone);
             $("#UpdateFrom input[name=address]").val(data.address);
+            $("#UpdateFrom input[name=email]").val(data.email);
             $("#title").html('Sửa thông tin khách hàng');
             if (data.status == '1') {
                 $("#UpdateFrom input[name=status]").attr("checked", "checked");
@@ -232,11 +270,15 @@ function LoadDataForForm(id) {
             }
         }
         $("#UpdateFrom input[name=code]").val(data.code);
-        $("#UpdateFrom select[name=group_id]").html(data.select_groups);
+        $("#UpdateFrom select[name=day]").html(data.birthday.day);
+        $("#UpdateFrom select[name=month]").html(data.birthday.month);
+        $("#UpdateFrom select[name=year]").html(data.birthday.year);
+        $("#UpdateFrom select[name=gender]").html(data.gender);
+        $("#UpdateFrom select[name=group_id]").html(data.group);
     });
 }
 
-function filter() 
+function filter()
 {
   var key = $("#key").val();
     var category = $("#group").val();
@@ -248,3 +290,22 @@ function filter()
 
 </script>
 {/literal}
+<script>
+$(document).ready(function() {
+	if( "{$notification.status}" == "success" || "{$notification.status}" == "error")
+	{
+		var notice = new PNotify({
+			title: "{$notification.title}",
+			text: "{$notification.text}",
+			type: "{$notification.status}",
+			mouse_reset: false,
+			buttons: {
+				sticker: false,
+		}
+		});
+		notice.get().click(function () {
+			notice.remove();
+		});
+	}
+})
+</script>

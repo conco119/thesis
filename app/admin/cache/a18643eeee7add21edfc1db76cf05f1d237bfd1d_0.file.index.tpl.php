@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-09 22:57:06
+/* Smarty version 3.1.30, created on 2018-05-11 23:09:24
   from "/Users/mtd/Sites/htaccess/app/admin/view/customergroup/index.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5af31a520c7097_62188116',
+  'unifunc' => 'content_5af5c034be7eb8_84600973',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'a18643eeee7add21edfc1db76cf05f1d237bfd1d' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/customergroup/index.tpl',
-      1 => 1525881422,
+      1 => 1526054962,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5af31a520c7097_62188116 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5af5c034be7eb8_84600973 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="">
 	<div class="row">
@@ -35,7 +35,8 @@ function content_5af31a520c7097_62188116 (Smarty_Internal_Template $_smarty_tpl)
 				</div>
 				<div class="x_content">
 					<div class="h_content">
-						<a href="?mod=customer&site=index" class="btn btn-primary left"><i class="fa fa-bars"></i> Quản lý khách hàng</a>
+						<a href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['prefix_admin'];?>
+mc=customer&site=index" class="btn btn-primary left"><i class="fa fa-bars"></i> Quản lý khách hàng</a>
 
 						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#UpdateFrom" onclick="LoadDataForForm(0);"><i class="fa fa-pencil"></i> Thêm mới</button>
 						<div class="clearfix"></div>
@@ -146,6 +147,15 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 						</div>
 					</div>
 					<div class="form-group">
+						<label class="control-label col-md-2 col-sm-2 col-xs-12">Chiết khấu</label>
+						<div class="col-md-4 col-sm-4 col-xs-12">
+							<select name="discount_type" class="form-control"></select>
+						</div>
+						<div class="col-md-4 col-sm-4 col-xs-12">
+							<input type="number" class="form-control" name="discount" onchange="check_number(this);">
+						</div>
+					</div>
+					<div class="form-group">
 						<label class="control-label col-md-2 col-sm-2 col-xs-12">Trạng thái</label>
 						<div class="col-md-9 col-sm-9 col-xs-12">
 							<div class="checkbox">
@@ -198,6 +208,7 @@ function LoadDataForForm(id) {
 		} else {
 			$("#UpdateFrom input[name=id]").val(data.id);
 			$("#UpdateFrom input[name=name]").val(data.name);
+			$("#UpdateFrom input[name=discount]").val(data.discount);
 			$("#title").html("Sửa thông tin nhóm khách hàng");
 			if (data.status == '1'){
 				$("#UpdateFrom input[name=status]").attr("checked", "checked");
@@ -209,17 +220,10 @@ function LoadDataForForm(id) {
 			}
 		}
 		$("#UpdateFrom input[name=code]").val(data.code);
+		$("#UpdateFrom select[name=discount_type]").html(data.discount_type);
 	});
 }
 
-function check_number(obj){
-	var value = $(obj).val();
-	if(value <= 0){
-		alert('Vui long nhap so duong');
-		$(obj).val(0);
-		return false;
-	}
-}
 <?php echo '</script'; ?>
 >
 

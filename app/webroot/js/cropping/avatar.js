@@ -18,8 +18,9 @@ function readURL(input) {
 
 function check_avatar(){
 	var cur_avt = $('#avatar_cur').attr('src');
-	if(cur_avt.match(/generals/g)){
+	if(cur_avt.match(/user-default/g)){
 		$('#del_avt_btn').attr('disabled','');
+		console.log('wat');
 	}
 }
 

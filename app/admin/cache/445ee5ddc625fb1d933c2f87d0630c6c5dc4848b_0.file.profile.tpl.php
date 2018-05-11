@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-10 09:48:55
+/* Smarty version 3.1.30, created on 2018-05-11 09:14:14
   from "/Users/mtd/Sites/htaccess/app/admin/view/user/profile.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5af3b317e5c266_99885792',
+  'unifunc' => 'content_5af4fc76ed5a23_12203095',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '445ee5ddc625fb1d933c2f87d0630c6c5dc4848b' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/user/profile.tpl',
-      1 => 1525920523,
+      1 => 1526004848,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5af3b317e5c266_99885792 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5af4fc76ed5a23_12203095 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 
 <div class="">
@@ -238,19 +238,19 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
                             <div class="col-lg-2"><label class="control-label" for="selectError3">Sinh nhật</label></div>
                             <div class="col-lg-3">
                                 <select id="" name="day" class="form-control required">
-                                    <?php echo $_smarty_tpl->tpl_vars['out']->value['birthday']['day'];?>
+                                    <?php echo $_smarty_tpl->tpl_vars['result']->value['birthday']['day'];?>
 
                                 </select>
                             </div>
                             <div class="col-lg-3">
                                 <select id="" name="month" class="form-control required">
-                                    <?php echo $_smarty_tpl->tpl_vars['out']->value['birthday']['month'];?>
+                                    <?php echo $_smarty_tpl->tpl_vars['result']->value['birthday']['month'];?>
 
                                 </select>
                                 </div>
                                 <div class="col-lg-4">
                                 <select id="" name="year" class="form-control required">
-                                    <?php echo $_smarty_tpl->tpl_vars['out']->value['birthday']['year'];?>
+                                    <?php echo $_smarty_tpl->tpl_vars['result']->value['birthday']['year'];?>
 
                                 </select>
                                 </div>
@@ -261,7 +261,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
                         </div>
                         <div class="col-lg-10">
                             <select id="" name="gender" class="form-control required">
-                                <?php echo $_smarty_tpl->tpl_vars['out']->value['gender'];?>
+                                <?php echo $_smarty_tpl->tpl_vars['result']->value['gender'];?>
 
                             </select>
                         </div>
@@ -361,6 +361,31 @@ js/cropping/avatar.js"><?php echo '</script'; ?>
 >
 
 <!-- image cropping -->
-
+<?php echo '<script'; ?>
+>
+$(document).ready(function() {
+	if( "<?php echo $_smarty_tpl->tpl_vars['notification']->value['status'];?>
+" == "success" || "<?php echo $_smarty_tpl->tpl_vars['notification']->value['status'];?>
+" == "error")
+	{
+		var notice = new PNotify({
+			title: "<?php echo $_smarty_tpl->tpl_vars['notification']->value['title'];?>
+",
+			text: "<?php echo $_smarty_tpl->tpl_vars['notification']->value['text'];?>
+",
+			type: "<?php echo $_smarty_tpl->tpl_vars['notification']->value['status'];?>
+",
+			mouse_reset: false,
+			buttons: {
+				sticker: false,
+		}
+		});
+		notice.get().click(function () {
+			notice.remove();
+		});
+	}
+})
+<?php echo '</script'; ?>
+>
 <?php }
 }

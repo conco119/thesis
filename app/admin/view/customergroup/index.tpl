@@ -11,7 +11,7 @@
 				</div>
 				<div class="x_content">
 					<div class="h_content">
-						<a href="?mod=customer&site=index" class="btn btn-primary left"><i class="fa fa-bars"></i> Quản lý khách hàng</a>
+						<a href="{$arg.prefix_admin}mc=customer&site=index" class="btn btn-primary left"><i class="fa fa-bars"></i> Quản lý khách hàng</a>
 
 						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#UpdateFrom" onclick="LoadDataForForm(0);"><i class="fa fa-pencil"></i> Thêm mới</button>
 						<div class="clearfix"></div>
@@ -101,6 +101,15 @@
 						</div>
 					</div>
 					<div class="form-group">
+						<label class="control-label col-md-2 col-sm-2 col-xs-12">Chiết khấu</label>
+						<div class="col-md-4 col-sm-4 col-xs-12">
+							<select name="discount_type" class="form-control"></select>
+						</div>
+						<div class="col-md-4 col-sm-4 col-xs-12">
+							<input type="number" class="form-control" name="discount" onchange="check_number(this);">
+						</div>
+					</div>
+					<div class="form-group">
 						<label class="control-label col-md-2 col-sm-2 col-xs-12">Trạng thái</label>
 						<div class="col-md-9 col-sm-9 col-xs-12">
 							<div class="checkbox">
@@ -152,6 +161,7 @@ function LoadDataForForm(id) {
 		} else {
 			$("#UpdateFrom input[name=id]").val(data.id);
 			$("#UpdateFrom input[name=name]").val(data.name);
+			$("#UpdateFrom input[name=discount]").val(data.discount);
 			$("#title").html("Sửa thông tin nhóm khách hàng");
 			if (data.status == '1'){
 				$("#UpdateFrom input[name=status]").attr("checked", "checked");
@@ -163,6 +173,7 @@ function LoadDataForForm(id) {
 			}
 		}
 		$("#UpdateFrom input[name=code]").val(data.code);
+		$("#UpdateFrom select[name=discount_type]").html(data.discount_type);
 	});
 }
 

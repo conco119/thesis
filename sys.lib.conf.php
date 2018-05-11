@@ -33,4 +33,7 @@ function lib_redirect_back(){
 	echo "<script> history.go(-1); </script>";
 	exit();
 }
+function lib_alert($title){
+	echo "<meta charset=\"UTF-8\"><script> alert('".$title."'); </script>";
+}
  ?>

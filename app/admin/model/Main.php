@@ -21,7 +21,6 @@ class Main implements Init
 
     $this->image = $manager;
     $this->slim_pdo = $pdo;
-    $this->zebra = new Zebra();
     $this->pdo = new DPDO();
     $this->paging = new pagination();
     $this->filehanle = new FileHandle();
@@ -62,8 +61,12 @@ class Main implements Init
             'setting' => $content['info'],
             'macos' => MACOS,
             'prefix_admin' => "./admin?",
-            'cwd' => getcwd()
     );
+    //user avatar to header view
+    if($this->currentUser['avatar'] != '')
+      $this->arg['avatar_link'] = $this->arg['image_folder_link'] . $this->currentUser['avatar'];
+    else
+      $this->arg['avatar_link'] = $this->arg['image_folder_link'] . 'user-default.png';
     $this->smarty->assign('arg', $this->arg);
   }
 

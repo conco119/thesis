@@ -70,7 +70,7 @@ class User extends Main
       $data['name'] = $_POST['name'];
       $data['username'] = $_POST['username'];
       $data['password'] = $_POST['year'] . $_POST['month'] . $_POST['day'];
-      $data['image'] = "";
+      $data['avatar'] = "";
 			$data['permission'] = $_POST["permission"];
 			$data["gender"] = $_POST["gender"];
 			$data["birthday"] = $_POST["year"] . "-" . $_POST["month"] . "-" . $_POST["day"];
@@ -146,7 +146,6 @@ class User extends Main
           ];
           $this->smarty->assign('notification', $notification);
       }
-
     }
 
   }
@@ -213,8 +212,8 @@ class User extends Main
     {
       $user = $this->pdo->fetch_one("SELECT * FROM users WHERE id = " . $_POST['id']);
       $user['permission'] = $this->userHelper->get_user_permission_select($user['permission']);
-      $user['gender'] = $this->userHelper->get_user_gender_select($user['gender']);
-      $user['birthday'] = $this->userHelper->get_user_birthday_select($user['birthday']);
+      $user['gender'] = $this->helper->get_user_gender_select($user['gender']);
+      $user['birthday'] = $this->helper->get_user_birthday_select($user['birthday']);
       echo json_encode($user);
     }
   }
@@ -236,9 +235,15 @@ class User extends Main
   function profile(){
     $this->change_avatar();
     $this->delete_avatar();
+    $this->change_info();
+    $this->change_pass();
     $sql = "SELECT * FROM users where id = {$this->currentUser['id']}";
     $user = $this->pdo->fetch_one($sql);
     $user['avatar'] = $this->userHelper->get_user_avatar($this->arg['image_folder_link'], $user['avatar']);
+    $this->arg['avatar_link'] = $user['avatar'];
+    $this->smarty->assign('arg', $this->arg);
+    $user['birthday'] = $this->helper->get_user_birthday_select($user['birthday']);
+    $user['gender'] = $this->helper->get_user_gender_select($user['gender']);
     $this->smarty->assign('result', $user);
 		// $this->dbo->connect();
 		// global $smarty, $login;
@@ -297,56 +302,9 @@ class User extends Main
 
 
 
-		if(isset($_POST["submit"])){
-			$data["name"] = $_POST["name"];
-			$data["male"] = $_POST["gender"];
-			$data["birthday"] = $_POST["year"] . "-" . $_POST["month"] . "-" . $_POST["day"];
-			$data["address"] = $_POST["address"];
-			$data["email"] = $_POST["email"];
-			$data["phone"] = $_POST["phone"];
-			$data['updated'] = time();
 
-			if(!checkdate($_POST['month'], $_POST['day'], $_POST['year'])){
-				lib_alert("Ngay sinh khong dung, vui long chon lai !");
-				lib_redirect_back();
-			}
-			else {
-				if($this->dbo->query_update("users", $data, "id=$login")){
-					lib_alert("Hoan thanh");
-					lib_redirect(THIS_LINK);
-				}
-				else{
-					lib_alert("Error !");
-					lib_redirect_back();
-					exit();
-				}
-			}
-		}
 
-		if(isset($_POST["pass"])){
-			$data["password"] = $_POST["password"];
-			$pass_old = $_POST["pass_old"];
-			if(!$this->dbo->check_exist_fields("SELECT id FROM users WHERE id=$login && password= '$pass_old'")){
-				lib_alert("Mat khau cu khong dung vui long nhap lai");
-				lib_redirect_back();
-			}
-			elseif($_POST["password"] != $_POST["Re_password"]) {
-				lib_alert("Nhap lai khong trung vui long nhap lai");
-				lib_redirect_back();
-			}
-			else
-			{
-				if($this->dbo->query_update("users", $data, "id=$login")){
-					lib_alert("Hoan thanh");
-					lib_redirect(THIS_LINK);
-				}
-				else{
-					lib_alert("Error !");
-					lib_redirect_back();
-					exit();
-				}
-			}
-		}
+
 
 
 		// $this->dbo->close();
@@ -368,7 +326,10 @@ class User extends Main
         $avatar->target_path = $this->arg['image_folder_path'] . $upload_file_name;
         $avatar->jpeg_quality = 100;
         $avatar->preserve_aspect_ratio = true;
-        $do = $avatar->crop($_POST['avatar_x'], $_POST['avatar_y'], $_POST['avatar_width']+$_POST['avatar_x'], $_POST['avatar_height']+$_POST['avatar_y']);
+        if($_FILES['avatar_file']['type'] == "image/gif")
+          move_uploaded_file($_FILES['avatar_file']['tmp_name'], $avatar->target_path);
+        else
+          $avatar->crop($_POST['avatar_x'], $_POST['avatar_y'], $_POST['avatar_width']+$_POST['avatar_x'], $_POST['avatar_height']+$_POST['avatar_y']);
         $data['avatar'] = $upload_file_name;
         if($this->currentUser['avatar'] != '' && $this->currentUser['avatar'] != $upload_file_name)
         {
@@ -379,23 +340,25 @@ class User extends Main
      }
      else if($this->currentUser['avatar'] != '')
      {
-      $avatar->source_path = $this->userHelper->get_avatar_path($this->arg['image_folder_path'], $this->currentUser['avatar']);
-      $ext = pathinfo($this->currentUser['avatar'], PATHINFO_EXTENSION);
-      $upload_file_name = $this->userHelper->get_image_name_upload_from_extension($ext);
-      $avatar->target_path = $this->arg['image_folder_path'] . $upload_file_name;
-      $avatar->jpeg_quality = 100;
-      $avatar->preserve_aspect_ratio = true;
-      $do = $avatar->crop($_POST['avatar_x'], $_POST['avatar_y'], $_POST['avatar_width']+$_POST['avatar_x'], $_POST['avatar_height']+$_POST['avatar_y']);
-      // pre($avatar);
-      // die();
-      $data['avatar'] = $upload_file_name;
-      if($this->currentUser['avatar'] != '' && $this->currentUser['avatar'] != $upload_file_name)
-      {
-        unlink($this->arg['image_folder_path'] . $this->currentUser['avatar'] );
-        // chmod($this->arg['image_folder_path'] . $this->['avatar'], 0777);
-      }
-      $this->pdo->update('users', $data, 'id='.$this->currentUser['id']);
+        $avatar->source_path = $this->userHelper->get_avatar_path($this->arg['image_folder_path'], $this->currentUser['avatar']);
+        $ext = pathinfo($this->currentUser['avatar'], PATHINFO_EXTENSION);
+        $upload_file_name = $this->userHelper->get_image_name_upload_from_extension($ext);
+        $avatar->target_path = $this->arg['image_folder_path'] . $upload_file_name;
+        $avatar->jpeg_quality = 100;
+        $avatar->preserve_aspect_ratio = true;
+        if($_FILES['avatar_file']['type'] == "image/gif")
+            move_uploaded_file($_FILES['avatar_file']['tmp_name'], $avatar->target_path);
+        else
+            $avatar->crop($_POST['avatar_x'], $_POST['avatar_y'], $_POST['avatar_width']+$_POST['avatar_x'], $_POST['avatar_height']+$_POST['avatar_y']);
+        $data['avatar'] = $upload_file_name;
+        if($this->currentUser['avatar'] != '' && $this->currentUser['avatar'] != $upload_file_name)
+        {
+          unlink($this->arg['image_folder_path'] . $this->currentUser['avatar'] );
+          // chmod($this->arg['image_folder_path'] . $this->['avatar'], 0777);
+        }
+        $this->pdo->update('users', $data, 'id='.$this->currentUser['id']);
      }
+
 
 		}
   }
@@ -409,8 +372,97 @@ class User extends Main
 			if($this->currentUser['avatar'] != ''){
         unlink($this->arg['image_folder_path'] . $this->currentUser['avatar'] );
 			}
-			$this->pdo->update('users', $data, 'id=' . $this->currentUser['id'] );
+      $this->pdo->update('users', $data, 'id=' . $this->currentUser['id'] );
 		}
+  }
+
+  public function change_info()
+  {
+    if( isset($_POST["submit"]) )
+    {
+    $data['name'] = $_POST['name'];
+    $data["birthday"] = $_POST["year"] . "-" . $_POST["month"] . "-" . $_POST["day"];
+    $data["gender"] = $_POST["gender"];
+    $data["address"] = $_POST["address"];
+    $data["email"] = $_POST["email"];
+    $data["phone"] = $_POST["phone"];
+    $data['updated_at'] = time();
+    try {
+      $updateStatement = $this->slim_pdo->update($data)->table($this->table)->where('id', '=', $this->currentUser['id']);
+      $isSucceed = $updateStatement->execute();
+    }
+    catch(PDOException $e) {
+        $text = $e->getMessage();
+        $isSucceed = false;
+    }
+    if($isSucceed)
+    {
+        $notification = [
+            'status' => 'success',
+            'title'  => 'Sửa thành công',
+            'text'   => "Sửa thông tin thành công công"
+        ];
+        $this->smarty->assign('notification', $notification );
+      }
+    else
+      {
+          $notification = [
+              'status' => 'error',
+              'title'  => 'Sửa không thành công',
+              'text'   => $text
+          ];
+          $this->smarty->assign('notification', $notification);
+      }
+
+    }
+  }
+
+  public function change_pass()
+  {
+
+    if(isset($_POST["pass"]))
+    {
+			$data["password"] = $_POST["password"];
+      $pass_old = $_POST["pass_old"];
+
+      if($this->pdo->check_exist("SELECT id FROM users WHERE id={$this->currentUser['id']} && password= '$pass_old'") && $_POST['password'] == $_POST['Re_password'])
+        {
+          $isSucceed = true;
+          $this->pdo->update($this->table, $data, "id=" . $this->currentUser['id']);
+        }
+
+      else if($pass_old != $this->currentUser['password'])
+        {
+          $isSucceed = false;
+          $text = "Mật khẩu cũ không chính xác";
+        }
+        else
+        {
+          $isSucceed = false;
+          $text = "Mật khẩu mới không trùng nhau";
+        }
+
+      if($isSucceed)
+      {
+          $notification = [
+              'status' => 'success',
+              'title'  => 'Sửa thành công',
+              'text'   => "Sửa mật khẩu thành công"
+          ];
+          $this->smarty->assign('notification', $notification );
+        }
+      else
+        {
+            $notification = [
+                'status' => 'error',
+                'title'  => 'Sửa không thành công',
+                'text'   => $text
+            ];
+            $this->smarty->assign('notification', $notification);
+        }
+
+    }
+
   }
 
 }

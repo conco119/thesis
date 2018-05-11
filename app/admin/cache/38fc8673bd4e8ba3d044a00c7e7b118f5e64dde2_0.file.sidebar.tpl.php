@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-09 16:03:53
+/* Smarty version 3.1.30, created on 2018-05-11 13:02:42
   from "/Users/mtd/Sites/htaccess/app/admin/view/layouts/includes/sidebar.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5af2b97941b549_54806151',
+  'unifunc' => 'content_5af53202d47ed8_08488666',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '38fc8673bd4e8ba3d044a00c7e7b118f5e64dde2' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/layouts/includes/sidebar.tpl',
-      1 => 1525856630,
+      1 => 1526018560,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5af2b97941b549_54806151 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5af53202d47ed8_08488666 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="left_col scroll-view">
 
@@ -69,7 +69,8 @@ mc=productunit&site=index">Đơn vị sản phẩm</a></li>
 mc=service&site=index"><i style="width:26px;" class="glyphicon glyphicon-list-alt"></i>    Quản lý dịch vụ</a></li>
 				<li><a><i class="fa fa-user-md"></i> Đối tác <span class="fa fa-chevron-down"></span></a>
 					<ul class="nav child_menu" style="display: none">
-						<li><a href="?mc=customer&site=index">Khách hàng</a></li>
+						<li><a href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['prefix_admin'];?>
+mc=customer&site=index">Khách hàng</a></li>
 						<li><a href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['prefix_admin'];?>
 mc=customergroup&site=index">Nhóm khách hàng</a></li>
 						<li><a href="?mc=supplier&site=index">Nhà cung cấp</a></li>
