@@ -20,12 +20,12 @@
 
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#UpdateFrom" onclick="LoadDataForForm(0);"><i class="fa fa-pencil"></i> Thêm mới</button>
 
-                <button type="button" class="btn btn-success" onclick="HandleActive('suppliers', 1);"><i class="fa fa-check-square-o"></i> Kích hoạt</button>
+                {* <button type="button" class="btn btn-success" onclick="HandleActive('suppliers', 1);"><i class="fa fa-check-square-o"></i> Kích hoạt</button>
                 <button type="button" class="btn btn-default" onclick="HandleActive('suppliers', 0);"><i class="fa fa-times-circle"></i> Hủy</button>
                 <form method="post" style="display: inline">
                     <input type="hidden" name="export_request" />
                     <button type="submit" class="btn btn-success"><i class="fa fa-share-square-o"></i> Xuất file Excel</button>
-                </form>
+                </form> *}
                 <div class="clearfix"></div>
             </div>
 
@@ -34,7 +34,6 @@
                 <table class="table table-striped table-bordered">
                     <thead>
                         <tr>
-                            <th style="width: 1%"><input type="checkbox" id="SelectAllRows"></th>
                             <th>Mã</th>
                             <th>Tên</th>
                             <th>Điện thoại</th>
@@ -46,9 +45,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {foreach from=$result item=data}
+                        {foreach from=$suppliers item=data}
                             <tr id="field{$data.id}">
-                                <td><input type="checkbox" class="item_checked" value="{$data.id}"></td>
                                 <td>{$data.code}</td>
                                 <td>{$data.name}</td>
                                 <td>{$data.phone}</td>
@@ -56,7 +54,7 @@
                                     class="btn btn btn-success">
                                     <i class="fa fa-search-plus"></i></a></td>
                                 <td class="text-right">{$data.buy_money|number_format}
-                                    <a href="?mod=supplier&site=history&id={$data.id}" 
+                                    <a href="?mod=supplier&site=history&id={$data.id}"
                                     class="btn btn btn-success"><i class="fa fa-search-plus"></i></a>
                                     </td>
                                 <td class="text-center">{$data.sort}</td>
@@ -118,6 +116,7 @@
                     <div class="form-group">
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <input type="hidden" name="id">
+							<input type="hidden" name="prefix_admin" value='{$arg.prefix_admin}'>
                         </div>
                     </div>
                     <div class="form-group">
@@ -151,12 +150,6 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-2 col-sm-2 col-xs-12">Sắp xếp</label>
-                        <div class="col-md-2 col-sm-6 col-xs-12">
-                            <input type="number" min="0" class="form-control" name="sort">
-                        </div>
-                    </div>
-                    <div class="form-group">
                         <label class="control-label col-md-2 col-sm-2 col-xs-12">Trạng thái</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
                             <div class="checkbox">
@@ -180,9 +173,19 @@
 
 {literal}
     <script>
+        function activeStatus(table, id) {
+            let prefix_admin = $("#UpdateFrom input[name=prefix_admin]").val();
+            $.post(`${prefix_admin}mc=supplier&site=ajax_active`, {'table': table, 'id': id}).done(function (data) {
+                    if(data == 0)
+                    alert('You can not change');
+                    else
+                    $("#stt" + id).html(data);
+            });
+        }
         function LoadDataForForm(id) {
+            let prefix_admin = $("#UpdateFrom input[name=prefix_admin]").val();
             $("#UpdateFrom input[type=text]").val('');
-            $.post("?mod=supplier&site=ajax_load_item", {'id': id}).done(function (data) {
+            $.post(`${prefix_admin}mc=supplier&site=ajax_load`, {'id': id}).done(function (data) {
                 var data = JSON.parse(data);
                 console.log(data);
                 if (data.id == undefined) {
@@ -197,7 +200,6 @@
                     $("#UpdateFrom input[name=manager]").val(data.manager);
                     $("#UpdateFrom input[name=phone]").val(data.phone);
                     $("#UpdateFrom input[name=address]").val(data.address);
-                    $("#UpdateFrom input[name=sort]").val(data.sort);
                     $("#title_supplier").html('Sửa thông tin nhà cung cấp');
                     if (data.status == '1') {
                         $("#UpdateFrom input[name=status]").attr("checked", "checked");
@@ -212,3 +214,22 @@
         }
     </script>
 {/literal}
+<script>
+$(document).ready(function() {
+	if( "{$notification.status}" == "success" || "{$notification.status}" == "error")
+	{
+		var notice = new PNotify({
+			title: "{$notification.title}",
+			text: "{$notification.text}",
+			type: "{$notification.status}",
+			mouse_reset: false,
+			buttons: {
+				sticker: false,
+		}
+		});
+		notice.get().click(function () {
+			notice.remove();
+		});
+	}
+})
+</script>

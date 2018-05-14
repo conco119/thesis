@@ -17,7 +17,7 @@
 						<!--<li id="home_li"><a href="./">Điều khiển</a></li> -->
 						<!--<li><a href="?mc=room&site=manager">Phòng hát</a></li>-->
 						<li><a href="{$arg.prefix_admin}mc=export&site=index">Bán hàng</a></li>
-						<li><a href="{$arg.prefix_admin}mc=import&site=create">Nhập hàng</a></li>
+						<li><a href="{$arg.prefix_admin}mc=import&site=index">Nhập hàng</a></li>
 						<li><a href="{$arg.prefix_admin}mc=import&site=reimport">Khách trả hàng</a></li>
 						<li><a href="{$arg.prefix_admin}mc=export&site=distroy">Hủy hàng</a></li>
 						<li><a href="{$arg.prefix_admin}mc=export&site=export_sup">Trả hàng NCC</a></li>
@@ -26,7 +26,7 @@
 				<li><a href="?mc=money&site=index"><i class="fa fa-dollar"></i> Sổ thu chi</a></li>
 				<li><a><i class="fa fa-product-hunt"></i> Sản phẩm<span class="fa fa-chevron-down"></span></a>
 					<ul class="nav child_menu" style="display: none">
-						<li id="product_index_li"><a href="?mc=product&site=index">Quản lý sản phẩm</a></li>
+						<li class="current-page" id="product_index_li"><a href="{$arg.prefix_admin}mc=product&site=index">Quản lý sản phẩm</a></li>
 						<!--<li><a href="?mc=product&site=combo">Quản lý bộ sản phẩm</a></li> -->
 
 						<li><a href="{$arg.prefix_admin}mc=productcat&site=index">Danh mục sản phẩm</a></li>
@@ -39,7 +39,7 @@
 					<ul class="nav child_menu" style="display: none">
 						<li><a href="{$arg.prefix_admin}mc=customer&site=index">Khách hàng</a></li>
 						<li><a href="{$arg.prefix_admin}mc=customergroup&site=index">Nhóm khách hàng</a></li>
-						<li><a href="?mc=supplier&site=index">Nhà cung cấp</a></li>
+						<li><a href="{$arg.prefix_admin}mc=supplier&site=index">Nhà cung cấp</a></li>
 					</ul>
 				</li>
 				<li><a><i class="fa fa-folder-open"></i> Lưu trữ <span class="fa fa-chevron-down"></span></a>

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-05 15:37:01
+/* Smarty version 3.1.30, created on 2018-05-15 09:24:41
   from "/Users/mtd/Sites/htaccess/app/admin/view/user/login.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aed6d2d2fadd6_02382335',
+  'unifunc' => 'content_5afa44e915d399_33879479',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '06dcf54b5172a75533d669097c6ca5135d649474' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/user/login.tpl',
-      1 => 1525500470,
+      1 => 1526351076,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5aed6d2d2fadd6_02382335 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5afa44e915d399_33879479 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="">
     <a class="hiddenanchor" id="toregister"></a> <a class="hiddenanchor" id="tologin"></a>
@@ -30,10 +30,10 @@ function content_5aed6d2d2fadd6_02382335 (Smarty_Internal_Template $_smarty_tpl)
                 <form method="post" action="">
                     <h1>Đăng nhập</h1>
                     <div>
-                        <input type="text" autofocus class="form-control text-center" name="username" placeholder="Tên đăng nhập" required />
+                        <input type="text" autofocus class="form-control text-center" name="username" placeholder="Tên đăng nhập" required value='admin'/>
                     </div>
                     <div>
-                        <input type="password" class="form-control text-center" name="password" placeholder="Mật khẩu" required />
+                        <input type="password" class="form-control text-center" name="password" placeholder="Mật khẩu" required  value='12345'/>
                     </div>
                     <div>
                         <input type="submit" class="btn btn-default submit" name="submit" value="Đăng nhập">

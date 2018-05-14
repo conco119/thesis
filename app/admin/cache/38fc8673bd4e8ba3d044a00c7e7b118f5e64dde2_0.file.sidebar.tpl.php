@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-11 13:02:42
+/* Smarty version 3.1.30, created on 2018-05-14 11:17:26
   from "/Users/mtd/Sites/htaccess/app/admin/view/layouts/includes/sidebar.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5af53202d47ed8_08488666',
+  'unifunc' => 'content_5af90dd60702d6_35611580',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '38fc8673bd4e8ba3d044a00c7e7b118f5e64dde2' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/layouts/includes/sidebar.tpl',
-      1 => 1526018560,
+      1 => 1526271442,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5af53202d47ed8_08488666 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5af90dd60702d6_35611580 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="left_col scroll-view">
 
@@ -43,7 +43,7 @@ function content_5af53202d47ed8_08488666 (Smarty_Internal_Template $_smarty_tpl)
 						<li><a href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['prefix_admin'];?>
 mc=export&site=index">Bán hàng</a></li>
 						<li><a href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['prefix_admin'];?>
-mc=import&site=create">Nhập hàng</a></li>
+mc=import&site=index">Nhập hàng</a></li>
 						<li><a href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['prefix_admin'];?>
 mc=import&site=reimport">Khách trả hàng</a></li>
 						<li><a href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['prefix_admin'];?>
@@ -55,7 +55,8 @@ mc=export&site=export_sup">Trả hàng NCC</a></li>
 				<li><a href="?mc=money&site=index"><i class="fa fa-dollar"></i> Sổ thu chi</a></li>
 				<li><a><i class="fa fa-product-hunt"></i> Sản phẩm<span class="fa fa-chevron-down"></span></a>
 					<ul class="nav child_menu" style="display: none">
-						<li id="product_index_li"><a href="?mc=product&site=index">Quản lý sản phẩm</a></li>
+						<li class="current-page" id="product_index_li"><a href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['prefix_admin'];?>
+mc=product&site=index">Quản lý sản phẩm</a></li>
 						<!--<li><a href="?mc=product&site=combo">Quản lý bộ sản phẩm</a></li> -->
 
 						<li><a href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['prefix_admin'];?>
@@ -73,7 +74,8 @@ mc=service&site=index"><i style="width:26px;" class="glyphicon glyphicon-list-al
 mc=customer&site=index">Khách hàng</a></li>
 						<li><a href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['prefix_admin'];?>
 mc=customergroup&site=index">Nhóm khách hàng</a></li>
-						<li><a href="?mc=supplier&site=index">Nhà cung cấp</a></li>
+						<li><a href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['prefix_admin'];?>
+mc=supplier&site=index">Nhà cung cấp</a></li>
 					</ul>
 				</li>
 				<li><a><i class="fa fa-folder-open"></i> Lưu trữ <span class="fa fa-chevron-down"></span></a>

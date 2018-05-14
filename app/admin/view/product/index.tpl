@@ -18,10 +18,10 @@
                         </div>
                         <button id="search_btn" type="button" class="btn btn-primary left" onclick="filter();"><i class="fa fa-search"></i></button>
 
-                        <a href="?mod=product&site=import" class="btn btn-primary"><i class="fa fa-file-excel-o"></i> Nhập từ file</a>
+                        {* <a href="?mod=product&site=import" class="btn btn-primary"><i class="fa fa-file-excel-o"></i> Nhập từ file</a> *}
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#UpdateForm" onclick="LoadDataForForm(0);"><i class="fa fa-pencil"></i> Thêm mới</button>
-                        <button type="button" class="btn btn-success" onclick="HandleCopy();"><i class="fa fa-copy"></i> Sao chép</button>
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#DeleteFormAll"  onclick="LoadDeleteItemAll('products');"><i class="fa fa-times-circle"></i> Xóa</button>
+                        {* <button type="button" class="btn btn-success" onclick="HandleCopy();"><i class="fa fa-copy"></i> Sao chép</button> *}
+                        {* <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#DeleteFormAll"  onclick="LoadDeleteItemAll('products');"><i class="fa fa-times-circle"></i> Xóa</button> *}
                         <div class="clearfix"></div>
                     </div>
                     <!-- start project list -->
@@ -29,9 +29,8 @@
                         <table class="table table-striped table-hover table-bordered">
                             <thead>
                                 <tr>
-                                    <th class="text-center"><input type="checkbox" id="SelectAllRows"></th>
                                     <th>Tên Sản phẩm</th>
-                                    <th>thuộc danh mục</th>
+                                    <th>Thuộc danh mục</th>
 									<th class="text-right">Giá</th>
                                     <th class="text-right">Nhập</th>
                                     <th class="text-right">Xuất</th>
@@ -44,17 +43,17 @@
                             <tbody>
                                 {foreach from=$result item=data}
                                     <tr id="field{$data.id}">
-                                        <td class="text-center"><input type="checkbox" class="item_checked" value="{$data.id}"></td>
                                         <td>
-                                        	{$data.name}<br /> 
+                                        	{$data.name}<br />
                                         	<a href="#" title="Click để cập nhật mã sản phẩm" data-toggle="modal" data-target="#UpdateBarcode" onclick="LoadBarcode({$data.id});">
                                         		<small><i class="fa fa-pencil"></i> <span id="Code{$data.id}">{$data.code}</span></small>
                                         	</a>
                                         </td>
-                                        <td>{$data.category}</td>
+                                        <td>{$data.category_id.name}</td>
 										<td class="text-right">{$data.price}</td>
                                         <td class="text-right">{$data.imported|intval}</td>
                                         <td class="text-right">{$data.exported|intval}</td>
+										{* Tồn kho *}
                                         <td class="text-right">{($data.imported - $data.exported)|intval}</td>
 										<td class="text-right">{(($data.imported - $data.exported)*$data.price_import)|number_format} đ</td>
                                         <td class="text-center" id="stt{$data.id}">{$data.status}</td>
@@ -159,6 +158,8 @@
 					<div class="form-group">
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<input type="hidden" name="id">
+							<input type="hidden" name="prefix_admin" value='{$arg.prefix_admin}'>
+							<input type="hidden" name="mc" value='{$arg.mc}'>
 						</div>
 					</div>
 					<div class="form-group">
@@ -186,7 +187,7 @@
 					<div class="form-group">
 						<label class="control-label col-md-2 col-sm-2 col-xs-12">Thương hiệu</label>
 						<div class="col-md-6 col-sm-6 col-xs-12">
-							<select name="trademark_id" class="form-control" onchange="AddIdTrademark(this.value);"></select>
+							<select name="manufacturer_id" class="form-control" onchange="AddIdTrademark(this.value);"></select>
 						</div>
                         <div class="col-md-1 col-sm-1 col-xs-12">
                             <button type="button" class="btn btn-default" data-toggle="modal" data-target="#UpdateTrademark" onclick="UpdateTrademark(0);">
@@ -210,13 +211,17 @@
 					{/if}
 					<div class="form-inline">
 						<label class="control-label col-md-2 col-sm-2 col-xs-12">Đơn vị</label>
-						<select name="unit" class="form-control" required></select>
+						<select name="unit_id" class="form-control" required></select>
+						{*<input type="text" name="percent_import" onchange="set_price_import(this.value);" style="width: 110px;" class="form-control"  placeholder="% nhập ...">*}
+						{*<input type="text" name="percent"  onchange="set_price(this.value);" style="width: 110px;"  class="form-control"  placeholder="% bán lẻ ...">*}
+						{*<input type="text" name="percent_sale"  onchange="set_price_sale(this.value);" style="width: 110px;"  class="form-control" placeholder="% bán buôn...">*}
+					</div>
+					<div class="form-inline">
+						<label class="control-label col-md-2 col-sm-2 col-xs-12">Chiết khấu</label>
+						<select name="discount_type" class="form-control" required></select>
 						<div class="input-group" style="margin-bottom: 0px;width: 120px">
-							<input id="percent" class="form-control prod-price" placeholder="chiết khấu" onchange="UpdatePriceImport(this.value,1);" aria-describedby="basic-addon2" type="text">
-							<span class="input-group-addon" id="basic-addon2">%</span>
+							<input name='discount' id="percent" class="form-control prod-price" placeholder="chiết khấu" aria-describedby="basic-addon2" type="number">
 						</div>
-						<i style="padding: 10px;" class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="Giá nhập được tính theo phần trăm chiết khấu giá bán"></i>
-						{*<input type="text" name="price_origin"  class="form-control"  placeholder="Nguyên giá...">*}
 						{*<input type="text" name="percent_import" onchange="set_price_import(this.value);" style="width: 110px;" class="form-control"  placeholder="% nhập ...">*}
 						{*<input type="text" name="percent"  onchange="set_price(this.value);" style="width: 110px;"  class="form-control"  placeholder="% bán lẻ ...">*}
 						{*<input type="text" name="percent_sale"  onchange="set_price_sale(this.value);" style="width: 110px;"  class="form-control" placeholder="% bán buôn...">*}
@@ -228,66 +233,11 @@
                             <input type="text" name="price_import" class="form-control" oninput="SetMoney(this);" placeholder="Giá nhập...">
                         </div>
                         <div class="col-md-2 col-sm-4 col-xs-12">
-                            <input type="text" name="price" class="form-control"  onchange="SetPriceImport(this.value,1);" oninput="SetMoney(this);" placeholder="Giá bán...">
+                            <input type="text" name="price" class="form-control"  oninput="SetMoney(this);" placeholder="Giá bán...">
                         </div>
                         <div class="col-md-2 col-sm-4 col-xs-12">
                             <input type="text" name="price_sale" class="form-control" oninput="SetMoney(this);" placeholder="Bán buôn...">
                         </div>
-                        <div class="col-md-1 col-sm-1 col-xs-12">
-                            <button type="button" class="btn btn-default" id="showUnit" onclick="ShowUnit(this);">
-                                <i class="fa fa-plus"></i>
-                            </button>
-                        </div>
-					</div>
-					<div class="form-group" id="large-unit">
-						<label class="control-label col-md-2 col-sm-2 col-xs-12">Đơn vị vừa</label>
-						<div class="col-md-3 col-sm-4 col-xs-12">
-							<select name="unit_nomal" id="select_nomal" class="form-control" onchange="showItem(this);"></select>
-						</div>
-						<div class="input-group" style="margin-bottom: 0px;width: 120px">
-							<input id="percent_nomal" class="form-control prod-price" placeholder="chiết khấu" onchange="UpdatePriceImport(this.value,2);" aria-describedby="basic-addon2" type="text">
-							<span class="input-group-addon" id="basic-addon2">%</span>
-						</div>
-					</div>
-					<div class="form-group" id="unit_nomal">
-						<label class="control-label col-md-2 col-sm-2 col-xs-12"></label>
-						<div class="col-md-2 col-sm-4 col-xs-12">
-							<input type="text" name="price_import_nomal" class="form-control" oninput="SetMoney(this);" placeholder="Giá nhập...">
-						</div>
-						<div class="col-md-2 col-sm-4 col-xs-12">
-							<input type="text" name="price_nomal" onchange="SetPriceImport(this.value,2);" class="form-control" oninput="SetMoney(this);" placeholder="Giá bán...">
-						</div>
-						<div class="col-md-2 col-sm-4 col-xs-12">
-                            <input type="text" name="price_sale_nomal" class="form-control" oninput="SetMoney(this);" placeholder="Bán buôn...">
-                        </div>
-						<div class="col-md-2 col-sm-4 col-xs-12">
-							<input type="number" oninput="SetMoney(this);" name="unit_nomal_number" onchange="UpdatePriceQty(this.value,2);" id="number_nomal" class="form-control" placeholder="SL...">
-						</div>
-					</div>
-					<div class="form-group" id="small-units">
-						<label class="control-label col-md-2 col-sm-2 col-xs-12">Đơn vị lớn</label>
-						<div class="col-md-3 col-sm-4 col-xs-12">
-							<select name="unit_big" id="select_big" class="form-control" onchange="showItem(this);"></select>
-						</div>
-						<div class="input-group" style="margin-bottom: 0px;width: 120px">
-							<input id="percent_big" class="form-control prod-price" placeholder="chiết khấu" onchange="UpdatePriceImport(this.value,3);" aria-describedby="basic-addon2" type="text">
-							<span class="input-group-addon" id="basic-addon2">%</span>
-						</div>
-					</div>
-					<div class="form-group" id="unit_big">
-						<label class="control-label col-md-2 col-sm-2 col-xs-12"></label>
-						<div class="col-md-2 col-sm-4 col-xs-12">
-							<input type="text" name="price_import_big" class="form-control" oninput="SetMoney(this);" placeholder="Giá nhập...">
-						</div>
-						<div class="col-md-2 col-sm-4 col-xs-12">
-							<input type="text" name="price_big" onchange="SetPriceImport(this.value,3);" class="form-control" oninput="SetMoney(this);" placeholder="Giá bán...">
-						</div>
-						<div class="col-md-2 col-sm-4 col-xs-12">
-                            <input type="text" name="price_sale_big" class="form-control" oninput="SetMoney(this);" placeholder="Bán buôn...">
-                        </div>
-						<div class="col-md-2 col-sm-4 col-xs-12">
-							<input type="number" name="unit_big_number" onchange="UpdatePriceQty(this.value,3)" id="number_big" class="form-control" placeholder="SL...">
-						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-md-2 col-sm-2 col-xs-12">Mô tả thêm</label>
@@ -329,160 +279,28 @@
 </div>
 <!-- /.modal -->
 
-
-<!-- Modal UpdateTrademark -->
-<div class="modal fade" tabindex="-1" id="UpdateTrademark">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
-				<h4 class="modal-title">Thương hiệu sản phẩm</h4>
-			</div>
-			<div class="modal-body form-horizontal form">
-				<div class="form-group">
-					<div class="col-md-12 col-sm-12 col-xs-12">
-						<input type="hidden" name="id">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-md-2 col-sm-2 col-xs-12">Mã</label>
-					<div class="col-md-4 col-sm-6 col-xs-12">
-						<input class="form-control" type="text" name="code">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-md-2 col-sm-2 col-xs-12">Thương hiệu</label>
-					<div class="col-md-8 col-sm-8 col-xs-12">
-						<input type="text" name="name" required="required" class="form-control" placeholder="Name...">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-md-2 col-sm-2 col-xs-12">Sắp xếp</label>
-					<div class="col-md-2 col-sm-6 col-xs-12">
-						<input type="number" class="form-control" name="sort">
-					</div>
-				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" onclick="AjaxSaveTrademark();">Lưu lại</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Bỏ qua</button>
-			</div>
-		</div>
-		<!-- /.modal-content -->
-	</div>
-	<!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-
-
-<!-- Modal UpdateOrigin -->
-<div class="modal fade" tabindex="-1" id="UpdateOrigin">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
-				<h4 class="modal-title">Xuất xứ sản phẩm</h4>
-			</div>
-			<div class="modal-body form-horizontal">
-				<div class="form-group">
-					<div class="col-md-12 col-sm-12 col-xs-12">
-						<input type="hidden" name="id">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-md-2 col-sm-2 col-xs-12">Mã</label>
-					<div class="col-md-4 col-sm-6 col-xs-12">
-						<input class="form-control" type="text" name="code">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-md-2 col-sm-2 col-xs-12">Xuất xứ</label>
-					<div class="col-md-8 col-sm-8 col-xs-12">
-						<input type="text" name="name" required="required" class="form-control" placeholder="Name...">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-md-2 col-sm-2 col-xs-12">Sắp xếp</label>
-					<div class="col-md-2 col-sm-6 col-xs-12">
-						<input type="number" class="form-control" name="sort">
-					</div>
-				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="submit" class="btn btn-primary" onclick="AjaxSaveOrigin();">Lưu lại</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Bỏ qua</button>
-			</div>
-		</div>
-		<!-- /.modal-content -->
-	</div>
-	<!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-<!-- Modal UpdateCategory -->
-<div class="modal fade" tabindex="-1" id="UpdateCategory">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
-				<h4 class="modal-title">Danh mục sản phẩm</h4>
-			</div>
-			<div class="modal-body form-horizontal">
-				<div class="form-group">
-					<div class="col-md-12 col-sm-12 col-xs-12">
-						<input type="hidden" name="id">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-md-2 col-sm-2 col-xs-12">Mã</label>
-					<div class="col-md-4 col-sm-6 col-xs-12">
-						<input class="form-control" type="text" name="code">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-md-2 col-sm-2 col-xs-12">Danh mục</label>
-					<div class="col-md-8 col-sm-8 col-xs-12">
-						<input type="text" name="name" required="required" class="form-control" placeholder="Tên danh mục...">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-md-2 col-sm-2 col-xs-12">Sắp xếp</label>
-					<div class="col-md-2 col-sm-6 col-xs-12">
-						<input type="number" class="form-control" name="sort">
-					</div>
-				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="submit" class="btn btn-primary" onclick=" AjaxSaveCategory();">Lưu lại</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Bỏ qua</button>
-			</div>
-		</div>
-		<!-- /.modal-content -->
-	</div>
-	<!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-<!-- Print -->
-<div class="modal fade" id="Print">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-body modal-print">
-				<iframe src="#" style="zoom:0.60" width="99.6%" height="450" id="PrintContent"></iframe>
-			</div>
-		</div>
-	</div>
-</div>
-<script>
-	 var print = '{$out.print}';
-</script>
 {literal}
 <script>
+
+function activeStatus(table, id) {
+	let prefix_admin = $("#UpdateForm input[name=prefix_admin]").val();
+    $.post(`${prefix_admin}mc=product&site=ajax_active`, {'table': table, 'id': id}).done(function (data) {
+            if(data == 0)
+              alert('You can not change');
+            else
+            $("#stt" + id).html(data);
+    });
+}
+
+
 $(document).ready(function () {
     checkShowItemUnits();
 });
 function checksubmit() {
+	let prefix_admin = $("#UpdateForm input[name=prefix_admin]").val();
 	var code= $("#UpdateForm input[name=code]").val();
 	var id= $("#UpdateForm input[name=id]").val();
-	$.post('?mod=product&site=ajax_check_code',{'code':code,'id':id}).done(function(data) {
+	$.post(`${prefix_admin}mc=product&site=ajax_check_code`,{'code':code,'id':id}).done(function(data) {
 		if(data==0){
 			$('#errorcode').show();
 			return false;
@@ -516,94 +334,7 @@ $(document).on('hidden.bs.modal', '.modal', function () {
 //
 //
 //}
-function AddIdTrademark(id){
-	$("button[data-target=#UpdateTrademark]").attr("onclick", "UpdateTrademark("+parseInt(id)+");");
-}
-function UpdateTrademark(id) {
-	$("#UpdateTrademark input[type=text]").val('');
-	$.post("?mod=product&site=ajax_load_trademark_item", {'id' : id}).done(function(data) {
-		var data = JSON.parse(data);
-		if (data.id == undefined) {
-			$("#UpdateTrademark input[name=id]").val(0);
-			$("#UpdateTrademark input[name=sort]").val(1);
-		} else {
-			$("#UpdateTrademark input[name=id]").val(data.id);
-			$("#UpdateTrademark input[name=name]").val(data.name);
-			$("#UpdateTrademark input[name=sort]").val(data.sort);
-		}
-		$("#UpdateTrademark input[name=code]").val(data.code);
-	});
-}
-function AjaxSaveTrademark(){
-	var data = {};
-	data['id'] = $("#UpdateTrademark input[name=id]").val();
-	data['name'] = $("#UpdateTrademark input[name=name]").val();
-	data['code'] = $("#UpdateTrademark input[name=code]").val();
-	data['sort'] = $("#UpdateTrademark input[name=sort]").val();
-	//data['status'] = $("#UpdateTrademark input[name=status]").prop('checked') ? 1 : 0;
-	if(data['name'] == ''){
-		$("#UpdateTrademark input[name=name]").val('Vui lòng nhập thể loại');
-		setTimeout(function(){
-			$("#UpdateTrademark input[name=name]").val('');
-			$("#UpdateTrademark input[name=name]").focus();
-		}, 1000);
-		return false;
-	}
-		
-	$.post("?mod=product&site=ajax_save_trademark", data).done(function(rt) {
-		var rt = JSON.parse(rt);
-		$('#UpdateTrademark').modal('hide');
-		$("#UpdateForm select[name=trademark_id]").html(rt.select);
-		AddIdTrademark(rt.id);
-		return false;
-	});
-}
 
-
-
-function AddIdOrigin(id){
-	$("button[data-target=#UpdateOrigin]").attr("onclick", "UpdateOrigin("+parseInt(id)+");");
-}
-
-function UpdateOrigin(id) {
-	$("#UpdateOrigin input[type=text]").val('');
-	$.post("?mod=product&site=ajax_load_origin_item", {'id' : id}).done(function(data) {
-		var data = JSON.parse(data);
-		if (data.id == undefined) {
-			$("#UpdateOrigin input[name=id]").val(0);
-			$("#UpdateOrigin input[name=sort]").val(1);
-		} else {
-			$("#UpdateOrigin input[name=id]").val(data.id);
-			$("#UpdateOrigin input[name=name]").val(data.name);
-			$("#UpdateOrigin input[name=sort]").val(data.sort);
-		}
-		$("#UpdateOrigin input[name=code]").val(data.code);
-	});
-}
-
-function AjaxSaveOrigin(){
-	var data = {};
-	data['id'] = $("#UpdateOrigin input[name=id]").val();
-	data['name'] = $("#UpdateOrigin input[name=name]").val();
-	data['code'] = $("#UpdateOrigin input[name=code]").val();
-	data['sort'] = $("#UpdateOrigin input[name=sort]").val();
-	if(data['name'] == ''){
-		$("#UpdateOrigin input[name=name]").val('Vui lòng nhập xuất xứ');
-		setTimeout(function(){
-			$("#UpdateOrigin input[name=name]").val('');
-			$("#UpdateOrigin input[name=name]").focus();
-		}, 1000);
-		return false;
-	}
-		
-	$.post("?mod=product&site=ajax_save_origin", data).done(function(rt) {
-		var rt = JSON.parse(rt);
-		$('#UpdateOrigin').modal('hide');
-		$("#UpdateForm select[name=origin_id]").html(rt.select);
-		AddIdOrigin(rt.id);
-		return false;
-	});
-}
 
 function AjaxSaveCategory(){
 	var data = {};
@@ -652,7 +383,7 @@ function LoadBarcode(id){
 	$($this).attr('onchange', 'UpdateBarcode('+id+', this.value);').focus();
 	$('#UpdateBarcode').on('shown.bs.modal', function () {
 	    $('#UpdateBarcode input').focus();
-	}) 
+	})
 }
 
 function UpdateBarcode(id, code){
@@ -708,7 +439,7 @@ function ShowUnit(obj){
 			$("#number_big").attr('min',min_big);
         }
     }
-    
+
 }
 
 function showItem(obj) {
@@ -754,22 +485,22 @@ function filter() {
 }
 
 function LoadDataForForm(id) {
+	let mc = $("#UpdateForm input[name=mc]").val();
+	let prefix_admin = $("#UpdateForm input[name=prefix_admin]").val();
     $("#UpdateForm input[type=text]").val('');
     $("#UpdateForm input[type=number]").val('');
-    $.post("?mod=product&site=ajax_load_item", {'id': id}).done(function (data) {
+    $.post(`${prefix_admin}mc=${mc}&site=ajax_load`, {'id': id}).done(function (data) {
         var data = JSON.parse(data);
         console.log(data);
         if (data.id == undefined) {
             $("#UpdateForm input[name=id]").val(0);
             $("#UpdateForm input[name=number_warning]").val(10);
             $("#UpdateForm input[name=warranty]").val(12);
+			$("#UpdateForm input[name=discount]").val(0);
             $("#UpdateForm input[name=status]").attr("checked", "checked");
             $("#UpdateForm input[name=status]").prop('checked', true);
-            $("#large-unit").addClass('hidden');
-            $("#small-units").addClass('hidden');
             $("#title_product").html('Thêm sản phẩm mới');
-            $("#showUnit").val('1');
-            
+
         } else {
             $("#UpdateForm input[name=id]").val(data.id);
             $("#UpdateForm input[name=name]").val(data.name);
@@ -777,31 +508,10 @@ function LoadDataForForm(id) {
             $("#UpdateForm input[name=price_import]").val(data.price_import);
             $("#UpdateForm input[name=price]").val(data.price);
             $("#UpdateForm input[name=price_sale]").val(data.price_sale);
-            
+			$("#UpdateForm input[name=discount]").val(data.discount);
             $("#title_product").html('Sửa thông tin sản phẩm');
 
             $("#UpdateFrom input[name=warranty]").val(data.warranty);
-            
-            if(data.unit_nomal == null ){
-                $("#large-unit").addClass('hidden');
-            }else{
-                $("#large-unit").removeClass('hidden');
-            }
-            if(data.unit_big == null ){
-                $("#small-units").addClass('hidden');
-            }else{
-                $("#small-units").removeClass('hidden');
-            }
-           
-            $("#UpdateForm input[name=unit_nomal_number]").val(data.unit_nomal_number);
-            $("#UpdateForm input[name=price_import_nomal]").val(data.price_import_nomal);
-            $("#UpdateForm input[name=price_nomal]").val(data.price_nomal);
-            $("#UpdateForm input[name=price_sale_nomal]").val(data.price_sale_nm);
-
-            $("#UpdateForm input[name=unit_big_number]").val(data.unit_big_number);
-            $("#UpdateForm input[name=price_import_big]").val(data.price_import_big);
-            $("#UpdateForm input[name=price_big]").val(data.price_big);
-            $("#UpdateForm input[name=price_sale_big]").val(data.price_sale_big);
             $("#UpdateForm input[name=number_warning]").val(data.number_warning);
             $("#UpdateForm input[name=warranty]").val(data.warranty);
             $("#UpdateForm textarea[name=description]").val(data.description);
@@ -815,15 +525,11 @@ function LoadDataForForm(id) {
             }
         }
         $("#UpdateForm input[name=code]").val(data.code);
-        $("#UpdateForm select[name=category_id]").html(data.select_categories);
-        $("#UpdateForm select[name=unit]").html(data.select_unit);
-        $("#UpdateForm select[name=unit_nomal]").html(data.select_unit_nomal);
-        $("#UpdateForm select[name=unit_big]").html(data.select_unit_big);
-        $("#UpdateForm select[name=trademark_id]").html(data.select_trademark);
-        $("#UpdateForm select[name=origin_id]").html(data.select_origin);
-        checkShowItemUnits();
-        AddIdTrademark(data.trademark_id);
-        AddIdOrigin(data.origin_id);
+        $("#UpdateForm select[name=category_id]").html(data.category_id);
+        $("#UpdateForm select[name=unit_id]").html(data.unit_id);
+        $("#UpdateForm select[name=manufacturer_id]").html(data.manufacturer_id);
+        $("#UpdateForm select[name=discount_type]").html(data.discount_type);
+
     });
 }
 
@@ -848,7 +554,7 @@ function HandleCopy() {
 }
 function  LoadDeleteItemAll(table) {
 	$("#DeleteItemAll").attr("onclick", "HandleMultiDelete('" + table + "');");
-	
+
 }
 
 function HandleMultiDelete(table) {
@@ -894,10 +600,10 @@ function HandleMultiDelete(table) {
 
 		//name=unit_normal_number
 		if(type==2){
-			
-			var price_im= $("input[name=price_import]").val().replace(/,/g,"");			
-			var price = $("input[name=price]").val().replace(/,/g,"");			
-			var price_import_normal = parseInt(price_im)*parseInt(value);	
+
+			var price_im= $("input[name=price_import]").val().replace(/,/g,"");
+			var price = $("input[name=price]").val().replace(/,/g,"");
+			var price_import_normal = parseInt(price_im)*parseInt(value);
 
 			$("input[name=price_import_nomal]").val(price_import_normal);
 			var price_normal = parseInt(price)*parseInt(value);
@@ -910,10 +616,10 @@ function HandleMultiDelete(table) {
 		}
 
 		if(type==3){
-			var price_import_nomal= $("input[name=price_import_nomal]").val().replace(/,/g,"");			
-			var price_normal = $("input[name=price_nomal]").val().replace(/,/g,"");			
+			var price_import_nomal= $("input[name=price_import_nomal]").val().replace(/,/g,"");
+			var price_normal = $("input[name=price_nomal]").val().replace(/,/g,"");
 
-			var price_import_big = parseInt(price_import_nomal)*parseInt(value);				
+			var price_import_big = parseInt(price_import_nomal)*parseInt(value);
 			var price_big = parseInt(price_normal)*parseInt(value);
 			//alert('Price normal:'+price_normal);
 			$("input[name=price_big]").val(price_big);
@@ -925,7 +631,7 @@ function HandleMultiDelete(table) {
 
 	}
 	/*end add*/
-	
+
 	function UpdatePriceImport(value,type) {
 		if(type==1){
 			var price_ex= $("input[name=price]").val().replace(/,/g, "");
@@ -994,3 +700,22 @@ function HandleMultiDelete(table) {
 
 </script>
 {/literal}
+<script>
+$(document).ready(function() {
+	if( "{$notification.status}" == "success" || "{$notification.status}" == "error")
+	{
+		var notice = new PNotify({
+			title: "{$notification.title}",
+			text: "{$notification.text}",
+			type: "{$notification.status}",
+			mouse_reset: false,
+			buttons: {
+				sticker: false,
+		}
+		});
+		notice.get().click(function () {
+			notice.remove();
+		});
+	}
+})
+</script>

@@ -66,7 +66,7 @@
 
 				<br />
 				<!-- site content -->
-				{include file=$content}
+				{include file=$tpl_file}
 				<!-- /site content -->
 
 				<!-- footer content -->
@@ -85,7 +85,7 @@
 		<div id="notif-group" class="tabbed_notifications"></div>
 	</div>
 
-	
+
 	<!-- bootstrap progress js -->
 	<script src="{$arg.stylesheet}js/progressbar/bootstrap-progressbar.min.js"></script>
 	<script src="{$arg.stylesheet}js/nicescroll/jquery.nicescroll.min.js"></script>
@@ -218,7 +218,7 @@
 				return false;
 			});
 		}, 900000);
-    
+
 	</script>
 </body>
 </html>

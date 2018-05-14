@@ -7,12 +7,15 @@ class User extends Main
     parent::__construct();
     $this->userHelper = new UserHelper();
     $this->table = "users";
-
   }
   public function index()
   {
     // pre($users);
-    // return;
+    $active =  strtotime('5-13');
+    $active['day'] = date("d.m.Y", strtotime('2018-05-13') );
+    $active['day2'] = date("d", strtotime('6')  );
+    pre($active);
+    return;
     //adding or editing
     $this->create();
     $this->edit();

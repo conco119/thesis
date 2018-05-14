@@ -6,10 +6,10 @@
                 <form method="post" action="">
                     <h1>Đăng nhập</h1>
                     <div>
-                        <input type="text" autofocus class="form-control text-center" name="username" placeholder="Tên đăng nhập" required />
+                        <input type="text" autofocus class="form-control text-center" name="username" placeholder="Tên đăng nhập" required value='admin'/>
                     </div>
                     <div>
-                        <input type="password" class="form-control text-center" name="password" placeholder="Mật khẩu" required />
+                        <input type="password" class="form-control text-center" name="password" placeholder="Mật khẩu" required  value='12345'/>
                     </div>
                     <div>
                         <input type="submit" class="btn btn-default submit" name="submit" value="Đăng nhập">

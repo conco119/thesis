@@ -91,4 +91,71 @@ class Helper extends HelpAbstract
         }
         return $result;
     }
+
+
+    //first parm @table
+    //second if is table $condition = table name ,else $condition is property
+    // $id
+    public function get_option($isTable, $condition, $id =0, $is_zero = 0)
+    {
+        $result = '';
+        if($isTable)
+        {
+            if($is_zero == 1)
+            {
+                $result = "<option value=0>Chọn danh mục</option>";
+                $query_result = $this->pdo->fetch_all("SELECT * FROM {$condition}");
+                foreach($query_result as $key => $value)
+                {
+                    if($value['id'] == $id)
+                        $result .= "<option value='{$value['id']}' selected>{$value['name']}</option>";
+                    else
+                    $result .= "<option value='{$value['id']}'>{$value['name']}</option>";
+                }
+                return $result;
+            }
+            else
+            {
+                $query_result = $this->pdo->fetch_all("SELECT * FROM {$condition}");
+                foreach($query_result as $key => $value)
+                {
+                    if($value['id'] == $id)
+                        $result .= "<option value='{$value['id']}' selected>{$value['name']}</option>";
+                    else
+                    $result .= "<option value='{$value['id']}'>{$value['name']}</option>";
+                }
+                return $result;
+
+            }
+
+        }
+        else
+        {
+            if($is_zero == 1)
+            {
+                $result = "<option value=0>Chọn danh mục</option>";
+                foreach($this->$condition as $key => $value)
+                {
+                    if($key == $id)
+                        $result .= "<option value='{$key}' selected>{$value}</option>";
+                    else
+                        $result .= "<option value='{$key}'>{$value}</option>";
+                }
+                return $result;
+            }
+            else
+            {
+                foreach($this->$condition as $key => $value)
+                {
+                    if($key == $id)
+                        $result .= "<option value='{$key}' selected>{$value}</option>";
+                    else
+                        $result .= "<option value='{$key}'>{$value}</option>";
+                }
+                return $result;
+
+            }
+        }
+
+    }
 }

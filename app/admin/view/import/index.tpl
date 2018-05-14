@@ -17,28 +17,28 @@
 		            <h2>Chi tiết hóa đơn nhập hàng</h2>
 		            <ul class="nav navbar-right panel_toolbox">
 		                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
-		                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cog"></i></a>
+		                {* <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cog"></i></a>
 		                    <ul class="dropdown-menu">
 		                        <li><a href="#">Thêm sản phẩm bằng tay</a></li>
 		                        <li><a href="#">Thêm sản phẩm mã vạch</a></li>
 		                        <li><a href="#">Thêm dịch vụ</a></li>
 		                    </ul>
-		                </li>
+		                </li> *}
 		            </ul>
 		            <div class="clearfix"></div>
 		        </div>
 		        <div class="x_content">
-		
+
 		            <div class="h_content">
-		                <div class="form-group form-inline">
+		                {* <div class="form-group form-inline">
 		                    <input class="left form-control" autofocus id="UseBarcode" placeholder="Mã vạch" onchange="GetProductFromBarcode(this.value);">
-		                </div>
-		
+		                </div> *}
+
 		                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#GetProduct" onclick="LoadProduct();"><i class="fa fa-pencil"></i> Chọn sản phẩm</button>
 		                <div class="clearfix"></div>
 		            </div>
-		
-		
+
+
 		            <div id="">
 		                <table class="table table-striped table-bordered" id="Products">
 		                    <thead>
@@ -49,7 +49,6 @@
                                     {if $arg.setting.percent eq 1}<th class="text-center">Chiết khấu</th>
                                         <th class="text-right">Giá nhập</th>{/if}
 		                            <th class="text-center">Số lượng</th>
-		                            <th>Đơn vị</th>
 		                            {if $arg.setting.use_expiry eq 1}<th>Hạn sử dụng</th>{/if}
 		                            {if $arg.setting.use_description_import eq 1}<th class="text-center" width="70">Mô tả</th>{/if}
 		                            <th class="text-right">Thành tiền</th>
@@ -61,38 +60,21 @@
 		                            <tr id="proNo{$list.id}">
 		                                <td>{$list.code}</td>
 		                                <td>{$list.name}</td>
-		                                <td class="text-right"><input type="text" class="prod-price" id="proPrice{$list.id}" onchange="UpdateProductPrice({$list.id}, this.value);" value="{$list.price|number_format}"></td>
-                                        {if $arg.setting.percent eq 1} <td class="text-center">
-                                            <div class="input-group" style="width: 50px;">
-                                                <input id="propercent{$list.id}" type="text" class="form-control prod-price input-sm"  value="{$list.percent}" onchange="UpdatePercent({$list.id},this.value);" aria-describedby="basic-addon2">
-                                                <span class="input-group-addon" id="basic-addon2" style="padding: 2px;">%</span>
-                                            </div>
-                                        </td>
-                                        <td class="text-right" id="price_sell{$list.id}">
-                                            {($list.price-$list.price*$list.percent/100)|number_format} đ
-                                        </td>{/if}
+		                                <td class="text-right"><input type="text" class="prod-price" id="proPrice{$list.id}" onchange="UpdateProductPrice({$list.id}, this.value);" value="{$list.price_import|number_format}"></td>
 		                                <td class="text-center"><input type="number" class="prod-number" id="proNumber{$list.id}" onchange="UpdateNumberProduct({$list.id}, 'update', this.value);" value="{$list.number}"></td>
-		                                <td>{$list.select_units}</td>
-		                                {if $arg.setting.use_expiry eq 1}<td><input type="text" class="expiry" id="proExpiry{$list.id}" onchange="UpdateExpiry({$list.id}, this.value);" value="{$list.expiry}"></td>{/if}
-                                        {if $arg.setting.use_description_import eq 1}<td class="text-center edit_desciption">
-										<button type="button" id="test" class="btn btn-lg btn-info" data-html="true" 
-										data-toggle="popover" data-placement="left" onclick="SetValueDescripton({$list.id});"
-										data-content="<input type='text' class='form-control' id='proDescription{$list.id}' onchange='UpdateDescriptionProduct({$list.id}, this.value);' value='{$list.description}'>">
-										<i class="fa fa-pencil"></i>
-										</button>
-									</td>{/if}
-		                                <td class="text-right" id="proTotal{$list.id}">{($list.price*$list.number-$list.price*$list.number*$list.percent/100)|number_format} đ</td>
+
+		                                <td class="text-right" id="proTotal{$list.id}">{($list.price_import*$list.number)|number_format} đ</td>
 		                                <td class="text-right"><button class="btn btn-danger" onclick="UpdateNumberProduct({$list.id}, 'delete')"><i class="fa fa-times-circle"></i></button></td>
 		                            </tr>
 		                        {/foreach}
 		                    </tbody>
 		                </table>
 		            </div>
-		
+
 		        </div>
 		    </div>
     	</div>
-    
+
         <div class="col-md-3 col-xs-12">
             <div class="x_panel">
                 <div class="">
@@ -153,7 +135,7 @@
                     </form>
                 </div>
             </div>
-            
+
             <div class="x_panel">
                 <div class="x_content">
                     <form class="form-horizontal form-label-left">
@@ -177,7 +159,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-5 col-sm-6 col-xs-12">Ghi nợ</label>
+                            <label class="control-label col-md-5 col-sm-6 col-xs-12">Ghi nợ/Dư</label>
                             <div class="col-md-7 col-sm-6 col-xs-12">
                                 <input type="text" class="form-control text-right" name="debt" readonly/>
                             </div>
@@ -190,7 +172,7 @@
                     </form>
                 </div>
             </div>
-            
+
         </div>
 
     </div>
@@ -275,11 +257,12 @@
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<select class="form-control" name="FilterCate" onchange="LoadProduct();">{$out.categories}</select>
 					</div>
-					{if $arg.setting.use_trademark eq 1}
-					<div class="col-md-6 col-sm-6 col-xs-12">
+					{* {if $arg.setting.use_trademark eq 1} *}
+					{* <div class="col-md-6 col-sm-6 col-xs-12">
 						<select class="form-control" name="FilterTrademark" onchange="LoadProduct();">{$out.trademarks}</select>
-					</div>
-					{/if} {if $arg.setting.use_origin eq 1}
+					</div> *}
+					{* {/if} *}
+                    {if $arg.setting.use_origin eq 1}
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<select class="form-control" name="FilterOrigin" onchange="LoadProduct();">{$out.origins}</select>
 					</div>
@@ -366,15 +349,6 @@ $(document).ready(function () {
     }, function (start, end, label) {
         $('#exportday').change();
     });
-
-    $('.expiry').daterangepicker
-    ({singleDatePicker: true,
-        calender_style: "picker_4",
-        format: 'DD-MM-YYYY'
-    }, function () {
-        $('.expiry').change();
-    });
-
     GetTotalSession(1);
 });
 

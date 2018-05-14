@@ -25,20 +25,14 @@ class Supplier extends Main
             $suppliers[$key]['status'] = $this->helper->help_get_status($supplier['status'], $this->table, $supplier['id']);
             $suppliers[$key]['updated_at'] = gmdate('d.m.Y', $supplier['updated_at'] + 7 * 3600);
             $suppliers[$key]['created_at'] = gmdate('d.m.Y', $supplier['created_at'] + 7 * 3600);
-            $suppliers[$key]['group'] = $this->CustomerHelper->help_get_group($supplier['group_id']);
-            $suppliers[$key]['creator'] = $this->CustomerHelper->help_get_creator($supplier['creator']);
         }
 
         //query customer group
-        $sql = "SELECT * FROM customer_groups";
-        $customer_groups = $this->pdo->fetch_all($sql);
-        $customer_groups = $this->CustomerHelper->help_get_customer_category_option($customer_groups);
         // pre($customers);
         // return;
         //smarty
         $this->smarty->assign('paging', $paging);
-        $this->smarty->assign('customers', $customers);
-        $this->smarty->assign('customer_groups', $customer_groups);
+        $this->smarty->assign('suppliers', $suppliers);
         $this->smarty->display(DEFAULT_LAYOUT);
     }
     //not using view from here
@@ -49,13 +43,10 @@ class Supplier extends Main
         {
           $data['code'] = $_POST['code'];
           $data['name'] = $_POST['name'];
-          $data['group_id'] = $_POST['group_id'];
-          $data['gender'] = $_POST['gender'];
-          $data['creator'] = $this->currentUser['id'];
-          $data["birthday"] = $_POST["year"] . "-" . $_POST["month"] . "-" . $_POST["day"];
+          $data['manager'] = $_POST['manager'];
           $data['phone'] = $_POST['phone'];
           $data['address'] = $_POST['address'];
-          $data['email'] = $_POST['email'];
+          $data['money'] = 0;
           $data['status'] = isset($_POST['status']) ? 1 : 0;
           $data['created_at'] = time();
           $data['updated_at'] = time();
@@ -65,7 +56,7 @@ class Supplier extends Main
                 $notification = [
                     'status' => 'success',
                     'title'  => 'Thêm thành công',
-                    'text'   => "Thêm khách hàng thành công"
+                    'text'   => "Thêm nhà cung cấp thành công"
                 ];
                 $this->smarty->assign('notification', $notification );
             }
@@ -74,7 +65,7 @@ class Supplier extends Main
                 $notification = [
                     'status' => 'error',
                     'title'  => 'Thêm không thành công',
-                    'text'   => "Thêm khách hàng không thành công"
+                    'text'   => "Thêm nhà cung cấp không thành công"
                 ];
                 $this->smarty->assign('notification', $notification);
             }
@@ -87,12 +78,9 @@ class Supplier extends Main
         {
             $data['code'] = $_POST['code'];
             $data['name'] = $_POST['name'];
+            $data['manager'] = $_POST['manager'];
             $data['phone'] = $_POST['phone'];
-            $data['gender'] = $_POST['gender'];
-            $data["birthday"] = $_POST["year"] . "-" . $_POST["month"] . "-" . $_POST["day"];
             $data['address'] = $_POST['address'];
-            $data['email'] = $_POST['email'];
-            $data['group_id'] = $_POST['group_id'];
             $data['status'] = isset($_POST['status']) ? 1 : 0;
             $data['updated_at'] = time();
             try {
@@ -109,7 +97,7 @@ class Supplier extends Main
                 $notification = [
                     'status' => 'success',
                     'title'  => 'Sửa thành công',
-                    'text'   => "Sửa khách hàng thành công"
+                    'text'   => "Sửa nhà cung cấp thành công"
                 ];
                 $this->smarty->assign('notification', $notification );
             }
@@ -147,11 +135,8 @@ class Supplier extends Main
         {
           $item = $this->pdo->fetch_one("SELECT * FROM {$this->table} WHERE id = " . $_POST['id']);
           if(!$item) {
-              $item['code'] = $this->CustomerHelper->get_customer_code();
+              $item['code'] = $this->SupplierHelper->get_sup_code();
           }
-          $item['birthday'] = $this->helper->get_user_birthday_select($item['birthday']);
-          $item['gender'] = $this->helper->get_user_gender_select($item['gender']);
-          $item['group'] = $this->CustomerHelper->help_get_group_option($item['group_id']);
           echo json_encode($item);
         }
         $this->pdo->close();
