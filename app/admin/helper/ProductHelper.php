@@ -14,4 +14,12 @@ class ProductHelper extends HelpAbstract
         return $this->pdo->fetch_one("SELECT * FROM product_categories WHERE id = {$category_id}");
     }
 
+    function get_product_code()
+    {
+        $rows = $this->pdo->fetch_one("SELECT max(id) as id FROM products");
+        if($row < 10)
+            return $this->code_prefix . "0" .($rows['id'] +1);
+        return $this->code_prefix . ($rows['id'] +1);
+    }
+
 }

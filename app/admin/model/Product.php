@@ -27,8 +27,6 @@ class Product extends Main
             $products[$key]['category_id'] = $this->ProductHelper->help_get_category($product['category_id']);
             $products[$key]['updated_at'] = gmdate('d.m.Y', $product['updated_at'] + 7 * 3600);
             $products[$key]['created_at'] = gmdate('d.m.Y', $product['created_at'] + 7 * 3600);
-            // $products[$key]['group'] = $this->CustomerHelper->help_get_group($customer['group_id']);
-            // $products[$key]['creator'] = $this->CustomerHelper->help_get_creator($customer['creator']);
         }
 
         //query customer group
@@ -159,6 +157,9 @@ class Product extends Main
         if( isset($_POST['id']) )
         {
           $item = $this->pdo->fetch_one("SELECT * FROM {$this->table} WHERE id = " . $_POST['id']);
+          if(!$item) {
+            $item['code'] = $this->ProductHelper->get_product_code();
+          }
           $item['category_id'] = $this->helper->get_option(1, 'product_categories',$item['category_id']);
           $item['price'] = number_format($item['price']);
           $item['price_sale'] = number_format($item['price_sale']);

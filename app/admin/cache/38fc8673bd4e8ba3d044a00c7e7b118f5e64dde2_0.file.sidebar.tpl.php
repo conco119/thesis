@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-14 11:17:26
+/* Smarty version 3.1.30, created on 2018-05-17 19:20:39
   from "/Users/mtd/Sites/htaccess/app/admin/view/layouts/includes/sidebar.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5af90dd60702d6_35611580',
+  'unifunc' => 'content_5afd73979d3c89_83251835',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '38fc8673bd4e8ba3d044a00c7e7b118f5e64dde2' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/layouts/includes/sidebar.tpl',
-      1 => 1526271442,
+      1 => 1526559624,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5af90dd60702d6_35611580 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5afd73979d3c89_83251835 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="left_col scroll-view">
 
@@ -81,11 +81,16 @@ mc=supplier&site=index">Nhà cung cấp</a></li>
 				<li><a><i class="fa fa-folder-open"></i> Lưu trữ <span class="fa fa-chevron-down"></span></a>
 					<ul class="nav child_menu" style="display: none">
 						<!--<li><a href="?mc=product&site=warehouse">Kho hàng</a></li>-->
-						<li><a href="?mc=export&site=statistics">Hóa đơn bán hàng</a></li>
-						<li><a href="?mc=import&site=statistics">Hóa đơn nhập hàng</a></li>
-						<li><a href="?mc=import&site=reimport_list">Phiếu khách trả hàng</a></li>
-						<li><a href="?mc=export&site=distroy_list">Phiếu hủy hàng</a></li>
-						<li><a href="?mc=export&site=export_sup_list">Phiếu trả hàng nhà cung cấp</a></li>
+						<li><a href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['prefix_admin'];?>
+mc=export&site=statistics">Hóa đơn bán hàng</a></li>
+						<li><a href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['prefix_admin'];?>
+mc=import&site=statistics">Hóa đơn nhập hàng</a></li>
+						<li><a href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['prefix_admin'];?>
+mc=import&site=reimport_list">Phiếu khách trả hàng</a></li>
+						<li><a href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['prefix_admin'];?>
+mc=export&site=distroy_list">Phiếu hủy hàng</a></li>
+						<li><a href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['prefix_admin'];?>
+mc=export&site=export_sup_list">Phiếu trả hàng nhà cung cấp</a></li>
 					</ul>
 				</li>
 				<li><a><i class="fa fa-bar-chart-o"></i> Báo cáo <span class="fa fa-chevron-down"></span></a>

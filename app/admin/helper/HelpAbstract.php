@@ -26,5 +26,11 @@ abstract class HelpAbstract {
         3 => "Gia tăng %",
         4 => "Gia tăng tiền mặt"
     ];
+
+    $this->select_export = array(
+        1 => "Hôm nay",
+        2 => "Tuần này",
+        3 => "Tháng này",
+    );
  }
 }

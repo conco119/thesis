@@ -12,28 +12,13 @@
                 <div class="x_content">
                     <div class="h_content">
                         <div class="form-group form-inline pull-left filter_form">
-                            <select class="form-control" id="filter" onchange="filter();">
-                                {$out.filter}
-                            </select>
-                            {if $out.value.filter eq '2'}
-                                <select class="form-control" id="year" onchange="filter();">{$out.year}</select>
-                                <select class="form-control" id="month" onchange="filter();">{$out.month}</select>
-                            {else if $out.value.filter eq '1'}
-                                <input type="text" class="form-control" id="date_from" placeholder="Từ ngày" onchange="filter();" value="{$out.date_from}">
-                                <input type="text" class="form-control" id="date_to" placeholder="Đến ngày" onchange="filter();" value="{$out.date_to}">
-                            {else}
                                 <select class="form-control" id="date_ex" onchange="filter();">
                                     <option value="0">Tất cả hóa đơn</option> {$out.select_export}
                                 </select>
-                            {/if}
                             <input class="form-control" id="key" value="{$out.key}" name="key" onchange="filter()" placeholder="Mã phiếu nhập,Id, Tên nhà cung cấp">
                         </div>
 
-                        <a href="?mod=import&site=create" class="btn btn-primary"><i class="fa fa-pencil"></i> Tạo hóa đơn</a>
-                        <form method="post" style="display: inline-block; float: left;">
-
-                            <button type="submit" name="export_request" class="btn btn-success"><i class="fa fa-share-square-o"></i> Xuất sản phẩm</a></button>
-                        </form>
+                        <a href="./admin?mc=import&site=index" class="btn btn-primary"><i class="fa fa-pencil"></i> Tạo hóa đơn</a>
                         <div class="clearfix"></div>
                     </div>
                     <!-- start project list -->
@@ -46,7 +31,7 @@
                                     <th class="text-right">Giá trị</th>
                                     <th class="text-right">Chiết khấu</th>
                                     <th class="text-right">Công nợ</th>
-                                    <th>NV Bán</th>
+                                    <th>Nhân viên bán</th>
                                     <th class=""></th>
                                 </tr>
                             </thead>
@@ -120,30 +105,14 @@
             });
         });
 
-        function filter() {
-            var filter = $("#filter").val();
-            var supp = $("#supp").val();
+        function filter()
+        {
             var date = $("#date_ex").val();
             var key = $("#key").val();
 
-            var url = "./?mod=import&site=statistics";
-            url += "&filter=" + filter;
-            url += "&supp=" + supp;
+            var url = "./admin?mc=import&site=statistics";
             url += "&date=" + date;
             url += "&key=" + key;
-
-
-            if (filter == "1") {
-                var date_from = $("#date_from").val();
-                var date_to = $("#date_to").val();
-                url += "&date_from=" + date_from;
-                url += "&date_to=" + date_to;
-            } else if (filter == "2") {
-                var year = $("#year").val();
-                var month = $("#month").val();
-                url += "&year=" + year;
-                url += "&month=" + month;
-            }
 
             window.location.href = url;
         }
@@ -154,7 +123,7 @@
         }
 
         function DisplayDetail(id) {
-            $("#orderDetail .modal-body").load("?mod=import&site=ajax_get_import_info", {"id": id});
+            $("#orderDetail .modal-body").load("./admin?mc=import&site=ajax_get_import_info", {"id": id});
         }
     </script>
 {/literal}
