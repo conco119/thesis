@@ -11,6 +11,20 @@ function SetExportValue(item, value){
 	});
 }
 
+function LoadProduct(){
+	var post = {};
+	post['key'] = $("input[name=FilterKey]").val();
+
+	post['cate'] = $("select[name=FilterCate]").val();
+	post['trade'] = $("select[name=FilterTrademark]").val();
+
+	// console.log(post);
+	$.post('./admin?mc=import&site=ajax_load_product',post)
+	.done(function(data){
+		$("#ProductList").html(data);
+	});
+}
+
 
 function AddProduct(id){
 	id = parseInt(id);
@@ -24,6 +38,7 @@ function AddProduct(id){
 		}
 		$("#prd" + id).remove();
 		$("#Products tbody").prepend(data);
+		LoadProduct();
 		GetTotalSession();
 	});
 
@@ -215,20 +230,7 @@ function WarehouseImportRemove(obj, id){
 }
 
 
-function LoadProduct(){
-	var post = {};
-	post['key'] = $("input[name=FilterKey]").val();
-	// post['code'] = $("#FilterCode").val();
-	// post['name'] = $("#FilterName").val();
-	post['cate'] = $("select[name=FilterCate]").val();
-	// post['trade'] = $("select[name=FilterTrademark]").val();
-	// post['orig'] = $("select[name=FilterOrigin]").val();
 
-	$.post('./admin?mc=import&site=ajax_load_product',post)
-	.done(function(data){
-		$("#ProductList").html(data);
-	});
-}
 
 
 function Refresh(){

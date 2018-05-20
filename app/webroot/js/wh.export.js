@@ -1,115 +1,106 @@
-function AddNewExport(){
-	$.post('?mod=exportAjax&site=ajax_add_export',{'submit': 1}).done(function(data){
-		window.location.href = data;
-		return false;
-	});
-}
 
-function RemoveExport(eid){
-	$.post('?mod=exportAjax&site=ajax_remove_export',{'eid': eid}).done(function(data){
-		window.location.href = data;
-		return false;
-	});
-}
-
-function SetExportValue(eid, item, value){
-	$.post('?mod=exportAjax&site=ajax_set_export_value',{'eid': eid, 'item': item, 'value': value}).done(function(data){
-		if(data=='discount' || data=='discount_type')
-			GetTotalSession(eid);
+function SetExportValue(item, value)
+{
+	$.post('./admin?mc=exportajax&site=ajax_set_export_value',{'item': item, 'value': value}).done(function(data)
+	{
+		console.log(data);
+		if(data=='discount_type' || data=='discount')
+		{
+			GetTotalSession();
+		}
 		else if(data=='payment')
-			GetTotalSession(eid, 1);
+		{
+			GetTotalSession(1);
+		}
 		return false;
 	});
 }
 
 // Ham xu ly them san pham vao hoa don nhap hang
-function AddProduct(eid, id){
+function AddProduct(id){
 	id = parseInt(id);
-	if(id==0 || id < 0){
+	if(id==0 || id < 0)
+	{
 		return false;
 	}
-	$.post('?mod=exportAjax&site=ajax_add_product_session',{'eid': eid, 'id': id})
+	$.post('./admin?mc=exportajax&site=ajax_add_product_session',{'id': id})
 	.done(function(data){
 		if(data=='0'){
 			return false;
 		}
-		$("#prd" + id).remove();
-		$("#Products tbody").prepend(data);
-		GetTotalSession(eid);
-		LoadProduct(eid);
-		$('[data-toggle="popover"]').popover();
+		data = JSON.parse(data);
+		let prepend = `
+			<tr id="proNo${data.id}">
+				<td>#</td>
+				<td>${data.code}</td>
+				<td>${data.name}</td>
+				<td class="text-right">
+					<input type="text" class="prod-price" style="margin-bottom:5px;  "
+					value="${data.price}" disabled>
+				</td>
+				<td class='text-center'>
+					${data.unit_name}
+				</td>
+				<td class="text-center">
+					<input type="number" class="prod-number" id="proNumber${data.id}" onchange="UpdateNumberProduct(${data.id}, this.value, ${data.max_number});" value="1">
+				</td>
+				<td class="text-right" id="proTotal${data.id}">${data.price} đ</td>
+				<td class="text-right"><button class="btn btn-danger" onclick="DeleteProductBill(${data.id})">
+						<i class="fa fa-times-circle"></i>
+					</button>
+				</td>
+			</tr>
+		`;
+		$("#Products tbody").append(prepend);
+		LoadProduct();
+		GetTotalSession();
 	});
 }
 
-function UpdateNumberProduct(eid, id, type, number, max){
+function DeleteProductBill(id)
+{
+	$.post('./admin?mc=exportajax&site=delete_product_bill',{'id': id})
+	.done(function(data){
+			$("#proNo"+id).remove();
+			// LoadProduct();
+			GetTotalSession();
+	});
+}
+
+function UpdateNumberProduct(id, number, max){
+
 	id = parseInt(id);
-	if(id==0 || id < 0){
+	if(id==0 || id < 0)
+	{
 		return false;
 	}
-	
-//	if(number > max && config.export_alway==0){
-//		alert('Số lượng không được vượt quá tồn kho.');
-//		number = max;
-//	}
-	if(number<1){
+
+	if(number<1)
+	{
 		alert("Số lượng không được nhỏ hơn 1 !");
 		number = 1;
 	}
 	// Xoa field vua duoc them
-	$.post('?mod=exportAjax&site=ajax_update_product_number',{'eid': eid, 'id': id, 'type':type, 'number': number})
+	$.post('./admin?mc=exportajax&site=ajax_update_product_number',{'id': id, 'number': number})
 	.done(function(data){
+		console.log(data);
 		var data = JSON.parse(data);
-		if(data.is_max == '1' && config.export_alway==0){
+		if(number > max)
+		{
 			alert('Số lượng không được vượt quá tồn kho.');
-			$("#proUnit"+id).val(data.unit_level);
-			UpdateProductUnit(id, data.unit_level, eid);
 		}
-		if(type=='delete'){
-			$("#proNo"+id).remove();
-			//LoadProduct();
-		}
-		else{
-			$("#proNumber"+id).val(data.number);
-			$("#proTotal"+id).html(data.total_item);
-		}
-		GetTotalSession(eid);
+
+		$("#proNumber"+id).val(data.number);
+		$("#proTotal"+id).html(data.total_item_money);
+		GetTotalSession();
 	});
-	
+
 }
 
-function UpdateWarrantyProduct(eid, id, number){
-	id = parseInt(id);
-	if(id==0 || id < 0){
-		return false;
-	}
-	
-	if(number<0){
-		alert("Thời gian bảo hành không được nhỏ hơn 1 tháng !");
-		number = 1;
-	}
-	$.post('?mod=exportAjax&site=ajax_update_product_warranty',{'eid': eid, 'id': id, 'warranty': number})
-	.done(function(data){
-		$("#proWarranty"+id).val(number);
-	});
-	
-}
 
-function UpdateDescriptionProduct(eid, id, number){
-	id = parseInt(id);
-	if(id==0 || id < 0){
-		return false;
-	}
-	$.post('?mod=exportAjax&site=ajax_update_product_description',{'eid': eid, 'id': id, 'description': number})
-	.done(function(data){
-		$("#proDescription"+id).val(data);
-	});
-}
-function SetValueDescriptonEx(eid,value){
-	$.post('?mod=exportAjax&site=ajax_update_description',{'eid': eid,'value':value})
-		.done(function(data){
-			$("#descriptionex").val(data);
-		});
-}
+
+
+
 function SetValueDescripton(eid, id){
 	$.post('?mod=exportAjax&site=ajax_update_product_description',{'eid': eid, 'id': id})
 	.done(function(data){
@@ -117,79 +108,12 @@ function SetValueDescripton(eid, id){
 	});
 }
 
-function UpdatePriceSale(eid,number){
-	$.post('?mod=exportAjax&site=ajax_update_price_sale',{'eid': eid, 'price_sale': number})
-	.done(function(data){
-		alert('Thay đổi hình thức thanh toán thành công');
-		GetTotalSession(eid);
-		location.reload();
-	});
-}
 
-function UpdateProductPrice(eid, id){
-	var price = $("#proPrice"+id).val();
-	$.post('?mod=exportAjax&site=ajax_update_product_price',{'eid': eid, 'id': id, 'price':price}).done(function(data){
-		var data = JSON.parse(data);
-		$("#price_sell"+id).html(data.price_sell);
-		$("#proPrice"+id).val(data.price);
-		$("#proTotal"+id).html(data.total_item);
-		GetTotalSession(eid);
-	});
-}
-function UpdatePercent(eid, id){
-	var percent = $("#propercent"+id).val();
-	$.post('?mod=exportAjax&site=ajax_update_percent',{'eid': eid, 'id': id, 'percent':percent}).done(function(data){
-		var data = JSON.parse(data);
-		$("#propercent"+id).val(data.percent);
-		$("#price_sell"+id).html(data.price);
-		$("#proTotal"+id).html(data.total_item);
-		GetTotalSession(eid);
-	});
-}
 
-function UpdateProductUnit(id, level, eid){
-	$.post('?mod=exportAjax&site=ajax_update_product_unit',{'eid': eid, 'id': id, 'level':level}).done(function(data){
-		var data = JSON.parse(data);
-		if(data.is_max==1){
-			alert("So luong cho don vi nay khong du. Vui long lua chon don vi nho hon.");
-			$("#proUnit"+id).val(data.level);
-			UpdateProductUnit(id, data.level, eid);
-		}
-		else{
-			$("#proPrice"+id).val(data.price);
-			$("#proTotal"+id).html(data.total_item);
-			$("#proNumber"+id).val(1);
-		}
-		GetTotalSession(eid);
-	});
-}
 
-function GetProductFromBarcode(eid, code){
-	$.post('?mod=exportAjax&site=ajax_get_id_from_code',{'eid':eid, 'code':code})
-	.done(function(rt){
-		$("#UseBarcode").val('');
-		if(rt=='0'){
-			alert('Khong ton tai san pham');
-			return false;
-		}
-		else{
-			var data = JSON.parse(rt);
-			if(data.exists=='0'){
-				if(data.number=='0' && config.export_alway==0){
-					alert('San pham nay khong con trong kho');
-					return false;
-				}
-				AddProduct(eid, data.id);
-				return false;
-			}
-			else{
-				UpdateNumberProduct(eid, data.id, 'add', 1);
-				return false;
-			}
-		}
-	});
 
-}
+
+
 
 
 function Refresh(){
@@ -206,135 +130,100 @@ function Refresh(){
 }
 
 
-function LoadProduct(eid){
+function LoadProduct(){
 	var post = {};
 	post['cate'] = $("#FilterCate").val();
 	post['trade'] = $("#FilterTrademark").val();
-	post['orig'] = $("#FilterOrigin").val();
 	post['key'] = $("#FilterKey").val();
-	post['eid'] = eid;
-	
-	$.post('?mod=exportAjax&site=ajax_load_product', post).done(function(data){
+
+	$.post('./admin?mc=exportajax&site=ajax_load_product', post).done(function(data){
 		$("#ProductList").html(data);
 	});
 }
 
 
-function AddCustomer(){
-	$("#show-loading").show();
-	var customer_group = $("#customer_group").val();
-	var customer_code = $("#customer_code").val();
-	var customer_name = $("#customer_name").val();
-	var customer_phone = $("#customer_phone").val();
-	var customer_address = $("#customer_address").val();
-	$.post('?mod=customer&site=ajax_add_customer', {'submit':1, 'group':customer_group, 'code':customer_code, 'name':customer_name, 'phone':customer_phone, 'address':customer_address})
-	.done(function(data){
-		$("#show-loading").hide();
-		if(data=='fail'){
-			alert('Khong thanh cong');
-			return false;
-		}
-		else{
-			alert('them khach hang thanh cong');
-			location.reload();
-			return false;
-		}
-	});
-}
 
-
-function AddServices(eid, id){
-	$.post('?mod=exportAjax&site=ajax_add_service_session',{'eid': eid, 'id': id}
-	).done(function(data){
-		$("#showService").removeClass("display-none");
-		$("#serChoice"+id).remove();
-		$("#Service tbody").append(data);
-		GetTotalSession(eid);
-	});
-}
-
-
-function ServiceUpdateNumber(eid, id, type, number){
-	if(type==null)
-		type = "add";
-	if(number==null)
-		number = 1;
-	if(number < 1)
-		number = 1;
-	$.post('?mod=exportAjax&site=ajax_service_update_number',{'eid': eid, 'id': id, 'type':type, 'number':number}
-	).done(function(data){
-		var data = JSON.parse(data);
-		if(type=='delete'){
-			$('#serNo'+id).remove();
-			if(data.item_number=='0')
-				$("#showService").addClass("display-none");
-		}
-		else{
-			$("#serNumber"+id).val(data.number);
-			$("#serTotal"+id).html(data.total_item);
-		}
-		GetTotalSession(eid);
-	});
-}
-
-
-function ServiceUpdatePrice(eid, id){
-	var price = $("#serPrice"+id).val().replace(",", "");
-	$.post('?mod=exportAjax&site=ajax_service_update_price',{'eid': eid, 'id': id, 'price':price}).done(function(data){
-		var data = JSON.parse(data);
-		$("#serPrice"+id).val(data.price);
-		$("#serTotal"+id).html(data.total_item);
-	});
-	GetTotalSession(eid);
-}
-
-
-function LoadService(eid){
-	$.post('?mod=exportAjax&site=ajax_load_services', {'eid':eid}).done(function(data){
+function LoadService(){
+	$.post('./admin?mc=exportajax&site=ajax_load_services').done(function(data){
+		console.log(data);
 		$("#ServicesChoice").html(data);
 	});
 }
-function ServiceUpdateTime(eid, id, time){
-	if(time==null || time < 0) time = 0;
-	$.post('?mod=exportAjax&site=ajax_service_update_time',{'eid': eid, 'id': id, 'time':time}).done(function(data){
-		var data = JSON.parse(data);
-		if(data.check == false)
-		{
-			alert('Nhập sai định dạng giờ. Cần nhập lại theo định dạng 0h00');
-			$("#serTime"+id).val('0h00');
-			ServiceUpdateTime(eid, id, '0h00');
-		}
-		console.log(data);
-		$("#serTotal"+id).html(data.total_item);
-		GetTotalSession(eid);
+
+function AddServices(id){
+	$.post('./admin?mc=exportajax&site=ajax_add_service_session',{'id': id}
+	).done(function(data){
+		data = JSON.parse(data)
+		let append = `
+			<tr id="serNo${data.id}">
+				<td>#</td>
+				<td>${data.name}</td>
+				<td class="text-right"><input type="text" class="prod-price" value="${data.price}" disabled></td>
+				<td class="text-center"><input type="number" class="prod-number" id="serNumber${data.id}"
+					onchange="ServiceUpdateNumber(${data.id}, this.value);" value="1">
+				</td>
+				<td class="text-right" id="serTotal${data.id}">${data.price} đ</td>
+				<td class="text-right"><button type="button" class="btn btn-danger" onclick="DeleteServiceBill(${data.id});">
+						<i class="fa fa-times-circle"></i>
+					</button>
+				</td>
+			</tr>
+		`;
+		// $("#showService").show("display-none");
+		$("#serChoice"+id).remove();
+		LoadService();
+		$("#Service tbody").append(append);
+		GetTotalSession();
 	});
 }
 
-function GetTotalSession(eid, is_payment){
-	if(eid==0){
-		$("#SaveExport").hide();
-		$(".oder").hide();
-		return false;
+function DeleteServiceBill(id)
+{
+	$.post('./admin?mc=exportajax&site=ajax_delete_service_bill',{'id': id}
+	).done(function(data){
+		var data = JSON.parse(data);
+		$('#serNo'+id).remove();
+		if(data.item_number == '0')
+			$("#showService").addClass("display-none");
+		GetTotalSession();
+	});
+}
+function ServiceUpdateNumber(id, number){
+	if(number < 1)
+	{
+		alert("Số lượng không được nhỏ hơn 1 !");
+		number = 1;
 	}
-	$.post('?mod=exportAjax&site=ajax_get_total_session', {'eid':eid, 'is_payment':is_payment}).done(function(data){
+
+	$.post('./admin?mc=exportajax&site=ajax_service_update_number',{'id': id, 'number':number}
+	).done(function(data){
+		var data = JSON.parse(data);
+		$("#serNumber"+id).val(data.number);
+		$("#serTotal"+id).html(data.total_money);
+		GetTotalSession();
+	});
+}
+
+
+
+
+
+function GetTotalSession(is_payment){
+	$.post('./admin?mc=exportajax&site=ajax_get_total_session', {'is_payment':is_payment}).done(function(data){
 		var data = JSON.parse(data);
 		$("input[name=m_total]").val(data.total);
 		$("input[name=m_total_must_pay]").val(data.total_must_pay);
-		$("input[name=payment]").val(data.total_payment);
+		$("input[name=payment]").val(data.payment);
 		$("input[name=debt]").val(data.debt);
 		$("#product-total span").html(data.total_product);
 		$("#service-total span").html(data.total_service);
 		var number = data.total.replace(",", "");
 
-		/*Điều kiện hiển thị nút Lưu hóa đơn*/
-		//if(parseInt(number)>0) $("#SaveExport").show();
-	/*Edit date: 07/12/2017*/	
-		if(parseInt(number)>=0) $("#SaveExport").show();
-	/*End edit*/		
-		else $("#SaveExport").hide();
-		
-		if(data.number_services>0) $("#showService").show();
-		else $("#showService").hide();
+
+		if(data.number_services>0)
+			$("#showService").show();
+		else
+			$("#showService").hide();
 	});
 }
 

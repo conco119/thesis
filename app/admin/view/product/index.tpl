@@ -187,7 +187,7 @@
 					<div class="form-group">
 						<label class="control-label col-md-2 col-sm-2 col-xs-12">Thương hiệu</label>
 						<div class="col-md-6 col-sm-6 col-xs-12">
-							<select name="manufacturer_id" class="form-control" onchange="AddIdTrademark(this.value);"></select>
+							<select name="trademark_id" class="form-control" onchange="AddIdTrademark(this.value);"></select>
 						</div>
                         <div class="col-md-1 col-sm-1 col-xs-12">
                             <button type="button" class="btn btn-default" data-toggle="modal" data-target="#UpdateTrademark" onclick="UpdateTrademark(0);">
@@ -527,7 +527,7 @@ function LoadDataForForm(id) {
         $("#UpdateForm input[name=code]").val(data.code);
         $("#UpdateForm select[name=category_id]").html(data.category_id);
         $("#UpdateForm select[name=unit_id]").html(data.unit_id);
-        $("#UpdateForm select[name=manufacturer_id]").html(data.manufacturer_id);
+        $("#UpdateForm select[name=trademark_id]").html(data.trademark_id);
         $("#UpdateForm select[name=discount_type]").html(data.discount_type);
 
     });

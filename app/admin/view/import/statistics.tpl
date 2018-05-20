@@ -40,9 +40,9 @@
                                     <tr>
                                         <td>{$list.code} <br> <small>{$list.date}</small></td>
                                         <td>{$list.supplier}</td>
-                                        <td class="text-right">{$list.money|number_format}</td>
+                                        <td class="text-right">{$list.must_pay|number_format}</td>
                                         <td class="text-right">{$list.discount}</td>
-                                        <td class="text-right">{$list.debt|number_format}</td>
+                                        <td class="text-right">{($list.payment - $list.must_pay)|number_format}</td>
                                         <td>{$list.user}</td>
                                         <td class="text-right">
                                             <button type="button" data-toggle="modal" class="btn btn-default" data-target="#orderDetail" onclick="DisplayDetail({$list.id});">

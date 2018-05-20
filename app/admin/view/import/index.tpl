@@ -1,7 +1,13 @@
 <div class="">
 
     <div class="" id="AllId">
-    	<div class="col-md-6 col-xs-12"></div>
+    	<div class="col-md-6 col-xs-12">
+            <div id="btn_export_active">
+                <ul>
+                    <li class='active'><a href="{$arg.this_link}">{$value.code}</a></li>
+                </ul>
+            </div>
+        </div>
         <div class="col-md-6 col-xs-12">
             <form class="text-right" action="" method="post">
                 <button type="button" class="btn btn-primary" onclick="Refresh();"><i class="fa fa-refresh"></i> Làm mới</button>
@@ -13,7 +19,7 @@
     	<div class="col-md-9 col-xs-12">
 		    <div class="x_panel">
 		        <div class="x_title">
-		        	<a href="?mod=import&site=statistics" style="margin-right: 20px;" class="btn btn-default pull-left"><i class="fa fa-arrow-left"></i>&ensp;Danh sách hóa đơn nhập</a>
+		        	<a href="./admin?mc=import&site=statistics" style="margin-right: 20px;" class="btn btn-default pull-left"><i class="fa fa-arrow-left"></i>&ensp;Danh sách hóa đơn nhập</a>
 		            <h2>Chi tiết hóa đơn nhập hàng</h2>
 		            <ul class="nav navbar-right panel_toolbox">
 		                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
@@ -45,12 +51,9 @@
 		                        <tr>
 		                            <th>Mã</th>
 		                            <th>Sản phẩm</th>
-                                    <th class="text-right">{if $arg.setting.percent eq 1}Nguyên giá{else}Giá nhập{/if}</th>
-                                    {if $arg.setting.percent eq 1}<th class="text-center">Chiết khấu</th>
-                                        <th class="text-right">Giá nhập</th>{/if}
+                                    <th class="text-right">Giá nhập</th>
+                                    <th class="text-center">Đơn vị</th>
 		                            <th class="text-center">Số lượng</th>
-		                            {if $arg.setting.use_expiry eq 1}<th>Hạn sử dụng</th>{/if}
-		                            {if $arg.setting.use_description_import eq 1}<th class="text-center" width="70">Mô tả</th>{/if}
 		                            <th class="text-right">Thành tiền</th>
 		                            <th class="td-actions"></th>
 		                        </tr>
@@ -61,6 +64,7 @@
 		                                <td>{$list.code}</td>
 		                                <td>{$list.name}</td>
 		                                <td class="text-right"><input type="text" class="prod-price" id="proPrice{$list.id}" onchange="UpdateProductPrice({$list.id}, this.value);" value="{$list.price_import|number_format}"></td>
+                                        <td class="text-center">{$list.unit_name}</td>
 		                                <td class="text-center"><input type="number" class="prod-number" id="proNumber{$list.id}" onchange="UpdateNumberProduct({$list.id}, 'update', this.value);" value="{$list.number}"></td>
 
 		                                <td class="text-right" id="proTotal{$list.id}">{($list.price_import*$list.number)|number_format} đ</td>
@@ -97,6 +101,12 @@
                                     <div class="col-md-9 col-sm-9 col-xs-12">
                                         <input class="date-picker form-control col-md-7 col-xs-12"  onchange="SetExportValue('date', this.value);"
                                                required="required" type="text" id="exportday" value="{$value.date}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Nhân viên</label>
+                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <input disabled type="text" class="form-control "  value="{$arg.user.name}"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -257,16 +267,9 @@
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<select class="form-control" name="FilterCate" onchange="LoadProduct();">{$out.categories}</select>
 					</div>
-					{* {if $arg.setting.use_trademark eq 1} *}
-					{* <div class="col-md-6 col-sm-6 col-xs-12">
-						<select class="form-control" name="FilterTrademark" onchange="LoadProduct();">{$out.trademarks}</select>
-					</div> *}
-					{* {/if} *}
-                    {if $arg.setting.use_origin eq 1}
 					<div class="col-md-6 col-sm-6 col-xs-12">
-						<select class="form-control" name="FilterOrigin" onchange="LoadProduct();">{$out.origins}</select>
+						<select class="form-control" name="FilterTrademark" onchange="LoadProduct();">{$out.trademarks}</select>
 					</div>
-					{/if}
 				</div>
 				<div style="max-height: 400px; overflow-y: auto">
 					<table class="table table-striped" id="ProductList"></table>

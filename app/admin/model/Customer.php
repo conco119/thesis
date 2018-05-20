@@ -173,4 +173,33 @@ class Customer extends Main
         echo 0;
         exit;
     }
+
+    function ajax_insert_item()
+    {
+        if (isset($_POST['code']))
+        {
+            $data['code'] = $_POST['code'];
+            $data['name'] = $_POST['name'];
+            $data['group_id'] = $_POST['group_id'];
+            $data['phone'] = $_POST['phone'];
+            $data['address'] = $_POST['address'];
+            $data['gender'] = 1;
+            $data['email'] = "";
+            $data['birthday'] = gmdate("Y.m.d");
+            $data['creator'] = $this->currentUser['id'];
+            $data['status'] = 1;
+            $data['updated_at'] = time();
+            $data['created_at'] = time();
+            $id = $this->pdo->insert("customers", $data);
+
+            $value['id'] = $id;
+            // $value['categories'] = $this->customer->get_select_customers_payment($this->dbo, $id, 0);
+            $value['categories'] = $this->helper->get_option_customer_export($id);
+            echo json_encode($value);
+            $this->pdo->close();
+            exit();
+        }
+
+    }
+
 }

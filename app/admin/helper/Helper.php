@@ -96,14 +96,14 @@ class Helper extends HelpAbstract
     //first parm @table
     //second if is table $condition = table name ,else $condition is property
     // $id
-    public function get_option($isTable, $condition, $id =0, $is_zero = 0)
+    public function get_option($isTable, $condition, $id =0, $is_zero = 0, $cat_zero_name = "Chọn danh mục")
     {
         $result = '';
         if($isTable)
         {
             if($is_zero == 1)
             {
-                $result = "<option value=0>Chọn danh mục</option>";
+                $result = "<option value=0>{$cat_zero_name}</option>";
                 $query_result = $this->pdo->fetch_all("SELECT * FROM {$condition}");
                 foreach($query_result as $key => $value)
                 {
@@ -133,7 +133,7 @@ class Helper extends HelpAbstract
         {
             if($is_zero == 1)
             {
-                $result = "<option value=0>Chọn danh mục</option>";
+                $result = "<option value=0>{$cat_zero_name}</option>";
                 foreach($this->$condition as $key => $value)
                 {
                     if($key == $id)
@@ -157,5 +157,46 @@ class Helper extends HelpAbstract
             }
         }
 
+    }
+
+    public function get_child_products($id, $products, $str_id, $key, $trade)
+    {
+        $all_child = $this->pdo->fetch_all("SELECT * FROM product_categories WHERE parent_id = {$id}");
+        // $cc = [];
+        if( $all_child )
+        {
+            foreach($all_child as $value)
+            {
+                $sql = "SELECT a.id,a.code,a.name,a.price_import,a.price,
+                (SELECT SUM(number_count) FROM import_products WHERE a.id=product_id) imported,
+                (SELECT SUM(number_count) FROM export_products WHERE a.id=product_id) exported
+                FROM products a
+                WHERE a.category_id = {$value['id']} AND a.id NOT IN ($str_id) AND a.status=1";
+
+                if ($trade != 0)
+                    $sql .= " AND a.trademark_id = $trade";
+                if($key != '')
+                    $sql .= " AND (a.code LIKE '%$key%' OR a.name LIKE '%$key%')";
+                $products = array_merge($products, $this->pdo->fetch_all($sql));
+                $products = $this->get_child_products($value['id'], $products, $str_id, $key, $trade);
+            }
+        }
+        return $products;
+    }
+
+    public function get_option_customer_export($id)
+    {
+        $sql = "SELECT a.id, a.code, a.name, b.name as group_name FROM customers a LEFT JOIN customer_groups b  ON a.group_id = b.id";
+        $customers = $this->pdo->fetch_all($sql);
+
+        $result = "<option value='0'> Chọn khách hàng </option>";
+        foreach($customers as $k => $customer)
+        {
+            if($customer['id'] == $id)
+                $result .= "<option value='{$customer['id']}' selected>{$customer['code']}-{$customer['name']}-{$customer['group_name']}</option>";
+            else
+                $result .= "<option value='{$customer['id']}'>{$customer['code']}-{$customer['name']}-{$customer['group_name']}</option>";
+        }
+        return $result;
     }
 }

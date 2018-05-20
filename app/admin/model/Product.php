@@ -49,7 +49,7 @@ class Product extends Main
             $data['name'] = $_POST['name'];
             $data['code'] = $_POST['code'];
             $data['category_id'] = $_POST['category_id'];
-            $data['manufacturer_id'] = $_POST['manufacturer_id'];
+            $data['trademark_id'] = $_POST['trademark_id'];
             $data['unit_id'] = $_POST['unit_id'];
             $data['discount_type'] = $_POST['discount_type'];
             $data['discount'] = $_POST['discount'];
@@ -94,7 +94,7 @@ class Product extends Main
             $data['name'] = $_POST['name'];
             $data['code'] = $_POST['code'];
             $data['category_id'] = $_POST['category_id'];
-            $data['manufacturer_id'] = $_POST['manufacturer_id'];
+            $data['trademark_id'] = $_POST['trademark_id'];
             $data['unit_id'] = $_POST['unit_id'];
             $data['discount_type'] = $_POST['discount_type'];
             $data['discount'] = $_POST['discount'];
@@ -165,7 +165,7 @@ class Product extends Main
           $item['price_sale'] = number_format($item['price_sale']);
           $item['price_import'] = number_format($item['price_import']);
           $item['unit_id'] = $this->helper->get_option(1, 'product_units',$item['unit_id']);
-          $item['manufacturer_id'] = $this->helper->get_option(1, 'manufacturers',$item['manufacturer_id']);
+          $item['trademark_id'] = $this->helper->get_option(1, 'product_trademarks',$item['trademark_id']);
           $item['discount_type'] = $this->helper->get_option(0, 'discount_type', $item['discount_type']);
           echo json_encode($item);
         }

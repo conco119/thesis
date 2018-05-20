@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-17 19:20:39
+/* Smarty version 3.1.30, created on 2018-05-21 16:43:10
   from "/Users/mtd/Sites/htaccess/app/admin/view/layouts/includes/sidebar.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5afd73979d3c89_83251835',
+  'unifunc' => 'content_5b0294ae5a02a0_26861349',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '38fc8673bd4e8ba3d044a00c7e7b118f5e64dde2' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/layouts/includes/sidebar.tpl',
-      1 => 1526559624,
+      1 => 1526895787,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5afd73979d3c89_83251835 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b0294ae5a02a0_26861349 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="left_col scroll-view">
 
@@ -52,7 +52,8 @@ mc=export&site=distroy">Hủy hàng</a></li>
 mc=export&site=export_sup">Trả hàng NCC</a></li>
 					</ul>
 				</li>
-				<li><a href="?mc=money&site=index"><i class="fa fa-dollar"></i> Sổ thu chi</a></li>
+				<li><a href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['prefix_admin'];?>
+mc=money&site=index"><i class="fa fa-dollar"></i> Sổ thu chi</a></li>
 				<li><a><i class="fa fa-product-hunt"></i> Sản phẩm<span class="fa fa-chevron-down"></span></a>
 					<ul class="nav child_menu" style="display: none">
 						<li class="current-page" id="product_index_li"><a href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['prefix_admin'];?>

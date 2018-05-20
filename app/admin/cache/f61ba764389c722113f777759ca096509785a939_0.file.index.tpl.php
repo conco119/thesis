@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-15 17:44:25
+/* Smarty version 3.1.30, created on 2018-05-19 13:25:34
   from "/Users/mtd/Sites/htaccess/app/admin/view/import/index.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5afaba09e797a5_08097301',
+  'unifunc' => 'content_5affc35e0f17b5_62742947',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'f61ba764389c722113f777759ca096509785a939' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/import/index.tpl',
-      1 => 1526381061,
+      1 => 1526711133,
       2 => 'file',
     ),
   ),
@@ -20,12 +20,20 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5afaba09e797a5_08097301 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5affc35e0f17b5_62742947 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="">
 
     <div class="" id="AllId">
-    	<div class="col-md-6 col-xs-12"></div>
+    	<div class="col-md-6 col-xs-12">
+            <div id="btn_export_active">
+                <ul>
+                    <li class='active'><a href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['this_link'];?>
+"><?php echo $_smarty_tpl->tpl_vars['value']->value['code'];?>
+</a></li>
+                </ul>
+            </div>
+        </div>
         <div class="col-md-6 col-xs-12">
             <form class="text-right" action="" method="post">
                 <button type="button" class="btn btn-primary" onclick="Refresh();"><i class="fa fa-refresh"></i> Làm mới</button>
@@ -37,7 +45,7 @@ function content_5afaba09e797a5_08097301 (Smarty_Internal_Template $_smarty_tpl)
     	<div class="col-md-9 col-xs-12">
 		    <div class="x_panel">
 		        <div class="x_title">
-		        	<a href="?mod=import&site=statistics" style="margin-right: 20px;" class="btn btn-default pull-left"><i class="fa fa-arrow-left"></i>&ensp;Danh sách hóa đơn nhập</a>
+		        	<a href="./admin?mc=import&site=statistics" style="margin-right: 20px;" class="btn btn-default pull-left"><i class="fa fa-arrow-left"></i>&ensp;Danh sách hóa đơn nhập</a>
 		            <h2>Chi tiết hóa đơn nhập hàng</h2>
 		            <ul class="nav navbar-right panel_toolbox">
 		                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
@@ -61,12 +69,9 @@ function content_5afaba09e797a5_08097301 (Smarty_Internal_Template $_smarty_tpl)
 		                        <tr>
 		                            <th>Mã</th>
 		                            <th>Sản phẩm</th>
-                                    <th class="text-right"><?php if ($_smarty_tpl->tpl_vars['arg']->value['setting']['percent'] == 1) {?>Nguyên giá<?php } else { ?>Giá nhập<?php }?></th>
-                                    <?php if ($_smarty_tpl->tpl_vars['arg']->value['setting']['percent'] == 1) {?><th class="text-center">Chiết khấu</th>
-                                        <th class="text-right">Giá nhập</th><?php }?>
+                                    <th class="text-right">Giá nhập</th>
+                                    <th class="text-center">Đơn vị</th>
 		                            <th class="text-center">Số lượng</th>
-		                            <?php if ($_smarty_tpl->tpl_vars['arg']->value['setting']['use_expiry'] == 1) {?><th>Hạn sử dụng</th><?php }?>
-		                            <?php if ($_smarty_tpl->tpl_vars['arg']->value['setting']['use_description_import'] == 1) {?><th class="text-center" width="70">Mô tả</th><?php }?>
 		                            <th class="text-right">Thành tiền</th>
 		                            <th class="td-actions"></th>
 		                        </tr>
@@ -87,6 +92,8 @@ foreach ($_from as $_smarty_tpl->tpl_vars['list']->value) {
 " onchange="UpdateProductPrice(<?php echo $_smarty_tpl->tpl_vars['list']->value['id'];?>
 , this.value);" value="<?php echo number_format($_smarty_tpl->tpl_vars['list']->value['price_import']);?>
 "></td>
+                                        <td class="text-center"><?php echo $_smarty_tpl->tpl_vars['list']->value['unit_name'];?>
+</td>
 		                                <td class="text-center"><input type="number" class="prod-number" id="proNumber<?php echo $_smarty_tpl->tpl_vars['list']->value['id'];?>
 " onchange="UpdateNumberProduct(<?php echo $_smarty_tpl->tpl_vars['list']->value['id'];?>
 , 'update', this.value);" value="<?php echo $_smarty_tpl->tpl_vars['list']->value['number'];?>
@@ -135,6 +142,13 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
                                         <input class="date-picker form-control col-md-7 col-xs-12"  onchange="SetExportValue('date', this.value);"
                                                required="required" type="text" id="exportday" value="<?php echo $_smarty_tpl->tpl_vars['value']->value['date'];?>
 ">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Nhân viên</label>
+                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <input disabled type="text" class="form-control "  value="<?php echo $_smarty_tpl->tpl_vars['arg']->value['user']['name'];?>
+"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -301,15 +315,10 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 						<select class="form-control" name="FilterCate" onchange="LoadProduct();"><?php echo $_smarty_tpl->tpl_vars['out']->value['categories'];?>
 </select>
 					</div>
-					
-					
-					
-                    <?php if ($_smarty_tpl->tpl_vars['arg']->value['setting']['use_origin'] == 1) {?>
 					<div class="col-md-6 col-sm-6 col-xs-12">
-						<select class="form-control" name="FilterOrigin" onchange="LoadProduct();"><?php echo $_smarty_tpl->tpl_vars['out']->value['origins'];?>
+						<select class="form-control" name="FilterTrademark" onchange="LoadProduct();"><?php echo $_smarty_tpl->tpl_vars['out']->value['trademarks'];?>
 </select>
 					</div>
-					<?php }?>
 				</div>
 				<div style="max-height: 400px; overflow-y: auto">
 					<table class="table table-striped" id="ProductList"></table>

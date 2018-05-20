@@ -28,6 +28,7 @@ class Import extends Main
             $import['payment'] = 0;
             $import['debt'] = 0;
             $import['description'] = "";
+            $import['code'] = $this->ImportHelper->get_import_code();
             $_SESSION['import_session'] = $import;
         }
         $this->smarty->assign('value', $import);
@@ -40,10 +41,10 @@ class Import extends Main
 
         // return;
         //set cac gia tri dau ra
-        // $out['cprint'] = "?mod=import&site=cprint";
-        $out['categories'] = $this->helper->get_option(1, 'product_categories', 0, 1);
+
+        $out['categories'] = $this->helper->get_option(1, 'product_categories', 0, 1, "Danh mục sản phẩm");
         $out['suppliers'] = $this->helper->get_option(1, 'suppliers', $import['supplier_id']);
-        // $out['trademarks'] = $this->product->get_select_trademarks($this->dbo);
+        $out['trademarks'] = $this->helper->get_option(1, 'product_trademarks', 0, 1, "Hãng sản xuất");
         // $out['origins'] = $this->product->get_select_origins($this->dbo);
         // $out['afprint'] = "?mod=import&site=afprint&id=";
         $out['discount'] = $this->helper->get_option(0, 'discount_type', $import['discount_type']);
@@ -56,8 +57,8 @@ class Import extends Main
 
         $this->smarty->display("form.tpl");
     }
-    //not using view from here
 
+    // tạo hóa đơn
     public function create()
     {
         if (isset($_POST['submit']) || isset($_POST['submit_print']))
@@ -78,17 +79,17 @@ class Import extends Main
 
             // Luu data hoa don nhap import
 
-            $data['code'] = $this->ImportHelper->get_import_code();
+            $data['code'] = $import['code'];
             $data['supplier_id'] = $import['supplier_id'];
             $data['date'] = gmdate("Y-m-d", strtotime($import['date']) + 7 * 3600);
-            $data['money_first'] = $import['total'];
+            $data['total_money'] = $import['total'];
             $data['discount'] = $import['discount'];
             $data['discount_type'] = $import['discount_type'];
-            $data['money'] = $import['must_pay'];
+            $data['must_pay'] = $import['must_pay'];
 
             #$data['debt'] = ($import['debt'] < 0) ? 0 : $import['debt'];
               /*change -> $data['debt']=$import['debt']*/
-            $data['debt']=$import['debt'];
+            $data['payment']=$import['payment'];
             $data['description'] = $import['description'];
             $data['creator'] = $this->currentUser['id'];
             $data['updater'] = $this->currentUser['id'];
@@ -100,53 +101,55 @@ class Import extends Main
              if ($import_id = $this->pdo->insert($this->table, $data))
              {
                  // luu hoa don vao table import
-                 $money['date'] = $data['date'];
-                 if( $import['debt'] <= 0 )
+                 if( $import['payment'] > 0 )
+                 {
+                    $money['code'] = "PC" . $import['code'];
                     $money['money'] = $import['payment'];
-                 else
-                    $money['money'] = $import['must_pay'];
+                    $money['date'] = gmdate("Y-m-d", strtotime($export['date']) + 7 * 3600);
+                    $money['category_id'] = 2;
+                    $money['is_import'] = 0;
+                    $money['object'] = 'sup';
+                    $money['object_id'] = $import['supplier_id'];
+                    $money['from_type'] = 'imp';
+                    $money['from_id'] = $import_id;
+                    $money['creator'] = $this->currentUser['id'];
+                    $money['is_auto'] = 0;
+                    $money['created_at'] = time();
+                    $money['updated_at'] = time();
+                    $money['description'] = "";
 
-                 $money['object_id'] = $import['supplier_id'];
-                 $money['object'] = "sup";
-                 $money['from_type'] = "imp";
-                 $money['from_id'] = $import_id;
-                 $money['is_import'] = 0;
-                 $money['category_id'] = 2;
-                 $money['description'] = "";
-                 $money['creator'] = $this->currentUser['id'];
-                 $money['is_auto'] = 0;
-                 $money['created_at'] = time();
-                 $money['updated_at'] = time();
+                 }
 
-                 $insertStatement = $this->slim_pdo->insert(array('date', 'money', 'object_id', "object", "from_type", "from_id", "is_import", "category_id", "description", "creator", "is_auto", "created_at", "updated_at" ))
-                       ->into('money')
-                       ->values(array($money['date'], $money['money'], $money['object_id'], $money['object'], $money['from_type'], $money['from_id'], $money['is_import'], $money['category_id'], $money['description'], $money['creator'], $money['is_auto'], $money['created_at'], $money['updated_at']));
-                $insertId = $insertStatement->execute(false);
-                //  $this->pdo->insert('money', $money); // Lưu lại phiếu thu chi
+                // lưu lại sổ thu chi
+                $insertStatement = $this->slim_pdo->insert(array('code', 'money', 'date', 'category_id', "is_import", "object", "object_id", "from_type", "from_id", "creator", "is_auto", "created_at", "updated_at", "description" ))
+                ->into('money')
+                ->values(array($money['code'], $money['money'], $money['date'], $money['category_id'], $money['is_import'], $money['object'], $money['object_id'], $money['from_type'], $money['from_id'], $money['creator'], $money['is_auto'], $money['created_at'], $money['updated_at'], $money['description']));
+                // $this->pdo->insert('money', $money);
+                $money_id = $insertStatement->execute();
 
                  // cập nhât tài khoản nợ/dư cho khách hàng
-                 if ($import['debt'] != 0)
-                 {
-                     $this->pdo->query("UPDATE suppliers SET money=money+" . $import['debt'] . " WHERE id=" . $import['supplier_id']);
-                     if ($import['debt'] < 0)
-                     {
-                         $money['description'] = "Tiền nợ nhập hàng - chuyển vào công nợ NCC";
-                         $money['money'] = -$import['debt'];
-                         $money['category_id'] = 3;
-                     }
-                     else
-                     {
-                         $money['description'] = "Tiền dư nhập hàng - chuyển vào công nợ NCC";
-                         $money['money'] = $import['debt'];
-                         $money['category_id'] = 4;
-                     }
+                //  if ($import['debt'] != 0)
+                //  {
+                //      $this->pdo->query("UPDATE suppliers SET money=money+" . $import['debt'] . " WHERE id=" . $import['supplier_id']);
+                //      if ($import['debt'] < 0)
+                //      {
+                //          $money['description'] = "Tiền nợ nhập hàng - chuyển vào công nợ NCC";
+                //          $money['money'] = -$import['debt'];
+                //          $money['category_id'] = 3;
+                //      }
+                //      else
+                //      {
+                //          $money['description'] = "Tiền dư nhập hàng - chuyển vào công nợ NCC";
+                //          $money['money'] = $import['debt'];
+                //          $money['category_id'] = 4;
+                //      }
 
-                     $money['is_auto'] = 1;
-                    $insertStatement = $this->slim_pdo->insert(array('date', 'money', 'object_id', "object", "from_type", "from_id", "is_import", "category_id", "description", "creator", "is_auto", "created_at", "updated_at" ))
-                        ->into('money')
-                        ->values(array($money['date'], $money['money'], $money['object_id'], $money['object'], $money['from_type'], $money['from_id'], $money['is_import'], $money['category_id'], $money['description'], $money['creator'], $money['is_auto'], $money['created_at'], $money['updated_at']));
-                    $insertId = $insertStatement->execute(false);
-                 }
+                //      $money['is_auto'] = 1;
+                //     $insertStatement = $this->slim_pdo->insert(array('date', 'money', 'object_id', "object", "from_type", "from_id", "is_import", "category_id", "description", "creator", "is_auto", "created_at", "updated_at" ))
+                //         ->into('money')
+                //         ->values(array($money['date'], $money['money'], $money['object_id'], $money['object'], $money['from_type'], $money['from_id'], $money['is_import'], $money['category_id'], $money['description'], $money['creator'], $money['is_auto'], $money['created_at'], $money['updated_at']));
+                //     $insertId = $insertStatement->execute(false);
+                //  }
 
                  unset($money);
                  unset($data);
@@ -213,7 +216,7 @@ class Import extends Main
             }
         }
     }
-
+    // hóa đơn nhập hàng
     public function statistics()
     {
 
@@ -228,7 +231,7 @@ class Import extends Main
             $sql_where .= " AND  (a.code LIKE '%$key%' OR b.name LIKE '%$key%')";
         }
 
-        $sql = "SELECT a.id, a.date, a.code, a.money, a.money_first, a.debt, b.name AS supplier, c.name AS user FROM imports AS a
+        $sql = "SELECT a.id, a.date, a.code, a.must_pay, a.total_money, a.payment, b.name AS supplier, c.name AS user FROM imports AS a
 					LEFT JOIN suppliers b ON a.supplier_id=b.id
 					LEFT JOIN users c ON a.creator=c.id
 				WHERE 1=1 $sql_where
@@ -305,7 +308,7 @@ class Import extends Main
         echo 0;
         exit;
     }
-
+    // thiết lập thông tin cho hóa đơn nhập
     function ajax_set_export_value()
     {
         if (isset($_POST['item'])) {
@@ -325,13 +328,14 @@ class Import extends Main
         echo 0;
         exit();
     }
-
+    // load product chọn sản phẩm
     function ajax_load_product()
     {
         $cate = isset($_POST['cate']) ? intval($_POST['cate']) : 0;
         // $orig = isset($_POST['orig']) ? intval($_POST['orig']) : 0;
-        // $trade = isset($_POST['trade']) ? intval($_POST['trade']) : 0;
+        $trade = isset($_POST['trade']) ? intval($_POST['trade']) : 0;
         $key = isset($_POST['key']) ? $_POST['key'] : '';
+
 
         $session = isset($_SESSION['import_session_product']) ? $_SESSION['import_session_product'] : array();
         $str_id = count($session) > 0 ? implode(",", array_keys($session)) : "0";
@@ -347,18 +351,16 @@ class Import extends Main
 
         // $this->dbo->connect();
 
-        $product_sql = "SELECT a.id,a.code,a.name,a.price_import,a.price
+        $product_sql = "SELECT a.id, a.code, a.name, a.price_import, a.price
                         ,(SELECT SUM(number_count) FROM import_products WHERE a.id=product_id) imported,
         				(SELECT SUM(number_count) FROM export_products WHERE a.id=product_id) exported
 				FROM products a
 				WHERE a.id NOT IN ($str_id) AND a.status=1";
         if ($cate != 0)
             $product_sql .= " AND a.category_id=$cate";
-        // if ($trade != 0)
-        //     $product_sql .= " AND a.trademark_id=$trade";
-        // if ($orig != 0)
-        //    $product_sql .= " AND a.origin_id=$orig";
-        if ($key != '')
+        if ($trade != 0)
+            $product_sql .= " AND a.trademark_id=$trade";
+        if ($key  != '')
             $product_sql .= " AND (a.code LIKE '%$key%' OR a.name LIKE '%$key%')";
 
         $product_sql .= " ORDER BY a.name ASC";
@@ -366,13 +368,11 @@ class Import extends Main
         $product_query = $this->pdo->fetch_all($product_sql);
         if($cate != 0)
         {
-            if($key != '')
-                $product_query = $this->ImportHelper->get_child_products($cate, $product_query, $str_id, $key);
-            else
-                $product_query = $this->ImportHelper->get_child_products($cate, $product_query, $str_id, "");
+            $product_query = $this->helper->get_child_products($cate, $product_query, $str_id, $key, $trade);
         }
 
-
+        // pre($product_query);
+        // die();
         // pre($product_query);
         // die();
         foreach($product_query as $key => $item)
@@ -393,7 +393,7 @@ class Import extends Main
 
         echo $result;
     }
-
+    // thêm sản phẩm vào session - hóa đơn
     function ajax_add_product_session()
     {
         $product = isset($_SESSION['import_session_product']) ? $_SESSION['import_session_product'] : array();
@@ -417,14 +417,20 @@ class Import extends Main
 
             $result = '<tr id="proNo' . $id . '">';
             $result .= '<td>' . $prod['code'] . '</td>';
+
             $result .= '<td>' . $prod['name'] . '</td>';
+
             $result .= '<td class="text-right">';
             $result .= '<input type="text" class="prod-price" id="proPrice' . $id . '" onchange="UpdateProductPrice(' . $id . ', this.value);" value="' . number_format($prod['price_import']) . '">';
             $result .= '</td>';
+
+            $result .= "<td class='text-center'>" . $prod['unit_name']; "</td>";
+
             $result .= '<td class="text-center">';
             $result .= "<input type=\"number\" class=\"prod-number\" id=\"proNumber" . $id . "\" onchange=\"UpdateNumberProduct(" . $id . ", 'update', this.value);\" value=\"1\">";
             $result .= '</td>';
-            // $result .= '<td class="align-center">' . $product[$_POST['id']]['select_units'] . '</td>';
+
+
             $result .= '<td class="text-right" id="proTotal' . $id . '">' . number_format($prod['price_import']) . ' đ</td>';
             $result .= '<td class="text-right">';
             $result .= "<a href=\"javascript:void(0);\" class=\"btn btn-danger\" onclick=\"UpdateNumberProduct(" . $id . ", 'delete');\">";
@@ -438,7 +444,7 @@ class Import extends Main
             exit();
         }
     }
-
+    // cập nhật số lượng sản phẩm
     function ajax_update_product_number()
     {
         $product = isset($_SESSION['import_session_product']) ? $_SESSION['import_session_product'] : array();
@@ -465,7 +471,7 @@ class Import extends Main
         echo json_encode($value);
         exit();
     }
-
+    // tính tổng tiền các thứ bla bla
     function ajax_get_total_session()
     {
         $import = isset($_SESSION['import_session']) ? $_SESSION['import_session'] : array();
@@ -511,7 +517,7 @@ class Import extends Main
         echo json_encode($value);
         exit();
     }
-
+    // thay đổi giá tiền sản phẩm
     function ajax_change_product_price()
     {
         if (isset($_POST['id']))
@@ -530,7 +536,7 @@ class Import extends Main
             echo json_encode($value);
         }
     }
-
+    //refresh session
     function ajax_refresh()
     {
         $import['creator'] = $this->currentUser['id'];
@@ -543,10 +549,11 @@ class Import extends Main
         $import['payment'] = 0;
         $import['debt'] = 0;
         $import['description'] = "";
+        $import['code'] = $this->ImportHelper->get_import_code();
         $_SESSION['import_session'] = $import;
         $_SESSION['import_session_product'] = array();
     }
-
+    // hiện chi tiết thông tin hóa đơn nhập(hóa đơn nhập hàng)
     function ajax_get_import_info()
     {
         if (isset($_POST['id']))
@@ -608,9 +615,8 @@ class Import extends Main
             else if($import['debt'] > 0)
                 $str .= "<div class=\"bold text-right\"><h4>Tiền dư: " . $this->dstring->get_price($import['debt']) . "</h4></div>";
             // $str .= "<hr class='line'>";
-
-            $str .= "<h3 class='text-right'>Chiết khấu: " . $this->dstring->get_price($import['money_first'] - $import['money']) . "</h3>";
-
+            $str .= "<div class=\"bold text-right\"><h4>Chiết khấu: " . $this->dstring->get_price($import['money_first'] - $import['money']) . "</h4></div>";
+            $str .= "<hr class='line'>";
             $str .= "<div class=\"bold text-right\"><h3>Đã trả: " . $this->dstring->get_price($import['money'] + $import['debt']) . "</h3></div>";
 
 

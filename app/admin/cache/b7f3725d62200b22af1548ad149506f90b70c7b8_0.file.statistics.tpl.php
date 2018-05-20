@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-17 22:58:38
+/* Smarty version 3.1.30, created on 2018-05-21 19:41:58
   from "/Users/mtd/Sites/htaccess/app/admin/view/import/statistics.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5afda6ae189625_09967018',
+  'unifunc' => 'content_5b02be961cdf24_34309286',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'b7f3725d62200b22af1548ad149506f90b70c7b8' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/import/statistics.tpl',
-      1 => 1526572717,
+      1 => 1526906516,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5afda6ae189625_09967018 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b02be961cdf24_34309286 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="">
     <div class="row">
@@ -73,11 +73,11 @@ foreach ($_from as $_smarty_tpl->tpl_vars['list']->value) {
 </small></td>
                                         <td><?php echo $_smarty_tpl->tpl_vars['list']->value['supplier'];?>
 </td>
-                                        <td class="text-right"><?php echo number_format($_smarty_tpl->tpl_vars['list']->value['money']);?>
+                                        <td class="text-right"><?php echo number_format($_smarty_tpl->tpl_vars['list']->value['must_pay']);?>
 </td>
                                         <td class="text-right"><?php echo $_smarty_tpl->tpl_vars['list']->value['discount'];?>
 </td>
-                                        <td class="text-right"><?php echo number_format($_smarty_tpl->tpl_vars['list']->value['debt']);?>
+                                        <td class="text-right"><?php echo number_format(($_smarty_tpl->tpl_vars['list']->value['payment']-$_smarty_tpl->tpl_vars['list']->value['must_pay']));?>
 </td>
                                         <td><?php echo $_smarty_tpl->tpl_vars['list']->value['user'];?>
 </td>

@@ -9,7 +9,7 @@
 
 <title>{$arg.setting.name}</title>
 <base href="{$arg.domain}">
-<link href="./hlstar.ico" rel="shortcut icon">
+<link href="./mtd.ico" rel="shortcut icon">
 
 <!-- Bootstrap core CSS -->
 

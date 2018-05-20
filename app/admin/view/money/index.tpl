@@ -28,8 +28,8 @@
                                 </select>
                             {/if}
                         </div>
-                        <button data-toggle="modal" class="btn btn-primary" data-target="#UpdateForm" onclick="LoadDataForEdit(0, 1);"><i class="fa fa-plus"></i> Lập phiếu thu</button>
-                        <button data-toggle="modal" class="btn btn-primary" data-target="#UpdateForm" onclick="LoadDataForEdit(0, 0);"><i class="fa fa-mail-reply-all"></i> Lập phiếu chi</button>
+                        <button data-toggle="modal" class="btn btn-primary" data-target="#AddForm" onclick="AddMoney(1);"><i class="fa fa-plus"></i> Lập phiếu thu</button>
+                        <button data-toggle="modal" class="btn btn-primary" data-target="#AddForm" onclick="AddMoney(0);"><i class="fa fa-mail-reply-all"></i> Lập phiếu chi</button>
 						<form method="post" style="display: inline;">
 							<button type="submit" class="btn btn-success" name="export_request">
 								<i class="fa fa-share-square-o"></i> Xuất file
@@ -42,7 +42,7 @@
 					<div id="money_stats">
 						<ul>
 							<li><a>Tổng thu: <span>{$money.import|number_format} đ</span></a></li>
-							<li><a>Tổng chi: <span>-{$money.export|number_format} đ</span></a></li>
+							<li><a>Tổng chi: <span>{$money.export|number_format} đ</span></a></li>
 							<li><a>Ngân quỹ: <span>{$money.total|number_format} đ</span></a></li>
 						</ul>
 						<div class="clearfix"></div>
@@ -52,9 +52,9 @@
                     <table class="table table-striped table-hover table-bordered">
                         <thead>
                             <tr>
-                                <th >Ngày tháng</th>
+                                <th>Mã phiếu</td>
                                 <th>Thể loại</th>
-                                <th>Nội dung</th>
+                                <th>Ngày tháng</th>
                                 <th class="text-right">Thu</th>
                                 <th class="text-right">Chi</th>
                                 <th>Người nộp / nhận</th>
@@ -65,17 +65,30 @@
 
                             {foreach from=$result item=list}
                                 <tr id="field{$list.id}">
-                                    <td>{$list.date|date_format:"%d-%m-%Y"}<br><small>{$list.updated}</small></td>
+                                    <td>{$list.code}</td>
                                     <td>{$list.money_type}<br><small>{$list.category}</small></td>
-                                    <td>{$list.description}</td>
-                                    <td class="text-right">{if $list.is_import neq 0} {$list.money|number_format} đ{/if}  </td>
-                                    <td class="text-right">{if $list.is_import eq 0}- {$list.money|number_format} đ {/if}</td>
-                                    <td>{$list.object_name}{if $list.object neq NULL}<br><small>[{$list.object}]</small>{/if}</td>
-                                    <td class="text-right">                                        
+                                    <td>{$list.date|date_format:"%d-%m-%Y"}<br><small>{$list.updated_at}</small></td>
+                                    <td class="text-right">
+                                        {if $list.is_import neq 0}
+                                            {$list.money|number_format} đ
+                                        {/if}
+                                    </td>
+                                    <td class="text-right">
+                                        {if $list.is_import eq 0}
+                                            {$list.money|number_format} đ
+                                        {/if}
+                                    </td>
+                                    <td>
+                                        {$list.object_name}
+                                        {if $list.object neq NULL}
+                                            <br><small>[{$list.object}]</small>
+                                        {/if}
+                                    </td>
+                                    <td class="text-right">
                                         {$list.btn}
                                         <button type="button" title="In phiếu" class="btn btn-default" data-dismiss="modal" onclick="SetPrint({$list.id})">
                                             <i class="fa fa-print"></i>
-                                        </button>                                        
+                                        </button>
                                     </td>
                                 </tr>
                             {/foreach}
@@ -177,7 +190,7 @@
                         <div class="col-md-9 col-sm-9 col-xs-12">
                             <div class="checkbox">
                                 <label> <input type="checkbox" name="type" value="1">Cập nhật tới báo cáo lợi nhuận</label>
-                                <p class="help-block">Khi tích chọn, số tiền này sẽ được tổng hợp vào chi phí hoặc doanh thu thêm trong báo cáo lợi nhuận. 
+                                <p class="help-block">Khi tích chọn, số tiền này sẽ được tổng hợp vào chi phí hoặc doanh thu thêm trong báo cáo lợi nhuận.
                                 Trong trường hợp tạo phiếu thu tiền khách nợ hoặc chi phí khác làm phát sinh tài khoản của khách hàng hoặc nhà cung cấp
                                 thì nên bỏ chọn để tránh sai số lợi nhuận.</p>
                             </div>
@@ -195,6 +208,91 @@
     <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+
+<!-- Modal UpdateFrom -->
+<div class="modal fade" tabindex="-1" id="AddForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                <h4 class="modal-title" id="title_fees"></h4>
+            </div>
+            <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" action="">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <input type="hidden" name="id">
+                            <input type="hidden" name="is_import">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-2 col-xs-12">Ngày lập phiếu</label>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <input type="text" id="datefees" class="form-control" name="date">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-2 col-xs-12">Đối tượng</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select name="object" class="form-control" onchange="LoadObject(this.value);">
+                                  <option value="0">Lựa chọn đối tượng</option>
+                                  <option value="1">Khách hàng</option>
+                                  <option value="2">Nhà cung cấp</option>
+                                  <option value="3">Nhân viên</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-2 col-xs-12">Người nộp / nhận</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select name="object_id" class="form-control"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-2 col-xs-12">Thể loại</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select name="category_id" class="form-control" onchange="AddIdMoneyType(this.value);"></select>
+                        </div>
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                        	<button type="button" id="BtnUpdateMoneyType" data-toggle="modal" class="btn btn-primary" data-target="#UpdateMoneyType" onclick="UpdateMoneyType(0);"><i class="fa fa-pencil"></i></button>
+                    	</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-2 col-xs-12">Số tiền</label>
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                            <input type="text" name="money" required="required" class="form-control text-right" oninput="SetMoney(this);">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-2 col-xs-12">Mô tả thêm</label>
+                        <div class="col-md-8 col-sm-6 col-xs-12">
+                            <textarea class="form-control" rows="4" name="description"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-2 col-xs-12">&nbsp;</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <div class="checkbox">
+                                <label> <input type="checkbox" name="type" value="1">Cập nhật tới báo cáo lợi nhuận</label>
+                                <p class="help-block">Khi tích chọn, số tiền này sẽ được tổng hợp vào chi phí hoặc doanh thu thêm trong báo cáo lợi nhuận.
+                                Trong trường hợp tạo phiếu thu tiền khách nợ hoặc chi phí khác làm phát sinh tài khoản của khách hàng hoặc nhà cung cấp
+                                thì nên bỏ chọn để tránh sai số lợi nhuận.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" name="submit">Lưu lại</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Bỏ qua</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
 
 
 <!-- Modal Update Item -->
@@ -274,7 +372,9 @@
 {literal}
 <script>
 $(document).ready(function() {
-	$('#datefees').daterangepicker({singleDatePicker : true, calender_style : "picker_4", format : 'DD-MM-YYYY'});
+	$('#UpdateForm #datefees').daterangepicker({singleDatePicker : true, calender_style : "picker_4", format : 'DD-MM-YYYY'});
+	$('#AddForm #datefees').daterangepicker({singleDatePicker : true, calender_style : "picker_4", format : 'DD-MM-YYYY'});
+
 	$('#date_from').daterangepicker({singleDatePicker : true, calender_style : "picker_4", format : 'DD-MM-YYYY'}, function() {
 		$('#date_from').change();
 	});
@@ -335,16 +435,18 @@ function UpdateMoneyType(id) {
 	});
 }
 
-function LoadDataForEdit(id, is_import) {
+function LoadDataForEdit(id, is_import)
+{
 	set_is_import = is_import;
 	$("#UpdateForm input[type=text]").val('');
 	$("#UpdateForm input[type=checkbox]").removeAttr("checked");
 	$("#UpdateForm select[name=object]").removeAttr('disabled');
 	$("#UpdateForm select[name=object_id]").removeAttr('disabled');
 	var msg = '';
-	$.post("?mod=money&site=ajax_load_item", {'id':id, 'is_import':is_import}).done(function(data) {
+	$.post("./admin?mc=money&site=ajax_load_item", {'id':id, 'is_import':is_import}).done(function(data) {
 		var data = JSON.parse(data);
-		if (data.id == undefined) {
+		if (data.id == undefined)
+        {
             //$("#UpdateForm input[name=type]").attr("checked", "checked");
             //$("#UpdateForm input[name=type]").prop('checked', true);
 			$("#UpdateForm input[name=id]").val(0);
@@ -352,13 +454,15 @@ function LoadDataForEdit(id, is_import) {
 			if(is_import=='0')
 				msg = 'Lập phiếu chi';
 			$("#title_fees").html(msg);
-		} else {
+		}
+        else
+        {
 			$("#UpdateForm input[name=id]").val(data.id);
 			$("#UpdateForm input[name=title]").val(data.title);
 			$("#UpdateForm input[name=money]").val(data.money);
 			$("#UpdateForm input[name=money]").val(data.money);
 			$("#UpdateForm textarea[name=description]").val(data.description);
-			
+
 //			$("#UpdateForm select[name=object]").attr('disabled','disabled');
 //			$("#UpdateForm select[name=object_id]").attr('disabled','disabled');
             if (data.type == '1') {
@@ -373,12 +477,35 @@ function LoadDataForEdit(id, is_import) {
 			if(is_import=='0')
 				msg = 'Chỉnh sửa phiếu chi';
 			$("#title_fees").html(msg);
-		}
+		 }
 		$("#UpdateForm input[name=is_import]").val(is_import);
 		$("#UpdateForm input[name=date]").val(data.date);
 		$("#UpdateForm select[name=category_id]").html(data.category);
 		$("#UpdateForm select[name=object]").html(data.object);
 		$("#UpdateForm select[name=object_id]").html(data.object_id);
+		AddIdMoneyType(data.category_id);
+	});
+}
+
+function AddMoney(is_import)
+{
+
+    if(is_import == 1)
+        $("#AddForm #title_fees").html("Lập phiếu thu");
+    else
+        $("#AddForm #title_fees").html("Lập phiếu chi");
+	$("#AddForm input[type=text]").val('');
+	$("#AddForm input[type=checkbox]").removeAttr("checked");
+	$("#AddForm select[name=object]").removeAttr('disabled');
+	$("#AddForm select[name=object_id]").removeAttr('disabled');
+	$.post("./admin?mc=money&site=ajax_load_data_for_adding", {'is_import':is_import}).done(function(data) {
+		var data = JSON.parse(data);
+        console.log(data);
+		$("#AddForm input[name=is_import]").val(is_import);
+		$("#AddForm input[name=date]").val(data.date);
+		$("#AddForm select[name=category_id]").html(data.category);
+		$("#AddForm select[name=object]").html(data.object);
+		$("#AddForm select[name=object_id]").html(data.object_id);
 		AddIdMoneyType(data.category_id);
 	});
 }
@@ -399,7 +526,7 @@ function AjaxSaveType(){
 		}, 1000);
 		return false;
 	}
-		
+
 	$.post("?mod=money&site=ajax_save_money_type", data).done(function(rt) {
 		var rt = JSON.parse(rt);
 		$('#UpdateMoneyType').modal('hide');

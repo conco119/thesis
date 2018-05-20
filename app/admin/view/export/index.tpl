@@ -1,30 +1,11 @@
-<script>
-var eid = {$out.eid};
-$(document).ready(function() {
-    $(function() {
-     var pgurl = window.location.href.substr(window.location.href.lastIndexOf("/")+1);
-         $("#btn_export_active a").each(function(){
-              if($(this).attr("href") == pgurl || $(this).attr("href") == '' )
-              		$(this).parent().addClass("active");
-         })
-    });
-});
-</script>
-<script type="text/javascript">var config = {$js_config};</script>
-<div class="">
 
+{* <script type="text/javascript">var config = {$js_config};</script> *}
+<div class="">
 	<div class="" id="AllId">
 		<div class="col-lg-12 col-sm-12 col-xs-12">
 			<div id="btn_export_active">
 				<ul>
-					{foreach from=$session key=k item=data}
-					<li><a href="{$out.url}&id={$k}">HD{$k}<span class="fa fa-remove" onclick="RemoveExport({$k});"></span></a></li>
-					{/foreach}
-					<li>
-						<button type="button" class="btn btn-primary" onclick="AddNewExport();">
-							<i class="fa fa-plus"></i>
-						</button>
-					</li>
+					<li class='active'><a href="{$arg.this_link}">{$value.code}</a></li>
 				</ul>
 			</div>
 		</div>
@@ -46,23 +27,13 @@ $(document).ready(function() {
 				<div class="x_content">
 
 					<div class="h_content">
-						<div class="form-group form-inline">
-							<input class="left form-control" id="UseBarcode" placeholder="Mã vạch" autofocus onchange="GetProductFromBarcode({$out.eid}, this.value);">
-						</div>
 
-						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#GetProduct" onclick="LoadProduct({$out.eid});">
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#GetProduct" onclick="LoadProduct()">
 							<i class="fa fa-pencil"></i> Chọn sản phẩm
 						</button>
-						{if $arg.setting.use_service eq 1}
-						<button type="button" class="btn btn-success" data-toggle="modal" onclick="LoadService({$out.eid});" data-target="#Services">
+						<button type="button" class="btn btn-success" data-toggle="modal" onclick="LoadService();" data-target="#Services">
 							<i class="fa fa-check-square-o"></i> Chọn dịch vụ
 						</button>
-						{/if}
-						{if $arg.setting.use_sale eq 1}
-						<select class="form-control" name="price_sale" id="price_sale" onchange="UpdatePriceSale({$out.eid},this.value)"
-							style="display: inline; width: 40px;"> {$out.price_sale}
-						</select>
-						{/if}
 						<div class="clearfix"></div>
 					</div>
 
@@ -71,65 +42,34 @@ $(document).ready(function() {
 						<table class="table table-striped table-bordered" id="Products">
 							<thead>
 								<tr>
+									<th width="50">#</th>
 									<th>Mã</th>
 									<th>Sản phẩm</th>
-									<th class="text-right">{if $arg.setting.percent eq 1}Nguyên giá{else}Giá bán{/if}</th>
-									{if $arg.setting.percent eq 1}<th class="text-center">Chiết khấu</th>
-									<th class="text-right">Giá bán</th>{/if}
-									<th class="text-center">SL</th>
-									{if $arg.setting.use_warranty eq 1}
-									<th class="text-center">Bảo hành</th>
-									{/if}
-									<th>Đơn vị</th> 
-									{if $arg.setting.use_expiry eq 1}
-									<th>HSD</th>
-									{/if}
-									<th class="text-right">Thành tiền</th> 
-									{if $arg.setting.use_description eq 1}
-									<th class="text-center" width="70">Mô tả</th>
-									{/if}
+									<th class="text-right">Giá bán</th>
+									<th class="text-center">Đơn vị</th>
+									<th class="text-center">Số lượng</th>
+									<th class="text-right">Thành tiền</th>
 									<th class="td-actions" width="60"></th>
 								</tr>
 							</thead>
 							<tbody>
-								{foreach from=$value.products item=list}
+								{foreach from=$products item=list}
 								<tr id="proNo{$list.id}">
+									<td>#</td>
 									<td>{$list.code}</td>
 									<td>{$list.name}</td>
 									<td class="text-right">
-										<input type="text" class="prod-price" style="margin-bottom:5px; " id="proPrice{$list.id}" onchange="UpdateProductPrice({$out.eid}, {$list.id});"
-										value="{($list.price)|number_format}">
-										</td>
-									{if $arg.setting.percent eq 1}<td class="text-center">
-										<div class="input-group" style="width: 50px;">
-											<input id="propercent{$list.id}" type="text" class="form-control prod-price input-sm"  value="{$list.percent}" onchange="UpdatePercent({$out.eid}, {$list.id});" aria-describedby="basic-addon2">
-											<span class="input-group-addon" id="basic-addon2" style="padding: 2px;">%</span>
-										</div>
+										<input type="text" class="prod-price" style="margin-bottom:5px;  "
+										value="{($list.price)|number_format}" disabled>
 									</td>
-									<td class="text-right" id="price_sell{$list.id}">
-										{($list.price-$list.price*$list.percent/100)|number_format}
-									</td>{/if}
-									<td class="text-center">
-										<input type="number" class="prod-number" id="proNumber{$list.id}" onchange="UpdateNumberProduct({$out.eid}, {$list.id}, 'update', this.value, {$list.max_number});" value="{$list.number}">
-									</td> 
-									{if $arg.setting.use_warranty eq 1}
-									<td class="text-center">
-										<input type="number" class="prod-number" id="proWarranty{$list.id}" onchange="UpdateWarrantyProduct({$out.eid}, {$list.id}, this.value);" value="{$list.warranty}">
-									</td>{/if}
-									<td>{$list.select_units}</td> {if $arg.setting.use_expiry eq 1}
-									<td>{$list.expiry|date_format:"%d-%m-%Y"}</td>{/if}
-									<td class="text-right" id="proTotal{$list.id}">{($list.price*$list.number-($list.price*$list.number*$list.percent/100))|number_format} đ</td>
-									{if $arg.setting.use_description eq 1}
-									<td class="text-center edit_desciption">
-										<button type="button" id="test" class="btn btn-lg btn-info" data-html="true" 
-										data-toggle="popover" data-placement="left" onclick="SetValueDescripton({$out.eid}, {$list.id});"
-										data-content="<input type='text' class='form-control' id='proDescription{$list.id}' onchange='UpdateDescriptionProduct({$out.eid}, {$list.id}, this.value);' value='{$list.description}'>">
-										<i class="fa fa-pencil"></i>
-										</button>
-										<!--<input type="text" class="situa_des1" id="proDescription{$list.id}" onchange="UpdateDescriptionProduct({$out.eid}, {$list.id}, this.value);" value="{$list.description}">-->
+									<td class='text-center'>
+										{$list.unit_name}
 									</td>
-									{/if}
-									<td class="text-right"><button class="btn btn-danger" onclick="UpdateNumberProduct({$out.eid}, {$list.id}, 'delete')">
+									<td class="text-center">
+										<input type="number" class="prod-number" id="proNumber{$list.id}" onchange="UpdateNumberProduct({$list.id}, this.value,{$list.max_number});" value="{$list.number}">
+									</td>
+									<td class="text-right" id="proTotal{$list.id}">{$list.price*$list.number|number_format} đ</td>
+									<td class="text-right"><button class="btn btn-danger" onclick="DeleteProductBill({$list.id})">
 											<i class="fa fa-times-circle"></i>
 										</button>
 									</td>
@@ -152,21 +92,16 @@ $(document).ready(function() {
 								</tr>
 							</thead>
 							<tbody>
-								{foreach from=$value.services item=list}
+								{foreach from=$services item=list}
 								<tr id="serNo{$list.id}">
 									<td>#</td>
 									<td>{$list.name}</td>
-									<td class="text-right"><input type="text" class="prod-price" id="serPrice{$list.id}"
-										onchange="ServiceUpdatePrice({$out.eid}, {$list.id});" value="{$list.price|number_format}"></td>
+									<td class="text-right"><input type="text"  disabled class="prod-price" value="{$list.price|number_format}"></td>
 									<td class="text-center"><input type="number" class="prod-number" id="serNumber{$list.id}"
-										onchange="ServiceUpdateNumber({$out.eid}, {$list.id}, 'update', this.value);" value="{$list.number}">
-										{if $list.type == 1}
-										
-										<input type="text" class="prod-number text-right" id="serTime{$list.id}"
-										onchange="ServiceUpdateTime({$out.eid}, {$list.id}, this.value);" value="{$list.time}">
-										{/if}</td>
-									<td class="text-right" id="serTotal{$list.id}">{($list.price*$list.number*$list.int_time)|number_format} đ</td>
-									<td class="text-right"><button type="button" class="btn btn-danger" onclick="ServiceUpdateNumber({$out.eid}, {$list.id}, 'delete');">
+										onchange="ServiceUpdateNumber({$list.id}, this.value);" value="{$list.number}">
+									</td>
+									<td class="text-right" id="serTotal{$list.id}">{($list.price*$list.number)|number_format} đ</td>
+									<td class="text-right"><button type="button" class="btn btn-danger" onclick="DeleteServiceBill({$list.id});">
 											<i class="fa fa-times-circle"></i>
 										</button>
 									</td>
@@ -203,27 +138,9 @@ $(document).ready(function() {
 											<label class="control-label col-md-3 col-sm-3 col-xs-6">Ngày</label>
 											<div class="col-md-9 col-sm-9 col-xs-6">
 												<input class="date-picker form-control col-md-7 col-xs-12"
-													onchange="SetExportValue({$out.eid}, 'date', this.value);"
+													onchange="SetExportValue('date', this.value);"
 													required="required" type="text" id="exportday"
 													value="{$value.date}">
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="control-label col-md-3 col-sm-3 col-xs-12">NV</label>
-											<div class="col-md-9 col-sm-9 col-xs-12">
-												<select class="form-control"
-													onchange="SetExportValue({$out.eid}, 'supporter', this.value);">{$out.supporter}
-												</select>
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="control-label col-md-3 col-sm-3 col-xs-12">NVKD</label>
-											<div class="col-md-9 col-sm-9 col-xs-12">
-												<select class="form-control"
-													onchange="SetExportValue({$out.eid}, 'staff_id', this.value);">
-													<option value="0">Lựa chọn NVKD</option>
-													{$out.staff_id}
-												</select>
 											</div>
 										</div>
 										<div class="form-group">
@@ -237,7 +154,7 @@ $(document).ready(function() {
 											<div class="col-md-9 col-sm-9 col-xs-12">
 												<select class="select2_single form-control"
 													name="customer_id" tabindex="-1"
-													onchange="SetExportValue({$out.eid}, 'customer_id', this.value); SetCustomerDiscount(this.value);">{$out.customers}
+													onchange="SetExportValue('customer_id', this.value); SetCustomerDiscount(this.value);">{$out.customers}
 												</select>
 											</div>
 										</div>
@@ -247,7 +164,7 @@ $(document).ready(function() {
 											<label class="control-label col-md-3 col-sm-3 col-xs-12">Loại</label>
 											<div class="col-md-9 col-sm-9 col-xs-12">
 												<select class="form-control" name="discount_type"
-													onchange="SetExportValue({$out.eid}, 'discount_type', this.value);">{$out.discount}
+													onchange="SetExportValue('discount_type', this.value);">{$out.discount}
 												</select>
 											</div>
 										</div>
@@ -257,14 +174,14 @@ $(document).ready(function() {
 											<div class="col-md-9 col-sm-3 col-xs-9">
 												<input type="text" class="form-control text-right"
 													name="discount"
-													onchange="SetExportValue({$out.eid}, 'discount', this.value);"
+													onchange="SetExportValue('discount', this.value);"
 													value="{$value.discount}" />
 											</div>
 										</div>
 									</div>
 									<div class="tab-pane" id="tab3">
 										<div class="form-group">
-											<div class="col-md-12 col-sm-12 col-xs-12"><textarea class="form-control" rows="3"  name="description" onchange="SetValueDescriptonEx({$out.eid},this.value)"
+											<div class="col-md-12 col-sm-12 col-xs-12"><textarea class="form-control" rows="3"  name="description" onchange="SetExportValue('description', this.value)"
 													id='descriptionex' placeholder='Mô tả thêm...'> {$value.description}</textarea>
 											</div>
 										</div>
@@ -296,7 +213,7 @@ $(document).ready(function() {
 							<div class="col-md-8 col-sm-8 col-xs-12">
 								<input type="text" name="payment"
 									class="form-control text-right"
-									onchange="SetExportValue({$out.eid}, 'payment', this.value);"
+									onchange="SetExportValue('payment', this.value);"
 									value="{$value.payment|number_format}" />
 								<button type="button" id="GetAllPay" onclick="GetAllPayment();"
 									title="Trả toàn bộ">
@@ -313,7 +230,10 @@ $(document).ready(function() {
 					</form>
 					<hr>
 					<div class="text-center">
-						<button type="button" id="SaveExport" class="btn btn-lg btn-success" data-toggle="modal" data-target="#orderDetail" onclick="GetOrderDetail({$out.eid});">
+						{* <button type="button" id="SaveExport" class="btn btn-lg btn-success" data-toggle="modal" data-target="#orderDetail" onclick="GetOrderDetail({$out.eid});">
+							<i class="fa fa-check-square-o"></i> Lưu hóa đơn
+						</button> *}
+						<button type="button" id="SaveExport" class="btn btn-lg btn-success" onclick="GetOrderDetail();">
 							<i class="fa fa-check-square-o"></i> Lưu hóa đơn
 						</button>
 					</div>
@@ -335,20 +255,14 @@ $(document).ready(function() {
             <div class="modal-body">
                 <div class="row form-group" id="prodFillter">
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="FilterKey" class="form-control" oninput="LoadProduct({$out.eid});" placeholder="Mã / Tên sản phẩm">
+                        <input type="text" id="FilterKey" class="form-control" oninput="LoadProduct();" placeholder="Mã / Tên sản phẩm">
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select class="form-control" id="FilterCate" onchange="LoadProduct({$out.eid});">{$out.categories}</select>
+                        <select class="form-control" id="FilterCate" onchange="LoadProduct();">{$out.categories}</select>
                     </div>
-                    {if $arg.setting.use_trademark  eq 1} 
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select class="form-control" id="FilterTrademark" onchange="LoadProduct({$out.eid});">{$out.trademarks}</select>
-                    </div>{/if}
-                    {if $arg.setting.use_origin  eq 1} 
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select class="form-control" id="FilterOrigin" onchange="LoadProduct({$out.eid});">{$out.origins}</select>
+                        <select class="form-control" id="FilterTrademark" onchange="LoadProduct();">{$out.trademarks}</select>
                     </div>
-                    {/if}
                 </div>
                 <div style="max-height: 400px; overflow-y: auto">
 					<table class="table table-striped" id="ProductList"></table>
@@ -478,26 +392,9 @@ $(document).ready(function() {
 <!-- /.modal -->
 
 <script src="{$arg.stylesheet}js/wh.export.js"></script>
-<script type="text/javascript">
-var cprint = '{$out.cprint}';
-var exprint = '{$out.exprint}';
-var afid = '{if isset($smarty.session.export_id) and $smarty.session.export_id neq ''}{$smarty.session.export_id}{/if}';
-var afprint = '{$out.afprint}'+afid;
-//var afprint = '?mod=export&site=cprint&eid='+afid;
-</script>
 {literal}
 <script>
-$(function() {
-    if (afid != '') {
-        //alert(afprint);
-        SetafPrint();
-    }
-});
-
-function dzungx() {
-    $("#save_btn").trigger("click");
-}
-
+//
 $(document).ready(function () {
     $('#exportday').daterangepicker({
         singleDatePicker: true,
@@ -506,8 +403,8 @@ $(document).ready(function () {
     }, function (start, end, label) {
         $('#exportday').change();
     });
-
-    GetTotalSession(eid, 1);
+	$("#showService").hide();
+    GetTotalSession(1);
 });
 
 function SetCustomerDiscount(value) {
@@ -517,7 +414,7 @@ function SetCustomerDiscount(value) {
         $("select[name=discount_type]").html(data.select_discount_type).change();
     });
 }
-
+//thêm khách hàng ajax
 function AddNewCustomer() {
     var data = {};
     data['code'] = $("#UpdateFrom input[name=code]").val();
@@ -531,25 +428,28 @@ function AddNewCustomer() {
 				return false;
 
 			}
-    $.post("?mod=customer&site=ajax_insert_item", data).done(function (rt) {
-        var rt = JSON.parse(rt);
+    $.post("./admin?mc=customer&site=ajax_insert_item", data).done(function (data_return) {
+        var data_return = JSON.parse(data_return);
+		console.log(data_return);
+		//return;
         $('#UpdateFrom').modal('hide');
+
         $(".select2_single").select2({placeholder: "Select a state", allowClear: true});
-        $("select[name=customer_id]").html(rt.categories).change();
+        $("select[name=customer_id]").html(data_return.categories).change();
     });
 }
 
-
+// load modal customer
 function LoadDataForForm(id) {
     $("#UpdateFrom input[type=text]").val('');
-    $.post("?mod=customer&site=ajax_load_item", {'id': id}).done(function (data) {
+    $.post("./admin?mc=customer&site=ajax_load", {'id': id}).done(function (data) {
         var data = JSON.parse(data);
         $("#UpdateFrom input[name=code]").val(data.code);
-        $("#UpdateFrom select[name=group_id]").html(data.select_groups);
+        $("#UpdateFrom select[name=group_id]").html(data.group);
     });
 }
 
-
+// trả đủ tiền
 function GetAllPayment() {
     var must_pay = $("input[name=m_total_must_pay]").val();
     $("input[name=payment]").val(must_pay);
@@ -566,14 +466,118 @@ function SetafPrint() {
     return false;
 }
 
-function GetOrderDetail(eid) {
-    //console.log(data);
-    $("#orderDetail .modal-body").load("?mod=exportAjax&site=ajax_get_export_session_detail", {'eid': eid});
+function GetOrderDetail() {
+    let customer_id = $("select[name=customer_id]").val();
+    if(customer_id == 0) {
+        alert('Vui lòng chọn nhà cung cấp');
+        return;
+    }
+	$('#orderDetail').modal('toggle');
+
+		var detail = '1';
+	    $.get("./admin?mc=exportajax&site=ajax_get_export_session_detail").done( (data) => {
+
+			 data = JSON.parse(data);
+			 console.log(data);
+				 detail = `
+
+					<div class="modal-body form-horizontal">
+						<h2>Hóa đơn bán hàng - ${data.export.code}</h2>
+						<div class="modal50">
+						<p><span><i class="icon-user"></i>Nhân viên bán hàng:</span> ${data.creator}</p><p><span><i class="icon-time"></i> Thời gian:</span> ${data.time}</p>
+						</div>
+						<div class="modal50"><p><span><i class="icon-user-md"></i> Khách hàng: </span>${data.customer.name}</p></div>
+						<div class="modal50"><p><span><i class="icon-user-md"></i> Địa chỉ: </span>${data.customer.address}</p></div>
+						<hr class="clear">`;
+
+				if(Object.keys(data.products).length > 0)
+				{
+
+
+				detail += `
+						<h3>Bảng chi tiết sản phẩm</h3>
+						<table class="table table-striped table-bordered table-bor-btm">
+							<thead>
+							<tr>
+								<th class="text-right">TT</th>
+								<th>Sản phẩm</th>
+								<th class="text-right">Đơn vị</th>
+								<th class="text-right">Giá bán</th>
+								<th class="text-right">Số lượng</th>
+								<th class="text-right">Thành tiền</th>
+							</tr>
+							</thead>
+							<tbody>
+							`;
+						let index = 1;
+						$.each(data.products, function(key, product) {
+						detail += `
+							<tr>
+								<td class="text-right">${index}</td>
+								<td>${product.name}</td>
+								<td class="text-right">${product.unit_name}</td>
+								<td class="text-right">${ConvertMoney(product.price)}</td>
+								<td class="text-right">${product.number}</td>
+								<td class="text-right">${ConvertMoney(product.number * product.price)} đ</td>
+							</tr>`;
+							index++;
+						})
+
+						detail += `</tbody> </table>`;
+
+					}
+					if(Object.keys(data.services).length > 0)
+					{
+						detail += `
+
+						<h3>Bảng chi tiết dịch vụ</h3>
+						<table class="table table-striped table-bordered table-bor-btm">
+							<thead>
+							<tr>
+								<th class="text-right">TT</th>
+								<th>Dịch vụ</th>
+								<th class="text-right">Chi phí</th>
+								<th class="text-right">Số lượng</th>
+								<th class="text-right">Thành tiền</th>
+							</tr>
+							</thead>
+							<tbody>`;
+							index=1;
+							$.each(data.services, function(key, product) {
+								detail += `<tr>
+									<td class="text-right">${index}</td>
+									<td>${product.name}</td>
+									<td class="text-right">${ConvertMoney(product.price)} đ</td>
+									<td class="text-right">${product.number}</td>
+									<td class="text-right">${ConvertMoney(product.number * product.price)} đ</td>
+								</tr>`
+							index++;
+							})
+							detail += `</tbody></table>`;
+					}
+					detail += `
+						<div class="bold text-right">`;
+							detail += `<h3>Tổng tiền: ${ConvertMoney(data.export.total)} đ</h3>`
+							if(data.export.total == data.export.must_pay)
+								detail += `<h3>Chiết khấu: 0 đ</h3>`
+							else
+								detail += `<h3>Chiết khấu: ${ConvertMoney(data.export.total - data.export.must_pay)} đ</h3>`
+							detail += `<h3> Khách cần trả: ${ConvertMoney(data.export.must_pay)} đ</h3>`
+							detail += '<hr>';
+							detail += `<h3>Khách trả: ${ConvertMoney(data.export.payment)} </h3>`;
+
+							//<hr>
+							//<p>Ghi nợ: 38,000 đ</p>
+							//<h3>Thanh toán: 120,000 đ</h3>
+						detail += `</div>`;
+				detail += "</div>"
+
+
+			$("#orderDetail .modal-body").html(detail);
+		});
 }
 
-$(function () {
-  $('[data-toggle="popover"]').popover();
-});
+
 
 
 </script>

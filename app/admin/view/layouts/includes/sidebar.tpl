@@ -23,7 +23,7 @@
 						<li><a href="{$arg.prefix_admin}mc=export&site=export_sup">Trả hàng NCC</a></li>
 					</ul>
 				</li>
-				<li><a href="?mc=money&site=index"><i class="fa fa-dollar"></i> Sổ thu chi</a></li>
+				<li><a href="{$arg.prefix_admin}mc=money&site=index"><i class="fa fa-dollar"></i> Sổ thu chi</a></li>
 				<li><a><i class="fa fa-product-hunt"></i> Sản phẩm<span class="fa fa-chevron-down"></span></a>
 					<ul class="nav child_menu" style="display: none">
 						<li class="current-page" id="product_index_li"><a href="{$arg.prefix_admin}mc=product&site=index">Quản lý sản phẩm</a></li>
