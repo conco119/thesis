@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-11 21:22:55
+/* Smarty version 3.1.30, created on 2018-05-23 17:54:24
   from "/Users/mtd/Sites/htaccess/app/admin/view/customer/index.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5af5a73f0a3ea9_34907410',
+  'unifunc' => 'content_5b054860d86438_76215385',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'cf907f15a2ac7e24fe839b38d141a32fa00ccc24' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/customer/index.tpl',
-      1 => 1526048572,
+      1 => 1527072815,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5af5a73f0a3ea9_34907410 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b054860d86438_76215385 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="">
     <div class="x_panel">
@@ -69,7 +69,6 @@ mc=customergroup&site=index" class="btn btn-primary left"><i class="fa fa-pencil
                         </tr>
                     </thead>
                     <tbody>
-
                         <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['customers']->value, 'list');
 if ($_from !== null) {
@@ -94,7 +93,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['list']->value) {
                                 <td class="text-center"><a href="?mod=customer&site=detail&id=<?php echo $_smarty_tpl->tpl_vars['list']->value['id'];?>
 " class="btn btn btn-success"><i class="fa fa-search-plus"></i></a></td>
                                 <td class="text-right">
-                                	<?php echo number_format($_smarty_tpl->tpl_vars['list']->value['buy_money']);?>
+                                	<?php echo number_format($_smarty_tpl->tpl_vars['list']->value['must_pay']);?>
 
                                     <a href="?mod=customer&site=history&id=<?php echo $_smarty_tpl->tpl_vars['list']->value['id'];?>
 " class="btn btn btn-success"><i class="fa fa-search-plus"></i></a>
@@ -116,32 +115,20 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 ?>
 
                     <tr>
-                        <th colspan="3" class="text-right">
+                        <th colspan="2" class="text-right">
                             Tổng tài khoản
                         </th>
                         <th class="text-right">
-                            <?php echo number_format($_smarty_tpl->tpl_vars['out']->value['total_owe_d']);?>
+                            <?php echo number_format($_smarty_tpl->tpl_vars['out']->value['total_money']);?>
  đ
                         </th>
                         <th class="text-right">
                             Tổng mua hàng
                         </th>
                         <th class="text-right">
-                            <?php echo number_format($_smarty_tpl->tpl_vars['out']->value['total_price']);?>
+                            <?php echo number_format($_smarty_tpl->tpl_vars['out']->value['total_must_pay']);?>
  đ
                         </th>
-                    </tr>
-                    <tr>
-                        <th colspan="3" class="text-right">
-                            Tổng ghi nợ
-                        </th>
-                        <th class="text-right">
-                            <?php echo number_format($_smarty_tpl->tpl_vars['out']->value['total_owe_a']);?>
- đ
-                        </th>
-                        <td colspan="4">
-
-                        </td>
                     </tr>
                     </tbody>
                 </table>

@@ -39,7 +39,6 @@
                             <th>Điện thoại</th>
                             <th class="text-right">Tài khoản / ghi nợ</th>
                             <th class="text-right">Tổng nhập</th>
-                            <th class="text-center">Sắp xếp</th>
                             <th class="text-center">Trạng thái</th>
                             <th class="text-right"></th>
                         </tr>
@@ -52,12 +51,12 @@
                                 <td>{$data.phone}</td>
                                 <td class="text-right">{$data.money|number_format} <a href="?mod=supplier&site=detail&id={$data.id}"
                                     class="btn btn btn-success">
-                                    <i class="fa fa-search-plus"></i></a></td>
-                                <td class="text-right">{$data.buy_money|number_format}
+                                    <i class="fa fa-search-plus"></i></a>
+                                </td>
+                                <td class="text-right">{$data.must_pay|number_format}
                                     <a href="?mod=supplier&site=history&id={$data.id}"
                                     class="btn btn btn-success"><i class="fa fa-search-plus"></i></a>
                                     </td>
-                                <td class="text-center">{$data.sort}</td>
                                 <td class="text-center" id="stt{$data.id}">{$data.status}</td>
                                 <td class="text-center">
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#UpdateFrom" onclick="LoadDataForForm({$data.id});"><i class="fa fa-pencil"></i></button>
@@ -66,14 +65,14 @@
                             </tr>
                         {/foreach}
                         <tr>
-                            <th colspan="4" class="text-right">
+                            <th colspan="3" class="text-right">
                                 Tổng:
                             </th>
                             <th class="text-right">
-                                {$out.total_owe|number_format} đ
+                                {$total|number_format} đ
                             </th>
                             <th class="text-right">
-                                {$out.total_price|number_format} đ
+                                {$total_must_pay|number_format} đ
                             </th>
                         </tr>
                     </tbody>

@@ -12,37 +12,16 @@
                 <div class="x_content">
                     <div class="h_content">
                         <div class="form-group form-inline pull-left filter_form">
-                            <select class="form-control" id="acount" onchange="filter();">
+                            <select class="form-control" id="date_ex" onchange="filter();">
+                                <option value="0">Tất cả hóa đơn</option> {$out.select_export}
+                            </select>
+                            <select class="form-control" id="user" onchange="filter();">
                                 <option value="0" onchange="filter();">Người lập phiếu</option>
-                                {$out.acount}
+                                {$out.user}
                             </select>
-                            <select class="form-control" id="staff" onchange="filter();">
-                                <option value="0" onchange="filter();">Chọn nhân viên kinh doanh</option>
-                                {$out.staff}
-                            </select>
-                            <input class="form-control" id="key" value="{$out.key}" name="key" onchange="filter()"
-                                   placeholder="Mã hóa đơn,id, Tên khách hàng">
-                            <select class="form-control" id="filter" onchange="filter();">
-                                {$out.filter}
-                            </select>
-
-                            {if $out.value.filter eq '2'}
-                                <select class="form-control" id="year" onchange="filter();">
-                                    {$out.year}
-                                </select>
-                                <select class="form-control" id="month" onchange="filter();">
-                                    {$out.month}
-                                </select>
-                            {/if}
-
-                            {if $out.value.filter eq '1'}
-                                <input type="text" class="form-control" id="date_from" placeholder="Từ ngày" onchange="filter();" value="{$out.date_from}">
-                                <input type="text" class="form-control" id="date_to" placeholder="Đến ngày" onchange="filter();" value="{$out.date_to}">
-                            {/if}
-
-
+                            <input class="form-control" id="key" value="{$out.key}" name="key" onchange="filter()" placeholder="Mã hóa đơn,id, Tên khách hàng">
                         </div>
-                        <a href="?mod=export&site=form" class="btn btn-primary"><i class="fa fa-pencil"></i> Tạo hóa đơn</a>
+                        <a href="./admin?mc=export&site=index" class="btn btn-primary"><i class="fa fa-pencil"></i> Tạo hóa đơn</a>
                         <div class="clearfix"></div>
                     </div>
                     <!-- start project list -->
@@ -54,9 +33,8 @@
                                 <th>Khách hàng</th>
                                 <th class="text-right">Giá trị</th>
                                 <th class="text-right">Chiết khấu</th>
-                                <th class="text-right">Công nợ</th>
+                                <th class="text-right">Khách nợ</th>
                                 <th>Người lập phiếu</th>
-                                <th>Nhân viên kinh doanh</th>
                                 <th class=""></th>
                             </tr>
                             </thead>
@@ -68,15 +46,14 @@
                                         <small>{$list.date}</small>
                                     </td>
                                     <td>{$list.customer}</td>
-                                    <td class="text-right">{$list.money}</td>
+                                    <td class="text-right">{$list.must_pay|number_format}</td>
                                     <td class="text-right">{$list.discount}</td>
-                                    <td class="text-right">{$list.debt}</td>
+                                    <td class="text-right">{($list.must_pay - $list.payment)|number_format}</td>
                                     <td>{$list.user}</td>
-                                    <td>{$list.staff_name}</td>
                                     <td class="text-right">
                                         <button type="button" title="Chi tiết hóa đơn" data-toggle="modal"
                                                 class="btn btn-default" data-target="#orderDetail"
-                                                onclick="SetExportInfo({$list.id});">
+                                                onclick="GetDetailExport({$list.id});">
                                             <i class="fa fa-search-plus"></i>
                                         </button>
                                         {if $list.room_id eq 0} <a href="{$list.modify}" class="btn btn-default"><i
@@ -95,7 +72,7 @@
                             {/foreach}
                             <tr>
                                 <th colspan="2" class="text-right">
-                                    Tổng doanh thu bán hàng
+                                    Tổng
                                 </th>
                                 <td class="text-right" style="color:red;font-weight: bold">
                                     {$out.total|number_format} đ
@@ -174,33 +151,12 @@
         });
 
         function filter() {
-            var filter = $("#filter").val();
-            var type = $("#type").val();
+            var user = $("#user").val();
             var date = $("#date_ex").val();
             var key = $("#key").val();
-            var acount = $("#acount").val();
-            var staff = $("#staff").val();
-
-            var url = "./?mod=export&site=statistics";
-            url += "&filter=" + filter;
-            url += "&type=" + type;
+            var url = "./admin?mc=export&site=statistics";
             url += "&date=" + date;
             url += "&key=" + key;
-            url += "&acount=" + acount;
-            url += "&staff=" + staff;
-
-            if (filter == "1") {
-                var date_from = $("#date_from").val();
-                var date_to = $("#date_to").val();
-                url += "&date_from=" + date_from;
-                url += "&date_to=" + date_to;
-            } else if (filter == "2") {
-                var year = $("#year").val();
-                var month = $("#month").val();
-                url += "&year=" + year;
-                url += "&month=" + month;
-            }
-
             window.location.href = url;
         }
 
@@ -209,8 +165,100 @@
             return false;
         }
 
-        function SetExportInfo(id) {
-            $("#orderDetail .modal-body").load("?mod=exportAjax&site=ajax_get_export_info", {"id": id});
+        function GetDetailExport(id) {
+            $.post("./admin?mc=exportajax&site=ajax_get_detail_export",{"id": id}).done(function(data){
+                data = JSON.parse(data)
+                console.log(data)
+                let append = `
+                        <h1 class="text-center">Hóa đơn bán hàng</h1>
+                        <h2 class="text-center">[Mã: ${data.code} - Ngày ${data.date}]</h2>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><span><i class="icon-user"></i> Lập phiếu:</span> ${data.user_name}</p>
+                                <p><span><i class="icon-time"></i> Thời gian lập:</span> ${data.created_at}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><span><i class="icon-user-md"></i> Khách hàng:</span> ${data.customer_name}</p>
+                            </div>
+                        </div>`
+
+                        if(Object.keys(data.products).length > 0)
+                        {
+                            append += `
+                            <h3>Chi tiết sản phẩm</h3>
+                            <table class="table table-striped table-bordered table-bor-btm">
+                                <thead>
+                                    <tr>
+                                        <th>Sản phẩm</th>
+                                        <th class="text-right">Đơn vị</th>
+                                        <th class="text-right">Giá bán</th>
+                                        <th class="text-right">SL</th>
+                                        <th class="text-right">Thành tiền</th>
+                                    </tr>
+                                </thead>
+                                <tbody>`
+                                let index = 1;
+                                $.each(data.products, function(key, product) {
+                                    append += `
+                                    <tr>
+                                        <td>${product.name}</td>
+                                        <td class="text-right">${product.unit_name}</td>
+                                        <td class="text-right">${ConvertMoney(product.price)} đ</td>
+                                        <td class="text-right">${product.number_count}</td>
+                                        <td class="text-right">${ConvertMoney(product.price * product.number_count)} đ</td>
+                                    </tr>`
+                                    index++;
+                                })
+                            append += `
+                                </tbody>
+                            </table>`
+                        }
+                        if(Object.keys(data.services).length > 0)
+                        {
+                            append += `
+                            <h3>Chi tiết dịch vụ</h3>
+                            <table class="table table-striped table-bordered table-bor-btm">
+                                <thead>
+                                    <tr>
+                                        <th>Dịch vụ</th>
+                                        <th class="text-right">Chi phí</th>
+                                        <th class="text-right">SL</th>
+                                        <th class="text-right">Thành tiền</th>
+                                    </tr>
+                                </thead>
+                                <tbody>`
+                                $.each(data.services, function(key, service) {
+                                    append +=`
+                                    <tr>
+                                        <td>${service.name}</td>
+                                        <td class="text-right">${ConvertMoney(service.price)} đ</td>
+                                        <td class="text-right">${service.number_count}</td>
+                                        <td class="text-right">${ConvertMoney(service.price * service.number_count)} đ</td>
+                                    </tr>`
+                                })
+                            append +=`
+                                </tbody>
+                            </table>`
+                        }
+
+                    append += `
+						<div class="bold text-right">`;
+							append += `<h3>Tổng tiền: ${ConvertMoney(data.total_money)} đ</h3>`
+                            if(data.total_money == data.must_pay)
+                                append += `<h3>Chiết khấu: 0 đ</h3>`
+                            else
+                                append += `<h3>Chiết khấu: ${ConvertMoney(data.total_money - data.must_pay)} đ</h3>`
+							append += `<h3> Khách cần trả: ${ConvertMoney(data.must_pay)} đ</h3>`
+							append += '<hr>';
+							append += `<h3>Khách trả: ${ConvertMoney(data.payment)} </h3>`;
+						append += `</div>`;
+                       // <div class="bold text-right">
+                         //   <h3>Tiền thanh toán: 158,000 đ</h3>
+                        //</div>
+
+                $("#orderDetail .modal-body").html(append);
+            })
+
         }
     </script>
 {/literal}

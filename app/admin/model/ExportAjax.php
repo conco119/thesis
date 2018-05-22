@@ -342,6 +342,36 @@ class ExportAjax extends Main
       exit();
   }
 
+  public function ajax_get_detail_export()
+  {
+    $id = $_POST['id'];
+    $sql = "SELECT a.* , c.name as customer_name, u.name as user_name
+    FROM exports a
+    LEFT JOIN customers c ON a.customer_id = c.id
+    LEFT JOIN users u ON a.creator = u.id
+    WHERE a.id = $id
+    ";
+
+    $export = $this->pdo->fetch_one($sql);
+    $export['date'] = gmdate('d-m-Y', strtotime($export['date']) + 7 * 3600);
+    $export['created_at'] = gmdate("H:i A d/m/Y", $export['created_at'] + 7 * 3600);
+    $sql = "SELECT a.*, u.name as unit_name, p.name
+    FROM export_products a
+    LEFT JOIN products p ON a.product_id = p.id
+    LEFT JOIN product_units u ON p.unit_id = u.id
+    WHERE export_id = $id";
+    $export['products'] = $this->pdo->fetch_all($sql);
+
+    $sql = "SELECT a.*, s.name
+    FROM export_services a
+    LEFT JOIN services s ON a.service_id = s.id
+    WHERE export_id = $id";
+
+    $export['services'] = $this->pdo->fetch_all($sql);
+    echo json_encode($export);
+    die();
+  }
+
 }
 
 

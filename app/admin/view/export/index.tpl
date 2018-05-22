@@ -469,7 +469,7 @@ function SetafPrint() {
 function GetOrderDetail() {
     let customer_id = $("select[name=customer_id]").val();
     if(customer_id == 0) {
-        alert('Vui lòng chọn nhà cung cấp');
+        alert('Vui lòng chọn khách hàng');
         return;
     }
 	$('#orderDetail').modal('toggle');

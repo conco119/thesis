@@ -30,7 +30,7 @@
                                     <th>Nhà Cung cấp</th>
                                     <th class="text-right">Giá trị</th>
                                     <th class="text-right">Chiết khấu</th>
-                                    <th class="text-right">Công nợ</th>
+                                    <th class="text-right">NCC nợ</th>
                                     <th>Nhân viên bán</th>
                                     <th class=""></th>
                                 </tr>

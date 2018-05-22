@@ -16,10 +16,18 @@ class Customer extends Main
         $this->create();
         $this->edit();
         //query customer
-        $sql = "SELECT * FROM {$this->table}";
+        $sql = "SELECT a.*,
+                    ( SELECT sum(must_pay) FROM exports WHERE  customer_id = a.id ) as must_pay,
+                    ( SELECT sum(payment) FROM exports WHERE customer_id = a.id ) as payment,
+                    ( SELECT sum(money) FROM money m WHERE m.object = 'cus' AND m.object_id = a.id AND m.is_auto = 0  AND m.is_import = 0) as pay_to_cus,
+                    ( SELECT sum(money) FROM money m WHERE m.object = 'cus' AND m.object_id = a.id AND m.is_auto = 0  AND m.is_import = 1) as cus_pay_to
+
+        FROM {$this->table} a";
         $paging = $this->paging->get_content($this->pdo->count_rows($sql), 10);
         $sql .= $paging['sql_add'];
         $customers = $this->pdo->fetch_all($sql);
+        $total_money = 0;
+        $total_must_pay = 0;
         foreach($customers as $key => $customer)
         {
             $customers[$key]['status'] = $this->helper->help_get_status($customer['status'], $this->table, $customer['id']);
@@ -27,8 +35,12 @@ class Customer extends Main
             $customers[$key]['created_at'] = gmdate('d.m.Y', $customer['created_at'] + 7 * 3600);
             $customers[$key]['group'] = $this->CustomerHelper->help_get_group($customer['group_id']);
             $customers[$key]['creator'] = $this->CustomerHelper->help_get_creator($customer['creator']);
+            $customers[$key]['money'] = ( $customer['payment'] - $customer['must_pay'] ) + ( $customer['cus_pay_to']  - $customer['pay_to_cus']);
+            $total_money += $customers[$key]['money'];
+            $total_must_pay += $customer['must_pay'];
         }
-
+        $out['total_money'] = $total_money;
+        $out['total_must_pay'] = $total_must_pay;
         //query customer group
         $sql = "SELECT * FROM customer_groups";
         $customer_groups = $this->pdo->fetch_all($sql);
@@ -37,6 +49,7 @@ class Customer extends Main
         // return;
         //smarty
         $this->smarty->assign('paging', $paging);
+        $this->smarty->assign('out', $out);
         $this->smarty->assign('customers', $customers);
         $this->smarty->assign('customer_groups', $customer_groups);
         $this->smarty->display(DEFAULT_LAYOUT);

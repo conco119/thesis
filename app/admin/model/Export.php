@@ -97,15 +97,16 @@ class Export extends Main
                 $money['from_type'] = 'exp';
                 $money['from_id'] = $export_id;
                 $money['creator'] = $this->currentUser['id'];
-                $money['is_auto'] = 0;
+                $money['type'] = 0;
+                $money['is_auto'] = 1;
                 $money['created_at'] = time();
                 $money['updated_at'] = time();
                 $money['description'] = "";
             }
             // lưu lại sổ thu chi
-            $insertStatement = $this->slim_pdo->insert(array('code', 'money', 'date', 'category_id', "is_import", "object", "object_id", "from_type", "from_id", "creator", "is_auto", "created_at", "updated_at", "description" ))
+            $insertStatement = $this->slim_pdo->insert(array('code', 'money', 'date', 'category_id', "is_import", "object", "object_id", "from_type", "from_id", "creator", "type", "is_auto", "created_at", "updated_at", "description" ))
             ->into('money')
-            ->values(array($money['code'], $money['money'], $money['date'], $money['category_id'], $money['is_import'], $money['object'], $money['object_id'], $money['from_type'], $money['from_id'], $money['creator'], $money['is_auto'], $money['created_at'], $money['updated_at'], $money['description']));
+            ->values(array($money['code'], $money['money'], $money['date'], $money['category_id'], $money['is_import'], $money['object'], $money['object_id'], $money['from_type'], $money['from_id'], $money['creator'], $money['type'], $money['is_auto'], $money['created_at'], $money['updated_at'], $money['description']));
             // $this->pdo->insert('money', $money);
             $money_id = $insertStatement->execute();
 
@@ -151,6 +152,84 @@ class Export extends Main
 
     }
   }
+
+  public function statistics()
+  {
+
+      $date_export = isset($_GET['date']) ? intval($_GET["date"]) : 0;
+      $out['select_export'] = $this->helper->get_option(0, 'select_export', $date_export);
+      $key = isset($_GET['key']) ? $_GET["key"] : "";
+      $out['key'] = $key;
+      $sql_where = "";
+      if ($key != "")
+      {
+          $sql_where .= " AND  (a.code LIKE '%$key%' OR b.name LIKE '%$key%')";
+      }
+
+      $sql = "SELECT a.id, a.date, a.code, a.must_pay, a.total_money, a.payment, b.name AS customer, c.name AS user FROM exports AS a
+                  LEFT JOIN customers b ON a.customer_id=b.id
+                  LEFT JOIN users c ON a.creator=c.id
+              WHERE 1=1 $sql_where
+              ORDER BY id DESC";
+      $paging = $this->paging->get_content($this->pdo->count_rows($sql), 10);
+      $sql .= $paging['sql_add'];
+
+      $exports = $this->pdo->fetch_all($sql);
+    //   pre($exports);
+      //filter this day, this week, this month
+      if ($date_export != 0)
+      {
+          switch($date_export)
+          {
+              case 1:
+                  $date = date("Y-m-d");
+                  foreach($exports as $key => $export)
+                  {
+                      if($export['date'] != $date)
+                          unset($export[$key]);
+                  }
+                  break;
+              case 2:
+                  $current_week = gmdate("W");
+                  $current_year = gmdate("Y");
+                  foreach($exports as $key => $export)
+                  {
+                      $week = gmdate("W", strtotime($export['date']) + 7 *3600);
+                      $year = gmdate("Y", strtotime($export['date']) + 7 *3600);
+                      if($current_week != $week && $current_year == $year)
+                          unset($exports[$key]);
+                  }
+                  break;
+              case 3:
+                  $current_month = gmdate("m");
+                  $current_year = gmdate("Y");
+                  foreach($exports as $key => $export)
+                  {
+                      $month = gmdate("m", strtotime($export['date']) + 7 *3600);
+                      $year = gmdate("Y", strtotime($export['date']) + 7 *3600);
+                      if($current_month != $month && $current_year == $year)
+                          unset($exports[$key]);
+                  }
+                  break;
+          }
+      }
+      $total = 0;
+      foreach ($exports as $key => $export)
+      {
+          $exports[$key]['date'] = gmdate('d.m.Y', strtotime($export['date']) + 7 * 3600);
+          $exports[$key]['discount'] = $this->dstring->get_price($export['total_money'] - $export['must_pay']);
+          $total += $export['must_pay'];
+      }
+      $out['total'] = $total;
+
+
+      $this->smarty->assign('paging', $paging);
+      $this->smarty->assign('result', $exports);
+      $this->smarty->assign('out', $out);
+      $this->smarty->display(DEFAULT_LAYOUT);
+  }
+
+
 
 }
 

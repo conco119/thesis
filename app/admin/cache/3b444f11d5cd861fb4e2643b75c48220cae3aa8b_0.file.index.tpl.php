@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-14 10:57:25
+/* Smarty version 3.1.30, created on 2018-05-23 16:25:39
   from "/Users/mtd/Sites/htaccess/app/admin/view/supplier/index.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5af909250f06f6_46086462',
+  'unifunc' => 'content_5b0533935db756_54278303',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '3b444f11d5cd861fb4e2643b75c48220cae3aa8b' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/supplier/index.tpl',
-      1 => 1526270243,
+      1 => 1527067537,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5af909250f06f6_46086462 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b0533935db756_54278303 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="">
     <div class="x_panel">
@@ -58,7 +58,6 @@ function content_5af909250f06f6_46086462 (Smarty_Internal_Template $_smarty_tpl)
                             <th>Điện thoại</th>
                             <th class="text-right">Tài khoản / ghi nợ</th>
                             <th class="text-right">Tổng nhập</th>
-                            <th class="text-center">Sắp xếp</th>
                             <th class="text-center">Trạng thái</th>
                             <th class="text-right"></th>
                         </tr>
@@ -81,15 +80,14 @@ foreach ($_from as $_smarty_tpl->tpl_vars['data']->value) {
  <a href="?mod=supplier&site=detail&id=<?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
 "
                                     class="btn btn btn-success">
-                                    <i class="fa fa-search-plus"></i></a></td>
-                                <td class="text-right"><?php echo number_format($_smarty_tpl->tpl_vars['data']->value['buy_money']);?>
+                                    <i class="fa fa-search-plus"></i></a>
+                                </td>
+                                <td class="text-right"><?php echo number_format($_smarty_tpl->tpl_vars['data']->value['must_pay']);?>
 
                                     <a href="?mod=supplier&site=history&id=<?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
 "
                                     class="btn btn btn-success"><i class="fa fa-search-plus"></i></a>
                                     </td>
-                                <td class="text-center"><?php echo $_smarty_tpl->tpl_vars['data']->value['sort'];?>
-</td>
                                 <td class="text-center" id="stt<?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
 "><?php echo $_smarty_tpl->tpl_vars['data']->value['status'];?>
 </td>
@@ -107,15 +105,15 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 ?>
 
                         <tr>
-                            <th colspan="4" class="text-right">
+                            <th colspan="3" class="text-right">
                                 Tổng:
                             </th>
                             <th class="text-right">
-                                <?php echo number_format($_smarty_tpl->tpl_vars['out']->value['total_owe']);?>
+                                <?php echo number_format($_smarty_tpl->tpl_vars['total']->value);?>
  đ
                             </th>
                             <th class="text-right">
-                                <?php echo number_format($_smarty_tpl->tpl_vars['out']->value['total_price']);?>
+                                <?php echo number_format($_smarty_tpl->tpl_vars['total_must_pay']->value);?>
  đ
                             </th>
                         </tr>

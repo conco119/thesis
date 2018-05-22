@@ -16,15 +16,26 @@ class Supplier extends Main
         $this->create();
         $this->edit();
         //query customer
-        $sql = "SELECT * FROM {$this->table}";
+        $sql = "SELECT a.*,
+                ( SELECT sum(payment) FROM imports WHERE supplier_id = a.id ) as payment,
+                ( SELECT sum(must_pay) FROM imports WHERE supplier_id = a.id ) as must_pay,
+                ( SELECT sum(money) FROM money m WHERE m.object = 'sup' AND m.object_id = a.id AND m.is_import = 0 AND is_auto = 0 ) as pay_to_sup,
+                ( SELECT sum(money) FROM money m WHERE m.object = 'sup' AND m.object_id = a.id AND m.is_import = 1 AND is_auto = 0) as sup_pay
+        FROM {$this->table} a";
         $paging = $this->paging->get_content($this->pdo->count_rows($sql), 10);
         $sql .= $paging['sql_add'];
         $suppliers = $this->pdo->fetch_all($sql);
+        $total = 0;
+        $total_must_pay = 0;
         foreach($suppliers as $key => $supplier)
         {
             $suppliers[$key]['status'] = $this->helper->help_get_status($supplier['status'], $this->table, $supplier['id']);
             $suppliers[$key]['updated_at'] = gmdate('d.m.Y', $supplier['updated_at'] + 7 * 3600);
             $suppliers[$key]['created_at'] = gmdate('d.m.Y', $supplier['created_at'] + 7 * 3600);
+            // $suppliers[$key]['money'] = ( $supplier['must_pay'] + $supplier['pay_to_sup'] ) - ( $supplier['payment'] + $supplier['sup_pay'] );
+            $suppliers[$key]['money'] = ( $supplier['must_pay'] - $supplier['payment'] ) + ( $supplier['sup_pay'] - $supplier['pay_to_sup'] );
+            $total += $suppliers[$key]['money'];
+            $total_must_pay += $supplier['must_pay'];
         }
 
         //query customer group
@@ -33,6 +44,8 @@ class Supplier extends Main
         //smarty
         $this->smarty->assign('paging', $paging);
         $this->smarty->assign('suppliers', $suppliers);
+        $this->smarty->assign('total', $total);
+        $this->smarty->assign('total_must_pay', $total_must_pay);
         $this->smarty->display(DEFAULT_LAYOUT);
     }
     //not using view from here

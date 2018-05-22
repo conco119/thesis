@@ -23,8 +23,8 @@ abstract class HelpAbstract {
     $this->discount_type = [
         1 => "Chiết khấu %",
         2 => "Chiết khấu tiền mặt",
-        3 => "Gia tăng %",
-        4 => "Gia tăng tiền mặt"
+        // 3 => "Gia tăng %",
+        // 4 => "Gia tăng tiền mặt"
     ];
 
     $this->select_export = array(
@@ -32,5 +32,11 @@ abstract class HelpAbstract {
         2 => "Tuần này",
         3 => "Tháng này",
     );
+
+    $this->object = [
+        '1' => "Khách hàng",
+        '2' => "Nhà cung cấp",
+        '3' => "Nhân viên"
+    ];
  }
 }

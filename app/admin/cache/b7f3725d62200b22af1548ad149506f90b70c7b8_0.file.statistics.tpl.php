@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-21 19:41:58
+/* Smarty version 3.1.30, created on 2018-05-23 16:57:21
   from "/Users/mtd/Sites/htaccess/app/admin/view/import/statistics.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b02be961cdf24_34309286',
+  'unifunc' => 'content_5b053b01a2e260_89672501',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'b7f3725d62200b22af1548ad149506f90b70c7b8' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/import/statistics.tpl',
-      1 => 1526906516,
+      1 => 1527069440,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b02be961cdf24_34309286 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b053b01a2e260_89672501 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="">
     <div class="row">
@@ -56,7 +56,7 @@ function content_5b02be961cdf24_34309286 (Smarty_Internal_Template $_smarty_tpl)
                                     <th>Nhà Cung cấp</th>
                                     <th class="text-right">Giá trị</th>
                                     <th class="text-right">Chiết khấu</th>
-                                    <th class="text-right">Công nợ</th>
+                                    <th class="text-right">NCC nợ</th>
                                     <th>Nhân viên bán</th>
                                     <th class=""></th>
                                 </tr>

@@ -516,6 +516,11 @@ function LoadDeleteItem(mc, id, site, target, reason) {
     $("#DeleteItem").attr("onclick", "DeleteItem('" + mc + "', " + id + ", '" + site + "', '" + target + "', '" + reason + "');");
 }
 
+function LoadDeleteItemRow(mc, id, site, target, reason) {
+    PNotify.removeAll();
+    $("#DeleteItem").attr("onclick", "DeleteItemRow('" + mc + "', " + id + ", '" + site + "', '" + target + "', '" + reason + "');");
+}
+
 function DeleteItem(mc, id, site, target, reason) {
     if (!site || site == '' || site == null || site == 'undefined')
         site = "ajax_delete";
@@ -543,6 +548,49 @@ function DeleteItem(mc, id, site, target, reason) {
             $('#DeleteForm').modal('hide');
             $('#field' + id).css('background', '#F7CDCE');
             $('#field' + id).fadeOut(800);
+            var notice = new PNotify({
+                title: 'Xóa thành công!',
+                text: 'Xóa ' + target + ' thành công',
+                type: 'success',
+                mouse_reset: false,
+                buttons: {
+                    sticker: false,
+                }
+            });
+            notice.get().click(function () {
+                notice.remove();
+            });
+        }
+    });
+}
+
+function DeleteItemRow(mc, id, site, target, reason) {
+    if (!site || site == '' || site == null || site == 'undefined')
+        site = "ajax_delete";
+    if (!target || target == '' || target == null || target == 'undefined')
+        target = "mục";
+    if (!reason || reason == '' || reason == null || reason == 'undefined')
+        reason = "";
+    $.post("./admin?mc=" + mc + "&site=" + site, {'id': id})
+    .done(function (data) {
+        if (data == 0) {
+            $('#DeleteForm').modal('hide');
+            var notice = new PNotify({
+                title: 'Xóa không thành công!',
+                text: 'Không thể xóa ' + target + ' này ' + reason,
+                type: 'error',
+                mouse_reset: false,
+                buttons: {
+                    sticker: false,
+                }
+            });
+            notice.get().click(function () {
+                notice.remove();
+            });
+        } else {
+            $('#DeleteForm').modal('hide');
+            $('#row' + id).css('background', '#F7CDCE');
+            $('#row' + id).fadeOut(800);
             var notice = new PNotify({
                 title: 'Xóa thành công!',
                 text: 'Xóa ' + target + ' thành công',

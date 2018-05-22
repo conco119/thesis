@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-21 13:12:08
+/* Smarty version 3.1.30, created on 2018-05-23 20:15:14
   from "/Users/mtd/Sites/htaccess/app/admin/view/export/index.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b02633861ab63_95030216',
+  'unifunc' => 'content_5b0569627ecf79_20761255',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '2d66338d91aa0ce0719613df5ee6e08e6d33ea75' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/export/index.tpl',
-      1 => 1526883127,
+      1 => 1527081313,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b02633861ab63_95030216 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b0569627ecf79_20761255 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 
 
@@ -544,7 +544,7 @@ function SetafPrint() {
 function GetOrderDetail() {
     let customer_id = $("select[name=customer_id]").val();
     if(customer_id == 0) {
-        alert('Vui lòng chọn nhà cung cấp');
+        alert('Vui lòng chọn khách hàng');
         return;
     }
 	$('#orderDetail').modal('toggle');

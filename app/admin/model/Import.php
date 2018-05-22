@@ -105,7 +105,7 @@ class Import extends Main
                  {
                     $money['code'] = "PC" . $import['code'];
                     $money['money'] = $import['payment'];
-                    $money['date'] = gmdate("Y-m-d", strtotime($export['date']) + 7 * 3600);
+                    $money['date'] = gmdate("Y-m-d", strtotime($import['date']) + 7 * 3600);
                     $money['category_id'] = 2;
                     $money['is_import'] = 0;
                     $money['object'] = 'sup';
@@ -113,7 +113,8 @@ class Import extends Main
                     $money['from_type'] = 'imp';
                     $money['from_id'] = $import_id;
                     $money['creator'] = $this->currentUser['id'];
-                    $money['is_auto'] = 0;
+                    $money['type'] = 0;
+                    $money['is_auto'] = 1;
                     $money['created_at'] = time();
                     $money['updated_at'] = time();
                     $money['description'] = "";
@@ -121,9 +122,9 @@ class Import extends Main
                  }
 
                 // lưu lại sổ thu chi
-                $insertStatement = $this->slim_pdo->insert(array('code', 'money', 'date', 'category_id', "is_import", "object", "object_id", "from_type", "from_id", "creator", "is_auto", "created_at", "updated_at", "description" ))
+                $insertStatement = $this->slim_pdo->insert(array('code', 'money', 'date', 'category_id', "is_import", "object", "object_id", "from_type", "from_id", "creator", "type", "is_auto", "created_at", "updated_at", "description" ))
                 ->into('money')
-                ->values(array($money['code'], $money['money'], $money['date'], $money['category_id'], $money['is_import'], $money['object'], $money['object_id'], $money['from_type'], $money['from_id'], $money['creator'], $money['is_auto'], $money['created_at'], $money['updated_at'], $money['description']));
+                ->values(array($money['code'], $money['money'], $money['date'], $money['category_id'], $money['is_import'], $money['object'], $money['object_id'], $money['from_type'], $money['from_id'], $money['creator'], $money['type'], $money['is_auto'], $money['created_at'], $money['updated_at'], $money['description']));
                 // $this->pdo->insert('money', $money);
                 $money_id = $insertStatement->execute();
 
@@ -282,7 +283,7 @@ class Import extends Main
         foreach ($imports as $key => $import)
         {
             $imports[$key]['date'] = gmdate('d.m.Y', strtotime($import['date']) + 7 * 3600);
-            $imports[$key]['discount'] = $this->dstring->get_price($import['money_first'] - $import['money']);
+            $imports[$key]['discount'] = $this->dstring->get_price($import['total_money'] - $import['must_pay']);
         }
 
 

@@ -47,7 +47,6 @@
                         </tr>
                     </thead>
                     <tbody>
-
                         {foreach from=$customers item=list}
                             <tr id="field{$list.id}">
                                 <td>
@@ -60,7 +59,7 @@
                                 </td>
                                 <td class="text-center"><a href="?mod=customer&site=detail&id={$list.id}" class="btn btn btn-success"><i class="fa fa-search-plus"></i></a></td>
                                 <td class="text-right">
-                                	{$list.buy_money|number_format}
+                                	{$list.must_pay|number_format}
                                     <a href="?mod=customer&site=history&id={$list.id}" class="btn btn btn-success"><i class="fa fa-search-plus"></i></a>
                                 </td>
                                 <td class="text-center" id="stt{$list.id}">{$list.status}</td>
@@ -71,29 +70,18 @@
                             </tr>
                         {/foreach}
                     <tr>
-                        <th colspan="3" class="text-right">
+                        <th colspan="2" class="text-right">
                             Tổng tài khoản
                         </th>
                         <th class="text-right">
-                            {$out.total_owe_d|number_format} đ
+                            {$out.total_money|number_format} đ
                         </th>
                         <th class="text-right">
                             Tổng mua hàng
                         </th>
                         <th class="text-right">
-                            {$out.total_price|number_format} đ
+                            {$out.total_must_pay|number_format} đ
                         </th>
-                    </tr>
-                    <tr>
-                        <th colspan="3" class="text-right">
-                            Tổng ghi nợ
-                        </th>
-                        <th class="text-right">
-                            {$out.total_owe_a|number_format} đ
-                        </th>
-                        <td colspan="4">
-
-                        </td>
                     </tr>
                     </tbody>
                 </table>
