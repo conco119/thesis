@@ -139,22 +139,22 @@
                         <tr>
                             <th>Mã hóa đơn</th>
                             <th>Khách hàng</th>
-                            <th class="text-right">Tiền thanh toán</th>
+                            <th class="text-right">Giá trị</th>
                             <th class="text-center">Mô tả</th>
                         </tr>
                     </thead>
                         <tbody>
                         {$tatol=0}
-                        {foreach from=$result_export item=data}
-                        {$tatol= $tatol+ $data.money}
+                        {foreach from=$exports item=data}
+                        {$tatol= $tatol+ $data.must_pay}
                         <tr>
                         <td>{$data.code}</td>
-                        <td>{$data.customer}</td>
-                        <td class="text-right">{$data.money|number_format} đ</td>
-                        <td>{$data.dis}</td>
+                        <td>{$data.customer_name}</td>
+                        <td class="text-right">{$data.must_pay|number_format} đ</td>
+                        <td>{$data.description}</td>
                         </tr>
                         {/foreach}
-                        <tr><td colspan="2"> </td><td class="text-right"><b>Tổng bán: {$tatol|number_format} đ</b></td><td></td></tr>
+                        <tr><td colspan="2"> </td><td class="text-right"><b>Tổng: {$tatol|number_format} đ</b></td><td></td></tr>
                         </tbody>
                 </table>
             </div>
@@ -289,7 +289,7 @@
        function UpdateDate()
         {
              var filter = $("#select_export").val();
-             var url = "./?mod=Account&site=profile";
+             var url = "./admin?mc=user&site=profile";
              url += "&date=" + filter;
              window.location.href = url;
         }

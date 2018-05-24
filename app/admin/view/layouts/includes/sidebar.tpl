@@ -1,7 +1,7 @@
 <div class="left_col scroll-view">
 
 	<div class="navbar nav_title" style="border: 0;">
-		<a href="./" class="site_title"><i class="fa fa-laptop"></i><span> MTD - Quản lý bán hàng</span></a>
+		<a href="./admin" class="site_title"><i class="fa fa-laptop"></i><span> MTD - Quản lý bán hàng</span></a>
 	</div>
 	<div class="clearfix"></div>
 	<br />

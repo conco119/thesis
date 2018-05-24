@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-18 18:58:09
+/* Smarty version 3.1.30, created on 2018-05-24 20:50:59
   from "/Users/mtd/Sites/htaccess/app/admin/view/product/index.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5afebfd167af10_83910536',
+  'unifunc' => 'content_5b06c343461603_86808774',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '11e2da0f070331b568354ebe1ee07d9ee7fe64fa' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/product/index.tpl',
-      1 => 1526644687,
+      1 => 1527169855,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5afebfd167af10_83910536 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b06c343461603_86808774 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="">
     <div class="row">
@@ -44,10 +44,8 @@ function content_5afebfd167af10_83910536 (Smarty_Internal_Template $_smarty_tpl)
                         </div>
                         <button id="search_btn" type="button" class="btn btn-primary left" onclick="filter();"><i class="fa fa-search"></i></button>
 
-                        
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#UpdateForm" onclick="LoadDataForForm(0);"><i class="fa fa-pencil"></i> Thêm mới</button>
-                        
-                        
+
                         <div class="clearfix"></div>
                     </div>
                     <!-- start project list -->
@@ -55,9 +53,10 @@ function content_5afebfd167af10_83910536 (Smarty_Internal_Template $_smarty_tpl)
                         <table class="table table-striped table-hover table-bordered">
                             <thead>
                                 <tr>
+                                    <th>Mã sản phẩm</th>
                                     <th>Tên Sản phẩm</th>
                                     <th>Thuộc danh mục</th>
-									<th class="text-right">Giá</th>
+									<th class="text-right">Giá bán</th>
                                     <th class="text-right">Nhập</th>
                                     <th class="text-right">Xuất</th>
                                     <th class="text-center">Tồn kho</th>
@@ -76,14 +75,12 @@ foreach ($_from as $_smarty_tpl->tpl_vars['data']->value) {
                                     <tr id="field<?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
 ">
                                         <td>
+											<?php echo $_smarty_tpl->tpl_vars['data']->value['code'];?>
+
+                                        </td>
+                                        <td>
                                         	<?php echo $_smarty_tpl->tpl_vars['data']->value['name'];?>
-<br />
-                                        	<a href="#" title="Click để cập nhật mã sản phẩm" data-toggle="modal" data-target="#UpdateBarcode" onclick="LoadBarcode(<?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
-);">
-                                        		<small><i class="fa fa-pencil"></i> <span id="Code<?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
-"><?php echo $_smarty_tpl->tpl_vars['data']->value['code'];?>
-</span></small>
-                                        	</a>
+
                                         </td>
                                         <td><?php echo $_smarty_tpl->tpl_vars['data']->value['category_id']['name'];?>
 </td>
@@ -102,7 +99,9 @@ foreach ($_from as $_smarty_tpl->tpl_vars['data']->value) {
 "><?php echo $_smarty_tpl->tpl_vars['data']->value['status'];?>
 </td>
                                         <td class="text-right" width="15%">
-											<a href="?mod=product&site=detail&id=<?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
+											<a href='./admin?mc=product&site=imagepost&id=<?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
+'><button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#UploadImageProduct" title="Hình ảnh sản phẩm"><i class="fa fa-image"></i></button><a/>
+											<a href="./admin?mc=product&site=detail&id=<?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
 " class="btn btn btn-success" title="Chi tiết nhập xuất"><i class="fa fa-search-plus"></i></a>
                                             <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#UpdateForm" title="Sửa thông tin sản phẩm" onclick="LoadDataForForm(<?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
 );"><i class="fa fa-pencil"></i></button>
@@ -122,7 +121,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 </td>
 								<td class="text-right"><?php echo $_smarty_tpl->tpl_vars['out']->value['number_ex'];?>
 </td>
-								<td class="text-right"><?php echo $_smarty_tpl->tpl_vars['out']->value['number_ex']-$_smarty_tpl->tpl_vars['out']->value['number_ex'];?>
+								<td class="text-right"><?php echo $_smarty_tpl->tpl_vars['out']->value['number_im']-$_smarty_tpl->tpl_vars['out']->value['number_ex'];?>
 </td>
 								<td class="text-right"><?php echo number_format($_smarty_tpl->tpl_vars['out']->value['total']);?>
  đ</td>
@@ -165,7 +164,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 </div>
 
 <!-- Modal Delete -->
-<div class="modal fade" id="DeleteFormAll">
+<div class="modal fade" id="UploadImageProduct">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -242,7 +241,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 							<input type="text" name="name" required="required" class="form-control" placeholder="Name...">
 						</div>
 					</div>
-					<?php if ($_smarty_tpl->tpl_vars['arg']->value['setting']['use_trademark'] == 1) {?>
+
 					<div class="form-group">
 						<label class="control-label col-md-2 col-sm-2 col-xs-12">Thương hiệu</label>
 						<div class="col-md-6 col-sm-6 col-xs-12">
@@ -254,36 +253,31 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
                             </button>
                         </div>
 					</div>
-					<?php }?>
-					<?php if ($_smarty_tpl->tpl_vars['arg']->value['setting']['use_origin'] == 1) {?>
+
 					<div class="form-group">
-						<label class="control-label col-md-2 col-sm-2 col-xs-12">Xuất xứ</label>
-						<div class="col-md-6 col-sm-6 col-xs-12">
-							<select class="form-control" name="origin_id" onchange="AddIdOrigin(this.value);"></select>
-						</div>
-                        <div class="col-md-1 col-sm-1 col-xs-12">
-                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#UpdateOrigin" onclick="UpdateOrigin(0);">
-                                <i class="fa fa-pencil"></i>
-                            </button>
-                        </div>
-					</div>
-					<?php }?>
-					<div class="form-inline">
 						<label class="control-label col-md-2 col-sm-2 col-xs-12">Đơn vị</label>
-						<select name="unit_id" class="form-control" required></select>
-						
-						
-						
+						<div class="col-md-2 col-sm-4 col-xs-12">
+							<select name="unit_id" class="form-control" required></select>
+						</div>
 					</div>
-					<div class="form-inline">
+
+					<div class="form-group">
+						<label class="control-label col-md-2 col-sm-2 col-xs-12">Khuyến mại</label>
+						<div class="col-md-9 col-sm-9 col-xs-12">
+							<div class="checkbox">
+								<label> <input type="checkbox" name="is_discount" onchange='DiscountChange()'></label>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
 						<label class="control-label col-md-2 col-sm-2 col-xs-12">Chiết khấu</label>
-						<select name="discount_type" class="form-control" required></select>
-						<div class="input-group" style="margin-bottom: 0px;width: 120px">
+						<div class="col-md-3 col-sm-4 col-xs-12">
+							<select name="discount_type" class="form-control" required></select>
+						</div>
+						<div class="col-md-6 col-sm-8 col-xs-12">
 							<input name='discount' id="percent" class="form-control prod-price" placeholder="chiết khấu" aria-describedby="basic-addon2" type="number">
 						</div>
-						
-						
-						
 					</div>
 					<br>
 					<div class="form-group" >
@@ -294,9 +288,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
                         <div class="col-md-2 col-sm-4 col-xs-12">
                             <input type="text" name="price" class="form-control"  oninput="SetMoney(this);" placeholder="Giá bán...">
                         </div>
-                        <div class="col-md-2 col-sm-4 col-xs-12">
-                            <input type="text" name="price_sale" class="form-control" oninput="SetMoney(this);" placeholder="Bán buôn...">
-                        </div>
+                        
 					</div>
 					<div class="form-group">
 						<label class="control-label col-md-2 col-sm-2 col-xs-12">Mô tả thêm</label>
@@ -309,12 +301,11 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 						<div class="col-md-2 col-sm-6 col-xs-12">
 							<input type="number" min="1" class="form-control" name="number_warning">
 						</div>
-						<?php if ($_smarty_tpl->tpl_vars['arg']->value['setting']['use_warranty'] == 1) {?> <label
-							class="control-label col-md-2 col-sm-2 col-xs-12">Bảo hành</label>
+						<label class="control-label col-md-2 col-sm-2 col-xs-12">Bảo hành</label>
 						<div class="col-md-2 col-sm-2 col-xs-12">
 							<input type="number" min="0" class="form-control" name="warranty" value="12">
 						</div>
-						<label class="control-label col-md-1 col-sm-1 col-xs-12">(tháng)</label><?php }?>
+						<label class="control-label col-md-1 col-sm-1 col-xs-12">(tháng)</label>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-md-2 col-sm-2 col-xs-12">Trạng thái</label>
@@ -342,6 +333,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 <?php echo '<script'; ?>
 >
 
+
+
 function activeStatus(table, id) {
 	let prefix_admin = $("#UpdateForm input[name=prefix_admin]").val();
     $.post(`${prefix_admin}mc=product&site=ajax_active`, {'table': table, 'id': id}).done(function (data) {
@@ -353,9 +346,7 @@ function activeStatus(table, id) {
 }
 
 
-$(document).ready(function () {
-    checkShowItemUnits();
-});
+
 function checksubmit() {
 	let prefix_admin = $("#UpdateForm input[name=prefix_admin]").val();
 	var code= $("#UpdateForm input[name=code]").val();
@@ -375,25 +366,10 @@ function checksubmit() {
 function change_code() {
 	$('#errorcode').hide();
 }
-function setprintprice() {
-	var arr = [];
-	$(".item_checked").each(function () {
-		if ($(this).is(':checked')) {
-			var value = $(this).val();
-			arr.push(value);
-		}
-	});
-	var str = arr.toString();
-	$("#PrintContent").attr("src", print+'&id='+str);
-	return false;
-}
+
 $(document).on('hidden.bs.modal', '.modal', function () {
 	$('.modal:visible').length && $(document.body).addClass('modal-open');
 });
-//function set_price_import(value) {
-//
-//
-//}
 
 
 function AjaxSaveCategory(){
@@ -438,32 +414,6 @@ function UpdateCategory(id) {
 	});
 }
 
-function LoadBarcode(id){
-	var $this = $("#UpdateBarcode input");
-	$($this).attr('onchange', 'UpdateBarcode('+id+', this.value);').focus();
-	$('#UpdateBarcode').on('shown.bs.modal', function () {
-	    $('#UpdateBarcode input').focus();
-	})
-}
-
-function UpdateBarcode(id, code){
-    $.post("?mod=product&site=ajax_update_barcode", {'id': id, 'code':code}).done(function (data) {
-		$('#UpdateBarcode input').val('');
-    	if(data==0){
-    		return false;
-    	}
-    	else if(data == 1){
-    		$('#UpdateBarcode').modal('hide');
-    		$("#Code"+id).html(code);
-    		return false;
-    	}
-    	else{
-    		alert(data);
-    		return false;
-    	}
-    });
-
-}
 
 $('#key, #category').keypress(function( event ){
       if ( event.which == 13 ) {
@@ -471,68 +421,7 @@ $('#key, #category').keypress(function( event ){
       }
 });
 
-function ShowUnit(obj){
-    var sts = $(obj).val();
-	var min_big = $("#number_nomal").val();
-    if(sts == 1){
-         if($("#large-unit").hasClass('hidden')){
-            $("#large-unit").removeClass('hidden');
-			$("#select_nomal").attr('required','');
-			 $("#number_nomal").attr('required','');
-			 $("#number_nomal").attr('min','1');
-        }
-		 else{$("#small-units").removeClass('hidden');
-			 $("#number_big").attr('required','');
-			$("#select_big").attr('required','');
-			 $("#number_big").attr('min',min_big);
-		 }
-    }else if(sts == 0){
-        if($("#large-unit").hasClass('hidden')){
-            $("#large-unit").removeClass('hidden');
-			$("#number_nomal").attr('required','');
-			$("#select_nomal").attr('required','');
-			$("#number_nomal").attr('min','1');
-        }else{
-            $("#small-units").removeClass('hidden');
-			$("#number_big").attr('required','');
-			$("#select_big").attr('required','');
-			$("#number_big").attr('min',min_big);
-        }
-    }
 
-}
-
-function showItem(obj) {
-    var name = $(obj).attr('name');
-    var value = $(obj).val();
-    if (value == 0 || value == null) {
-        $("#" + name).hide();
-    } else {
-        var unit_nomal = $("select[name=unit_nomal]").val();
-        if (name == 'unit_big' && (unit_nomal == 0 || unit_nomal == null)) {
-            alert("Vui lòng chọn đơn vị vừa trước !");
-            $(obj).val(0)
-            return false;
-        }
-        $("#" + name).show();
-    }
-    //console.log(name);
-}
-
-function checkShowItemUnits() {
-    var unit_nomal = $("select[name=unit_nomal]").val();
-    var unit_big = $("select[name=unit_big]").val();
-    console.log(unit_nomal);
-    if (unit_nomal == 0 || unit_nomal == null)
-        $("#unit_nomal").hide();
-    else
-        $("#unit_nomal").show();
-
-    if (unit_big == 0 || unit_big == null)
-        $("#unit_big").hide();
-    else
-        $("#unit_big").show();
-}
 
 function filter() {
     var key = $("#key").val();
@@ -575,7 +464,18 @@ function LoadDataForForm(id) {
             $("#UpdateForm input[name=number_warning]").val(data.number_warning);
             $("#UpdateForm input[name=warranty]").val(data.warranty);
             $("#UpdateForm textarea[name=description]").val(data.description);
-
+			if(data.is_discount == 1)
+			{
+				$("#UpdateForm input[name=is_discount]").prop('checked', true);
+				$("#UpdateForm select[name=discount_type]").prop('disabled', false);
+				$("#UpdateForm input[name=discount]").prop('disabled', false);
+			}
+			else
+			{
+				$("#UpdateForm input[name=is_discount]").prop('checked', false);
+				$("#UpdateForm select[name=discount_type]").prop('disabled', true);
+				$("#UpdateForm input[name=discount]").prop('disabled', true);
+			}
             if (data.status == '1') {
                 $("#UpdateForm input[name=status]").attr("checked", "checked");
                 $("#UpdateForm input[name=status]").prop('checked', true);
@@ -593,170 +493,24 @@ function LoadDataForForm(id) {
     });
 }
 
-function HandleCopy() {
-    var arr = [];
-    $(".item_checked").each(function () {
-        if ($(this).is(':checked')) {
-            var value = $(this).val();
-            arr.push(value);
-        }
-    });
-    if (arr.length < 1) {
-        alert("Chọn mục xử lý.")
-        return false;
-    }
-    var str = arr.toString();
-    $.post("?mod=product&site=ajax_copy", {'id': str})
-            .done(function () {
-                alert("Sao chep thanh cong.");
-                location.reload();
-            });
-}
-function  LoadDeleteItemAll(table) {
-	$("#DeleteItemAll").attr("onclick", "HandleMultiDelete('" + table + "');");
+
+function DiscountChange(value)
+{
+	let is_checked = $("#UpdateForm input[name=is_discount]").is(':checked')
+	if(is_checked)
+	{
+		$("#UpdateForm select[name=discount_type]").prop('disabled', false);
+		$("#UpdateForm input[name=discount]").prop('disabled', false);
+	}
+	else
+	{
+		$("#UpdateForm select[name=discount_type]").prop('disabled', true);
+		$("#UpdateForm input[name=discount]").prop('disabled', true);
+	}
 
 }
 
-function HandleMultiDelete(table) {
-    var arr = [];
-    $(".item_checked").each(function () {
-        if ($(this).is(':checked')) {
-            var value = $(this).val();
-            arr.push(value);
-        }
-    });
-    if (arr.length < 1) {
-        alert("Chọn 1 mục để xử lý");
-        return false;
-    }
-    var str = arr.toString();
-    $.post("?mod=product&site=ajax_multi_delete", {'id': str}).done(function () {
-        location.reload();
-    });
 
-}
-	function UpdatePercent(value,id) {
-		$.post("?mod=product&site=ajax_update_percent", {'id': id,'value':value}).done(function (data) {
-			if(data==0){
-				alert('error');
-			}
-			else {
-				$('#price'+id).html(data);
-				$('propercent'+id).val(value);
-				alert('Thanh cong!');
-			}
-		});
-
-	}
-	/*add function update price*/
-
-	function UpdatePriceQty(value,type){
-		/*
-		price_import         |price         | price_sale
-		price_import_normal  |price_normal  | price_sale_normal
-		price_import_big	 |price_big	    | price_sale_big
-
-		*/
-
-		//name=unit_normal_number
-		if(type==2){
-
-			var price_im= $("input[name=price_import]").val().replace(/,/g,"");
-			var price = $("input[name=price]").val().replace(/,/g,"");
-			var price_import_normal = parseInt(price_im)*parseInt(value);
-
-			$("input[name=price_import_nomal]").val(price_import_normal);
-			var price_normal = parseInt(price)*parseInt(value);
-			//alert('Price normal:'+price_normal);
-			$("input[name=price_nomal]").val(price_normal);
-
-			//SetMoney($("input[name=price_import_nomal]"));
-
-			//SetMoney($("input[name=price_nomal]"));
-		}
-
-		if(type==3){
-			var price_import_nomal= $("input[name=price_import_nomal]").val().replace(/,/g,"");
-			var price_normal = $("input[name=price_nomal]").val().replace(/,/g,"");
-
-			var price_import_big = parseInt(price_import_nomal)*parseInt(value);
-			var price_big = parseInt(price_normal)*parseInt(value);
-			//alert('Price normal:'+price_normal);
-			$("input[name=price_big]").val(price_big);
-			$("input[name=price_import_big]").val(price_import_big);
-
-			//SetMoney($("input[name=price_import_nomal]"));
-			//SetMoney($("input[name=price_nomal]"));
-		}
-
-	}
-	/*end add*/
-
-	function UpdatePriceImport(value,type) {
-		if(type==1){
-			var price_ex= $("input[name=price]").val().replace(/,/g, "");
-			if(price_ex==""){
-				alert('Vui lòng nhập giá bán!');
-				$("#percent").val(0);
-				return false;
-			}
-			var price_im= parseInt(price_ex) - parseInt(price_ex)*parseInt(value)/100;
-			$("input[name=price_import]").val(price_im);
-			SetMoney($("input[name=price_import]"));
-		}
-		if(type==2){
-			var price_ex= $("input[name=price_nomal]").val().replace(/,/g, "");
-			if(price_ex==""){
-				alert('Vui lòng nhập giá bán!');
-				$("#percent_nomal").val(0);
-				return false;
-			}
-			var price_im= parseInt(price_ex) - parseInt(price_ex)*parseInt(value)/100;
-			$("input[name=price_import_nomal]").val(price_im);
-			SetMoney($("input[name=price_import_nomal]"));
-		}
-		if(type==3){
-			var price_ex= $("input[name=price_big]").val().replace(/,/g, "");
-			if(price_ex==""){
-				alert('Vui lòng nhập giá bán!');
-				$("#percent_big").val(0);
-				return false;
-			}
-			var price_im= parseInt(price_ex) - parseInt(price_ex)*parseInt(value)/100;
-			$("input[name=price_import_big]").val(price_im);
-			SetMoney($("input[name=price_import_big]"));
-		}
-	}
-	function SetPriceImport(value,type) {
-		value=value.replace(/,/g, "");
-		if(type==1){
-			var per= $('#percent').val();
-			if(per==""){
-				return false;
-			}
-			var price_im= parseInt(value) - parseInt(value)*parseInt(per)/100;
-			$("input[name=price_import]").val(price_im);
-			SetMoney($("input[name=price_import]"));
-		}
-		if(type==2){
-			var per= $('#percent_nomal').val();
-			if(per==""){
-				return false;
-			}
-			var price_im= parseInt(value) - parseInt(value)*parseInt(per)/100;
-			$("input[name=price_import_nomal]").val(price_im);
-			SetMoney($("input[name=price_import_nomal]"));
-		}
-		if(type==1){
-			var per= $('#percent_big').val();
-			if(per==""){
-				return false;
-			}
-			var price_im= parseInt(value) - parseInt(value)*parseInt(per)/100;
-			$("input[name=price_import_big]").val(price_im);
-			SetMoney($("input[name=price_import_big]"));
-		}
-	}
 
 <?php echo '</script'; ?>
 >
@@ -764,6 +518,8 @@ function HandleMultiDelete(table) {
 <?php echo '<script'; ?>
 >
 $(document).ready(function() {
+	$("#UpdateForm select[name=discount_type]").prop('disabled', true);
+	$("#UpdateForm input[name=discount]").prop('disabled', true);
 	if( "<?php echo $_smarty_tpl->tpl_vars['notification']->value['status'];?>
 " == "success" || "<?php echo $_smarty_tpl->tpl_vars['notification']->value['status'];?>
 " == "error")

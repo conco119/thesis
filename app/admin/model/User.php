@@ -232,6 +232,10 @@ class User extends Main
   }
 
   function profile(){
+    // searching
+    $date_export = isset($_GET['date']) ? intval($_GET["date"]) : 0;
+    $out['select_export'] = $this->helper->get_option(0, 'select_export', $date_export);
+
     $this->change_avatar();
     $this->delete_avatar();
     $this->change_info();
@@ -244,69 +248,34 @@ class User extends Main
     $user['birthday'] = $this->helper->get_user_birthday_select($user['birthday']);
     $user['gender'] = $this->helper->get_user_gender_select($user['gender']);
     $this->smarty->assign('result', $user);
-		// $this->dbo->connect();
-		// global $smarty, $login;
-		// $sql_where = "AND 1=1";
-
-		// $sql = "SELECT a.id,a.username,a.name,a.office_id,a.male,a.level,a.birthday,a.address,a.phone,a.email,a.position,a.group_id,a.image
-		// FROM users AS a
-		// WHERE a.id=$login";
-		// $result = $this->dbo->fetch_one_array($sql);
-		// $result['avatar'] = $this->user->get_avatar($result['image']);
-		// //echo $result['avatar'];
-
-		// $smarty->assign("result", $result);
-
-		// $date_export = isset($_GET['date']) ? intval($_GET["date"]) : 0;
-
-		// if($date_export != 0)
-		// {
-		// 	if($date_export ==1)
-		// 	{
-
-		// 		$time= time();
-		// 		$time = date("Y-m-d");
-		// 		$sql_where .= " AND b.date='".$time."'";
-		// 	}
-		// 	if($date_export ==2)
-		// 	{
-		// 		$sql_where .= " AND b.week= WEEKOFYEAR(CURDATE()) AND b.year= YEAR(CURDATE()) ";
-		// 	}
-		// 	if($date_export ==3 )
-		// 	{
-		// 		$sql_where .= " AND b.month= MONTH(CURDATE()) AND b.year= YEAR(CURDATE()) ";
-		// 	}
-
-		// }
-		// $out['select_export'] = $this->help->get_select_from_array($this->select_export,$date_export);
-
-		// $sql_export = "SELECT a.id,a.username,a.name,a.office_id,a.male,b.money,b.description as dis,c.name AS customer,a.level,a.birthday,a.address,a.phone,b.code,a.email,a.position,a.group_id,a.image
-		// FROM users AS a LEFT JOIN wh_export b ON a.id=b.creator
-		// LEFT JOIN customers c ON b.customer_id=c.id
-		// WHERE a.id=".$login." ".$sql_where;
-		// $paging = $this->paging->get_content($this->dbo->number_result_from_sql($sql), 10);
-		// $sql .= $paging['sql_add'];
-		// $smarty->assign('paging', $paging);
-    //     @$query_export = $this->dbo->query($sql_export);
-    //     while ($item = $this->dbo->fetch_array(@$query_export)) {
-		// 	$item['code'] = $this->help->get_code($item['id'], 'exp');
-    //         $result_export[] = $item;
-    //     }
-		// $smarty->assign("result_export", @$result_export);
+    //exports
+    $sql = "SELECT a.code, a.must_pay, a.description, c.name as customer_name
+            FROM exports a
+            LEFT JOIN customers c ON a.customer_id = c.id
+            LEFT JOIN users u ON u.id = {$this->currentUser['id']}
+            WHERE 1=1";
+        if($date_export != 0)
+        {
+          switch($date_export)
+          {
+            case 1:
+              $sql .= " AND a.date = CURDATE()";
+              break;
+            case 2:
+              $sql .= " AND WEEK(a.date) = WEEK(CURDATE()) AND YEAR(a.date) = YEAR(CURDATE())";
+              break;
+            case 3:
+              $sql .= " AND MONTH(a.date) = MONTH(CURDATE()) AND YEAR(a.date) = YEAR(CURDATE())";
+              break;
+          }
+        }
+    $paging = $this->paging->get_content($this->pdo->count_rows($sql), 10);
+    $sql .= $paging['sql_add'];
+    $exports = $this->pdo->fetch_all($sql);
 
 
-		// $out['gender'] = $this->get_user_gender($result['male']);
-		// $out['birthday'] = $this->get_birthday_select($result['birthday']);
-		// $smarty->assign('out', $out);
-
-
-
-
-
-
-
-
-		// $this->dbo->close();
+    $this->smarty->assign('out', $out);
+    $this->smarty->assign('exports', $exports);
 		$this->smarty->display(DEFAULT_LAYOUT);
   }
   // end profile function

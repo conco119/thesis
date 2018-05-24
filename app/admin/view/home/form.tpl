@@ -5,7 +5,7 @@
                 <div class="icon">
                     <i class="fa fa-file blue"></i>
                 </div>
-                <div class="count">{$statis1.export}</div>
+                <div class="count">{$statis_1.exports}</div>
                 <h3>Hóa đơn bán</h3>
                 <p>Tổng số hóa đơn bán hàng trong tháng.</p>
             </div>

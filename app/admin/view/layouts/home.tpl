@@ -59,7 +59,7 @@
 
 				<br />
 				<!-- site content -->
-				{include file=$content}
+				{include file=$tpl_file}
 				<!-- /site content -->
 
 				<!-- footer content -->
@@ -93,7 +93,7 @@
 				return false;
 			});
 		}, 900000);
-		
+
 		var online = navigator.onLine;
 		if(online==true){
 			//setInterval(function(){

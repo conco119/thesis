@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-11 09:14:14
+/* Smarty version 3.1.30, created on 2018-05-24 19:31:54
   from "/Users/mtd/Sites/htaccess/app/admin/view/user/profile.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5af4fc76ed5a23_12203095',
+  'unifunc' => 'content_5b06b0ba297f76_40998705',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '445ee5ddc625fb1d933c2f87d0630c6c5dc4848b' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/user/profile.tpl',
-      1 => 1526004848,
+      1 => 1527165113,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5af4fc76ed5a23_12203095 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b06b0ba297f76_40998705 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 
 <div class="">
@@ -171,7 +171,7 @@ function content_5af4fc76ed5a23_12203095 (Smarty_Internal_Template $_smarty_tpl)
                         <tr>
                             <th>Mã hóa đơn</th>
                             <th>Khách hàng</th>
-                            <th class="text-right">Tiền thanh toán</th>
+                            <th class="text-right">Giá trị</th>
                             <th class="text-center">Mô tả</th>
                         </tr>
                     </thead>
@@ -179,20 +179,20 @@ function content_5af4fc76ed5a23_12203095 (Smarty_Internal_Template $_smarty_tpl)
                         <?php $_smarty_tpl->_assignInScope('tatol', 0);
 ?>
                         <?php
-$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['result_export']->value, 'data');
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['exports']->value, 'data');
 if ($_from !== null) {
 foreach ($_from as $_smarty_tpl->tpl_vars['data']->value) {
 ?>
-                        <?php $_smarty_tpl->_assignInScope('tatol', $_smarty_tpl->tpl_vars['tatol']->value+$_smarty_tpl->tpl_vars['data']->value['money']);
+                        <?php $_smarty_tpl->_assignInScope('tatol', $_smarty_tpl->tpl_vars['tatol']->value+$_smarty_tpl->tpl_vars['data']->value['must_pay']);
 ?>
                         <tr>
                         <td><?php echo $_smarty_tpl->tpl_vars['data']->value['code'];?>
 </td>
-                        <td><?php echo $_smarty_tpl->tpl_vars['data']->value['customer'];?>
+                        <td><?php echo $_smarty_tpl->tpl_vars['data']->value['customer_name'];?>
 </td>
-                        <td class="text-right"><?php echo number_format($_smarty_tpl->tpl_vars['data']->value['money']);?>
+                        <td class="text-right"><?php echo number_format($_smarty_tpl->tpl_vars['data']->value['must_pay']);?>
  đ</td>
-                        <td><?php echo $_smarty_tpl->tpl_vars['data']->value['dis'];?>
+                        <td><?php echo $_smarty_tpl->tpl_vars['data']->value['description'];?>
 </td>
                         </tr>
                         <?php
@@ -201,7 +201,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['data']->value) {
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 ?>
 
-                        <tr><td colspan="2"> </td><td class="text-right"><b>Tổng bán: <?php echo number_format($_smarty_tpl->tpl_vars['tatol']->value);?>
+                        <tr><td colspan="2"> </td><td class="text-right"><b>Tổng: <?php echo number_format($_smarty_tpl->tpl_vars['tatol']->value);?>
  đ</b></td><td></td></tr>
                         </tbody>
                 </table>
@@ -353,7 +353,7 @@ js/cropping/avatar.js"><?php echo '</script'; ?>
        function UpdateDate()
         {
              var filter = $("#select_export").val();
-             var url = "./?mod=Account&site=profile";
+             var url = "./admin?mc=user&site=profile";
              url += "&date=" + filter;
              window.location.href = url;
         }

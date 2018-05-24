@@ -16,10 +16,16 @@ class Product extends Main
         $this->create();
         $this->edit();
         //query customer
-        $sql = "SELECT * FROM {$this->table}";
+        $sql = "SELECT a.*,
+                (SELECT sum(number_count) FROM import_products i WHERE i.product_id = a.id) AS imported,
+                (SELECT sum(number_count) FROM export_products e WHERE e.product_id = a.id ) AS exported
+        FROM {$this->table} a";
         $paging = $this->paging->get_content($this->pdo->count_rows($sql), 10);
         $sql .= $paging['sql_add'];
         $products = $this->pdo->fetch_all($sql);
+        $number_im = 0;
+        $number_ex = 0;
+        $total = 0;
         foreach($products as $key => $product)
         {
             $products[$key]['status'] = $this->helper->help_get_status($product['status'], $this->table, $product['id']);
@@ -27,8 +33,13 @@ class Product extends Main
             $products[$key]['category_id'] = $this->ProductHelper->help_get_category($product['category_id']);
             $products[$key]['updated_at'] = gmdate('d.m.Y', $product['updated_at'] + 7 * 3600);
             $products[$key]['created_at'] = gmdate('d.m.Y', $product['created_at'] + 7 * 3600);
+            $number_im += $product['imported'];
+            $number_ex += $product['exported'];
+            $total += ($product['imported'] - $product['exported']) * $product['price_import'];
         }
-
+        $out['number_im'] = $number_im;
+        $out['number_ex'] = $number_ex;
+        $out['total'] = $total;
         //query customer group
         // $sql = "SELECT * FROM customer_groups";
         // $customer_groups = $this->pdo->fetch_all($sql);
@@ -36,6 +47,7 @@ class Product extends Main
         // pre($customers);
         // return;
         //smarty
+        $this->smarty->assign('out', $out);
         $this->smarty->assign('paging', $paging);
         $this->smarty->assign('result', $products);
         $this->smarty->display(DEFAULT_LAYOUT);
@@ -51,8 +63,9 @@ class Product extends Main
             $data['category_id'] = $_POST['category_id'];
             $data['trademark_id'] = $_POST['trademark_id'];
             $data['unit_id'] = $_POST['unit_id'];
-            $data['discount_type'] = $_POST['discount_type'];
-            $data['discount'] = $_POST['discount'];
+            $data['is_discount'] = isset($_POST['is_discount']) ? 1 : 0;
+            $data['discount_type'] = isset($_POST['discount_type']) ? $_POST['discount_type'] : 1;
+            $data['discount'] = isset($_POST['discount']) ? $_POST['discount'] : 0;
             $data['price_import'] = $this->dstring->convert_price_to_int($_POST['price_import']);
             $data['price'] = $this->dstring->convert_price_to_int($_POST['price']);
             $data['price_sale'] = $this->dstring->convert_price_to_int($_POST['price_sale']);
@@ -96,8 +109,9 @@ class Product extends Main
             $data['category_id'] = $_POST['category_id'];
             $data['trademark_id'] = $_POST['trademark_id'];
             $data['unit_id'] = $_POST['unit_id'];
-            $data['discount_type'] = $_POST['discount_type'];
-            $data['discount'] = $_POST['discount'];
+            $data['is_discount'] = isset($_POST['is_discount']) ? 1 : 0;
+            $data['discount_type'] = isset($_POST['discount_type']) ? $_POST['discount_type'] : 1;
+            $data['discount'] = isset($_POST['discount']) ? $_POST['discount'] : 0;
             $data['price_import'] = $this->dstring->convert_price_to_int($_POST['price_import']);
             $data['price'] = $this->dstring->convert_price_to_int($_POST['price']);
             $data['price_sale'] = $this->dstring->convert_price_to_int($_POST['price_sale']);
@@ -233,5 +247,56 @@ class Product extends Main
             $this->pdo->close();
             echo "thanh cong r";
         }
+    }
+
+    //chi tiết sản phẩm cho hóa đơn
+    function detail()
+    {
+
+        $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+        $detail_export = []; //smarty assign
+        $detail_import = []; //smarty assign
+        $product_info = $this->pdo->fetch_one("SELECT * FROM products WHERE id= $id");
+
+        // detail imports
+        $sql = "SELECT a.id, a.code, a.date, b.number_count, b.price_import , u.name as unit_name, p.name as product_name
+                FROM imports a
+                LEFT JOIN import_products b ON b.import_id = a.id
+                LEFT JOIN products p ON p.id = b.product_id
+                LEFT JOIN product_units u ON u.id = p.unit_id
+                WHERE p.id=$id";
+        $detail_import = $this->pdo->fetch_all($sql);
+        foreach($detail_import as $k => $item)
+        {
+            $detail_import[$k]['date'] = gmdate('d-m-Y', strtotime($item['date']) +7 *3600);
+            $detail_import[$k]['total'] = $this->dstring->get_price($item['number_count'] * $item['price_import']);
+        }
+        //detail exports
+        $sql = "SELECT a.id, a.code, a.date, b.number_count, b.price , u.name as unit_name, p.name as product_name
+                FROM exports a
+                LEFT JOIN export_products b ON b.export_id = a.id
+                LEFT JOIN products p ON p.id = b.product_id
+                LEFT JOIN product_units u ON u.id = p.unit_id
+                WHERE p.id=$id";
+        $detail_export = $this->pdo->fetch_all($sql);
+        foreach($detail_export as $k => $item)
+        {
+            $detail_export[$k]['date'] = gmdate('d-m-Y', strtotime($item['date']) +7 *3600);
+            $detail_export[$k]['total'] = $this->dstring->get_price($item['number_count'] * $item['price']);
+        }
+
+        $this->smarty->assign('detail_import', $detail_import);
+        $this->smarty->assign('detail_export', $detail_export);
+        $this->smarty->assign('product_info', $product_info);
+        $this->smarty->display(DEFAULT_LAYOUT);
+    }
+
+    function imagepost()
+    {
+        $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+        $product_info = $this->pdo->fetch_one("SELECT * FROM products WHERE id= $id");
+        $this->smarty->assign('product_info', $product_info);
+        $this->smarty->assign('id', $id);
+        $this->smarty->display(DEFAULT_LAYOUT);
     }
 }

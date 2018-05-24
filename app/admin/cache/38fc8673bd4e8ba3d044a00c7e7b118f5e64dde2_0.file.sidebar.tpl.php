@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-23 19:13:04
+/* Smarty version 3.1.30, created on 2018-05-24 11:37:17
   from "/Users/mtd/Sites/htaccess/app/admin/view/layouts/includes/sidebar.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b055ad0c4f588_95519435',
+  'unifunc' => 'content_5b06417db87772_60649013',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '38fc8673bd4e8ba3d044a00c7e7b118f5e64dde2' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/layouts/includes/sidebar.tpl',
-      1 => 1527077575,
+      1 => 1527136635,
       2 => 'file',
     ),
   ),
@@ -20,12 +20,12 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b055ad0c4f588_95519435 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b06417db87772_60649013 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="left_col scroll-view">
 
 	<div class="navbar nav_title" style="border: 0;">
-		<a href="./" class="site_title"><i class="fa fa-laptop"></i><span> MTD - Quản lý bán hàng</span></a>
+		<a href="./admin" class="site_title"><i class="fa fa-laptop"></i><span> MTD - Quản lý bán hàng</span></a>
 	</div>
 	<div class="clearfix"></div>
 	<br />
