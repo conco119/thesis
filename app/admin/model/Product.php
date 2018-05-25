@@ -293,10 +293,78 @@ class Product extends Main
 
     function imagepost()
     {
+        $this->change_product_image();
         $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
         $product_info = $this->pdo->fetch_one("SELECT * FROM products WHERE id= $id");
+        //image
+        $sql = "SELECT *, m.id as media_id, m.name, m.path
+                FROM media_product p
+                LEFT JOIN media m ON m.id = p.media_id
+                WHERE p.product_id = $id";
+        $images = $this->pdo->fetch_all($sql);
+        $this->smarty->assign('images', $images);
         $this->smarty->assign('product_info', $product_info);
         $this->smarty->assign('id', $id);
         $this->smarty->display(DEFAULT_LAYOUT);
     }
+    public function change_product_image()
+    {
+
+      if(isset($_POST['avatar_change']))
+      {
+
+        $data = array();
+        $avatar = new Zebra();
+        if ( isset($_FILES['avatar_file']) && $this->helper->check_type($_FILES['avatar_file']['type']) )
+        {
+          // echo "ok";
+          // die();
+          $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+          $product = $this->pdo->fetch_one("SELECT * FROM products WHERE id= $id");
+          $avatar->source_path = $_FILES['avatar_file']['tmp_name'];
+          $upload_file_name = $this->ProductHelper->get_image_name_upload_from_dollar_files($product['code'], $_FILES['avatar_file']['type']);
+          $avatar->target_path = $this->arg['product_folder_path'] . "/" . $upload_file_name;
+          $data['name'] = $upload_file_name;
+          $data['path'] = $this->arg['product_folder_path'];
+          $avatar->jpeg_quality = 100;
+          $avatar->preserve_aspect_ratio = true;
+          if($_FILES['avatar_file']['type'] == "image/gif")
+            move_uploaded_file($_FILES['avatar_file']['tmp_name'], $avatar->target_path);
+          else
+            $avatar->crop($_POST['avatar_x'], $_POST['avatar_y'], $_POST['avatar_width']+$_POST['avatar_x'], $_POST['avatar_height']+$_POST['avatar_y']);
+          $media_id = $this->pdo->insert('media', $data);
+          unset($data);
+          $data['product_id'] = $id;
+          $data['media_id'] = $media_id;
+          $media_id = $this->pdo->insert('media_product', $data);
+          lib_redirect();
+        }
+      }
+    }
+
+    public function ajax_delete_image()
+    {
+
+        if(isset($_POST['media_product_id']) && isset($_POST['media_id']))
+        {
+            $media = $this->pdo->fetch_all("SELECT * FROM media WHERE id=". $_POST['media_id']);
+            // pre( $_POST);
+            // die();
+            $this->pdo->query("DELETE FROM media WHERE id=".$_POST['media_id']);
+            $this->pdo->query("DELETE FROM media_product WHERE id=".$_POST['media_product_id']);
+            unlink($this->arg['product_folder_path'] . "/" . $media[0]['name'] );
+            $sql = "SELECT *, m.id as media_id, m.name, m.path,'{$this->arg['product_folder_link']}' as link
+            FROM media_product p
+            LEFT JOIN media m ON m.id = p.media_id
+            WHERE p.product_id =" . $_POST['product_id'];
+            $images = $this->pdo->fetch_all($sql);
+
+            echo json_encode($images);
+            die();
+        }
+        else
+            echo 0;
+            die();
+    }
+    // end of change avatar
 }

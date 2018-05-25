@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-24 20:50:59
+/* Smarty version 3.1.30, created on 2018-05-25 17:38:01
   from "/Users/mtd/Sites/htaccess/app/admin/view/product/index.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b06c343461603_86808774',
+  'unifunc' => 'content_5b07e7896387f2_51252652',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '11e2da0f070331b568354ebe1ee07d9ee7fe64fa' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/product/index.tpl',
-      1 => 1527169855,
+      1 => 1527244677,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b06c343461603_86808774 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b07e7896387f2_51252652 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="">
     <div class="row">
@@ -100,7 +100,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['data']->value) {
 </td>
                                         <td class="text-right" width="15%">
 											<a href='./admin?mc=product&site=imagepost&id=<?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
-'><button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#UploadImageProduct" title="Hình ảnh sản phẩm"><i class="fa fa-image"></i></button><a/>
+'><button type="button" class="btn btn-default btn-xs" title="Hình ảnh sản phẩm"><i class="fa fa-image"></i></button><a/>
 											<a href="./admin?mc=product&site=detail&id=<?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
 " class="btn btn btn-success" title="Chi tiết nhập xuất"><i class="fa fa-search-plus"></i></a>
                                             <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#UpdateForm" title="Sửa thông tin sản phẩm" onclick="LoadDataForForm(<?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
@@ -163,22 +163,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
     </div>
 </div>
 
-<!-- Modal Delete -->
-<div class="modal fade" id="UploadImageProduct">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Xóa mục này</h4>
-            </div>
-            <div class="modal-body">Bạn chắc chắn muốn xóa mục này chứ?</div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Hủy bỏ</button>
-                <button type="button" class="btn btn-danger" onclick="LoadDeleteItem();" id="DeleteItemAll">Xóa</button>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 <!-- Modal Delete All -->
 <div class="modal fade" id="DeleteForm">

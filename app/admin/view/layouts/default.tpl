@@ -22,6 +22,9 @@
     <script src="{$arg.stylesheet}js/jquery.min.js"></script>
     <script src="{$arg.stylesheet}js/notify/pnotify.core.js"></script>
     <script src="{$arg.stylesheet}js/notify/pnotify.buttons.js"></script>
+    <!-- image product -->
+    <link  href="{$arg.stylesheet}css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
 </head>
 
 <body class="nav-md">

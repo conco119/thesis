@@ -12,7 +12,7 @@ class UserHelper extends HelpAbstract
             3 => "EM"
         ];
         $this->prefix_img_name = 'mtd-avatar';
-        $this->true_type = array("image/gif", "image/jpg", "image/jpeg", "image/png");
+
         $this->avatar_folder = "../upload/user/avatars/";
         $this->default_avatar = 'user-default.png';
     }
@@ -71,11 +71,6 @@ class UserHelper extends HelpAbstract
     function get_image_name_upload_from_extension($ext)
     {
         return $this->prefix_img_name . time() . "." . $ext;
-    }
-
-    function check_type($type)
-    {
-        return in_array($type, $this->true_type);
     }
 
     function get_avatar_path($image_folder_path, $image=""){

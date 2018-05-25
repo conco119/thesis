@@ -50,6 +50,8 @@ class Main implements Init
             'stylesheet' => DOMAIN . "app/webroot/",
             'image_folder_link' => DOMAIN . 'upload/image/',
             'image_folder_path' => ROOT_PATH . "/upload/image/",
+            'product_folder_link' => DOMAIN . 'upload/product',
+            'product_folder_path' => ROOT_PATH . "/upload/product",
             'today' => gmdate("d-m-Y", time() + 7 * 3600),
             'this_month' => gmdate("m", time() + 7 * 3600),
             'this_year' => gmdate("Y", time() + 7 * 3600),

@@ -22,4 +22,13 @@ class ProductHelper extends HelpAbstract
         return $this->code_prefix . ($rows['id'] +1);
     }
 
+    // tên file =  code sản phẩm + mtd + time
+    function get_image_name_upload_from_dollar_files($code, $type)
+    {
+        $ext_arr = explode("/", $type);
+		$ext = end($ext_arr);
+		return $code . '_mtd' . time() . "." . $ext;
+    }
+
+
 }

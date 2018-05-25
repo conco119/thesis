@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-24 11:37:40
+/* Smarty version 3.1.30, created on 2018-05-25 14:04:47
   from "/Users/mtd/Sites/htaccess/app/admin/view/layouts/home.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b0641947be9b7_10801894',
+  'unifunc' => 'content_5b07b58fde15a6_00506819',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '9bff48db593dc130ce216a85e913982045d15708' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/layouts/home.tpl',
-      1 => 1527136658,
+      1 => 1527228058,
       2 => 'file',
     ),
   ),
@@ -23,7 +23,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:includes/footer.tpl' => 1,
   ),
 ),false)) {
-function content_5b0641947be9b7_10801894 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b07b58fde15a6_00506819 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,7 +38,7 @@ function content_5b0641947be9b7_10801894 (Smarty_Internal_Template $_smarty_tpl)
 </title>
 <base href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['domain'];?>
 ">
-<link href="./hlstar.ico" rel="shortcut icon">
+<link href="./mtd.ico" rel="shortcut icon">
 
 <!-- Bootstrap core CSS -->
 <link href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['stylesheet'];?>
@@ -157,23 +157,6 @@ js/custom.js"><?php echo '</script'; ?>
 
 	<?php echo '<script'; ?>
  type="text/javascript">
-		setInterval(function(){
-			$.post('?mod=install&site=ajax_get_time_check_install').done(function(data){
-				if(data!='1'){
-					$.post('?mod=install&site=ajax_block_active_file');
-				}
-				return false;
-			});
-		}, 900000);
-
-		var online = navigator.onLine;
-		if(online==true){
-			//setInterval(function(){
-				//$.post('http://task.sbig.vn/?mod=cusServices&site=get_customer_client').done(function(data){
-					//return false;
-				//});
-			//}, 1800000);
-		}
 	<?php echo '</script'; ?>
 >
 </body>

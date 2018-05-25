@@ -199,4 +199,8 @@ class Helper extends HelpAbstract
         }
         return $result;
     }
+    function check_type($type)
+    {
+        return in_array($type, $this->true_type);
+    }
 }

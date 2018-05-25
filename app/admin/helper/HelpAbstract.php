@@ -38,5 +38,6 @@ abstract class HelpAbstract {
         '2' => "Nhà cung cấp",
         '3' => "Nhân viên"
     ];
+    $this->true_type = array("image/gif", "image/jpg", "image/jpeg", "image/png");
  }
 }

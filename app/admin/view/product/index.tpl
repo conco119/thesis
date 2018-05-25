@@ -57,7 +57,7 @@
 										<td class="text-right">{(($data.imported - $data.exported)*$data.price_import)|number_format} đ</td>
                                         <td class="text-center" id="stt{$data.id}">{$data.status}</td>
                                         <td class="text-right" width="15%">
-											<a href='./admin?mc=product&site=imagepost&id={$data.id}'><button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#UploadImageProduct" title="Hình ảnh sản phẩm"><i class="fa fa-image"></i></button><a/>
+											<a href='./admin?mc=product&site=imagepost&id={$data.id}'><button type="button" class="btn btn-default btn-xs" title="Hình ảnh sản phẩm"><i class="fa fa-image"></i></button><a/>
 											<a href="./admin?mc=product&site=detail&id={$data.id}" class="btn btn btn-success" title="Chi tiết nhập xuất"><i class="fa fa-search-plus"></i></a>
                                             <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#UpdateForm" title="Sửa thông tin sản phẩm" onclick="LoadDataForForm({$data.id});"><i class="fa fa-pencil"></i></button>
                                             <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#DeleteForm" title="Xóa sản phẩm" onclick="LoadDeleteItem('product', {$data.id}, '', 'sản phẩm', 'vì còn tồn tại hóa đơn');"><i class="fa fa-trash-o"></i></button>
@@ -107,22 +107,7 @@
     </div>
 </div>
 
-<!-- Modal Delete -->
-<div class="modal fade" id="UploadImageProduct">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Xóa mục này</h4>
-            </div>
-            <div class="modal-body">Bạn chắc chắn muốn xóa mục này chứ?</div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Hủy bỏ</button>
-                <button type="button" class="btn btn-danger" onclick="LoadDeleteItem();" id="DeleteItemAll">Xóa</button>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 <!-- Modal Delete All -->
 <div class="modal fade" id="DeleteForm">

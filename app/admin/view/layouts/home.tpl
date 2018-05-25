@@ -9,7 +9,7 @@
 
 <title>{$arg.setting.name}</title>
 <base href="{$arg.domain}">
-<link href="./hlstar.ico" rel="shortcut icon">
+<link href="./mtd.ico" rel="shortcut icon">
 
 <!-- Bootstrap core CSS -->
 <link href="{$arg.stylesheet}css/bootstrap.min.css" rel="stylesheet">
@@ -85,23 +85,6 @@
 	<script src="{$arg.stylesheet}js/custom.js"></script>
 
 	<script type="text/javascript">
-		setInterval(function(){
-			$.post('?mod=install&site=ajax_get_time_check_install').done(function(data){
-				if(data!='1'){
-					$.post('?mod=install&site=ajax_block_active_file');
-				}
-				return false;
-			});
-		}, 900000);
-
-		var online = navigator.onLine;
-		if(online==true){
-			//setInterval(function(){
-				//$.post('http://task.sbig.vn/?mod=cusServices&site=get_customer_client').done(function(data){
-					//return false;
-				//});
-			//}, 1800000);
-		}
 	</script>
 </body>
 </html>

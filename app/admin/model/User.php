@@ -285,7 +285,7 @@ class User extends Main
     {
 			$data = array();
       $avatar = new Zebra();
-      if ( isset($_FILES['avatar_file']) && $this->userHelper->check_type($_FILES['avatar_file']['type']) )
+      if ( isset($_FILES['avatar_file']) && $this->helper->check_type($_FILES['avatar_file']['type']) )
       {
         // echo "ok";
         // die();
