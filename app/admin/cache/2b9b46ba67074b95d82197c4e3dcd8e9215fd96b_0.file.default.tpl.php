@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-25 18:35:50
+/* Smarty version 3.1.30, created on 2018-05-26 08:53:54
   from "/Users/mtd/Sites/htaccess/app/admin/view/layouts/default.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b07f5169ed1a3_30180962',
+  'unifunc' => 'content_5b08be32b09b63_10329384',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '2b9b46ba67074b95d82197c4e3dcd8e9215fd96b' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/layouts/default.tpl',
-      1 => 1527248148,
+      1 => 1527299565,
       2 => 'file',
     ),
   ),
@@ -23,7 +23,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:includes/footer.tpl' => 1,
   ),
 ),false)) {
-function content_5b07f5169ed1a3_30180962 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b08be32b09b63_10329384 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html>
@@ -68,8 +68,10 @@ js/notify/pnotify.buttons.js"><?php echo '</script'; ?>
 >
     <!-- image product -->
     <link  href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['stylesheet'];?>
-css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
+css/product/gallery-grid.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['stylesheet'];?>
+css/product/baguetteBox.min.css">
+
 </head>
 
 <body class="nav-md">

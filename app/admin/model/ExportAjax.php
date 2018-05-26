@@ -102,7 +102,7 @@ class ExportAjax extends Main
 
       // $this->dbo->connect();
 
-      $product_sql = "SELECT a.id, a.code, a.name, a.price_import, a.price
+      $product_sql = "SELECT a.id, a.code, a.name, a.price_import, a.price, a.is_discount, a.discount_type, a.discount
                       ,(SELECT SUM(number_count) FROM import_products WHERE a.id=product_id) imported,
                       (SELECT SUM(number_count) FROM export_products WHERE a.id=product_id) exported
               FROM products a
@@ -122,13 +122,25 @@ class ExportAjax extends Main
           $product_query = $this->helper->get_child_products($cate, $product_query, $str_id, $key, $trade);
       }
 
-      // pre($product_query);
-      // die();
+    //   pre($product_query);
+    //   die();
       // pre($product_query);
       // die();
       foreach($product_query as $key => $item)
       {
-          $item['price'] = number_format($item['price']);
+        //   $item['price'] = number_format($item['price']);
+          if($item['is_discount'] == 1)
+          {
+              switch($item['discount_type'])
+              {
+                  case 1:
+                    $item['price'] = number_format($item['price'] - ( ($item['price'] * $item['discount'])/100) );
+                    break;
+                  case 2:
+                    $item['price'] = number_format($item['price'] - $item['discount'] );
+                    break;
+              }
+          }
           $result .= '<tr id="prd' . $item['id'] . '">';
           $result .= '<td>' . $item['code'] . '</td>';
           $result .= '<td>' . $item['name'] . '</td>';
@@ -159,7 +171,7 @@ class ExportAjax extends Main
           $products = isset($_SESSION['export_session_products']) ? $_SESSION['export_session_products'] : array();
 
           $id = intval($_POST['id']);
-          $prod = $this->pdo->fetch_one("SELECT a.id, a.code, a.name, a.price, a.price_import, a.warranty, a.unit_id, b.name AS unit_name,
+          $prod = $this->pdo->fetch_one("SELECT a.id, a.code, a.name, a.price, a.price_import, a.warranty, a.unit_id, a.is_discount, a.discount_type, a.discount, b.name AS unit_name,
                     (SELECT sum(number_count) FROM import_products WHERE product_id = a.id ) AS imported,
                     (SELECT sum(number_count) FROM export_products WHERE product_id = a.id ) AS exported
                   FROM products a
@@ -172,7 +184,23 @@ class ExportAjax extends Main
           $products[$_POST['id']]['id'] = $prod['id'];
           $products[$_POST['id']]['number'] = 1;
           $products[$_POST['id']]['name'] = $prod['name'];
-          $products[$_POST['id']]['price'] = $prod['price'];
+          if( $prod['is_discount'] == 1)
+          {
+              switch($prod['discount_type'])
+              {
+                case 1:
+                    $products[$_POST['id']]['price'] = $prod['price'] - (($prod['price'] * $prod['discount'])/100);
+                    break;
+                case 2:
+                    $products[$_POST['id']]['price'] = $prod['price'] -  $prod['discount'];
+                    break;
+              }
+          }
+          else
+          {
+                $products[$_POST['id']]['price'] = $prod['price'];
+          }
+
           $products[$_POST['id']]['warranty'] = $prod['warranty'];
 
           $products[$_POST['id']]['code'] = $prod['code'];
@@ -186,7 +214,7 @@ class ExportAjax extends Main
           $result['id'] = $prod['id'];
           $result['code'] = $prod['code'];
           $result['name'] = $prod['name'];
-          $result['price'] = number_format($prod['price']);
+          $result['price'] = number_format($products[$_POST['id']]['price']);
           $result['unit_name'] = $prod['unit_name'];
           $result['max_number'] = $prod['number'];
 

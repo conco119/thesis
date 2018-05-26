@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-25 17:38:01
+/* Smarty version 3.1.30, created on 2018-05-26 17:06:39
   from "/Users/mtd/Sites/htaccess/app/admin/view/product/index.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b07e7896387f2_51252652',
+  'unifunc' => 'content_5b0931afb26cf0_80101495',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '11e2da0f070331b568354ebe1ee07d9ee7fe64fa' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/product/index.tpl',
-      1 => 1527244677,
+      1 => 1527329187,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b07e7896387f2_51252652 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b0931afb26cf0_80101495 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="">
     <div class="row">
@@ -39,7 +39,7 @@ function content_5b07e7896387f2_51252652 (Smarty_Internal_Template $_smarty_tpl)
                         <div class="form-group form-inline">
                             <input type="search" class="left form-control" id="key" placeholder="Mã / tên sản phẩm" value="<?php echo $_smarty_tpl->tpl_vars['out']->value['key'];?>
 ">
-                            <select class="left form-control" id="category"><option value="">Danh mục</option><?php echo $_smarty_tpl->tpl_vars['out']->value['categories'];?>
+                            <select class="left form-control" id="category"><option value="0">Danh mục</option><?php echo $_smarty_tpl->tpl_vars['out']->value['categories'];?>
 </select>
                         </div>
                         <button id="search_btn" type="button" class="btn btn-primary left" onclick="filter();"><i class="fa fa-search"></i></button>
@@ -412,7 +412,7 @@ function filter() {
     var key = $("#key").val();
     var category = $("#category").val();
 
-    var url = "./?mod=product&site=index";
+    var url = "./admin?mc=product&site=index";
     url += "&category=" + category;
     url += "&key=" + key;
     window.location.href = url;

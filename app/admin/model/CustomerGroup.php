@@ -75,8 +75,6 @@ class CustomerGroup extends Main
         {
             $data['code'] = $_POST['code'];
             $data['name'] = $_POST['name'];
-            $data['discount_type'] = $_POST['discount_type'];
-            $data['discount'] = $_POST['discount'];
             $data['status'] = isset($_POST['status']) ? 1 : 0;
             $data['updated_at'] = time();
             try {

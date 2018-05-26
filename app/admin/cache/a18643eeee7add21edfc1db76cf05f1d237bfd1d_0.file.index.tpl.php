@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-11 23:09:24
+/* Smarty version 3.1.30, created on 2018-05-26 17:29:40
   from "/Users/mtd/Sites/htaccess/app/admin/view/customergroup/index.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5af5c034be7eb8_84600973',
+  'unifunc' => 'content_5b0937141a7ae8_79687947',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'a18643eeee7add21edfc1db76cf05f1d237bfd1d' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/customergroup/index.tpl',
-      1 => 1526054962,
+      1 => 1527330568,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5af5c034be7eb8_84600973 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b0937141a7ae8_79687947 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="">
 	<div class="row">
@@ -144,15 +144,6 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 						<label class="control-label col-md-2 col-sm-2 col-xs-12">Tên nhóm</label>
 						<div class="col-md-8 col-sm-8 col-xs-12">
 							<input type="text" name="name" required="required" class="form-control" placeholder="Tên nhóm">
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-md-2 col-sm-2 col-xs-12">Chiết khấu</label>
-						<div class="col-md-4 col-sm-4 col-xs-12">
-							<select name="discount_type" class="form-control"></select>
-						</div>
-						<div class="col-md-4 col-sm-4 col-xs-12">
-							<input type="number" class="form-control" name="discount" onchange="check_number(this);">
 						</div>
 					</div>
 					<div class="form-group">

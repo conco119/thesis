@@ -23,8 +23,9 @@
     <script src="{$arg.stylesheet}js/notify/pnotify.core.js"></script>
     <script src="{$arg.stylesheet}js/notify/pnotify.buttons.js"></script>
     <!-- image product -->
-    <link  href="{$arg.stylesheet}css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
+    <link  href="{$arg.stylesheet}css/product/gallery-grid.css" rel="stylesheet">
+    <link rel="stylesheet" href="{$arg.stylesheet}css/product/baguetteBox.min.css">
+
 </head>
 
 <body class="nav-md">

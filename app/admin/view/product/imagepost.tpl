@@ -1,3 +1,4 @@
+
 <div>
     <div class="x_panel">
         <div class="x_title">
@@ -96,7 +97,13 @@
             </div>
         </div>
     </div>
-    <div id='product-post'>
+    <div id='product-post' class='tab-pane fade'>
+
+    <form method="post">
+        <textarea  id="ckeditor" name='content'>{$post.content}</textarea>
+        <br>
+            <button class='btn btn-default' name='editor' type='submit'><i class='far fa-save>'></i>Lưu</button>
+    </form>
     </div>
 </div>
 
@@ -115,11 +122,18 @@
 		</div>
 	</div>
 </div>
+<script src='{$arg.stylesheet}/ckeditor/ckeditor.js'></script>
 <script src="{$arg.stylesheet}js/cropping/cropper.min.js"></script>
 <script src="{$arg.stylesheet}js/image.product.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+<script src="{$arg.stylesheet}js/product/baguetteBox.min.js"></script>
 {literal}
 <script>
+CKEDITOR.replace('ckeditor',{
+    filebrowserBrowseUrl : 'app/webroot/filemanager/dialog.php?type=2&editor=ckeditor&fldr=',
+    filebrowserUploadUrl : 'app/webroot/filemanager/dialog.php?type=2&editor=ckeditor&fldr=',
+    filebrowserImageBrowseUrl : 'app/webroot/filemanager/dialog.php?type=1&editor=ckeditor&fldr=',
+    height: 500
+});
 baguetteBox.run('.tz-gallery');
 function DeleteConfirm(product_id, media_product_id, media_id)
 {

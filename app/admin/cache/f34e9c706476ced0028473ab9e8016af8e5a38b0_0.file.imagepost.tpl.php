@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-26 00:02:10
+/* Smarty version 3.1.30, created on 2018-05-26 11:33:49
   from "/Users/mtd/Sites/htaccess/app/admin/view/product/imagepost.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b084192521477_95208355',
+  'unifunc' => 'content_5b08e3ad98aa37_10935456',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'f34e9c706476ced0028473ab9e8016af8e5a38b0' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/product/imagepost.tpl',
-      1 => 1527267728,
+      1 => 1527309228,
       2 => 'file',
     ),
   ),
@@ -20,8 +20,9 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b084192521477_95208355 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b08e3ad98aa37_10935456 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
+
 <div>
     <div class="x_panel">
         <div class="x_title">
@@ -141,7 +142,14 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
             </div>
         </div>
     </div>
-    <div id='product-post'>
+    <div id='product-post' class='tab-pane fade'>
+
+    <form method="post">
+        <textarea  id="ckeditor" name='content'><?php echo $_smarty_tpl->tpl_vars['post']->value['content'];?>
+</textarea>
+        <br>
+            <button class='btn btn-default' name='editor' type='submit'><i class='far fa-save>'></i>Lưu</button>
+    </form>
     </div>
 </div>
 
@@ -161,6 +169,10 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 	</div>
 </div>
 <?php echo '<script'; ?>
+ src='<?php echo $_smarty_tpl->tpl_vars['arg']->value['stylesheet'];?>
+/ckeditor/ckeditor.js'><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
  src="<?php echo $_smarty_tpl->tpl_vars['arg']->value['stylesheet'];?>
 js/cropping/cropper.min.js"><?php echo '</script'; ?>
 >
@@ -169,11 +181,18 @@ js/cropping/cropper.min.js"><?php echo '</script'; ?>
 js/image.product.js"><?php echo '</script'; ?>
 >
 <?php echo '<script'; ?>
- src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"><?php echo '</script'; ?>
+ src="<?php echo $_smarty_tpl->tpl_vars['arg']->value['stylesheet'];?>
+js/product/baguetteBox.min.js"><?php echo '</script'; ?>
 >
 
 <?php echo '<script'; ?>
 >
+CKEDITOR.replace('ckeditor',{
+    filebrowserBrowseUrl : 'app/webroot/filemanager/dialog.php?type=2&editor=ckeditor&fldr=',
+    filebrowserUploadUrl : 'app/webroot/filemanager/dialog.php?type=2&editor=ckeditor&fldr=',
+    filebrowserImageBrowseUrl : 'app/webroot/filemanager/dialog.php?type=1&editor=ckeditor&fldr=',
+    height: 500
+});
 baguetteBox.run('.tz-gallery');
 function DeleteConfirm(product_id, media_product_id, media_id)
 {

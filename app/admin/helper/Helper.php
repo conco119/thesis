@@ -167,7 +167,7 @@ class Helper extends HelpAbstract
         {
             foreach($all_child as $value)
             {
-                $sql = "SELECT a.id,a.code,a.name,a.price_import,a.price,
+                $sql = "SELECT a.id,a.code,a.name,a.price_import,a.price, a.is_discount, a.discount_type, a.discount
                 (SELECT SUM(number_count) FROM import_products WHERE a.id=product_id) imported,
                 (SELECT SUM(number_count) FROM export_products WHERE a.id=product_id) exported
                 FROM products a

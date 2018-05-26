@@ -16,13 +16,27 @@ class Product extends Main
         $this->create();
         $this->edit();
         //query customer
+        $cat_id = isset($_GET['category']) ? intval($_GET['category']) : 0;
+        $key = isset($_GET['key']) ? trim($_GET['key']) : '';
+        $sql_filter = '';
+
+        if($cat_id != 0)
+            $sql_filter .= " AND a.category_id = $cat_id";
+
+        if($key != '')
+            $sql_filter .= " AND (a.code LIKE  '%$key%' OR a.name LIKE '%$key%' )";
+        $out['categories'] =  $this->helper->get_option(1, 'product_categories', $cat_id);
+        $out['key'] = $key;
         $sql = "SELECT a.*,
                 (SELECT sum(number_count) FROM import_products i WHERE i.product_id = a.id) AS imported,
                 (SELECT sum(number_count) FROM export_products e WHERE e.product_id = a.id ) AS exported
-        FROM {$this->table} a";
+        FROM {$this->table} a WHERE 1=1 $sql_filter";
         $paging = $this->paging->get_content($this->pdo->count_rows($sql), 10);
         $sql .= $paging['sql_add'];
         $products = $this->pdo->fetch_all($sql);
+
+        if($cat_id !=0)
+            $products = $this->ProductHelper->get_child_products($cat_id, $products, $key);
         $number_im = 0;
         $number_ex = 0;
         $total = 0;
@@ -120,6 +134,9 @@ class Product extends Main
             $data['number_warning'] = $_POST['number_warning'];
             $data['status'] = isset($_POST['status']) ? 1 : 0;
             $data['updated_at'] = time();
+            $post['slug'] = $this->dstring->str_convert($data['name'] . $data['code']);
+            $post['title'] = $data['name'];
+            $this->pdo->update("posts", $post, "product_id=".$_POST['id']);
             try {
                 $updateStatement = $this->slim_pdo->update($data)->table($this->table)->where('id', '=', $_POST['id']);
                 $isSucceed = $updateStatement->execute();
@@ -293,7 +310,8 @@ class Product extends Main
 
     function imagepost()
     {
-        $this->change_product_image();
+        $this->add_product_image();
+        $this->add_post();
         $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
         $product_info = $this->pdo->fetch_one("SELECT * FROM products WHERE id= $id");
         //image
@@ -302,12 +320,44 @@ class Product extends Main
                 LEFT JOIN media m ON m.id = p.media_id
                 WHERE p.product_id = $id";
         $images = $this->pdo->fetch_all($sql);
+        //post
+        $sql = "SELECT * FROM posts WHERE product_id =$id";
+        $post = $this->pdo->fetch_all($sql);
         $this->smarty->assign('images', $images);
+        $this->smarty->assign('post', $post[0]);
         $this->smarty->assign('product_info', $product_info);
         $this->smarty->assign('id', $id);
         $this->smarty->display(DEFAULT_LAYOUT);
     }
-    public function change_product_image()
+
+    public function add_post()
+    {
+        if(isset($_POST['editor']))
+        {
+            $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+            $product = $this->pdo->fetch_one("SELECT * FROM products WHERE id =$id");
+            if( $this->pdo->check_exist("SELECT * FROM posts WHERE product_id = $id") )
+            {
+                $data['content'] = $_POST['content'];
+                $data['updated_at'] = time();
+                $this->pdo->update('posts', $data, "product_id=$id");
+                lib_redirect();
+            }
+            $data['product_id'] = $id;
+            $data['slug'] = $this->dstring->str_convert($product['name'] . $product['code']);
+            $data['content'] = $_POST['content'];
+            $data['title'] = $product['name'];
+            $data['created_at'] = time();
+            $data['updated_at'] = time();
+            $insertStatement = $this->slim_pdo->insert(array('product_id', 'content', 'slug', "title", "created_at", "updated_at"))
+            ->into('posts')
+            ->values(array($data['product_id'], $data['content'], $data['slug'], $data['title'], $data['created_at'], $data['updated_at']));
+            $export_id = $insertStatement->execute();
+            // $this->pdo->insert('posts', $data);
+            lib_redirect();
+        }
+    }
+    public function add_product_image()
     {
 
       if(isset($_POST['avatar_change']))

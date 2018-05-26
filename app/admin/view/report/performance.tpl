@@ -10,21 +10,10 @@
 		<div class="x_content">
 			<div class="form-group form-inline">
 				<div class="h_content">
-					<select class="form-control" id="filter" onchange="filter();">
-						{$out.filter}
-					</select> 
-					{if $out.value.filter eq '2'} 
-					<select class="form-control" id="year" onchange="filter();">{$out.year}</select> 
-					<select class="form-control" id="month" onchange="filter();">{$out.month}</select> 
-					{else if $out.value.filter eq '1'} 
-					<input type="text" class="form-control" id="date_from" placeholder="Từ ngày" onchange="filter();" value="{$out.date_from}"> 
-					<input type="text" class="form-control" id="date_to" placeholder="Đến ngày" onchange="filter();" value="{$out.date_to}"> 
-					{else} 
 					<select class="form-control" id="date_ex" onchange="filter();">
 						<option value="0">Tất cả hóa đơn</option> {$out.select_export}
-					</select> 
-					{/if} 
-					<a href="?mod=import&site=create" class="btn btn-primary"><i class="fa fa-pencil"></i> Tạo hóa đơn</a>
+					</select>
+					<a href="{$arg.prefix_admin}mc=export&site=index" class="btn btn-primary"><i class="fa fa-pencil"></i> Tạo hóa đơn</a>
 				</div>
 
 			</div>
@@ -46,22 +35,22 @@
 									<tr>
 										<td class="text-left">- Doanh thu sản phẩm</td>
 										<td class="text-right">
-											{$perform.total_products|number_format} đ</td>
+											{$perform.total_product|number_format} đ</td>
 									</tr>
 									<tr>
 										<td class="text-left">- Vốn sản phẩm</td>
 										<td class="text-right">
-											{$perform.cost|number_format} đ</td>
+											{$perform.total_cost|number_format} đ</td>
 									</tr>
 									<tr>
 										<td class="text-left">- Lợi nhuận sản phẩm</td>
 										<td class="text-right">
-											{($perform.total_products - $perform.cost)|number_format} đ</td>
+											{($perform.total_product - $perform.total_cost)|number_format} đ</td>
 									</tr>
 									<tr>
 										<td class="text-left">- Doanh thu dịch vụ</td>
 										<td class="text-right">
-											{$perform.total_services|number_format} đ</td>
+											{$perform.total_service|number_format} đ</td>
 									</tr>
 
 								</table>
@@ -70,12 +59,12 @@
 						<tr>
 							<th class="text-left">Doanh thu khác</th>
 							<td class="text-right">
-								{$perform.money_im|number_format} đ</td>
+								{$perform.money_imp|number_format} đ</td>
 						</tr>
 						<tr>
 							<th class="text-left">Chi phí khác</th>
 							<td class="text-right">
-								{$perform.money_ex|number_format} đ</td>
+								{$perform.money_exp|number_format} đ</td>
 						</tr>
 						{*<tr>*}
 							{*<th class="text-left">Chi phí</th>*}
@@ -83,7 +72,7 @@
 						{*</tr>*}
 						<tr>
 							<th class="text-left">Lợi nhuận</th>
-							<td class="text-right">{$perform.total|number_format}
+							<td class="text-right">{$perform.money_get|number_format}
 								đ</td>
 						</tr>
 					</tbody>
@@ -137,25 +126,10 @@
 	});
 
 	function filter() {
-		var filter = $("#filter").val();
-		var supp = $("#supp").val();
-		var date = $("#date_ex").val();
-		var url = "./?mod=report&site=performance";
-		url += "&filter=" + filter;
-		url += "&supp=" + supp;
-		url += "&date=" + date;
 
-		if (filter == "1") {
-			var date_from = $("#date_from").val();
-			var date_to = $("#date_to").val();
-			url += "&date_from=" + date_from;
-			url += "&date_to=" + date_to;
-		} else if (filter == "2") {
-			var year = $("#year").val();
-			var month = $("#month").val();
-			url += "&year=" + year;
-			url += "&month=" + month;
-		}
+		var date = $("#date_ex").val();
+		var url = "./admin?mc=report&site=performance";
+		url += "&date=" + date;
 
 		window.location.href = url;
 	}

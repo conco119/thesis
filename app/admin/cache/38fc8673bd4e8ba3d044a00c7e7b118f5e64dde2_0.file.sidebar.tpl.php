@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-25 20:40:22
+/* Smarty version 3.1.30, created on 2018-05-26 15:30:59
   from "/Users/mtd/Sites/htaccess/app/admin/view/layouts/includes/sidebar.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b081246ba8104_82636780',
+  'unifunc' => 'content_5b091b4390b589_43897105',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '38fc8673bd4e8ba3d044a00c7e7b118f5e64dde2' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/layouts/includes/sidebar.tpl',
-      1 => 1527255619,
+      1 => 1527323457,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b081246ba8104_82636780 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b091b4390b589_43897105 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="left_col scroll-view">
 
@@ -82,11 +82,16 @@ mc=import&site=statistics">Hóa đơn nhập hàng</a></li>
 				</li>
 				<li><a><i class="fa fa-bar-chart-o"></i> Báo cáo <span class="fa fa-chevron-down"></span></a>
 					<ul class="nav child_menu" style="display: none">
-						<li><a href="?mc=report&site=daily">Ghi sổ ngày</a></li>
-						<li><a href="?mc=product&site=statistics">Sản phẩm</a></li>
-						<li><a href="?mc=service&site=statistics">Dịch vụ</a></li>
-						<li><a href="?mc=report&site=performance">Lợi nhuận</a></li>
-						<li><a href="?mc=report&site=user">Nhân viên</a></li>
+						<li><a href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['prefix_admin'];?>
+mc=report&site=daily">Ghi sổ ngày</a></li>
+						<li><a href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['prefix_admin'];?>
+mc=product&site=statistics">Sản phẩm</a></li>
+						<li><a href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['prefix_admin'];?>
+mc=service&site=statistics">Dịch vụ</a></li>
+						<li><a href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['prefix_admin'];?>
+mc=report&site=performance">Lợi nhuận</a></li>
+						<li><a href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['prefix_admin'];?>
+mc=report&site=user">Nhân viên</a></li>
 						<!--<li><a href="?mc=cost&site=index"> Tính giá vốn </a></li>-->
 					</ul>
 				</li>

@@ -46,11 +46,11 @@
 				</li>
 				<li><a><i class="fa fa-bar-chart-o"></i> Báo cáo <span class="fa fa-chevron-down"></span></a>
 					<ul class="nav child_menu" style="display: none">
-						<li><a href="?mc=report&site=daily">Ghi sổ ngày</a></li>
-						<li><a href="?mc=product&site=statistics">Sản phẩm</a></li>
-						<li><a href="?mc=service&site=statistics">Dịch vụ</a></li>
-						<li><a href="?mc=report&site=performance">Lợi nhuận</a></li>
-						<li><a href="?mc=report&site=user">Nhân viên</a></li>
+						<li><a href="{$arg.prefix_admin}mc=report&site=daily">Ghi sổ ngày</a></li>
+						<li><a href="{$arg.prefix_admin}mc=product&site=statistics">Sản phẩm</a></li>
+						<li><a href="{$arg.prefix_admin}mc=service&site=statistics">Dịch vụ</a></li>
+						<li><a href="{$arg.prefix_admin}mc=report&site=performance">Lợi nhuận</a></li>
+						<li><a href="{$arg.prefix_admin}mc=report&site=user">Nhân viên</a></li>
 						<!--<li><a href="?mc=cost&site=index"> Tính giá vốn </a></li>-->
 					</ul>
 				</li>

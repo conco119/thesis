@@ -14,7 +14,7 @@
                     <div class="h_content">
                         <div class="form-group form-inline">
                             <input type="search" class="left form-control" id="key" placeholder="Mã / tên sản phẩm" value="{$out.key}">
-                            <select class="left form-control" id="category"><option value="">Danh mục</option>{$out.categories}</select>
+                            <select class="left form-control" id="category"><option value="0">Danh mục</option>{$out.categories}</select>
                         </div>
                         <button id="search_btn" type="button" class="btn btn-primary left" onclick="filter();"><i class="fa fa-search"></i></button>
 
@@ -355,7 +355,7 @@ function filter() {
     var key = $("#key").val();
     var category = $("#category").val();
 
-    var url = "./?mod=product&site=index";
+    var url = "./admin?mc=product&site=index";
     url += "&category=" + category;
     url += "&key=" + key;
     window.location.href = url;
