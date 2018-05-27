@@ -170,7 +170,7 @@ class User extends Main
         $this->smarty->display('login.tpl');
         return;
       }
-        $_SESSION[LOGIN_MEMBER] = $user['id'];
+        $_SESSION["LOGIN_MEMBER"] = $user['id'];
         lib_redirect(HOME_PAGE);
     }
 
@@ -184,7 +184,7 @@ class User extends Main
 
   public function logout()
   {
-    unset($_SESSION[LOGIN_MEMBER]);
+    unset($_SESSION["LOGIN_MEMBER"]);
     lib_redirect('?mc=user&site=login');
   }
   // not using view
@@ -275,6 +275,7 @@ class User extends Main
 
 
     $this->smarty->assign('out', $out);
+    $this->smarty->assign('paging', $paging);
     $this->smarty->assign('exports', $exports);
 		$this->smarty->display(DEFAULT_LAYOUT);
   }

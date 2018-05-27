@@ -61,12 +61,10 @@
                                         <button type="button" title="In hóa đơn" data-toggle="modal"
                                                 class="btn btn-default" onclick="SetPrint({$list.id});"
                                                 data-dismiss="modal"><i class="fa fa-print"></i></button>
-                                        {if $check_delete}
                                             <button type="button" title="Xóa hóa đơn" class="btn btn-default"
                                                     data-toggle="modal" data-target="#DeleteForm"
                                                     onclick="LoadDeleteItem('export', {$list.id}, '', 'hóa đơn bán', 'vì còn tồn tại trong hóa đơn');">
                                                 <i class="fa fa-trash-o"></i></button>
-                                        {/if}
                                     </td>
                                 </tr>
                             {/foreach}

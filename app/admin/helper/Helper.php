@@ -165,9 +165,11 @@ class Helper extends HelpAbstract
         // $cc = [];
         if( $all_child )
         {
+
             foreach($all_child as $value)
             {
-                $sql = "SELECT a.id,a.code,a.name,a.price_import,a.price, a.is_discount, a.discount_type, a.discount
+
+                $sql = "SELECT a.id, a.code, a.name, a.price_import, a.price,
                 (SELECT SUM(number_count) FROM import_products WHERE a.id=product_id) imported,
                 (SELECT SUM(number_count) FROM export_products WHERE a.id=product_id) exported
                 FROM products a
@@ -177,8 +179,14 @@ class Helper extends HelpAbstract
                     $sql .= " AND a.trademark_id = $trade";
                 if($key != '')
                     $sql .= " AND (a.code LIKE '%$key%' OR a.name LIKE '%$key%')";
-                $products = array_merge($products, $this->pdo->fetch_all($sql));
-                $products = $this->get_child_products($value['id'], $products, $str_id, $key, $trade);
+
+                $products = array_merge($products, $this->pdo->fetch_all($sql) );
+
+                if($value['parent_id'] != 0)
+                {
+                    $products = $this->get_child_products($value['id'], $products, $str_id, $key, $trade);
+                }
+
             }
         }
         return $products;

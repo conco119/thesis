@@ -61,7 +61,7 @@
 		<div class="menu_section">
 			<h3>Cấu hình</h3>
 			<ul class="nav side-menu">
-				<li><a href="?mc=setting&site=info"><i class="fa fa-info"></i>Thiết lập thông tin</a></li>
+				<li><a href="{$arg.prefix_admin}mc=setting&site=info"><i class="fa fa-info"></i>Thiết lập thông tin</a></li>
 			</ul>
 		</div>
 

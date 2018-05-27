@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-26 15:30:59
+/* Smarty version 3.1.30, created on 2018-05-26 17:47:20
   from "/Users/mtd/Sites/htaccess/app/admin/view/layouts/includes/sidebar.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b091b4390b589_43897105',
+  'unifunc' => 'content_5b093b38bf9ea8_97954218',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '38fc8673bd4e8ba3d044a00c7e7b118f5e64dde2' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/layouts/includes/sidebar.tpl',
-      1 => 1527323457,
+      1 => 1527331639,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b091b4390b589_43897105 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b093b38bf9ea8_97954218 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="left_col scroll-view">
 
@@ -103,7 +103,8 @@ mc=user&site=index"><i class="fa fa-user"></i> Quản lý người dùng</a></li
 		<div class="menu_section">
 			<h3>Cấu hình</h3>
 			<ul class="nav side-menu">
-				<li><a href="?mc=setting&site=info"><i class="fa fa-info"></i>Thiết lập thông tin</a></li>
+				<li><a href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['prefix_admin'];?>
+mc=setting&site=info"><i class="fa fa-info"></i>Thiết lập thông tin</a></li>
 			</ul>
 		</div>
 

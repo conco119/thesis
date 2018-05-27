@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-23 22:26:31
+/* Smarty version 3.1.30, created on 2018-05-26 22:49:18
   from "/Users/mtd/Sites/htaccess/app/admin/view/export/statistics.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b058827c50848_32597589',
+  'unifunc' => 'content_5b0981fe130528_05892239',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '4b1c5c7ef913fffd492807d76b0989963b3f0671' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/export/statistics.tpl',
-      1 => 1527089189,
+      1 => 1527349738,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b058827c50848_32597589 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b0981fe130528_05892239 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="">
     <div class="row">
@@ -103,13 +103,11 @@ foreach ($_from as $_smarty_tpl->tpl_vars['list']->value) {
                                                 class="btn btn-default" onclick="SetPrint(<?php echo $_smarty_tpl->tpl_vars['list']->value['id'];?>
 );"
                                                 data-dismiss="modal"><i class="fa fa-print"></i></button>
-                                        <?php if ($_smarty_tpl->tpl_vars['check_delete']->value) {?>
                                             <button type="button" title="Xóa hóa đơn" class="btn btn-default"
                                                     data-toggle="modal" data-target="#DeleteForm"
                                                     onclick="LoadDeleteItem('export', <?php echo $_smarty_tpl->tpl_vars['list']->value['id'];?>
 , '', 'hóa đơn bán', 'vì còn tồn tại trong hóa đơn');">
                                                 <i class="fa fa-trash-o"></i></button>
-                                        <?php }?>
                                     </td>
                                 </tr>
                             <?php

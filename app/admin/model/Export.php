@@ -228,6 +228,24 @@ class Export extends Main
       $this->smarty->display(DEFAULT_LAYOUT);
   }
 
+  function ajax_delete()
+  {
+    if( isset($_POST['id']) )
+    {
+        $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
+        $this->pdo->query("DELETE FROM export_products WHERE export_id = $id");
+        $this->pdo->query("DELETE FROM export_services WHERE export_id = $id");
+        $this->pdo->query("DELETE FROM money WHERE from_type='exp' AND from_id=$id AND is_auto=1");
+        $this->pdo->query("DELETE FROM exports WHERE id = $id");
+        echo 1;
+        $this->pdo->close();
+        exit();
+    }
+    echo 0;
+    $this->pdo->close();
+    exit();
+
+  }
 
 
 }

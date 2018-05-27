@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-23 20:15:14
+/* Smarty version 3.1.30, created on 2018-05-28 00:03:45
   from "/Users/mtd/Sites/htaccess/app/admin/view/export/index.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b0569627ecf79_20761255',
+  'unifunc' => 'content_5b0ae4f14edb03_82292321',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '2d66338d91aa0ce0719613df5ee6e08e6d33ea75' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/export/index.tpl',
-      1 => 1527081313,
+      1 => 1527440623,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b0569627ecf79_20761255 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b0ae4f14edb03_82292321 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 
 
@@ -43,7 +43,7 @@ function content_5b0569627ecf79_20761255 (Smarty_Internal_Template $_smarty_tpl)
 		<div class="col-md-9 col-xs-12">
 			<div class="x_panel">
 				<div class="x_title">
-		        	<a href="?mod=export&site=statistics" style="margin-right: 20px;" class="btn btn-default pull-left"><i class="fa fa-arrow-left"></i>&ensp;Hóa đơn lưu trữ</a>
+		        	<a href="./admin?mc=export&site=statistics" style="margin-right: 20px;" class="btn btn-default pull-left"><i class="fa fa-arrow-left"></i>&ensp;Hóa đơn lưu trữ</a>
 					<h2>Chi tiết đơn hàng</h2>
 					<ul class="nav navbar-right panel_toolbox">
 						<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>

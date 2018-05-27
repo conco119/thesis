@@ -17,7 +17,7 @@
 		<div class="col-md-9 col-xs-12">
 			<div class="x_panel">
 				<div class="x_title">
-		        	<a href="?mod=export&site=statistics" style="margin-right: 20px;" class="btn btn-default pull-left"><i class="fa fa-arrow-left"></i>&ensp;Hóa đơn lưu trữ</a>
+		        	<a href="./admin?mc=export&site=statistics" style="margin-right: 20px;" class="btn btn-default pull-left"><i class="fa fa-arrow-left"></i>&ensp;Hóa đơn lưu trữ</a>
 					<h2>Chi tiết đơn hàng</h2>
 					<ul class="nav navbar-right panel_toolbox">
 						<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>

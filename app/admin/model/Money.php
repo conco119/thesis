@@ -291,6 +291,8 @@ class Money extends Main
         echo 0;
         $this->pdo->close();
 		exit();
-	}
+    }
+
+
 
 }

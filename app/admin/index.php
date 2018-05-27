@@ -12,7 +12,7 @@ require_once './helper/helpabstract.php';
 require_once './helper/helper.php';
 
 // id user
-$login_id = isset($_SESSION[LOGIN_MEMBER]) ? intval($_SESSION[LOGIN_MEMBER]) : 0;
+$login_id = isset($_SESSION["LOGIN_MEMBER"]) ? intval($_SESSION["LOGIN_MEMBER"]) : 0;
 
 $mc = isset($_GET['mc']) ? $_GET['mc'] : "home";
 $site = isset($_GET['site']) ? $_GET['site'] : "index";

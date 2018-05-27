@@ -296,18 +296,19 @@ class Import extends Main
 
     public function ajax_delete()
     {
-        $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
-        if($id == 0){
-            echo 0;
-            exit();
-        }
-        if(($this->currentUser['permission'] == 1 || $this->currentUser['permission'] == 2) && $this->pdo->query("DELETE FROM {$this->table} WHERE id=$id"))
+        if( isset($_POST['id']) )
         {
+            $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
+            $this->pdo->query("DELETE FROM import_products WHERE import_id = $id");
+            $this->pdo->query("DELETE FROM money WHERE from_type='imp' AND from_id=$id AND is_auto=1");
+            $this->pdo->query("DELETE FROM imports WHERE id = $id");
             echo 1;
+            $this->pdo->close();
             exit();
         }
         echo 0;
-        exit;
+        $this->pdo->close();
+        exit();
     }
     // thiết lập thông tin cho hóa đơn nhập
     function ajax_set_export_value()
@@ -364,7 +365,7 @@ class Import extends Main
         if ($key  != '')
             $product_sql .= " AND (a.code LIKE '%$key%' OR a.name LIKE '%$key%')";
 
-        $product_sql .= " ORDER BY a.name ASC";
+        // $product_sql .= " ORDER BY a.name ASC";
 
         $product_query = $this->pdo->fetch_all($product_sql);
         if($cate != 0)
@@ -555,75 +556,103 @@ class Import extends Main
         $_SESSION['import_session_product'] = array();
     }
     // hiện chi tiết thông tin hóa đơn nhập(hóa đơn nhập hàng)
-    function ajax_get_import_info()
+    // function ajax_get_import_info()
+    // {
+    //     if (isset($_POST['id']))
+    //     {
+    //         $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
+
+    //         $import = $this->pdo->fetch_one("SELECT a.id, a.code, a.created_at ,a.money_first ,a.date, a.money, a.debt, u.name AS creator, s.name AS supplier
+	// 				FROM imports a
+	// 				LEFT JOIN users u ON a.creator=u.id
+	// 				LEFT JOIN suppliers s ON a.supplier_id=s.id
+	// 				WHERE a.id=$id");
+    //         if (!$import) exit();
+
+    //         $str = "";
+    //         $str .= "<h1 class=\"text-center\">Hóa đơn nhập hàng</h1>";
+    //         $str .= "<h2 class=\"text-center\">[Mã: " . $import['code'] . "]</h2>";
+    //         $str .= "<p><span>Nhà cung cấp:</span> " . $import ['supplier'] . "</p>";
+    //         $str .= "<p><span>Nhân viên:</span> " . $import['creator'] . "</p>";
+    //         $str .= "<p><span>Thời gian:</span> " . gmdate("H:i A d.m.Y", $import['created_at'] + 7 * 3600) . "</p>";
+
+    //         $str .= "<table class=\"table table-striped table-bordered table-bor-btm\">";
+    //         $str .= "<thead>";
+    //         $str .= "<tr>";
+    //         $str .= "<th>Sản phẩm</th>";
+    //         $str .= "<th class=\"text-right\">Đơn vị</th>";
+    //         $str .= "<th class=\"text-right\">Giá nhập</th>";
+    //         // $str .= "<th class=\"text-right\">Giá bán</th>";
+    //         $str .= "<th class=\"text-right\">SL</th>";
+    //         $str .= "<th class=\"text-right\">Thành tiền</th>";
+    //         $str .= "</tr>";
+    //         $str .= "</thead>";
+    //         $str .= "<tbody>";
+
+    //         $products = $this->pdo->fetch_all("SELECT (a.price_import * a.number_count) AS total, a.price_import, a.price, a.number_count, b.name, u.name AS unit_name
+	// 				FROM import_products a
+	// 				LEFT JOIN products b ON a.product_id = b.id
+	// 				LEFT JOIN product_units u ON u.id = b.unit_id
+	// 				WHERE a.import_id = $id
+	// 				");
+    //          foreach($products as $key => $item)
+    //          {
+    //             $item['total'] = $this->dstring->get_price($item['total']);
+    //             $str .= "<tr>";
+    //             $str .= "<td>" . $item['name'] . "</td>";
+    //             $str .= "<td class=\"text-right\">" . $item['unit_name'] . "</td>";
+    //             $str .= "<td class=\"text-right\">" . $this->dstring->get_price($item['price_import']) . "</td>";
+    //             // $str .= "<td class=\"text-right\">" . $this->dstring->get_price($item['price']) . "</td>";
+    //             $str .= "<td class=\"text-right\">" . $item['number_count'] . "</td>";
+    //             $str .= "<td class=\"text-right\">" . $item['total'] . "</td>";
+    //             $str .= "</tr>";
+    //         }
+
+    //         $str .= "</tbody>";
+    //         $str .= "</table>";
+    //         $str .= "<div class=\"bold text-right\"><h4>Tổng tiền: " . $this->dstring->get_price($import['money_first']) . "</h4></div>";
+    //         $str .= "<div class=\"bold text-right\"><h4>Phải trả " . $this->dstring->get_price($import['money']) . "</h4></div>";
+    //         if ($import['debt'] < 0)
+    //             $str .= "<div class=\"bold text-right\"><h4>Tiền nợ: " . $this->dstring->get_price(-$import['debt']) . "</h4></div>";
+    //         else if($import['debt'] > 0)
+    //             $str .= "<div class=\"bold text-right\"><h4>Tiền dư: " . $this->dstring->get_price($import['debt']) . "</h4></div>";
+    //         // $str .= "<hr class='line'>";
+    //         $str .= "<div class=\"bold text-right\"><h4>Chiết khấu: " . $this->dstring->get_price($import['money_first'] - $import['money']) . "</h4></div>";
+    //         $str .= "<hr class='line'>";
+    //         $str .= "<div class=\"bold text-right\"><h3>Đã trả: " . $this->dstring->get_price($import['money'] + $import['debt']) . "</h3></div>";
+
+
+    //         echo $str;
+    //         exit();
+    //     }
+    // }
+    function ajax_get_detail_import()
     {
-        if (isset($_POST['id']))
-        {
-            $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
+        $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
 
-            $import = $this->pdo->fetch_one("SELECT a.id, a.code, a.created_at ,a.money_first ,a.date, a.money, a.debt, u.name AS creator, s.name AS supplier
-					FROM imports a
-					LEFT JOIN users u ON a.creator=u.id
-					LEFT JOIN suppliers s ON a.supplier_id=s.id
-					WHERE a.id=$id");
-            if (!$import) exit();
-
-            $str = "";
-            $str .= "<h1 class=\"text-center\">Hóa đơn nhập hàng</h1>";
-            $str .= "<h2 class=\"text-center\">[Mã: " . $import['code'] . "]</h2>";
-            $str .= "<p><span>Nhà cung cấp:</span> " . $import ['supplier'] . "</p>";
-            $str .= "<p><span>Nhân viên:</span> " . $import['creator'] . "</p>";
-            $str .= "<p><span>Thời gian:</span> " . gmdate("H:i A d.m.Y", $import['created_at'] + 7 * 3600) . "</p>";
-
-            $str .= "<table class=\"table table-striped table-bordered table-bor-btm\">";
-            $str .= "<thead>";
-            $str .= "<tr>";
-            $str .= "<th>Sản phẩm</th>";
-            $str .= "<th class=\"text-right\">Đơn vị</th>";
-            $str .= "<th class=\"text-right\">Giá nhập</th>";
-            // $str .= "<th class=\"text-right\">Giá bán</th>";
-            $str .= "<th class=\"text-right\">SL</th>";
-            $str .= "<th class=\"text-right\">Thành tiền</th>";
-            $str .= "</tr>";
-            $str .= "</thead>";
-            $str .= "<tbody>";
-
-            $products = $this->pdo->fetch_all("SELECT (a.price_import * a.number_count) AS total, a.price_import, a.price, a.number_count, b.name, u.name AS unit_name
-					FROM import_products a
-					LEFT JOIN products b ON a.product_id = b.id
-					LEFT JOIN product_units u ON u.id = b.unit_id
-					WHERE a.import_id = $id
-					");
-             foreach($products as $key => $item)
-             {
-                $item['total'] = $this->dstring->get_price($item['total']);
-                $str .= "<tr>";
-                $str .= "<td>" . $item['name'] . "</td>";
-                $str .= "<td class=\"text-right\">" . $item['unit_name'] . "</td>";
-                $str .= "<td class=\"text-right\">" . $this->dstring->get_price($item['price_import']) . "</td>";
-                // $str .= "<td class=\"text-right\">" . $this->dstring->get_price($item['price']) . "</td>";
-                $str .= "<td class=\"text-right\">" . $item['number_count'] . "</td>";
-                $str .= "<td class=\"text-right\">" . $item['total'] . "</td>";
-                $str .= "</tr>";
-            }
-
-            $str .= "</tbody>";
-            $str .= "</table>";
-            $str .= "<div class=\"bold text-right\"><h4>Tổng tiền: " . $this->dstring->get_price($import['money_first']) . "</h4></div>";
-            $str .= "<div class=\"bold text-right\"><h4>Phải trả " . $this->dstring->get_price($import['money']) . "</h4></div>";
-            if ($import['debt'] < 0)
-                $str .= "<div class=\"bold text-right\"><h4>Tiền nợ: " . $this->dstring->get_price(-$import['debt']) . "</h4></div>";
-            else if($import['debt'] > 0)
-                $str .= "<div class=\"bold text-right\"><h4>Tiền dư: " . $this->dstring->get_price($import['debt']) . "</h4></div>";
-            // $str .= "<hr class='line'>";
-            $str .= "<div class=\"bold text-right\"><h4>Chiết khấu: " . $this->dstring->get_price($import['money_first'] - $import['money']) . "</h4></div>";
-            $str .= "<hr class='line'>";
-            $str .= "<div class=\"bold text-right\"><h3>Đã trả: " . $this->dstring->get_price($import['money'] + $import['debt']) . "</h3></div>";
+        //thông tin hóa đơn
+        $sql = "SELECT a.* , s.name as supplier_name, u.name as user_name
+        FROM imports a
+        LEFT JOIN suppliers s ON a.supplier_id = s.id
+        LEFT JOIN users u ON a.creator = u.id
+        WHERE a.id = $id";
 
 
-            echo $str;
-            exit();
-        }
+        $import = $this->pdo->fetch_one($sql);
+
+        $import['date'] = gmdate('d-m-Y', strtotime($import['date']) + 7 * 3600);
+        $import['created_at'] = gmdate("H:i A d/m/Y", $import['created_at'] + 7 * 3600);
+        //sản phẩm
+        $sql = "SELECT a.*, u.name as unit_name, p.name
+        FROM import_products a
+        LEFT JOIN products p ON a.product_id = p.id
+        LEFT JOIN product_units u ON p.unit_id = u.id
+        WHERE import_id = $id";
+        $import['products'] = $this->pdo->fetch_all($sql);
+
+
+        echo json_encode($import);
+        die();
     }
 
 }
