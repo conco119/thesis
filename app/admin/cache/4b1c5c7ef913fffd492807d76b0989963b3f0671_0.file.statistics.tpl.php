@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-26 22:49:18
+/* Smarty version 3.1.30, created on 2018-05-28 16:50:35
   from "/Users/mtd/Sites/htaccess/app/admin/view/export/statistics.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b0981fe130528_05892239',
+  'unifunc' => 'content_5b0bd0eb7c4bf7_70528232',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '4b1c5c7ef913fffd492807d76b0989963b3f0671' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/export/statistics.tpl',
-      1 => 1527349738,
+      1 => 1527501034,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b0981fe130528_05892239 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b0bd0eb7c4bf7_70528232 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="">
     <div class="row">
@@ -62,6 +62,7 @@ function content_5b0981fe130528_05892239 (Smarty_Internal_Template $_smarty_tpl)
                                 <th class="text-right">Chiết khấu</th>
                                 <th class="text-right">Khách nợ</th>
                                 <th>Người lập phiếu</th>
+                                <th>Cập nhật bởi</th>
                                 <th class=""></th>
                             </tr>
                             </thead>
@@ -89,6 +90,14 @@ foreach ($_from as $_smarty_tpl->tpl_vars['list']->value) {
 </td>
                                     <td><?php echo $_smarty_tpl->tpl_vars['list']->value['user'];?>
 </td>
+                                    <td>
+                                        <?php if (isset($_smarty_tpl->tpl_vars['list']->value['updater']['name'])) {?>
+                                            <?php echo $_smarty_tpl->tpl_vars['list']->value['updater']['name'];?>
+ <br>
+                                            <small><?php echo $_smarty_tpl->tpl_vars['list']->value['updated_at'];?>
+</small>
+                                        <?php }?>
+                                    </td>
                                     <td class="text-right">
                                         <button type="button" title="Chi tiết hóa đơn" data-toggle="modal"
                                                 class="btn btn-default" data-target="#orderDetail"
@@ -96,9 +105,9 @@ foreach ($_from as $_smarty_tpl->tpl_vars['list']->value) {
 );">
                                             <i class="fa fa-search-plus"></i>
                                         </button>
-                                        <?php if ($_smarty_tpl->tpl_vars['list']->value['room_id'] == 0) {?> <a href="<?php echo $_smarty_tpl->tpl_vars['list']->value['modify'];?>
+                                        <a href="./admin?mc=exportedit&site=modify&id=<?php echo $_smarty_tpl->tpl_vars['list']->value['id'];?>
 " class="btn btn-default"><i
-                                                    class="fa fa-edit"></i></a><?php }?>
+                                                    class="fa fa-edit"></i></a>
                                         <button type="button" title="In hóa đơn" data-toggle="modal"
                                                 class="btn btn-default" onclick="SetPrint(<?php echo $_smarty_tpl->tpl_vars['list']->value['id'];?>
 );"

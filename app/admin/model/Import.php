@@ -232,7 +232,7 @@ class Import extends Main
             $sql_where .= " AND  (a.code LIKE '%$key%' OR b.name LIKE '%$key%')";
         }
 
-        $sql = "SELECT a.id, a.date, a.code, a.must_pay, a.total_money, a.payment, b.name AS supplier, c.name AS user FROM imports AS a
+        $sql = "SELECT a.id, a.date, a.code, a.must_pay, a.total_money, a.payment, a.creator, a.updater, a.updated_at, b.name AS supplier, c.name AS user FROM imports AS a
 					LEFT JOIN suppliers b ON a.supplier_id=b.id
 					LEFT JOIN users c ON a.creator=c.id
 				WHERE 1=1 $sql_where
@@ -284,6 +284,12 @@ class Import extends Main
         {
             $imports[$key]['date'] = gmdate('d.m.Y', strtotime($import['date']) + 7 * 3600);
             $imports[$key]['discount'] = $this->dstring->get_price($import['total_money'] - $import['must_pay']);
+            if( $import['creator'] != $import['updater'] )
+            {
+                $imports[$key]['updater'] = $this->pdo->fetch_one("SELECT name FROM users WHERE id =" . $import['updater'] );
+                $imports[$key]['updated_at'] = gmdate('H:i d/m/Y', $import['updated_at']+7*3600);
+            }
+
         }
 
 

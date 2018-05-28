@@ -165,7 +165,7 @@ class Export extends Main
           $sql_where .= " AND  (a.code LIKE '%$key%' OR b.name LIKE '%$key%')";
       }
 
-      $sql = "SELECT a.id, a.date, a.code, a.must_pay, a.total_money, a.payment, b.name AS customer, c.name AS user FROM exports AS a
+      $sql = "SELECT a.id, a.date, a.code, a.must_pay, a.total_money, a.payment, a.creator, a.updater, a.updated_at, b.name AS customer, c.name AS user FROM exports AS a
                   LEFT JOIN customers b ON a.customer_id=b.id
                   LEFT JOIN users c ON a.creator=c.id
               WHERE 1=1 $sql_where
@@ -218,6 +218,11 @@ class Export extends Main
           $exports[$key]['date'] = gmdate('d.m.Y', strtotime($export['date']) + 7 * 3600);
           $exports[$key]['discount'] = $this->dstring->get_price($export['total_money'] - $export['must_pay']);
           $total += $export['must_pay'];
+          if( $export['creator'] != $export['updater'] )
+          {
+              $exports[$key]['updater'] = $this->pdo->fetch_one("SELECT name FROM users WHERE id =" . $export['updater'] );
+              $exports[$key]['updated_at'] = gmdate('H:i d/m/Y', $export['updated_at']+7*3600);
+          }
       }
       $out['total'] = $total;
 

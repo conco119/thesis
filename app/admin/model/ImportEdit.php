@@ -93,7 +93,6 @@ class ImportEdit extends Main
             $data['must_pay'] = $import['must_pay'];
             $data['payment']=$import['payment'];
             $data['description'] = $import['description'];
-            $data['creator'] = $this->currentUser['id'];
             $data['updater'] = $this->currentUser['id'];
             $data['updated_at'] = time();
             $this->pdo->update('imports', $data, 'id=' . $import['id']);

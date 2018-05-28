@@ -31,7 +31,8 @@
                                     <th class="text-right">Giá trị</th>
                                     <th class="text-right">Chiết khấu</th>
                                     <th class="text-right">NCC nợ</th>
-                                    <th>Nhân viên bán</th>
+                                    <th>Người lập phiếu</th>
+                                    <th>Cập nhật bởi</th>
                                     <th class=""></th>
                                 </tr>
                             </thead>
@@ -44,6 +45,12 @@
                                         <td class="text-right">{$list.discount}</td>
                                         <td class="text-right">{($list.payment - $list.must_pay)|number_format}</td>
                                         <td>{$list.user}</td>
+                                        <td>
+                                            {if isset($list.updater.name)}
+                                                {$list.updater.name} <br>
+                                                <small>{$list.updated_at}</small>
+                                            {/if}
+                                        </td>
                                         <td class="text-right">
                                             <button type="button" data-toggle="modal" class="btn btn-default" data-target="#orderDetail" onclick="DisplayDetail({$list.id});">
                                                 <i class="fa fa-search-plus"></i>

@@ -35,6 +35,7 @@
                                 <th class="text-right">Chiết khấu</th>
                                 <th class="text-right">Khách nợ</th>
                                 <th>Người lập phiếu</th>
+                                <th>Cập nhật bởi</th>
                                 <th class=""></th>
                             </tr>
                             </thead>
@@ -50,14 +51,20 @@
                                     <td class="text-right">{$list.discount}</td>
                                     <td class="text-right">{($list.must_pay - $list.payment)|number_format}</td>
                                     <td>{$list.user}</td>
+                                    <td>
+                                        {if isset($list.updater.name)}
+                                            {$list.updater.name} <br>
+                                            <small>{$list.updated_at}</small>
+                                        {/if}
+                                    </td>
                                     <td class="text-right">
                                         <button type="button" title="Chi tiết hóa đơn" data-toggle="modal"
                                                 class="btn btn-default" data-target="#orderDetail"
                                                 onclick="GetDetailExport({$list.id});">
                                             <i class="fa fa-search-plus"></i>
                                         </button>
-                                        {if $list.room_id eq 0} <a href="{$list.modify}" class="btn btn-default"><i
-                                                    class="fa fa-edit"></i></a>{/if}
+                                        <a href="./admin?mc=exportedit&site=modify&id={$list.id}" class="btn btn-default"><i
+                                                    class="fa fa-edit"></i></a>
                                         <button type="button" title="In hóa đơn" data-toggle="modal"
                                                 class="btn btn-default" onclick="SetPrint({$list.id});"
                                                 data-dismiss="modal"><i class="fa fa-print"></i></button>

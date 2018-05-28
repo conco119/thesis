@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-28 00:01:47
+/* Smarty version 3.1.30, created on 2018-05-28 16:51:29
   from "/Users/mtd/Sites/htaccess/app/admin/view/import/statistics.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b0ae47beda527_58317741',
+  'unifunc' => 'content_5b0bd121d8dfb1_47111182',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'b7f3725d62200b22af1548ad149506f90b70c7b8' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/import/statistics.tpl',
-      1 => 1527440506,
+      1 => 1527501084,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b0ae47beda527_58317741 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b0bd121d8dfb1_47111182 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="">
     <div class="row">
@@ -57,7 +57,8 @@ function content_5b0ae47beda527_58317741 (Smarty_Internal_Template $_smarty_tpl)
                                     <th class="text-right">Giá trị</th>
                                     <th class="text-right">Chiết khấu</th>
                                     <th class="text-right">NCC nợ</th>
-                                    <th>Nhân viên bán</th>
+                                    <th>Người lập phiếu</th>
+                                    <th>Cập nhật bởi</th>
                                     <th class=""></th>
                                 </tr>
                             </thead>
@@ -82,6 +83,14 @@ foreach ($_from as $_smarty_tpl->tpl_vars['list']->value) {
 </td>
                                         <td><?php echo $_smarty_tpl->tpl_vars['list']->value['user'];?>
 </td>
+                                        <td>
+                                            <?php if (isset($_smarty_tpl->tpl_vars['list']->value['updater']['name'])) {?>
+                                                <?php echo $_smarty_tpl->tpl_vars['list']->value['updater']['name'];?>
+ <br>
+                                                <small><?php echo $_smarty_tpl->tpl_vars['list']->value['updated_at'];?>
+</small>
+                                            <?php }?>
+                                        </td>
                                         <td class="text-right">
                                             <button type="button" data-toggle="modal" class="btn btn-default" data-target="#orderDetail" onclick="DisplayDetail(<?php echo $_smarty_tpl->tpl_vars['list']->value['id'];?>
 );">
