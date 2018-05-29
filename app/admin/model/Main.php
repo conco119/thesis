@@ -6,24 +6,22 @@ lib_use(CORE_PAGINATION);
 lib_use(CORE_FILEHANDLE);
 lib_use(CORE_TIMES);
 lib_use(CORE_ZEBRA);
+lib_use(CORE_IMAGE);
 class Main implements Init
 {
   protected $arg, $conf_info;
   function __construct()
   {
-    global $smarty, $tpl_file, $mc, $site, $login_id, $pdo, $manager;
-
+    global $smarty, $tpl_file, $mc, $site, $login_id, $pdo;
     $this->currentUser = '';
 
     $this->login_id = $login_id;
     $this->mc = $mc;
     $this->site = $site;
 
-    $this->image = $manager;
     $this->slim_pdo = $pdo;
     $this->pdo = new DPDO();
     $this->paging = new pagination();
-    $this->filehanle = new FileHandle();
     $this->times = new Times();
     $this->dstring = new DString();
     $this->helper = new Helper();
@@ -52,6 +50,8 @@ class Main implements Init
             'image_folder_path' => ROOT_PATH . "/upload/image/",
             'product_folder_link' => DOMAIN . 'upload/product',
             'product_folder_path' => ROOT_PATH . "/upload/product",
+            'logo_folder_link' => DOMAIN . "/upload/logo",
+            'logo_folder_path' => ROOT_PATH . "/upload/logo",
             'today' => gmdate("d-m-Y", time() + 7 * 3600),
             'this_month' => gmdate("m", time() + 7 * 3600),
             'this_year' => gmdate("Y", time() + 7 * 3600),

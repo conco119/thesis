@@ -10,14 +10,11 @@ define("LOGIN_PAGE", DOMAIN . "admin?mc=user&site=login");
 define("DENIED_PAGE", DOMAIN . "admin?mc=home&site=denied");
 // lay info db
 function get_db_info() {
-  if(file_exists(FILE_CONF_DATABASE)){
+  if(file_exists(FILE_CONF_DATABASE))
+  {
     $info = parse_ini_file(FILE_CONF_DATABASE);
-    // var_dump($info);
-    if(count($info) > 1){
-      $info[] = @$content['server'];
-      $info[] = @$content['data_user'];
-      $info[] = @$content['data_pass'];
-      $info[] = @$content['data_name'];
+    if(count($info) > 1)
+    {
       $conn = implode(",", $info);
     }
   }

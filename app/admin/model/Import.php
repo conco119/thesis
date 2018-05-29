@@ -661,4 +661,121 @@ class Import extends Main
         die();
     }
 
+
+    function reimport()
+    {
+
+        $import = isset($_SESSION['reimport_session']) ? $_SESSION['reimport_session'] : array();
+        //lib_dump($import);
+        $products = isset($import['products']) ? $import['products'] : array();
+        if (count($import) == 0) {
+            $import['code'] = "HD" . time();
+            $import['creator'] = $this->arg['user']['name'];
+            $revert['supplier_id'] = 0;
+            $import['date'] = $this->arg['today'];
+            $import['total'] = 0;
+            $import['discount_type'] = 0;
+            $import['discount'] = 0;
+            $import['must_pay'] = 0;
+            $import['customer_id'] = 0;
+            $import['customer_name'] = "";
+            $import['payment'] = 0;
+            $import['debt'] = 0;
+            $import['id_export'] = 0;
+            $import['description'] = "";
+            $import['products'] = array();
+            $_SESSION['warehouse_reimport_session'] = $import;
+        }
+        $smarty->assign('value', $import);
+        // Lay danh sach san pham nhap vao don hang
+        $total = 0;
+        foreach ($products AS $k => $item) {
+            $products[$k]['total'] = intval(@$item['price'] * @$item['number']);
+            $total += intval(@$item['price'] * @$item['number']);
+        }
+        $smarty->assign('products', $products);
+
+        // Set cac gia tri dau ra
+        $out['cprint'] = "?mod=import&site=cprint";
+        $out['type'] = $this->help->get_select_from_array($this->product->type_export, 0, 0);
+        $out['suppliers'] = $this->dbo->dbo_get_options("suppliers", @$import['supplier_id']);
+        $out['discount'] = $this->help->get_select_from_array($this->warehouse->discount_type, @$import['discount_type']);
+        $out['print'] = "?mod=import&site=c" . $this->set->print_type[$this->arg['setting']['imprint']];
+        $smarty->assign('out', $out);
+
+        // Xu ly nhap don hang vao data
+        if (isset($_POST['submit'])) {
+            $import = isset($_SESSION['warehouse_reimport_session']) ? $_SESSION['warehouse_reimport_session'] : array();
+            $products = isset($import['products']) ? $import['products'] : array();
+            if (count($products) == 0) {
+                lib_alert("Vui long nhap san pham");
+                lib_redirect();
+            }
+//    		if ($import['debt'] != 0 && @$import['supplier_id'] == 0) {
+//    			lib_alert("Vui long chon nha cung cap");
+//    			lib_redirect();
+//    		}
+            if ($this->arg['setting']['use_expiry'] == 1) {
+                foreach ($products AS $k => $item) {
+                    if ($item['expiry'] == NULL) {
+                        lib_alert("Vui long nhap han su dung");
+                        lib_redirect();
+                    }
+                }
+            }
+
+            // Luu data hoa don nhap warehouse_import
+            $data['code'] = strtoupper('distroy');
+            //$data['supplier_id'] = @$import['supplier_id'];
+            $data['date'] = gmdate("Y-m-d", strtotime($import['date']) + 7 * 3600);
+            $data['month'] = $this->time->get_month($import['date'], 0);
+            $data['week'] = $this->time->get_week($import['date'], 0);
+            $data['year'] = $this->time->get_year($import['date'], 0);
+            $data['money_first'] = $import['total'];
+            $data['money'] = $import['must_pay'];
+            $data['debt'] = $import['debt'] < 0 ? 0 : $import['debt'];
+            $data['description'] = $import['description'];
+            $data['export_id'] = $import['id_export'];
+            $data['creator'] = $login;
+            $data['updater'] = $login;
+            $data['created'] = time();
+            $data['updated'] = time();
+
+            if ($import_id = $this->dbo->query_insert("warehouse_import", $data)) {
+                $money['date'] = $data['date'];
+                $money['month'] = $data['month'];
+                $money['year'] = $data['year'];
+                $money['money'] = $data['money'] - $data['debt'];
+                $money['description'] = "Thanh toán phiếu trả hàng của khách hàng";
+                //$money['object_id'] = $data['supplier_id'];
+                $money['from_id'] = $import_id;
+                if ($_POST['check_money'] == 1) {
+                    $this->dbo->query("UPDATE customers SET money=money+" . $money['money'] . " WHERE id=" . $import ['customer_id']);
+                    $this->warehouse->insert_money_statistics($this->dbo, $money, 0, 'cus', "", $import['customer_id']);
+                    $this->warehouse->insert_money_statistics($this->dbo, $money, 1, 'cus', "", $import['customer_id']);
+                } else {
+                    $this->warehouse->insert_money_statistics($this->dbo, $money, 0, 'cus', "", $import['customer_id']); // Lưu lại phiếu thu chi
+
+                }
+                unset($money);
+
+                $this->warehouse->create_virtual_data_export($this->dbo, gmdate("Y-m-d", strtotime($import['date']) + 7 * 3600));
+                unset($data);
+
+                foreach ($products AS $k => $item) {
+                    $item['import_id'] = $import_id;
+                    $this->warehouse->import_item_insert($this->dbo, $item); //Luu lai chi tiet hoa don
+                }
+                $_SESSION['warehouse_reimport_session'] = array();
+                lib_alert("Lap hoa don thanh cong");
+                lib_redirect("?mod=import&site=reimport_list");
+            } else {
+                lib_alert("Error");
+                lib_redirect();
+            }
+        }
+
+        $this->dbo->close();
+        $smarty->display("form.tpl");
+    }
 }

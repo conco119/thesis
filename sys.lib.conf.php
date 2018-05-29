@@ -6,6 +6,7 @@ define("CORE_TIMES","core:Times");
 define("CORE_PAGINATION","core:Pagination");
 define("CORE_FILEHANDLE","core:FileHandle");
 define("CORE_ZEBRA","core:Zebra");
+define("CORE_IMAGE","core:Image");
 define('DEFAULT_LAYOUT', 'default.tpl');
 define("USER", "user");
 define("MACOS", '/~mtd/htaccess/');

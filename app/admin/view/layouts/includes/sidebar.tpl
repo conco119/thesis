@@ -16,6 +16,7 @@
 					<ul class="nav child_menu" style="display: none">
 						<li><a href="{$arg.prefix_admin}mc=export&site=index">Bán hàng</a></li>
 						<li><a href="{$arg.prefix_admin}mc=import&site=index">Nhập hàng</a></li>
+						<li><a href="{$arg.prefix_admin}mc=import&site=reimport">Khách trả hàng</a></li>
 					</ul>
 				</li>
 				<li><a href="{$arg.prefix_admin}mc=money&site=index"><i class="fa fa-dollar"></i> Sổ thu chi</a></li>
