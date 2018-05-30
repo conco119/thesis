@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-23 16:25:39
+/* Smarty version 3.1.30, created on 2018-06-03 10:06:26
   from "/Users/mtd/Sites/htaccess/app/admin/view/supplier/index.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b0533935db756_54278303',
+  'unifunc' => 'content_5b135b328d6644_86360220',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '3b444f11d5cd861fb4e2643b75c48220cae3aa8b' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/supplier/index.tpl',
-      1 => 1527067537,
+      1 => 1527995184,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b0533935db756_54278303 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b135b328d6644_86360220 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="">
     <div class="x_panel">
@@ -56,7 +56,7 @@ function content_5b0533935db756_54278303 (Smarty_Internal_Template $_smarty_tpl)
                             <th>Mã</th>
                             <th>Tên</th>
                             <th>Điện thoại</th>
-                            <th class="text-right">Tài khoản / ghi nợ</th>
+                            <th class="text-right">Tài khoản</th>
                             <th class="text-right">Tổng nhập</th>
                             <th class="text-center">Trạng thái</th>
                             <th class="text-right"></th>

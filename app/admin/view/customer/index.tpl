@@ -39,7 +39,7 @@
                         <tr>
                             <th>Khách hàng</th>
                             <th>Nhóm</th>
-                            <th class="text-right">Tài khoản / Ghi nợ</th>
+                            <th class="text-right">Tài khoản</th>
                             <th class="text-right">Chi tiết mua hàng</th>
                             <th class="text-right">Tổng mua</th>
                             <th class="text-center">TT</th>
@@ -205,10 +205,7 @@
 
 <script src="{$arg.stylesheet}js/moment/moment.min.js"></script>
 <script type="text/javascript" src="{$arg.stylesheet}js/datepicker/daterangepicker.js"></script>
-<script>
-var owe = {$chart.debt};
-var pay = {$chart.pay};
-</script>
+
 {literal}
 <script>
 $(document).ready(function () {

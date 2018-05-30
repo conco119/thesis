@@ -8,6 +8,12 @@ class Money extends Main
         $this->MoneyHelper = new MoneyHelper();
         $this->table = 'money';
         $this->prefix_code = "MN";
+        $this->from_type = array(
+            'imp' => 'Thanh toán hóa đơn nhập',
+            'exp' => 'Thanh toán hóa đơn bán',
+            'reimp' => 'Khách trả hàng',
+            'srv' => 'Trả hàng nhà cung cấp'
+        );
     }
 
     public function index()
@@ -35,6 +41,8 @@ class Money extends Main
         // pre($money_statistic);
         foreach($money_statistic as $k =>$item)
         {
+            if( $item['from_type'] != '')
+            $money_statistic[$k]['category'] = $this->from_type[$item['from_type']];
             $money_statistic[$k]['money_type'] = $item['is_import'] == 1 ? "<i class=\"fa fa-plus\"/></i> Phiếu thu" : "<i class=\"fa fa-mail-reply-all\"/></i> Phiếu chi";
             $money_statistic[$k]['updated_at'] = gmdate('H:i d/m/Y', $item['updated_at']+7*3600);
             $money_statistic[$k]['btn'] = $this->MoneyHelper->get_money_btn($item['id'], $item['is_import'], $item['from_type'], $item['from_id']);

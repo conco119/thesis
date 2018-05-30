@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-23 17:54:24
+/* Smarty version 3.1.30, created on 2018-06-03 16:17:18
   from "/Users/mtd/Sites/htaccess/app/admin/view/customer/index.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b054860d86438_76215385',
+  'unifunc' => 'content_5b13b21e8e2665_89357612',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'cf907f15a2ac7e24fe839b38d141a32fa00ccc24' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/customer/index.tpl',
-      1 => 1527072815,
+      1 => 1528003277,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b054860d86438_76215385 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b13b21e8e2665_89357612 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="">
     <div class="x_panel">
@@ -61,7 +61,7 @@ mc=customergroup&site=index" class="btn btn-primary left"><i class="fa fa-pencil
                         <tr>
                             <th>Khách hàng</th>
                             <th>Nhóm</th>
-                            <th class="text-right">Tài khoản / Ghi nợ</th>
+                            <th class="text-right">Tài khoản</th>
                             <th class="text-right">Chi tiết mua hàng</th>
                             <th class="text-right">Tổng mua</th>
                             <th class="text-center">TT</th>
@@ -261,14 +261,7 @@ js/moment/moment.min.js"><?php echo '</script'; ?>
  type="text/javascript" src="<?php echo $_smarty_tpl->tpl_vars['arg']->value['stylesheet'];?>
 js/datepicker/daterangepicker.js"><?php echo '</script'; ?>
 >
-<?php echo '<script'; ?>
->
-var owe = <?php echo $_smarty_tpl->tpl_vars['chart']->value['debt'];?>
-;
-var pay = <?php echo $_smarty_tpl->tpl_vars['chart']->value['pay'];?>
-;
-<?php echo '</script'; ?>
->
+
 
 <?php echo '<script'; ?>
 >

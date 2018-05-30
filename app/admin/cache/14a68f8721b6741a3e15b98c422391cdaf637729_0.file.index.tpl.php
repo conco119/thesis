@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-23 16:19:26
+/* Smarty version 3.1.30, created on 2018-06-03 12:22:27
   from "/Users/mtd/Sites/htaccess/app/admin/view/money/index.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b05321e5f6f72_08261511',
+  'unifunc' => 'content_5b137b139418a1_31975523',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '14a68f8721b6741a3e15b98c422391cdaf637729' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/money/index.tpl',
-      1 => 1527067158,
+      1 => 1528003342,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b05321e5f6f72_08261511 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b137b139418a1_31975523 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/Users/mtd/Sites/htaccess/library/smarty/plugins/modifier.date_format.php';
 ?>
 <div class="">
@@ -85,6 +85,7 @@ if (!is_callable('smarty_modifier_date_format')) require_once '/Users/mtd/Sites/
                             <tr>
                                 <th>Mã phiếu</td>
                                 <th>Thể loại</th>
+                                <th>Nội dung</th>
                                 <th>Ngày tháng</th>
                                 <th class="text-right">Thu</th>
                                 <th class="text-right">Chi</th>
@@ -106,14 +107,11 @@ foreach ($_from as $_smarty_tpl->tpl_vars['list']->value) {
                                     <td>
                                     <?php echo $_smarty_tpl->tpl_vars['list']->value['money_type'];?>
 <br>
-                                    <?php if ($_smarty_tpl->tpl_vars['list']->value['category_id'] == 1 || $_smarty_tpl->tpl_vars['list']->value['category_id'] == 2) {?>
-                                        <small style="color:red"><?php echo $_smarty_tpl->tpl_vars['list']->value['category'];?>
+                                    <small><?php echo $_smarty_tpl->tpl_vars['list']->value['category'];?>
 </small>
-                                    <?php } else { ?>
-                                        <small><?php echo $_smarty_tpl->tpl_vars['list']->value['category'];?>
-</small>
-                                    <?php }?>
                                     </td>
+                                    <td><?php echo $_smarty_tpl->tpl_vars['list']->value['description'];?>
+</td>
                                     <td><?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['list']->value['date'],"%d-%m-%Y");?>
 <br><small><?php echo $_smarty_tpl->tpl_vars['list']->value['updated_at'];?>
 </small></td>
@@ -303,10 +301,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
                         <label class="control-label col-md-3 col-sm-2 col-xs-12">&nbsp;</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
                             <div class="checkbox">
-                                <label> <input type="checkbox" name="type" value="1">Cập nhật tới báo cáo lợi nhuận</label>
-                                <p class="help-block">Khi tích chọn, số tiền này sẽ được tổng hợp vào chi phí hoặc doanh thu thêm trong báo cáo lợi nhuận.
-                                Trong trường hợp tạo phiếu thu tiền khách nợ hoặc chi phí khác làm phát sinh tài khoản của khách hàng hoặc nhà cung cấp
-                                thì nên bỏ chọn để tránh sai số lợi nhuận.</p>
+                                <label> <input type="checkbox" name="type" value="1">Hạch toán vào kết quả hoạt động kinh doanh</label>
+                                <p class="help-block">Chọn trong trường hợp giá trị này là khoản Thu nhập thêm hoặc Chi phí vận hành, phát sinh của cửa hàng. Không chọn trong trường hợp Thu tiền hàng hoặc Trả tiền nhà cung cấp.</p>
                             </div>
                         </div>
                     </div>

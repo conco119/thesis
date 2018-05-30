@@ -37,7 +37,7 @@
                             <th>Mã</th>
                             <th>Tên</th>
                             <th>Điện thoại</th>
-                            <th class="text-right">Tài khoản / ghi nợ</th>
+                            <th class="text-right">Tài khoản</th>
                             <th class="text-right">Tổng nhập</th>
                             <th class="text-center">Trạng thái</th>
                             <th class="text-right"></th>

@@ -55,6 +55,7 @@
                             <tr>
                                 <th>Mã phiếu</td>
                                 <th>Thể loại</th>
+                                <th>Nội dung</th>
                                 <th>Ngày tháng</th>
                                 <th class="text-right">Thu</th>
                                 <th class="text-right">Chi</th>
@@ -69,12 +70,9 @@
                                     <td>{$list.code}</td>
                                     <td>
                                     {$list.money_type}<br>
-                                    {if $list.category_id eq 1 or $list.category_id eq 2}
-                                        <small style="color:red">{$list.category}</small>
-                                    {else}
-                                        <small>{$list.category}</small>
-                                    {/if}
+                                    <small>{$list.category}</small>
                                     </td>
+                                    <td>{$list.description}</td>
                                     <td>{$list.date|date_format:"%d-%m-%Y"}<br><small>{$list.updated_at}</small></td>
                                     <td class="text-right">
                                         {if $list.is_import neq 0}
@@ -250,10 +248,8 @@
                         <label class="control-label col-md-3 col-sm-2 col-xs-12">&nbsp;</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
                             <div class="checkbox">
-                                <label> <input type="checkbox" name="type" value="1">Cập nhật tới báo cáo lợi nhuận</label>
-                                <p class="help-block">Khi tích chọn, số tiền này sẽ được tổng hợp vào chi phí hoặc doanh thu thêm trong báo cáo lợi nhuận.
-                                Trong trường hợp tạo phiếu thu tiền khách nợ hoặc chi phí khác làm phát sinh tài khoản của khách hàng hoặc nhà cung cấp
-                                thì nên bỏ chọn để tránh sai số lợi nhuận.</p>
+                                <label> <input type="checkbox" name="type" value="1">Hạch toán vào kết quả hoạt động kinh doanh</label>
+                                <p class="help-block">Chọn trong trường hợp giá trị này là khoản Thu nhập thêm hoặc Chi phí vận hành, phát sinh của cửa hàng. Không chọn trong trường hợp Thu tiền hàng hoặc Trả tiền nhà cung cấp.</p>
                             </div>
                         </div>
                     </div>

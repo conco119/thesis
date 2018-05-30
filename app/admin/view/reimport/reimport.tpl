@@ -27,7 +27,7 @@
                         <tr>
                             <th>Mã</th>
                             <th>Sản phẩm</th>
-                            <th class="text-right">Hoàn lại</th>
+                            <th class="text-right">Giá</th>
                             <th class="text-center">S.lượng</th>
                             <th>Đơn vị</th>
                             <th class="text-right">Thành tiền</th>
@@ -40,20 +40,19 @@
                                 <td>{$list.product_code}</td>
                                 <td>{$list.product_name}</td>
                                 <td class="text-right"><input type="text"
-                                                              class="prod-price" id="proPrice{$list.id}"
-                                                              onchange="UpdateProductPrice({$list.id}, this.value);"
+                                                              class="prod-price"
                                                               value="{$list.price|number_format}"></td>
                                 <td class="text-center"><input type="number"
-                                                               class="prod-number" id="proNumber{$list.id}"
-                                                               onchange="UpdateNumberProduct({$list.id}, this.value, {$list.max_number});"
-                                                               value="{$list.number}"></td>
-                                <td>{$list.select_units}</td>
+                                                               class="prod-number" id="proNumber{$list.product_id}"
+                                                               onchange="UpdateNumberProduct({$list.product_id}, this.value, {$list.max_number});"
+                                                               value="{$list.number_count}"></td>
+                                <td>{$list.unit_name}</td>
                                 <td class="text-right"
-                                    id="proTotal{$list.id}">{($list.price*$list.number)|number_format} đ
+                                    id="proTotal{$list.product_id}">{($list.price*$list.number_count)|number_format} đ
                                 </td>
                                 <td class="text-right">
                                     <button class="btn btn-danger"
-                                            onclick="RemoveProduct({$list.id})">
+                                            onclick="RemoveProduct({$list.product_id})">
                                         <i class="fa fa-times-circle"></i>
                                     </button>
                                 </td>
@@ -252,17 +251,7 @@
             }, function (start, end, label) {
                 $('#exportday').change();
             });
-
-            $('.expiry').daterangepicker
-            ({
-                singleDatePicker: true,
-                calender_style: "picker_4",
-                format: 'DD-MM-YYYY'
-            }, function () {
-                $('.expiry').change();
-            });
-
-            GetTotalSession(1);
+            GetTotalSession();
         });
 
         function GetAllPayment() {
@@ -270,15 +259,6 @@
             $("input[name=payment]").val(must_pay);
             $('input[name=payment]').change();
         }
-
-
-        function SetPrint() {
-            $("#PrintContent").attr("src", cprint);
-            return false;
-        }
-        $(function () {
-            $('[data-toggle="popover"]').popover();
-        });
 
     </script>
 {/literal}
