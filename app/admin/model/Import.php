@@ -232,7 +232,7 @@ class Import extends Main
                     {
                         $week = gmdate("W", strtotime($import['date']) + 7 *3600);
                         $year = gmdate("Y", strtotime($import['date']) + 7 *3600);
-                        if($current_week != $week && $current_year == $year)
+                        if($current_week != $week && $current_year != $year)
                             unset($imports[$key]);
                     }
                     break;
@@ -243,7 +243,7 @@ class Import extends Main
                     {
                         $month = gmdate("m", strtotime($import['date']) + 7 *3600);
                         $year = gmdate("Y", strtotime($import['date']) + 7 *3600);
-                        if($current_month != $month && $current_year == $year)
+                        if($current_month != $month && $current_year != $year)
                             unset($imports[$key]);
                     }
                     break;

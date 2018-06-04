@@ -30,7 +30,7 @@ class Product extends Main
         $sql = "SELECT a.*,
                 (SELECT sum(number_count) FROM import_products i WHERE i.product_id = a.id) AS imported,
                 (SELECT sum(number_count) FROM export_products e WHERE e.product_id = a.id ) AS exported
-        FROM {$this->table} a WHERE 1=1 $sql_filter";
+        FROM {$this->table} a WHERE 1=1 $sql_filter ORDER BY id DESC";
         $paging = $this->paging->get_content($this->pdo->count_rows($sql), 10);
         $sql .= $paging['sql_add'];
         $products = $this->pdo->fetch_all($sql);
@@ -43,7 +43,21 @@ class Product extends Main
         foreach($products as $key => $product)
         {
             $products[$key]['status'] = $this->helper->help_get_status($product['status'], $this->table, $product['id']);
-            $products[$key]['price'] = $this->dstring->get_price($product['price']);
+            if( $product['is_discount'] == 1)
+            {
+                switch($product['discount_type'])
+                {
+                    case 1:
+                        $product['price'] = $product['price'] - (($product['price'] * $product['discount'])/100);
+                        $products[$key]['price'] = $this->dstring->get_price($product['price']);
+                        break;
+                    case 2:
+                        $product['price'] = $product['price'] - $product['discount'];
+                        $products[$key]['price'] = $this->dstring->get_price($product['price']);
+                        break;
+                }
+            }
+
             $products[$key]['category_id'] = $this->ProductHelper->help_get_category($product['category_id']);
             $products[$key]['updated_at'] = gmdate('d.m.Y', $product['updated_at'] + 7 * 3600);
             $products[$key]['created_at'] = gmdate('d.m.Y', $product['created_at'] + 7 * 3600);
@@ -315,11 +329,12 @@ class Product extends Main
         $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
         $product_info = $this->pdo->fetch_one("SELECT * FROM products WHERE id= $id");
         //image
-        $sql = "SELECT *, m.id as media_id, m.name, m.path
+        $sql = "SELECT p.*, m.id as media_id, m.name, m.path, p.is_showed
                 FROM media_product p
                 LEFT JOIN media m ON m.id = p.media_id
                 WHERE p.product_id = $id";
         $images = $this->pdo->fetch_all($sql);
+
         //post
         $sql = "SELECT * FROM posts WHERE product_id =$id";
         $post = $this->pdo->fetch_all($sql);
@@ -386,6 +401,7 @@ class Product extends Main
           unset($data);
           $data['product_id'] = $id;
           $data['media_id'] = $media_id;
+          $data['is_showed'] = 0;
           $media_id = $this->pdo->insert('media_product', $data);
           lib_redirect();
         }
@@ -403,7 +419,8 @@ class Product extends Main
             $this->pdo->query("DELETE FROM media WHERE id=".$_POST['media_id']);
             $this->pdo->query("DELETE FROM media_product WHERE id=".$_POST['media_product_id']);
             unlink($this->arg['product_folder_path'] . "/" . $media[0]['name'] );
-            $sql = "SELECT *, m.id as media_id, m.name, m.path,'{$this->arg['product_folder_link']}' as link
+
+            $sql = "SELECT p.*, m.id as media_id, m.name, m.path,'{$this->arg['product_folder_link']}' as link
             FROM media_product p
             LEFT JOIN media m ON m.id = p.media_id
             WHERE p.product_id =" . $_POST['product_id'];
@@ -415,6 +432,27 @@ class Product extends Main
         else
             echo 0;
             die();
+    }
+
+    public function set_main_avatar()
+    {
+        $product_id = isset($_POST['product_id']) ? intval($_POST['product_id']) : 0;
+        $media_id = isset($_POST['media_id']) ? intval($_POST['media_id']) : 0;
+        $data['is_showed'] = 0;
+        $this->pdo->update('media_product', $data, "product_id = $product_id AND is_showed = 1 ");
+
+        $data['is_showed'] = 1;
+        $this->pdo->update('media_product', $data, "product_id = $product_id AND media_id = $media_id");
+
+
+        $sql = "SELECT p.*, m.id as media_id, m.name, m.path,'{$this->arg['product_folder_link']}' as link
+            FROM media_product p
+            LEFT JOIN media m ON m.id = p.media_id
+            WHERE p.product_id =" . $_POST['product_id'];
+            $images = $this->pdo->fetch_all($sql);
+
+        echo json_encode($images);
+        die();
     }
     // end of change avatar
 }

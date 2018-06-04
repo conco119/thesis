@@ -89,7 +89,12 @@
                         <a class="lightbox" href="{$arg.product_folder_link}/{$image.name}">
                             <img  src="{$arg.product_folder_link}/{$image.name}" alt="Park">
                         </a>
-                        <button class="edit btn btn-success" ><i class='fa fa-pencil'></i></button>
+                        {if $image.is_showed eq 1}
+                            <button class="edit btn btn-success" ><i class='fa fa-check'></i>Đại diện</button>
+                        {else}
+                            <button class="edit btn btn-success" onclick='SetMainAvatar({$product_info.id}, {$image.media_id})'><i class='fa fa-pencil'></i></button>
+                        {/if}
+
                         <button  data-toggle="modal" data-target="#DeleteForm" onclick='DeleteConfirm({$product_info.id}, {$image.id}, {$image.media_id})' class="delete btn btn-danger"><i class='fa fa-trash-o'></i></button>
                     </div>
                     {/foreach}
@@ -135,6 +140,41 @@ CKEDITOR.replace('ckeditor',{
     height: 500
 });
 baguetteBox.run('.tz-gallery');
+function SetMainAvatar(product_id, media_id)
+{
+    var data = {
+        "product_id": product_id,
+        "media_id": media_id
+    }
+    $.post("./admin?mc=product&site=set_main_avatar", data).done(function(result) {
+        result = JSON.parse(result);
+        let append = '';
+        $.each(result, function(key, image){
+
+             append += `
+                    <div class="col-sm-6 col-md-4 image-container">
+                        <a class="lightbox" href="${image.link}/${image.name}">
+                            <img  src="${image.link}/${image.name}" alt="Park">
+                        </a>
+                        `;
+                        if(image.is_showed == 1)
+                        {
+                            append += `<button class="edit btn btn-success" ><i class='fa fa-check'></i>Đại diện</button>`;
+                        }
+                        if(image.is_showed == 0)
+                        {
+                            append += `<button class="edit btn btn-success" onclick='SetMainAvatar(${image.product_id}, ${image.media_id})'><i class='fa fa-pencil'></i></button>`;
+                        }
+
+
+
+                    append += `
+                        <button  data-toggle="modal" data-target="#DeleteForm" onclick='DeleteConfirm(${image.product_id}, ${image.id}, ${image.media_id})' class="delete btn btn-danger" href="/jane/"><i class='fa fa-trash-o'></i></button>
+                    </div>`;
+        })
+        $(".tz-gallery .row").html(append);
+    })
+}
 function DeleteConfirm(product_id, media_product_id, media_id)
 {
     PNotify.removeAll();
@@ -152,15 +192,24 @@ function DeleteImage(product_id, media_product_id, media_id)
         $('#DeleteForm').modal('hide');
         var append = '';
         $.each(result, function(key, image){
-             append += `
+                append += `
                     <div class="col-sm-6 col-md-4 image-container">
                         <a class="lightbox" href="${image.link}/${image.name}">
                             <img  src="${image.link}/${image.name}" alt="Park">
                         </a>
-                        <button class="edit btn btn-success" href="/jane/"><i class='fa fa-pencil'></i></button>
-                        <button  data-toggle="modal" data-target="#DeleteForm" onclick='DeleteConfirm(${product_id}, ${image.id}, ${image.media_id})' class="delete btn btn-danger" href="/jane/"><i class='fa fa-trash-o'></i></button>
-                    </div>
-            `
+                        `;
+                        if(image.is_showed == 1)
+                        {
+                            append += `<button class="edit btn btn-success" ><i class='fa fa-check'></i>Đại diện</button>`;
+                        }
+                        if(image.is_showed == 0)
+                        {
+                            append += `<button class="edit btn btn-success" onclick='SetMainAvatar(${image.product_id}, ${image.media_id})'><i class='fa fa-pencil'></i></button>`;
+                        }
+
+                    append += `
+                        <button  data-toggle="modal" data-target="#DeleteForm" onclick='DeleteConfirm(${image.product_id}, ${image.id}, ${image.media_id})' class="delete btn btn-danger" href="/jane/"><i class='fa fa-trash-o'></i></button>
+                    </div>`;
         })
         $(".tz-gallery .row").html(append);
     })

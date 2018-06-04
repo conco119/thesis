@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-26 11:33:49
+/* Smarty version 3.1.30, created on 2018-06-04 21:06:52
   from "/Users/mtd/Sites/htaccess/app/admin/view/product/imagepost.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b08e3ad98aa37_10935456',
+  'unifunc' => 'content_5b15477c6c9456_77907667',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'f34e9c706476ced0028473ab9e8016af8e5a38b0' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/product/imagepost.tpl',
-      1 => 1527309228,
+      1 => 1528121204,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b08e3ad98aa37_10935456 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b15477c6c9456_77907667 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 
 <div>
@@ -126,7 +126,14 @@ foreach ($_from as $_smarty_tpl->tpl_vars['image']->value) {
 /<?php echo $_smarty_tpl->tpl_vars['image']->value['name'];?>
 " alt="Park">
                         </a>
-                        <button class="edit btn btn-success" ><i class='fa fa-pencil'></i></button>
+                        <?php if ($_smarty_tpl->tpl_vars['image']->value['is_showed'] == 1) {?>
+                            <button class="edit btn btn-success" ><i class='fa fa-check'></i>Đại diện</button>
+                        <?php } else { ?>
+                            <button class="edit btn btn-success" onclick='SetMainAvatar(<?php echo $_smarty_tpl->tpl_vars['product_info']->value['id'];?>
+, <?php echo $_smarty_tpl->tpl_vars['image']->value['media_id'];?>
+)'><i class='fa fa-pencil'></i></button>
+                        <?php }?>
+
                         <button  data-toggle="modal" data-target="#DeleteForm" onclick='DeleteConfirm(<?php echo $_smarty_tpl->tpl_vars['product_info']->value['id'];?>
 , <?php echo $_smarty_tpl->tpl_vars['image']->value['id'];?>
 , <?php echo $_smarty_tpl->tpl_vars['image']->value['media_id'];?>
@@ -194,6 +201,41 @@ CKEDITOR.replace('ckeditor',{
     height: 500
 });
 baguetteBox.run('.tz-gallery');
+function SetMainAvatar(product_id, media_id)
+{
+    var data = {
+        "product_id": product_id,
+        "media_id": media_id
+    }
+    $.post("./admin?mc=product&site=set_main_avatar", data).done(function(result) {
+        result = JSON.parse(result);
+        let append = '';
+        $.each(result, function(key, image){
+
+             append += `
+                    <div class="col-sm-6 col-md-4 image-container">
+                        <a class="lightbox" href="${image.link}/${image.name}">
+                            <img  src="${image.link}/${image.name}" alt="Park">
+                        </a>
+                        `;
+                        if(image.is_showed == 1)
+                        {
+                            append += `<button class="edit btn btn-success" ><i class='fa fa-check'></i>Đại diện</button>`;
+                        }
+                        if(image.is_showed == 0)
+                        {
+                            append += `<button class="edit btn btn-success" onclick='SetMainAvatar(${image.product_id}, ${image.media_id})'><i class='fa fa-pencil'></i></button>`;
+                        }
+
+
+
+                    append += `
+                        <button  data-toggle="modal" data-target="#DeleteForm" onclick='DeleteConfirm(${image.product_id}, ${image.id}, ${image.media_id})' class="delete btn btn-danger" href="/jane/"><i class='fa fa-trash-o'></i></button>
+                    </div>`;
+        })
+        $(".tz-gallery .row").html(append);
+    })
+}
 function DeleteConfirm(product_id, media_product_id, media_id)
 {
     PNotify.removeAll();
@@ -211,15 +253,24 @@ function DeleteImage(product_id, media_product_id, media_id)
         $('#DeleteForm').modal('hide');
         var append = '';
         $.each(result, function(key, image){
-             append += `
+                append += `
                     <div class="col-sm-6 col-md-4 image-container">
                         <a class="lightbox" href="${image.link}/${image.name}">
                             <img  src="${image.link}/${image.name}" alt="Park">
                         </a>
-                        <button class="edit btn btn-success" href="/jane/"><i class='fa fa-pencil'></i></button>
-                        <button  data-toggle="modal" data-target="#DeleteForm" onclick='DeleteConfirm(${product_id}, ${image.id}, ${image.media_id})' class="delete btn btn-danger" href="/jane/"><i class='fa fa-trash-o'></i></button>
-                    </div>
-            `
+                        `;
+                        if(image.is_showed == 1)
+                        {
+                            append += `<button class="edit btn btn-success" ><i class='fa fa-check'></i>Đại diện</button>`;
+                        }
+                        if(image.is_showed == 0)
+                        {
+                            append += `<button class="edit btn btn-success" onclick='SetMainAvatar(${image.product_id}, ${image.media_id})'><i class='fa fa-pencil'></i></button>`;
+                        }
+
+                    append += `
+                        <button  data-toggle="modal" data-target="#DeleteForm" onclick='DeleteConfirm(${image.product_id}, ${image.id}, ${image.media_id})' class="delete btn btn-danger" href="/jane/"><i class='fa fa-trash-o'></i></button>
+                    </div>`;
         })
         $(".tz-gallery .row").html(append);
     })

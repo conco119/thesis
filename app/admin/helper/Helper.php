@@ -211,4 +211,20 @@ class Helper extends HelpAbstract
     {
         return in_array($type, $this->true_type);
     }
+    // lọc tuần, tháng , năm
+    function get_select_from_array($index)
+    {
+        $result = '';
+        foreach ($this->select_export AS $k => $item) {
+            if ($k == $index)
+            {
+                $result .= "<option value='$k' selected>" . $item . "</option>";
+            }
+            else
+            {
+                $result .= "<option value='$k'>" . $item . "</option>";
+            }
+        }
+        return $result;
+    }
 }

@@ -45,6 +45,56 @@ class ReImport extends Main
     }
 
 
+    function statistics()
+    {
+
+        $import_date = isset($_GET['date']) ? intval($_GET["date"]) : 0;
+        $out['select_import'] = $this->helper->get_select_from_array($import_date);
+
+
+        $key = isset($_GET['key']) ? $_GET["key"] : "";
+        $out['key'] = $key;
+        $sql_where = "";
+        if ($key != "") {
+            $sql_where .= " AND  (a.id LIKE '%$key%' OR b.name LIKE '%$key%')";
+        }
+
+
+        if($date_import != 0)
+        {
+          switch($date_import)
+          {
+            case 1:
+              $sql .= " AND a.date = CURDATE()";
+              break;
+            case 2:
+              $sql .= " AND WEEK(a.date) = WEEK(CURDATE()) AND YEAR(a.date) = YEAR(CURDATE())";
+              break;
+            case 3:
+              $sql .= " AND MONTH(a.date) = MONTH(CURDATE()) AND YEAR(a.date) = YEAR(CURDATE())";
+              break;
+          }
+        }
+
+
+
+        $sql = "SELECT a.id,a.date,a.code,a.status,a.money,a.money_first,a.type,a.debt,b.name AS supplier,c.name AS user FROM warehouse_import AS a
+    	LEFT JOIN suppliers b ON a.supplier_id=b.id
+    	LEFT JOIN users c ON a.creator=c.id
+    	WHERE a.code='DISTROY' $sql_where
+    	ORDER BY a.id DESC ";
+        $paging = $this->paging->get_content($this->pdo->count_rows($sql), 10);
+        $sql .= $paging['sql_add'];
+        $this->smarty->assign('paging', $paging);
+
+        $query = $this->pdo->fetch_all($sql);
+
+
+        $this->smarty->assign('out', $out);
+
+        $this->smarty->display(DEFAULT_LAYOUT);
+    }
+
     function create()
     {
 

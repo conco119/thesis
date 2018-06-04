@@ -22,7 +22,7 @@ class ExportHelper extends HelpAbstract
         // $cc = [];
         if( !empty($all_child) )
         {
-            foreach($all_child as $key => $value)
+            foreach($all_child as $k => $value)
             {
                 $sql = "SELECT a.id,a.code,a.name,a.price_import,a.price,
                 (SELECT SUM(number_count) FROM import_products WHERE a.id=product_id) imported,

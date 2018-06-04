@@ -43,6 +43,7 @@
 						<!--<li><a href="?mc=product&site=warehouse">Kho hàng</a></li>-->
 						<li><a href="{$arg.prefix_admin}mc=export&site=statistics">Hóa đơn bán hàng</a></li>
 						<li><a href="{$arg.prefix_admin}mc=import&site=statistics">Hóa đơn nhập hàng</a></li>
+						<li><a href="{$arg.prefix_admin}mc=reimport&site=statistics">Phiếu khách trả hàng</a></li>
 					</ul>
 				</li>
 				<li><a><i class="fa fa-bar-chart-o"></i> Báo cáo <span class="fa fa-chevron-down"></span></a>
