@@ -4,10 +4,10 @@
             <h3>Thông tin liên hệ</h3>
 
             <ul class="full">
-                <li>{$output.info_footer.name}</li>
-                <li>{$output.info_footer.address}</li>
-                <li>{$output.info_footer.phone}</li>
-                <li>{$output.info_footer.email}</li>
+                <li>{$info.info.name}</li>
+                <li>{$info.info.address}</li>
+                <li>Call {$info.info.phone}</li>
+                <li>{$info.info.email}</li>
             </ul>
         </div>
         <div class="col-md-3 col-sm-3 col-xs-12">
@@ -57,7 +57,7 @@
                         <div class="fb_icon"><i class="fa fa-youtube"></i></div>
                     </a>
                 </li>
-               
+
             </ul>
 
             <div class="mail_cont">

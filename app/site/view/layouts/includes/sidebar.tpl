@@ -3,13 +3,13 @@
 </div>
 <div class="category bg_white mar-btm">
     <ul>
-        {foreach from=$output.category item=list} 
-            <li><a href="{$list.link}"> {$list.name} {if $list.sub neq NULL}<i class="fa fa-caret-right"></i>{/if}</a>
-                    {if $list.sub neq NULL}
+        {foreach from=$menu item=list}
+            <li><a href="./?mc=category&n={$list.menu_link}"> {$list.name} {if $list.child_menu neq NULL}<i class="fa fa-caret-right"></i>{/if}</a>
+                {if $list.child_menu neq NULL}
                     <ul>
-                        {foreach from=$list.sub item=subList}
-                            <li><a href="{$subList.link}">{$subList.name}</a></li>
-                            {/foreach}
+                        {foreach from=$list.child_menu item=subList}
+                            <li><a href="./?mc=category&n={$subList.menu_link}">{$subList.name}</a></li>
+                        {/foreach}
                     </ul>
                 {/if}
             </li>
@@ -24,16 +24,21 @@
         <h3><i class="fa fa-tasks"></i> Bán chạy nhất</h3>
     </div>
     <ul>
-        {foreach from=$output.product_highlight item=list}
+        {foreach from=$best_seller item=list}
             <li>
                 <div class="col-md-4 col-sm-4 col-xs-12 col-df text-center">
-                    <a href="{$list.link}" title="{$list.name}"><img src="{$list.img}" width="100%;"></a>
+                    <a href="./?mc=productdetail&n={$list.link_name}" title="{$list.name}"><img src="{$arg.product_folder_link}/{$list.image_name}" width="100%;"></a>
                 </div>
                 <div class="col-md-8 col-sm-8 col-xs-12 col-df">
                     <div class="info_prd">
-                        <a href="{$list.link}" title="{$list.name}">{$list.name}</a>
+                        <a href="./?mc=productdetail&n={$list.link_name}" title="{$list.name}">{$list.name}</a>
                     </div>
-                    <div class="price">{$list.price_sale}</div>
+                    <div class="price">
+                        {$list.price}đ
+                        {if $list.is_discount eq 1}
+                                <span>{$list.sale_price}đ </span>
+                        {/if}
+                    </div>
                 </div>
             </li>
         {/foreach}
@@ -42,30 +47,32 @@
     <div class="clear"></div>
 </div>
 
-<div class="sidebar_title bg_e84c3d">
-    <h3><i class="fa fa-tasks"></i> So sảnh sản phẩm</h3>
-</div>
-<div class="compare_product bg_white mar-btm">
-    <ul>
-        {foreach from=$output.compare_product item=data}
-            <li id="compare{$data.id}">
-                <div class="img">
-                    <img src="{$data.avatar}">
-                </div>
-                <div class="prd_compare">
-                    <a href="{$data.url}" title="{$data.name}">{$data.name}</a>
-                </div>
 
-                <i class="fa fa-times close" onclick="removeCompareProduct({$data.id});"></i>
+<div class="bestseller bg_white mar-btm">
+    <div class="sidebar_title bg_e84c3d">
+        <h3><i class="fa fa-tasks"></i> Sản phẩm khuyến mãi</h3>
+    </div>
+    <ul>
+        {foreach from=$sale_products item=list}
+            <li>
+                <div class="col-md-4 col-sm-4 col-xs-12 col-df text-center">
+                    <a href="./?mc=productdetail&n={$list.link_name}" title="{$list.name}"><img src="{$arg.product_folder_link}/{$list.image_name}" width="100%;"></a>
+                </div>
+                <div class="col-md-8 col-sm-8 col-xs-12 col-df">
+                    <div class="info_prd">
+                        <a href="./?mc=productdetail&n={$list.link_name}" title="{$list.name}">{$list.name}</a>
+                    </div>
+                    <div class="price">
+                        {$list.price}đ
+                        {if $list.is_discount eq 1}
+                                <span>{$list.sale_price}đ </span>
+                        {/if}
+                    </div>
+                </div>
             </li>
         {/foreach}
     </ul>
 
-    <div class="compareItem">
-        <a href="./so-sanh/" >
-            <i class="fa fa-files-o"></i> So sánh <span>{$arg.number_compare} sản phẩm</span>
-        </a>
-    </div> 
     <div class="clear"></div>
 </div>
 

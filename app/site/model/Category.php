@@ -10,6 +10,8 @@ class Category extends Main {
 
     function index()
     {
+        $this->set_sidebar();
+        $this->set_footer();
         //random product
         $sql = "SELECT p.* ,
         (SELECT m.name FROM media m
@@ -17,32 +19,27 @@ class Category extends Main {
         FROM products p ORDER BY RAND() LIMIT 10";
         $random_product = $this->pdo->fetch_all($sql);
 
-
-        $c = isset($_GET['c']) ? $_GET['c'] : "";
+        //find product id
+        $c = isset($_GET['n']) ? $_GET['n'] : "";
         $all_cat = $this->pdo->fetch_all("SELECT id, name FROM product_categories");
         foreach($all_cat as $k => $cat)
         {
             if( $this->dstring->str_convert($cat['name']) == $c)
             {
                 $cat_id = $cat['id'];
+                $category = $this->pdo->fetch_one("SELECT * FROM product_categories WHERE id = $cat_id");
             }
         }
 
-        echo $cat_id;
-        $all_child = $this->pdo->fetch_all("SELECT * FROM product_categories WHERE parent_id = $cat_id");
-        $parent = $this->pdo->fetch_one("SELECT * FROM product_categories WHERE id = $cat_id");
-        foreach ($all_child as $key => $value)
-        {
-            $all_child[$key]['link'] = $this->dstring->str_convert($value['name']);
-            $all_child[$key]['child'] = $this->CategoryHelper->get_child_category($value['id'], $this->dstring);
-        }
         // all product
         $sql = "SELECT p.* ,
         (SELECT m.name FROM media m
         RIGHT JOIN  media_product mp ON m.id = mp.media_id WHERE mp.product_id = p.id AND mp.is_showed = 1) as image_name,
         (SELECT count(id) FROM product_rates pr WHERE p.id=pr.product_id ) as number_user_rate,
         (SELECT sum(rate) FROM product_rates pr WHERE p.id=pr.product_id ) as total_rate
-        FROM products p ORDER BY id";
+        FROM products p
+        WHERE p.category_id = $cat_id
+        ORDER BY id";
         $paging = $this->paging->get_content($this->pdo->count_rows($sql), 10);
         $sql .= $paging['sql_add'];
         $products = $this->pdo->fetch_all($sql);
@@ -65,12 +62,11 @@ class Category extends Main {
                 }
             }
         }
-        pre($products);
+
         $this->smarty->assign('paging', $paging);
         $this->smarty->assign('products', $products);
         $this->smarty->assign('random_product', $random_product);
-        $this->smarty->assign('all_child', $all_child);
-        $this->smarty->assign('parent', $parent);
-        $this->smarty->display('category-detail.tpl');
+        $this->smarty->assign('category', $category);
+        $this->smarty->display('home.tpl');
     }
 }

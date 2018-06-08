@@ -9,6 +9,7 @@ define("HOME_PAGE", DOMAIN . "admin");
 define("LOGIN_PAGE", DOMAIN . "admin?mc=user&site=login");
 define("DENIED_PAGE", DOMAIN . "admin?mc=home&site=denied");
 // lay info db
+
 function get_db_info() {
   if(file_exists(FILE_CONF_DATABASE))
   {
@@ -18,6 +19,7 @@ function get_db_info() {
       $conn = implode(",", $info);
     }
   }
+
   return $conn;
 }
 

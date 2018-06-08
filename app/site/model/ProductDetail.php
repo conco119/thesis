@@ -32,6 +32,6 @@ class ProductDetail extends Main {
         $product['images'] = $this->pdo->fetch_all($sql);
         pre($product);
         $this->smarty->assign('product', $product);
-        $this->smarty->display('product-detail.tpl');
+        $this->smarty->display('home.tpl');
     }
 }
