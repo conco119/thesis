@@ -3,9 +3,9 @@
         <ul class="pull-left hide-mobile">
         </ul>
         <ul class="pull-right">
-            {if $arg.user.id neq '0'}
+            {if $arg.user.id eq 0}
                 <li><a href="./cus/?site=login"><i class="fa fa-user"></i>
-                        Đăng nhập</a></li>
+                        Đăng nhập </a></li>
                 <li><a href="./cus/?site=register"><i class="fa fa-register"></i>
                         Đăng ký</a></li>
             {else}

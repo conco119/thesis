@@ -125,4 +125,19 @@ class Home extends Main {
         $this->smarty->assign('plugin', $plugin);
         $this->smarty->display('home.tpl');
     }
+
+    function payment()
+    {
+        $this->smarty->display('home.tpl');
+    }
+
+    function contact()
+    {
+        $this->smarty->display('contact.tpl');
+    }
+
+    function intro()
+    {
+        $this->smarty->display('home.tpl');
+    }
 }

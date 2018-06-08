@@ -69,7 +69,8 @@ class Main
     else
       $this->arg['avatar_link'] = $this->arg['image_folder_link'] . 'user-default.png';
     $this->smarty->assign('arg', $this->arg);
-
+    $this->set_sidebar();
+    $this->set_footer();
 
   }
 
@@ -87,7 +88,7 @@ class Main
         }
     }
     $this->smarty->assign('menu',$menu);
-
+   
 
     // sản phẩm bán chạy
     $sql = "SELECT p.*, sum(ex.number_count) as exported,

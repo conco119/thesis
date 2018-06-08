@@ -40,7 +40,7 @@
         {include file="includes/menu.tpl"}
         
         <div class="container">
-            {include file=$content}
+            {include file=$tpl_file}
         </div>
               
         {include file="includes/footer.tpl"}

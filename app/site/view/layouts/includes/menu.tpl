@@ -10,19 +10,25 @@
 				</div>
 				<div class="col-md-2 col-sm-2 col-xs-12 col-df">
 					<li class="" style="background: rgb(245, 121, 31);"><i class="fa fa-camera-retro"></i>
-						<a href="./" title="Sản phẩm">Sản phẩm
+						<a href="./?mc=product" title="Sản phẩm">Sản phẩm
 							<p>Phân phối linh kiện</p>
 					</a></li>
 				</div>
 				<div class="col-md-2 col-sm-2 col-xs-12 col-df">
-					<li class="" style="background: rgb(53, 152, 219);"><i class="fa fa-cc-paypal"></i>
-						<a href="./" title="Giới thiệu">Giới thiệu
+					<li class="" style="background: rgb(129, 142, 181);"><i class="fa fa-cc-paypal"></i>
+						<a href="./?site=intro" title="Giới thiệu">Giới thiệu
 							<p></p>
 					</a></li>
 				</div>
 				<div class="col-md-2 col-sm-2 col-xs-12 col-df">
+					<li class="" style="background: rgb(53, 152, 219);"><i class="fa fa-cc-paypal"></i>
+						<a href="./?site=payment" title="Giới thiệu">Thanh Toán
+							<p>Phương thức thanh toán</p>
+					</a></li>
+				</div>
+				<div class="col-md-2 col-sm-2 col-xs-12 col-df">
 					<li class="" style="background: rgb(154, 89, 181);"><i class="fa fa-cc-paypal"></i>
-						<a href="./" title="Liên hệ">Liên hệ
+						<a href="./?site=contact" title="Liên hệ">Liên hệ
 							<p> Liên hệ </p>
 					</a></li>
 				</div>

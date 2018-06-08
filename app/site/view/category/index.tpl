@@ -8,25 +8,25 @@
     <div class="col-md-4 col-sm-4 col-xs-12">
         <div class="product_item">
             <div class="img">
-               <img src="{$arg.product_folder_link}/{$list.image_name}" width="100%">
+               <a href="?mc=product&site=detail&n={$list.link_name}"><img src="{$arg.product_folder_link}/{$list.image_name}" width="100%"></a>
             </div>
             <div class="name">
-                <a href="{$list.link}">{$list.name}</a>
+                <a href="?mc=product&site=detail&n={$list.link_name}">{$list.name}</a>
             </div>
-            <p class="price">{$list.price}</p>
+            <p class="price">
+                {$list.price}đ
+                {if $list.is_discount eq 1}
+                        <span>{$list.sale_price}đ </span>
+                {/if}
+            </p>
             <div class="num_star" id="Star{$list.id}">
-            	{$list.stars}
-            	<span>{$list.number_point} đánh giá - {$list.avg_point} điểm</span>
+            	 <i class="fa fa-star" onclick="SetStarProduct(32, 1);"></i>
+                  <i class="fa fa-star" onclick="SetStarProduct(32, 1);"></i>
+            	<span>{$list.number_point} x đánh giá - {$list.avg_point} x điểm</span>
             </div>
             <div class="btn_function">
-                <div class="col-md-8 col-sm-8 col-xs-8 col-df">
+                <div class="col-md-12 col-sm-12 col-xs-12 col-df">
                     <button type="button" class="btn_prd cart" title="Thêm vào giỏ hàng" onclick="addToCart({$list.id});"><i class="fa fa-opencart"></i> Thêm vào giỏ hàng </button>
-                </div>
-                <div class="col-md-2 col-sm-2 col-xs-2 col-df">
-                    <button type="button" class="btn_prd like" title="Yêu thích sản phẩm" onclick="likeProduct({$list.id});"><i class="fa fa-heart-o"></i></button>
-                </div>
-                <div class="col-md-2 col-sm-2 col-xs-2 col-df">
-                    <button class="btn_prd btn-compare" title="Thêm vào so sánh" onclick="compareProduct({$list.id}, {$list.category_id});"><i class="fa fa-files-o"></i></button>
                 </div>
             </div>
         </div>
@@ -39,7 +39,6 @@
 <div class="mar-top">
     <ul class="paging">
         {$paging.paging}
-
     </ul>
 </div>
 

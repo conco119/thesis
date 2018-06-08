@@ -1,6 +1,6 @@
 <?php
 
-class ProductDetailHelper extends HelpAbstract
+class ProductHelper extends HelpAbstract
 {
     function __construct()
     {
