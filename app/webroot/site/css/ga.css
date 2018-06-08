@@ -1,0 +1,48 @@
+@CHARSET "ISO-8859-1";
+*{
+	margin: 0;
+	padding: 0;
+}
+body{
+	background: #333;
+	font-size: 13px;
+}
+#wrap{
+	width: 1100px;
+	margin: auto;
+}
+
+
+/**  Style for ul,li  **/
+.ul5{
+	display: block;
+}
+.ul5 li{
+	list-style: none;
+	float: left;
+}
+.ul5 li{
+	width: 20%;
+}
+.ul5 li a{
+	display: block;
+}
+/** --------------------------- **/
+
+
+.img{
+	position: relative;
+}
+.img img{
+	width: 100%;
+}
+
+hr.clear{
+	border: 0;
+	height: 0;
+	clear: both;
+}
+
+.mar-btm{
+	margin-bottom: 10px;
+}

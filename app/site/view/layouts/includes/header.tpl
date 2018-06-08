@@ -1,106 +1,69 @@
-<header class="header-container">
-    <div class="header-top">
-        <div class="container">
-            <div class="row">
-                <!-- Header Language -->
-                <div class="col-xs-6">
-                </div>
-                <div class="col-xs-6">
-                    <!-- Header Top Links -->
-                    <div class="toplinks">
-                        <div class="links">
-                            <div class="myaccount"><a title="My Account" href="login.html"><span class="hidden-xs">Tài khoản</span></a></div>
-                            {* <div class="wishlist"><a title="My Wishlist" href="wishlist.html"><span class="hidden-xs">Wishlist</span></a></div> *}
-                            <div class="check"><a title="Checkout" href="checkout.html"><span class="hidden-xs">Phương thức thanh toán</span></a></div>
-                            <div class="phone hidden-xs">1 800 123 1234</div>
-                        </div>
-                    </div>
-                    <!-- End Header Top Links -->
-                </div>
-            </div>
+<div class="container">
+    <div class="top_link bg_white">
+        <ul class="pull-left hide-mobile">
+            {foreach from=$output.menu_top_link item=list}
+                <li><a href="{$list.url}">{$list.name}</a></li> 
+                {/foreach}
+        </ul>
+        <ul class="pull-right">
+            {if $arg.login eq '0'}
+                <li><a href="./cus/?site=login"><i class="fa fa-user"></i>
+                        Đăng nhập</a></li>
+                <li><a href="./cus/?site=register"><i class="fa fa-user"></i>
+                        Đăng ký</a></li> {else}
+                <li class="pull-right"><a href="./cus/?site=logout"><i
+                            class="fa fa-user"></i> Đăng Xuất</a></li>
+                <li class="pull-right"><a href="./cus/?site=detail"><i
+                            class="fa fa-registered"></i> {$arg.user.name}</a></li> {/if}
+            </ul>
+            <div class="clear"></div>
         </div>
     </div>
-    <div class="header container">
-        <div class="row">
-            <div class="col-lg-2 col-sm-3 col-md-2 col-xs-12">
-                <!-- Header Logo -->
-                <a class="logo" title="Magento Commerce" href="index.html"><img alt="Magento Commerce" src="{$arg.stylesheet}images/logo.png"></a>
-                <!-- End Header Logo -->
+
+    <div class="container">
+        <div class="header">
+
+            <div class="col-md-3 col-sm-3 col-xs-12 col-df">
+                <div class="logo">
+                    <a href=""><img src="{$output.logo}"> Máy tính đông tây</a>
+                </div>
             </div>
-            <div class="col-lg-7 col-sm-4 col-md-6 col-xs-12">
-                <!-- Search-col -->
-                <div class="search-box">
-                    <form action="#" method="POST" id="search_mini_form" name="Categories">
-                        <select name="category_id" class="cate-dropdown hidden-xs">
-                            <option value="0">All Categories</option>
-                            <option value="36">Camera</option>
-                            <option value="37">Electronics</option>
-                            <option value="42">&nbsp;&nbsp;&nbsp;Cell Phones</option>
-                            <option value="43">&nbsp;&nbsp;&nbsp;Cameras</option>
-                            <option value="44">&nbsp;&nbsp;&nbsp;Laptops</option>
-                            <option value="45">&nbsp;&nbsp;&nbsp;Hard Drives</option>
-                            <option value="46">&nbsp;&nbsp;&nbsp;Monitors</option>
-                            <option value="47">&nbsp;&nbsp;&nbsp;Mouse</option>
-                            <option value="48">&nbsp;&nbsp;&nbsp;Digital Cameras</option>
-                            <option value="38">Desktops</option>
-                            <option value="39">Computer Parts</option>
-                            <option value="40">Televisions</option>
-                            <option value="41">Featured</option>
-                        </select>
-                        <input type="text" placeholder="Search here..." value="" maxlength="70" class="" name="search" id="search">
-                        <button id="submit-button" class="search-btn-bg"><span>Tìm kiếm</span></button>
+            <div class="col-md-9 col-sm-9 col-xs-12 col-df">
+                <div class="col-md-7 col-sm-7 col-xs-12">
+
+                    <form action="./search/" method="get" id="search-form">
+                        <input type="text" name="skey" class="form-control" placeholder="Tìm kiếm">
+                        <button type="submit"><i class="fa fa-search"></i></button>
                     </form>
+
                 </div>
-                <!-- End Search-col -->
-            </div>
-            <!-- Top Cart -->
-            <div class="col-lg-3 col-sm-5 col-md-4 col-xs-12">
-                <div class="top-cart-contain">
-                    <div class="mini-cart">
-                        <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle"> <a href="shopping_cart.html"> <i class="icon-cart"></i>
-                <div class="cart-box"><span class="title">Giỏ hàng</span><span id="cart-total"> 2 </span></div>
-                </a></div>
-                        <div>
-                            <div class="top-cart-content arrow_box">
-                                <div class="block-subtitle">Recently added item(s)</div>
-                                <ul id="cart-sidebar" class="mini-products-list">
-                                    <li class="item even"> <a class="product-image" href="#" title="Downloadable Product "><img alt="Downloadable Product " src="products-images/product1.jpg" width="80"></a>
-                                        <div class="detail-item">
-                                            <div class="product-details"> <a href="#" title="Remove This Item" onClick="" class="glyphicon glyphicon-remove">&nbsp;</a> <a class="glyphicon glyphicon-pencil" title="Edit item" href="#">&nbsp;</a>
-                                                <p class="product-name"> <a href="#" title="Downloadable Product">Downloadable Product </a> </p>
-                                            </div>
-                                            <div class="product-details-bottom"> <span class="price">$100.00</span> <span class="title-desc">Qty:</span> <strong>1</strong> </div>
-                                        </div>
-                                    </li>
-                                    <li class="item last odd"> <a class="product-image" href="#" title="  Sample Product "><img alt="  Sample Product " src="products-images/product11.jpg" width="80"></a>
-                                        <div class="detail-item">
-                                            <div class="product-details"> <a href="#" title="Remove This Item" onClick="" class="glyphicon glyphicon-remove">&nbsp;</a> <a class="glyphicon glyphicon-pencil" title="Edit item" href="#">&nbsp;</a>
-                                                <p class="product-name"> <a href="#" title="  Sample Product "> Sample Product </a> </p>
-                                            </div>
-                                            <div class="product-details-bottom"> <span class="price">$320.00</span> <span class="title-desc">Qty:</span> <strong>2</strong> </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <div class="top-subtotal">Subtotal: <span class="price">$420.00</span></div>
-                                <div class="actions">
-                                    <button class="btn-checkout" type="button"><span>Checkout</span></button>
-                                    <button class="view-cart" type="button"><span>View Cart</span></button>
-                                </div>
-                            </div>
+                <div class="col-md-5 col-sm-5 col-xs-12 col-df hide-mobile">
+
+                    <div class="col-md-12 col-sm-12 col-xs-12 col-df nav_header">
+                        <div class="item_hd bg_a1aaaf">
+                            {$output.info_footer.phone} <i class="fa fa-phone fa-2x"></i>
+                            <p>Monday - satusday: 8am</p>
                         </div>
-                    </div>
-                    <div id="ajaxconfig_info" style="display:none"> <a href="#/"></a>
-                        <input value="" type="hidden">
-                        <input id="enable_module" value="1" type="hidden">
-                        <input class="effect_to_cart" value="1" type="hidden">
-                        <input class="title_shopping_cart" value="Go to shopping cart" type="hidden">
+                        <ul class="phone">
+                            <li class="bg_e84c3d">
+                                <a href="./so-sanh/" id="compareItem">
+                                    <i class="fa fa-files-o"></i> <span>{$arg.number_compare} item</span>
+                                </a>
+                            </li>
+                            <li class="bg_3598db">
+                                <a href="./yeu-thich/">
+                                    <i class="fa fa-heart-o"></i> <span>{$arg.number_like} item</span>
+                                </a>
+                            </li>
+                            <li class="bg_f5791f">
+                                <a href="./gio-hang/">
+                                    <i class="fa fa-cart-plus"></i> <span>{$arg.number_cart} item</span>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                <div class="signup"><a title="Login" href="login.html"><span>Đăng ký</span></a></div>
-                <span class="or"> | </span>
-                <div class="signup"><a style='color:red' title="Login" href="login.html"><span>Đăng nhập</span></a></div>
             </div>
-            <!-- End Top Cart -->
+            <div class="clear"></div>
         </div>
     </div>
-</header>

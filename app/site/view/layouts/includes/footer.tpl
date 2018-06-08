@@ -1,66 +1,80 @@
-<footer class="footer">
-    <div class="footer-middle container">
-        <div class="col-md-3 col-sm-4">
-            <div class="footer-logo"><a href="index.html" title="Logo"><img src="images/footer-logo.png" alt="logo"></a></div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus diam arcu. </p>
-            <div class="payment-accept">
-                <div><img src="images/payment-1.png" alt="payment"> <img src="images/payment-2.png" alt="payment"> <img src="images/payment-3.png" alt="payment"> <img src="images/payment-4.png" alt="payment"></div>
+<div class="row col-df footer">
+    <div class="container-fluid">
+        <div class="col-md-3 col-sm-3 col-xs-12">
+            <h3>Thông tin liên hệ</h3>
+
+            <ul class="full">
+                <li>{$output.info_footer.name}</li>
+                <li>{$output.info_footer.address}</li>
+                <li>{$output.info_footer.phone}</li>
+                <li>{$output.info_footer.email}</li>
+            </ul>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-12">
+            <h3>Quy định - Chính sách</h3>
+
+            <ul class="full">
+                {foreach from=$output.menu_footer item=list}
+                    <li><a href="{$list.url}">{$list.name}</a></li>
+                {/foreach}
+            </ul>
+        </div>
+        {foreach from=$output.menu_p3 item=list}
+        <div class="col-md-3 col-sm-3 col-xs-12">
+            <h3> {$list.name} </h3>
+            <ul class="full">
+                {foreach from=$list.child_menu item=child}
+                    <li><a href="{$child.url}">{$child.name}</a></li>
+                {/foreach}
+            </ul>
+        </div>
+        {/foreach}
+
+        <div class="col-md-3 col-sm-3 col-xs-12">
+            <h3>Kết nối</h3>
+
+            <ul class="full connect_footer">
+                <li class="bg_3a599f">
+                    <a href="{$arg.social.facebook}" target="_blank">
+                        <div class="fb_icon"><i class="fa fa-facebook"></i></div>
+                    </a>
+                </li>
+
+                <li class="bg_3096f1">
+                    <a href="{$arg.social.twitter}" target="_blank">
+                        <div class="fb_icon"><i class="fa fa-twitter"></i></div>
+                    </a>
+                </li>
+
+                 <li class="bg_dd4e42">
+                    <a href="{$arg.social.google}" target="_blank">
+                        <div class="fb_icon"><i class="fa fa-google-plus"></i></div>
+                    </a>
+                </li>
+
+                <li class="bg_f2802c">
+                    <a href="{$arg.social.youtube}" target="_blank">
+                        <div class="fb_icon"><i class="fa fa-youtube"></i></div>
+                    </a>
+                </li>
+               
+            </ul>
+
+            <div class="mail_cont">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="usr" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-success">Subscribe</button>
+                </div>
             </div>
-        </div>
-        <div class="col-md-2 col-sm-4">
-            <h4>Shopping Guide</h4>
-            <ul class="links">
-                <li class="first"><a href="#" title="How to buy">How to buy</a></li>
-                <li><a href="faq.html" title="FAQs">FAQs</a></li>
-                <li><a href="#" title="Payment">Payment</a></li>
-                <li><a href="#" title="Shipment&lt;/a&gt;">Shipment</a></li>
-                <li><a href="delivery.html" title="delivery">Delivery</a></li>
-                <li class="last"><a href="#" title="Return policy">Return policy</a></li>
-            </ul>
-        </div>
-        <div class="col-md-2 col-sm-4">
-            <h4>Style Advisor</h4>
-            <ul class="links">
-                <li class="first"><a title="Your Account" href="login.html">Your Account</a></li>
-                <li><a title="Information" href="#">Information</a></li>
-                <li><a title="Addresses" href="#">Addresses</a></li>
-                <li><a title="Addresses" href="#">Discount</a></li>
-                <li><a title="Orders History" href="#">Orders History</a></li>
-                <li class="last"><a title=" Additional Information" href="#">Additional Information</a></li>
-            </ul>
-        </div>
-        <div class="col-md-2 col-sm-4">
-            <h4>Information</h4>
-            <ul class="links">
-                <li class="first"><a href="sitemap.html" title="Site Map">Site Map</a></li>
-                <li><a href="#/" title="Search Terms">Search Terms</a></li>
-                <li><a href="#" title="Advanced Search">Advanced Search</a></li>
-                <li><a href="contact_us.html" title="Contact Us">Contact Us</a></li>
-                <li><a href="#" title="Suppliers">Suppliers</a></li>
-                <li class=" last"><a href="#" title="Our stores" class="link-rss">Our stores</a></li>
-            </ul>
-        </div>
-        <div class="col-md-3 col-sm-4">
-            <h4>Contact us</h4>
-            <div class="contacts-info">
-                <address>
-                    <i class="add-icon">&nbsp;</i>123 Main Street, Anytown,
-                    <br> &nbsp;CA 12345 USA
-                </address>
-                <div class="phone-footer"><i class="phone-icon">&nbsp;</i> +1 800 123 1234</div>
-                <div class="email-footer"><i class="email-icon">&nbsp;</i> <a href="mailto:support@magikcommerce.com">support@magikcommerce.com</a> </div>
-            </div>
+
         </div>
     </div>
-    <div class="footer-bottom container">
-        <div class="col-sm-5 col-xs-12 coppyright"> &copy; 2015 Magikcommerce. All Rights Reserved.</div>
-        <div class="col-sm-7 col-xs-12 company-links">
-            <ul class="links">
-                <li><a href="#" title="Magento Themes">Magento Themes</a></li>
-                <li><a href="#" title="Premium Themes">Premium Themes</a></li>
-                <li><a href="#" title="Responsive Themes">Responsive Themes</a></li>
-                <li class="last"><a href="#" title="Magento Extensions">Magento Extensions</a></li>
-            </ul>
-        </div>
-    </div>
-</footer>
+</div>
+
+{literal}
+<script type="text/javascript">
+(function(d,s,id){var z=d.createElement(s);z.type="text/javascript";z.id=id;z.async=true;z.src="//static.zotabox.com/7/e/7e6bd0dde9d6ef8fce0be070a1b9d6c5/widgets.js";var sz=d.getElementsByTagName(s)[0];sz.parentNode.insertBefore(z,sz)}(document,"script","zb-embed-code"));
+</script>
+{/literal}

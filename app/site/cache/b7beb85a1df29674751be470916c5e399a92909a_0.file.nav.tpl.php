@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-04 23:07:49
+/* Smarty version 3.1.30, created on 2018-06-05 22:19:35
   from "/Users/mtd/Sites/htaccess/app/site/view/layouts/includes/nav.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b1563d5181e60_73104353',
+  'unifunc' => 'content_5b16aa070186c0_64400615',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'b7beb85a1df29674751be470916c5e399a92909a' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/site/view/layouts/includes/nav.tpl',
-      1 => 1528128468,
+      1 => 1528211972,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b1563d5181e60_73104353 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b16aa070186c0_64400615 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!-- Navbar -->
 <nav>
@@ -111,7 +111,8 @@ $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->t
 if ($_from !== null) {
 foreach ($_from as $_smarty_tpl->tpl_vars['category']->value) {
 ?>
-                                        <li class="level1 nav-6-1 parent item"> <a href="grid.html"><span><?php echo $_smarty_tpl->tpl_vars['category']->value['name'];?>
+                                        <li class="level1 nav-6-1 parent item"> <a href="./?mc=category&site=index&c=<?php echo $_smarty_tpl->tpl_vars['category']->value['link'];?>
+"><span><?php echo $_smarty_tpl->tpl_vars['category']->value['name'];?>
 </span></a>
                                         <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['category']->value['child'], 'child');
@@ -120,7 +121,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['child']->value) {
 ?>
                                             <!--sub sub category-->
                                             <ul class="level1">
-                                                <li class="level2 nav-6-1-1"> <a href="grid.html"><span><?php echo $_smarty_tpl->tpl_vars['child']->value['name'];?>
+                                                <li class="level2 nav-6-1-1"> <a href="./?mc=category&site=index&c="<span><?php echo $_smarty_tpl->tpl_vars['child']->value['name'];?>
 </span></a> </li>
 
                                             </ul>

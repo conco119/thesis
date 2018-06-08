@@ -82,11 +82,11 @@
                             <div class="nav-block nav-block-center">
                                 <ul class="level0">
                                     {foreach from=$categories item=category}
-                                        <li class="level1 nav-6-1 parent item"> <a href="grid.html"><span>{$category.name}</span></a>
+                                        <li class="level1 nav-6-1 parent item"> <a href="./?mc=category&site=index&c={$category.link}"><span>{$category.name}</span></a>
                                         {foreach from=$category.child item=child}
                                             <!--sub sub category-->
                                             <ul class="level1">
-                                                <li class="level2 nav-6-1-1"> <a href="grid.html"><span>{$child.name}</span></a> </li>
+                                                <li class="level2 nav-6-1-1"> <a href="./?mc=category&site=index&c="<span>{$child.name}</span></a> </li>
 
                                             </ul>
                                             <!--sub sub category-->

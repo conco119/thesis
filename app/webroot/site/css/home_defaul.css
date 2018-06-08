@@ -1,0 +1,50 @@
+
+body{
+  background: url(../images/bg.png) no-repeat;
+  background-size: 100% !important;
+}
+
+.home-default {
+  position: relative;
+  margin: 0 auto; }
+  .home-default .home_box {
+    background: url(../images/bg_box.jpg) repeat;
+    position: relative;
+    max-width: 693px;
+    border: #FFF solid 3px;
+    padding-bottom: 20px;
+    margin: 25px auto;
+    z-index: 1;
+    margin-top: 70px; }
+    .home-default .home_box .ribbon {
+      width: 100%;
+      height: 69px;
+      text-align: center;
+      margin: 0 auto;
+      z-index: 9999;
+      background: url(../images/ribbon_green.png) center no-repeat; }
+      .home-default .home_box .ribbon img {
+        width: 100%;
+        max-width: 435px;
+        margin-top: 15px; }
+    .home-default .home_box .btn_icon {
+      text-align: center; }
+      .home-default .home_box .btn_icon span {
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
+        color: #FFF;
+        display: inline-block;
+        border-radius: 4px; }
+        .home-default .home_box .btn_icon span a {
+          text-decoration: none;
+          color: #930000;
+          font-size: 16px;
+          font-weight: bold;
+          line-height: 36px;
+          display: inline-block;
+          padding: 0 5px;
+          margin: 7px 5px;
+          border: 4px double #930000;
+          border-radius: 5px;
+          background: #E0E0E0; }

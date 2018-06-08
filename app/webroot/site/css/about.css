@@ -1,0 +1,145 @@
+#header{
+	padding: 30px 0px;
+
+}
+#header img{
+	background: #2AA6CE;
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	padding: 5px;
+}
+
+#about-content{
+	padding-bottom: 30px !important;
+}
+
+#about-content p {
+	line-height: 24px;
+	font-style: italic;
+}
+
+#about-content h3{
+	margin: 0px;
+	padding: 30px 0px;
+	text-transform: uppercase;
+}
+
+.bor-right{
+	border-right: 1px #dedede solid;
+}
+
+#contact-content{
+	padding: 20px 15px !important;
+}
+
+#contact-content .contact-left li{
+	padding: 20px 0px;
+	border-bottom: 1px #dedede dotted;
+	float: left;width: 100%;
+}
+
+#contact-content .contact-left .img{
+	float: left;
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	border: 1px #dedede solid;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+
+#contact-content .contact-left h3 a{
+	color: #040404;
+	text-decoration: none;
+}
+
+#contact-content .contact-left p{
+	font-size: 16px;
+	margin: 0px;
+}
+
+.cont_localtion {
+    position: relative;
+    display: block;
+    height: 50px;
+    padding-left: 70px;
+    padding-top: 5px;
+}
+
+.cont_localtion .icon {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 40px;
+    min-height: 40px;
+    text-align: center;
+    line-height: 40px;
+    color: white;
+}
+
+.cont_localtion p {
+    color: #858991;
+    margin: 0px;
+    padding-top: 10px;
+}
+
+.bg_1bbc9b {
+    background: #1bbc9b;
+}
+.bg_f5791f {
+    background: #f5791f !important;
+    border: 1px #f5791f solid !important;
+}
+.bg_3598db {
+    background: #3598db !important;
+}
+.bg_9a59b5 {
+    background: #9a59b5;
+}
+.error{
+	color: red;
+	font-size: 12px;
+	font-weight: 500;
+}
+
+
+#ContactFrom form{
+	padding-bottom: 30px;
+}
+
+
+#ContactFrom .head p{
+	color: #50a3cd;
+	text-transform: uppercase;
+	font-weight: 600;
+	margin: 0px;
+	font-size: 14px;
+}
+
+#ContactFrom .contact-title{
+	text-transform: uppercase;
+	font-size: 40px;
+	color: #474a4f;
+	font-weight: 600;
+	margin: 0px;
+}
+
+#ContactFrom .form-horizontal .form-group{
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+#ContactFrom .head {
+    padding: 15px 0px 10px 0px;
+    margin-bottom: 15px;
+}
+
+#ContactFrom .contact-title {
+    margin: 0px;
+    padding-bottom: 10px;
+    border-bottom: 2px #2A6496 solid;
+    color: #FF4234;
+    font-size: 20px;
+}
+

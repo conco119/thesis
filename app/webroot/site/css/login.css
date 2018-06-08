@@ -1,0 +1,119 @@
+.error{
+	color: red;
+}
+.login_box {
+	max-width: 450px;
+	width: 100%;
+	margin: 0 auto;
+}
+
+.login_box .log_title {
+	background-color: #274279;
+	background-image: url(../images/mask-header.png);
+	background-repeat: no-repeat;
+	background-position: right top;
+	position: relative;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	border-bottom: none;
+	height: 80px;
+	padding-left: 130px;
+	color: white;
+	font-size: 20px;
+	text-align: left;
+	float: left;
+	width: 100%;
+}
+
+.login_box .w-circle {
+	width: 86px;
+	height: 72px;
+	position: absolute;
+	left: 25px;
+	top: 0;
+	overflow: hidden;
+}
+
+.login_box .circle {
+	display: block;
+	width: 86px;
+	height: 86px;
+	border-radius: 50%;
+	border: 6px solid #fff;
+	line-height: 74px;
+	text-align: center;
+	color: #fff;
+	font-size: 40px;
+	position: absolute;
+	left: 0;
+	top: -14px;
+}
+
+.login_box .circle i {
+	width: 31px;
+	height: 35px;
+	background: url("../images/user.png") no-repeat;
+	float: left;
+	margin-top: 20px;
+	margin-left: 20px;
+}
+
+.login_box .log_footer {
+	border-top: 1px #dedede solid;
+	padding-top: 15px;
+	float: left;
+	width: 100%;
+}
+
+.login_box .log_footer p {
+	margin: 0px;
+	color: #666;
+	font-size: 13px;
+}
+
+
+#login {
+	padding: 20px;
+	border: 2px solid #ccc;
+	margin: 20px 0;
+}
+
+#login h1 {
+	text-align: center;
+	margin-top: 10px;
+	padding-bottom: 20px;
+	border-bottom: 2px solid #ccc;
+}
+
+#login p {
+	text-align: center;
+}
+
+#login .field {
+	margin-bottom: 8px;
+}
+
+#login .field label {
+	width: 80px;
+	font-size: 12px;
+	text-align: right;
+	margin-right: 8px;
+	display: inline-block;
+}
+
+#login .field label.error {
+	display: block;
+	width: auto;
+	text-align: left;
+	margin-left: 93px;
+}
+
+#login .field input {
+	width: 240px;
+	font-size: 13px;
+	display: inline-block;
+}
+
+.login-actions {
+	text-align: center;
+}

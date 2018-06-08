@@ -8,10 +8,7 @@ class HomeHelper extends HelpAbstract
         parent::__construct();
     }
 
-    function get_child_category($id)
-    {
-        return $this->pdo->fetch_all("SELECT * FROM product_categories WHERE parent_id = $id");
-    }
+
     public function get_child_products($id, $products = "")
     {
         $all_child = $this->pdo->fetch_all("SELECT * FROM product_categories WHERE parent_id = {$id}");

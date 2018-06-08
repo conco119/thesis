@@ -1,0 +1,158 @@
+#web-feature{
+	padding-top: 30px;
+}
+#web-feature .item{
+	margin-bottom: 10px;
+	padding: 30px 0;
+}
+#web-feature .item img{
+	width: 80px;
+	float: left;
+	margin-right: 10px;
+}
+#web-feature .item h3{
+	font-size: 18px;
+	margin: 0px 0px 10px;
+}
+
+#web-service{
+	background: #f5f5f5;
+	padding: 30px 0;
+}
+#web-service .title{
+	margin-bottom: 30px;
+}
+#web-service .item{
+	border: 1px solid #fff;
+	margin-bottom: 30px;
+	padding: 40px 20px;
+	background: #fff;
+}
+#web-service .item img{
+	width: 150px;
+	float: left;
+	margin-right: 20px;
+}
+#web-service .item h3{
+	font-size: 20px;
+}
+
+#web-prod{
+	padding: 30px 0;
+}
+#web-prod .title{
+	margin-bottom: 30px;
+}
+#web-prod .item{
+	background: #f5f5f5;
+	padding: 10px;
+	margin-bottom: 20px;
+}
+#web-prod .item h3 a{
+	display: block;
+	font-size: 16px;
+	line-height: 25px;
+	height: 50px;
+	overflow: hidden;
+	color: #666;
+	text-align: center;
+}
+
+
+/* ----------------------------------------- */
+
+
+
+#app-banner .item {
+	position: absolute;
+	top: 80px;
+	left: 0px;
+	width: 100%;
+	padding: 0px 10px;
+}
+
+#app-banner{
+	text-align: center;
+	color: white;
+	text-transform: uppercase;
+	position: relative;
+}
+
+#app-banner h1 {
+	font-size: 60px;
+	font-weight: 600;
+}
+
+.software-page .banner .slogan .form-cont {
+	text-align: center;
+}
+
+#app-banner input {
+	max-width: 500px !important;
+	margin: 0 auto;
+}
+
+#app-service{
+	padding: 30px 0;
+}
+#app-service .title{
+	margin-bottom: 30px;
+}
+#app-service .item{
+	background: #f5f5f5;
+	margin-bottom: 30px;
+	padding: 30px 20px;
+}
+#app-service .item h3 a{
+	color: #454545;
+	margin-bottom: 10px;
+	display: block;
+}
+#app-service .item-sub{
+	text-align: center;
+	margin: 20px 0 10px;
+}
+#app-service .item-sub img{
+	width: 100%;
+	border-radius: 150px;
+}
+#app-services{
+	padding: 30px 0;
+	background: #f5f5f5;
+}
+#app-services .item{
+	background: #fff;
+	padding: 20px;
+	min-height: 280px;
+}
+#app-services .item h3{
+	font-size: 20px;
+	height: 50px;
+	line-height: 25px;
+}
+/* -------------------------------------------- */
+
+
+#domain{
+	padding: 30px 0;
+}
+#domain .img{
+	margin: 20px 0 30px;
+}
+#domain .table{
+	margin: 20px 0 30px;
+}
+#domain .table th,
+#domain .table td{
+	padding: 14px 8px;
+	font-size: 18px;
+}
+#domain .btn{
+	background: #D9534F;
+	color: #fff;
+}
+#domain .btn:hover{
+	background: #A94442;
+}
+/* ----------------------------------------------------- */
+

@@ -4,6 +4,7 @@ define("CORE_PDO","core:DPDO");
 define("CORE_STRING","core:String");
 define("CORE_TIMES","core:Times");
 define("CORE_PAGINATION","core:Pagination");
+define("CORE_PAGINATION2","core:Pagination2");
 define("CORE_FILEHANDLE","core:FileHandle");
 define("CORE_ZEBRA","core:Zebra");
 define("CORE_IMAGE","core:Image");

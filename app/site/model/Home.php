@@ -10,12 +10,17 @@ class Home extends Main {
 
     function index()
     {
-        // danh mục sản phẩm
-        $categories = $this->pdo->fetch_all("SELECT * FROM product_categories WHERE parent_id =0");
-        foreach($categories  as $key => $category)
-        {
-            $categories[$key]['child'] = $this->HomeHelper->get_child_category($category['id']);
-        }
+        //random product
+        $sql = "SELECT p.* ,
+        (SELECT m.name FROM media m
+        RIGHT JOIN  media_product mp ON m.id = mp.media_id WHERE mp.product_id = p.id AND mp.is_showed = 1) as image_name
+        FROM products p ORDER BY RAND() LIMIT 10";
+        $random_product = $this->pdo->fetch_all($sql);
+
+        // pre($random_product);
+
+
+
         // sản phẩm bán chạy
         $sql = "SELECT p.*, sum(ex.number_count) as exported,
         (SELECT m.name FROM media m
@@ -171,13 +176,23 @@ class Home extends Main {
         }
 
 
+        //info cửa hàng
+        $info = array();
+        if (file_exists($this->file_setting))
+        {
+            $info = parse_ini_file($this->file_setting, true);
+        }
+
+
         //ổ cắm thông minh
-        $this->smarty->assign('categories', $categories);
+
+        $this->smarty->assign('random_product', $random_product);
         $this->smarty->assign('latest_products', $latest_products);
         $this->smarty->assign('smart_light', $smart_light);
         $this->smarty->assign('plugin', $plugin);
         $this->smarty->assign('sale_products', $sale_products);
         $this->smarty->assign('best_seller', $best_seller);
+        $this->smarty->assign('info', $info);
         $this->smarty->display('home.tpl');
     }
 }

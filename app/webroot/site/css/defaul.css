@@ -1,0 +1,173 @@
+body {
+	background-image: url(../images/defaul_bg.png);
+	background-position: left center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+	background-color: #464646;
+	transition: all ease 0.3s;
+}
+
+.col-df {
+	margin: 0px !important;
+	padding: 0px !important;
+}
+
+.full {
+	float: left;
+	width: 100%;
+}
+
+ul {
+	display: block;
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+.clear {
+	clear: both;
+}
+
+.name-cty {
+	padding-top: 50px;
+}
+
+.name-cty h1 {
+	margin: 0px 0px 15px 0px;
+	padding: 0px;
+	color: white;
+}
+
+.address p {
+	color: white;
+	margin: 0px;
+}
+
+.width-50 {
+	width: 50%;
+}
+
+.height-50 {
+	height: 50%;
+}
+
+.height_double {
+	height: 220px !important;
+}
+
+.height_double .box-cont {
+	height: 210px !important;
+}
+
+.big {
+	width: 100%;
+	display: inline-block;
+	float: left;
+}
+
+.lag {
+	width: 50%;
+	display: inline-block;
+	float: left;
+}
+
+.absolute {
+	position: absolute;
+}
+
+.pad-top-15 {
+	padding-top: 15px;
+}
+
+.defaul_item {
+	margin: 0 auto;
+	text-align: center;
+	float: left;
+	width: 240px;
+	transition: all ease 1s;
+}
+
+.defaul_item .box {
+	padding: 5px;
+	height: 110px;
+	transition: all ease 0.5s;
+}
+
+.defaul_item .box .box-cont {
+	height: 100px;
+	transition: all ease 0.4s;
+	position: relative;
+}
+
+.defaul_item .box .box-cont:hover {
+	-moz-box-shadow: inset 0 0 20px #000;
+	-webkit-box-shadow: inset 0 0 20px #000;
+	box-shadow: inset 0 0 20px #000;
+}
+
+.defaul_item .box .box-cont img {
+	transition: all ease 0.5s;
+}
+
+.defaul_item img,
+.big img{
+	width: 100% !important;
+}
+
+.defaul_item .box a {
+	display: block;
+	height: 100%;
+	text-decoration: none;
+}
+
+.defaul_item .box p {
+	font-size: 11px;
+	color: white;
+	margin: 0px;
+}
+
+.defaul_item .box .absolute {
+	bottom: 5px;
+	left: 5px;
+	font-size: 11px;
+	color: white;
+	text-decoration: none;
+	height: 16px;
+}
+
+.defaul_item .box .icon_absolute {
+	position: absolute;
+	top: 25%;
+	left: 20%;
+}
+
+.bg_6436d7 {
+	background: #6436d7;
+}
+
+.bg_8c0a92 {
+	background: #8c0a92;
+}
+
+.bg_009a00 {
+	background: #009a00;
+}
+
+.bg_ca3a18 {
+	background: #ca3a18;
+}
+
+.bg_06d2fc {
+	background: #06d2fc;
+}
+
+.bg_1262d9 {
+	background: #1262d9;
+}
+
+.bg_FF5C36 {
+	background: #FF5C36;
+}
+
+/*# sourceMappingURL=defaul.css.map */

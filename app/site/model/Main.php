@@ -2,7 +2,7 @@
 
 lib_use(CORE_PDO);
 lib_use(CORE_STRING);
-lib_use(CORE_PAGINATION);
+lib_use(CORE_PAGINATION2);
 lib_use(CORE_FILEHANDLE);
 lib_use(CORE_TIMES);
 lib_use(CORE_ZEBRA);
@@ -62,8 +62,6 @@ class Main
             'site' => $this->site,
             'user' => $this->currentUser,
             'setting' => $content['info'],
-            'macos' => MACOS,
-            'prefix_admin' => "./admin?",
     );
     //user avatar to header view
     if($this->currentUser['avatar'] != '')
@@ -71,19 +69,37 @@ class Main
     else
       $this->arg['avatar_link'] = $this->arg['image_folder_link'] . 'user-default.png';
     $this->smarty->assign('arg', $this->arg);
+
+    //thiết lập cho nav
+    $this->set_header();
+  }
+
+
+
+  public function set_header()
+  {
+    // danh mục sản phẩm
+    $categories = $this->pdo->fetch_all("SELECT * FROM product_categories WHERE parent_id =0");
+    foreach($categories  as $key => $category)
+    {
+        $categories[$key]['link'] = $this->dstring->str_convert($category['name']);
+        $categories[$key]['child'] = $this->helper->get_child_category($category['id'], $this->dstring);
+    }
+
+    $this->smarty->assign('categories', $categories);
   }
 
   public function check_user()
   {
-    global $site, $login_id, $mc;
-    $user = $this->pdo->fetch_one( "SELECT * FROM users a where id='$login_id'" );
-    if($login_id != 0 && $user['status'] == 0)
-      $login_id = 0;
-    if($login_id == 0 && !in_array($site,['login']) && $user['status'] == 0 )
-    {
-        lib_redirect(LOGIN_PAGE);
-    }
-    return $user;
+    // global $site, $login_id, $mc;
+    // $user = $this->pdo->fetch_one( "SELECT * FROM users a where id='$login_id'" );
+    // if($login_id != 0 && $user['status'] == 0)
+    //   $login_id = 0;
+    // if($login_id == 0 && !in_array($site,['login']) && $user['status'] == 0 )
+    // {
+    //     lib_redirect(LOGIN_PAGE);
+    // }
+    // return $user;
   }
 }
 
