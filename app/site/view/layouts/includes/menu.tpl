@@ -4,7 +4,7 @@
 			<ul>
 				<div class="col-md-2 col-sm-2 col-xs-12 col-df">
 					<li class="" style="background:green;"><i class="fa fa-home"></i>
-						<a href="./" title="Trang chủ">Trang chủ
+						<a href="{$arg.domain}" title="Trang chủ">Trang chủ
 							<p>{$list.description}</p>
 					</a></li>
 				</div>

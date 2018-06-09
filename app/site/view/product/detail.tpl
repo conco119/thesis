@@ -2,28 +2,29 @@
 
 <div class="detail-product" id="product{$value.id}">
     <div class="col-md-5 col-sm-5 col-xs-12 mar-top">
-
         <ul id="etalage">
             <li>
-                <img class="etalage_thumb_image" src="{$value.avatar}" width="100%">
-                <img class="etalage_source_image target" src="{$value.avatar}" width="100%">
+                <img class="etalage_thumb_image" src="{$arg.product_folder_link}/{$value.images[0].name}" width="100%">
+                <img class="etalage_source_image target" src="{$arg.product_folder_link}/{$value.images[0].name}" width="100%">
             </li>
-            {if $images neq ""}
-            {foreach from=$images item=list}
-                <li>
-                    <img class="etalage_thumb_image" src="{$list}" width="100%">
-                    <img class="etalage_source_image target" src="{$list}" width="100%">
-                </li>
-            {/foreach}
+            {if $value.images neq ""}
+                {foreach from=$value.images key=k item=list}
+                {if $k  neq 0}
+                    <li>
+                        <img class="etalage_thumb_image" src="{$arg.product_folder_link}/{$list.name}" width="100%">
+                        <img class="etalage_source_image target" src="{$arg.product_folder_link}/{$list.name}" width="100%">
+                    </li>
+                {/if}
+                {/foreach}
             {/if}
         </ul>
-        <img class="block-mobile" src="{$value.avatar}" width="100%" >
+        <img class="block-mobile" src="{$arg.product_folder_link}/{$value.images[0].name}" width="100%" >
     </div>
     <div class="col-md-7 col-sm-7 col-xs-12">
         <div class="info_prd_detail">
             <h1 class="name">{$value.name}</h1>
             <p class="by"><i class="fa fa-barcode"></i> Mã Sản phẩm: <b>{$value.code}</b></p>
-            {if $value.trademark neq NULL}<p><i class="fa fa-trophy"></i> Nhãn Hiệu: <b>{$value.trademark}</b></p>{/if}
+            <p><i class="fa fa-trophy"></i> Nhãn Hiệu: <b>{$value.trademark_name}</b></p>
             <div class="box">
                 <div class="show-small-info">
                     <ul>
@@ -33,30 +34,47 @@
                     </ul>
                 </div>
                 <div class="show-small-info">
-                    <p><i class="fa fa-tags"></i> {$value.category}</p>
+                    <p><i class="fa fa-tags"></i> {$value.category_name}</p>
+                </div>
+                <div class="show-small-info">
+                     <p><i class="fa fa-folder-open"></i> Tình trạng:
+                        <b>
+                        {if $value.imported-$value.exported  gt 0}
+                            <span style='color:red'> Còn hàng </span>
+                        {else}
+                            <span style='color:red'>  Hết hàng  </span>
+                        {/if}
+                        </b>
+                    </p>
                 </div>
 
                 <div class="show-small-info">
                     <p id="Star{$value.id}" class="star-big">
-                        {$value.stars}
+                         <i class="fa fa-star" onclick="SetStarProduct(32, 1);"></i>
                         <span>{$value.number_point} đánh giá - {$value.avg_point} điểm</span>
                     </p>
                 </div>
             </div>
 
             <div class="price">
-                <p><label>Giá bán:</label> {$value.price_sale}</p>
+                <p>
+                <label>Giá bán:</label>
+                    {if $value.is_discount eq 1}
+                        {$value.sale_price}đ
+                        <span>{$value.price}đ </span>
+                    {else}
+                        {$value.price}đ
+                    {/if}
+                </p>
             </div>
 
             <div class="addcart">
-               Số Lượng: <input type="number" width="30" value="1" id="CartNumber{$value.id}"/>   <button onclick="addNumberToCart({$value.id});"><i class="fa fa-opencart" ></i> Đặt Mua Ngay</button>
-                <button class="btn-like-big" type="button" onclick="likeProduct({$value.id});"><i class="fa fa-heart-o"></i> Yêu thích </button>
-                <button type="button" class="btn-compare-big" onclick="compareProduct({$value.id}, {$value.category_id});"><i class="fa fa-files-o"></i> So sánh</button>
+               Số Lượng: <input type="number" width="30" value="1" id="CartNumber{$value.id}"/>   <button onclick="addToCart({$value.id});"><i class="fa fa-opencart" ></i> Đặt Mua Ngay</button>
             </div>
-            
+
             <div class="support-detail">
-                <label>Tel: {$output.info_footer.phone}</label>
-                
+                <label>Tel: {$info.info.phone}</label>
+
                 <ul class="help-payal">
                     {foreach from=$output.menu_p4 item=list}
                         {foreach from=$list.child_menu key = k item=child}
@@ -64,10 +82,9 @@
                         {/foreach}
                     {/foreach}
                 </ul>
-
             </div>
-            
-            
+
+
             <!--<div class="pro-show-btn mar-top mar-btm">
                 <button class="btn-like-big" type="button" onclick="likeProduct({$value.id});"><i class="fa fa-heart-o"></i> Yêu thích </button>
                 <button type="button" class="btn-compare-big" onclick="compareProduct({$value.id}, {$value.category_id});"><i class="fa fa-files-o"></i> So sánh</button>
@@ -80,18 +97,9 @@
 
 <div class="col-md-12 col-sm-12 col-xs-12 col-df">
     <div class="btn_tab_event">
-        <a href="javascript:void(0)" class="active" tab="tab0">Thống số kỹ thuật</a>
-        <a href="javascript:void(0)" tab="tab1">Mô tả sản phẩm</a>
-        <a href="javascript:void(0)" tab="tab2">Đánh giá (0)</a>
-
+        <a href="javascript:void(0)" class="active" tab="tab0">Mô tả sản phẩm</a>
         <div class="tab_cont block bg_white" id="tab0">
-            {$value.description}
-        </div>
-        <div class="tab_cont bg_white" id="tab1">
-            {$value.content}
-        </div>
-        <div class="tab_cont bg_white" id="tab2">
-            <div class="fb-comments" data-href="{$arg.this_link}" data-numposts="3"  data-width="100%" data-colorscheme="light"></div>	
+             {$value.content}
         </div>
     </div>
     <br /><br />
@@ -104,38 +112,33 @@
 </div>
 
 <div class="row">
-    {foreach from=$other item=list}
+    {foreach from=$relate_product item=list}
         <div class="col-md-4 col-sm-4 col-xs-12">
             <div class="product_item">
                 <div class="img">
-                    <a href="{$list.link}"><img src="{$list.img}" width="100%"></a>
+                    <a href="./?mc=product&site=detail&n={$list.link_name}">
+                        <img src="{$arg.product_folder_link}/{$list.image_name}" width="100%">
+                    </a>
                 </div>
                 <div class="name">
                     <a href="{$list.link}">{$list.name}</a>
                 </div>
                 <div class="price">
-                    {$list.price}
-                    <p>
-                        <span class="old"> </span><span class="aft">  </span>
-                    </p>
+                    {if $list.is_discount eq 1}
+                        {$list.sale_price}đ
+                        <span>{$list.price}đ </span>
+                    {else}
+                        {$list.price}đ
+                    {/if}
                 </div>
-                <div class="num_star full">
-                    <span></span> <span></span> <span></span> <span></span> <span></span>
+                <div class="num_star">
+                    <i class="fa fa-star" onclick="SetStarProduct(32, 1);"></i>
+                     <span>{$list.number_point} đánh giá - {$list.avg_point} điểm</span>
                 </div>
                 <div class="btn_function">
-                    <div class="col-md-8 col-sm-8 col-xs-8 col-df">
+                    <div class="col-md-12 col-sm-12 col-xs-12 col-df">
                         <button type="button" class="btn_prd cart" onclick="addToCart({$list.id});">
                             <i class="fa fa-opencart"></i> Thêm vào giỏ hàng
-                        </button>
-                    </div>
-                    <div class="col-md-2 col-sm-2 col-xs-2 col-df">
-                        <button class="btn_prd like">
-                            <i class="fa fa-heart-o"></i>
-                        </button>
-                    </div>
-                    <div class="col-md-2 col-sm-2 col-xs-2 col-df">
-                        <button class="btn_prd btn-compare">
-                            <i class="fa fa-picture-o"></i>
                         </button>
                     </div>
                 </div>
@@ -146,6 +149,7 @@
 <br />
 
 <script src="{$arg.stylesheet}js/cart.js"></script>
+<script src="{$arg.stylesheet}js/hoverZoomjquery.etalage.min.js"></script>
 {literal}
     <script type="text/javascript">
         $('#etalage').etalage({

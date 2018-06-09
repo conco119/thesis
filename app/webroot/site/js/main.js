@@ -77,106 +77,37 @@ $(document).ready(function () {
 
 
 
-function compareProduct(id, category) {
-    var message;
-    $.post('?mod=product&site=ajax_set_compare_product', {
-        'id': id, 'category': category
-    }).done(function (rt) {
-        if (rt == '1') {
-            message = "Thêm vào so sánh thành công !";
-            updateCompareItem('add');
-            addToCompareList(id);
-        } else if (rt == '2') {
-            message = "Sản phẩm đã được đưa vào so sánh !";
-        } else if (rt == '3') {
-            message = "Sản phẩm không cùng loại, không thể so sánh !";
-        }
-        MessageModal(message);
-        return false;
-    });
-    return false;
-}
-
-function removeCompareProduct(id) {
-    $.post('?mod=product&site=ajax_remove_compare_product', {
-        'id': id
-    }).done(function (rt) {
-        updateCompareItem();
-        $("#compare" + id).hide();
-        return false;
-    });
-}
-
-// Dua san pham so sanh vao danh sach
-function addToCompareList(product_id) {
-    $.post('?mod=product&site=ajax_load_compare_list', {
-        'id': product_id
-    }).done(function (rt) {
-        $(".compare_product ul").append(rt);
-        return false;
-    });
-
-}
-
-function updateCompareItem(type) {
-    var number = parseInt($("#compareItem span").html());
-    if (type == 'add') {
-        number = number + 1;
-    } else {
-        number = number - 1;
-    }
-    if (number < 0)
-        number = 0;
-    $("#compareItem span").html(number + " item");
-    return false;
-}
-
-function likeProduct(id) {
-    var message;
-    $.post('?mod=product&site=ajax_like_product', {
-        'id': id
-    }).done(function (rt) {
-        if (rt == '2') {
-            message = 'Bạn đã thích sản phẩm này !';
-        }
-        if (rt == '1') {
-            message = 'Bạn vừa thích một sản phẩm';
-        }
-        if (rt == '0') {
-            message = 'Bạn chưa đăng nhập, không thể thích được sản phẩm.';
-        }
-        MessageModal(message);
-        return false;
-    });
-}
 
 function SetStarProduct(id, point) {
     var message;
-    $.post('?mod=product&site=ajax_set_star_product', {
+    $.post('./?mc=product&site=set_star', {
         'id': id, "point": point
     }).done(function (rt) {
-        if (rt == '1') {
+        rt = JSON.parse(rt)
+        if (rt.status == '1') {
             message = 'Đánh giá thành công. Cảm ơn bạn đã đánh giá sản phẩm của chúng tôi !';
         }
-        if (rt == '0') {
+        if (rt.status == '0') {
             message = 'Bạn chưa đăng nhập, không thể đánh giá được sản phẩm.';
+            return;
         }
-        LoadStarProduct(id);
+        LoadStarProduct(id, point, rt.danhgia, rt.mark);
         MessageModal(message);
         return false;
     });
 }
 
-function LoadStarProduct(id) {
-    $.post('?mod=product&site=ajax_load_star_products', {
-        'id': id
-    }).done(function (rt) {
-        console.log(rt);
-        if (rt != '0')
-            $("#Star" + id).html(rt);
-        return false;
-    });
-
+function LoadStarProduct(id, point, danhgia, mark) {
+    var append = '';
+    for ( index = 1; index <=5 ; index++)
+    {
+        if(point - index >= 0)
+            append += `<i class="fa fa-star checked" onclick="SetStarProduct(${id}, ${index});"></i>`;
+        else
+            append += `<i class="fa fa-star" onclick="SetStarProduct(${id}, ${index});"></i>`;
+    }
+    console.log(append);
+    $("#Star" + id).html(append);
 }
 
 function MessageModal(message) {

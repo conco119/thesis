@@ -17,17 +17,29 @@
                         <td>Thành tiền</td>
                         <td>Xử lý</td>
                     </tr>
-                    {foreach from=$result key=k item=list}
+                    {foreach from=$cart.products key=k item=list}
                         <tr>
                             <td>{$k+1}</td>
-                            <td><img src="{$list.img}" width="60" height="60"></td>
+                            <td><img src="{$arg.product_folder_link}/{$list.image_name}" width="60" height="60"></td>
                             <td class="name">{$list.name}</td>
 
-                            <td class="price">{$list.price}</td>
-                            <td>
-                            	<input type="number" min="0" step="1" class="number" value="{$list.number}" onchange="updateCart(this.value, {$list.id});" />
+                            <td class="price">
+                            {if $list.is_discount eq 1}
+                                {$list.price_sale|number_format}đ
+                            {else}
+                                 {$list.price|number_format}đ
+                            {/if}
                             </td>
-                            <td class="price">{$list.sum}</td>
+                            <td>
+                            	<input type="number" min="0" step="1" class="number" value="{$list.number_count}" onchange="updateCart(this.value, {$list.id});" />
+                            </td>
+                            <td class="price">
+                            {if $list.is_discount eq 1}
+                                {($list.price_sale*$list.number_count)|number_format}đ
+                            {else}
+                                {($list.price*$list.number_count)|number_format}đ
+                            {/if}
+                            </td>
                             <td><a href="javascript:void(0);"
                                    onclick="delateItemCart({$list.id});"><i
                                         class="fa fa-trash-o fa-2x"></i></a></td>
@@ -43,16 +55,16 @@
         <div class="pad-15 bg_f4f4f4">
             <div class="num-money pad-15">
                 <p>
-                    Tổng tiền (<span>* Đã bao gồm VAT</span>): <strong
-                        style="color: red;">{$sum_cart}</strong>
+                    Tổng tiền: <strong
+                        style="color: red;">{$total|number_format}đ</strong>
                 </p>
             </div>
             <div class="update-cart">
                 <a href="?mod=product&site=index" class="btn btn-primary">Tiếp
-                    tục mua hàng</a> 
-                <a href="javascript:void(0)" id="delete_cart"
-                   class="btn btn-primary pull-right">Xóa hết</a> 
-                <a href="?mod=cart&site=payment" class="btn btn-primary pull-right">Thanh toán đơn hàng</a>
+                    tục mua hàng</a>
+                <a href="#" onclick="DeleteAll()"
+                   class="btn btn-primary pull-right">Xóa hết</a>
+                <a href="./?mc=cart&site=payment" class="btn btn-primary pull-right">Thanh toán đơn hàng</a>
                 <div class="clear"></div>
             </div>
         </div>

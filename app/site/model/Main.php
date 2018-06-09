@@ -71,7 +71,7 @@ class Main
     $this->smarty->assign('arg', $this->arg);
     $this->set_sidebar();
     $this->set_footer();
-
+    $this->set_cart();
   }
 
 
@@ -88,7 +88,7 @@ class Main
         }
     }
     $this->smarty->assign('menu',$menu);
-   
+
 
     // sản phẩm bán chạy
     $sql = "SELECT p.*, sum(ex.number_count) as exported,
@@ -138,6 +138,7 @@ class Main
     foreach($sale_products as $k => $item)
     {
         $sale_products[$k]['price'] = number_format($item['price']);
+        $sale_products[$k]['link_name'] = $this->dstring->str_convert($item['name']);
         if( $item['is_discount'] == 1)
         {
             switch($item['discount_type'])
@@ -165,6 +166,12 @@ class Main
         $info = parse_ini_file($this->file_setting, true);
     }
     $this->smarty->assign('info', $info);
+  }
+
+  public function set_cart()
+  {
+    $number_item = count($_SESSION['cart']['products']);
+    $this->smarty->assign('number_item', $number_item);
   }
 
   public function check_user()

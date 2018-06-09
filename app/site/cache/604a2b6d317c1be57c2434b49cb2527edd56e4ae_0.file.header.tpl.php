@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-08 23:06:38
+/* Smarty version 3.1.30, created on 2018-06-09 21:29:50
   from "C:\xampp\htdocs\~mtd\htaccess\app\site\view\layouts\includes\header.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b1aa98e57ccd7_33235940',
+  'unifunc' => 'content_5b1be45e8c9a63_62214241',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '604a2b6d317c1be57c2434b49cb2527edd56e4ae' => 
     array (
       0 => 'C:\\xampp\\htdocs\\~mtd\\htaccess\\app\\site\\view\\layouts\\includes\\header.tpl',
-      1 => 1528473997,
+      1 => 1528554567,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b1aa98e57ccd7_33235940 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b1be45e8c9a63_62214241 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="container">
     <div class="top_link bg_white">
@@ -28,14 +28,14 @@ function content_5b1aa98e57ccd7_33235940 (Smarty_Internal_Template $_smarty_tpl)
         </ul>
         <ul class="pull-right">
             <?php if ($_smarty_tpl->tpl_vars['arg']->value['user']['id'] == 0) {?>
-                <li><a href="./cus/?site=login"><i class="fa fa-user"></i>
+                <li><a href="./?mc=customer&site=login"><i class="fa fa-user"></i>
                         Đăng nhập </a></li>
-                <li><a href="./cus/?site=register"><i class="fa fa-register"></i>
+                <li><a href="./?mc=customer&site=register"><i class="fa fa-register"></i>
                         Đăng ký</a></li>
             <?php } else { ?>
-                <li class="pull-right"><a href="./cus/?site=logout"><i
+                <li class="pull-right"><a href="./?mc=customer&site=logout"><i
                             class="fa fa-user"></i> Đăng Xuất</a></li>
-                <li class="pull-right"><a href="./cus/?site=detail"><i
+                <li class="pull-right"><a href="../?mc=customer&site=detail"><i
                             class="fa fa-user"></i> <?php echo $_smarty_tpl->tpl_vars['arg']->value['user']['name'];?>
 </a></li>
             <?php }?>
@@ -72,9 +72,9 @@ function content_5b1aa98e57ccd7_33235940 (Smarty_Internal_Template $_smarty_tpl)
                         </div>
                         <ul class="phone">
                             <li class="bg_f5791f">
-                                <a href="./gio-hang/">
-                                    <i class="fa fa-cart-plus"></i> <span><?php echo $_smarty_tpl->tpl_vars['arg']->value['number_cart'];?>
- 0 item</span>
+                                <a href="./?mc=cart">
+                                    <i class="fa fa-cart-plus"></i> <span id='cart-number'><?php echo $_smarty_tpl->tpl_vars['number_item']->value;?>
+ sản phẩm</span>
                                 </a>
                             </li>
                         </ul>

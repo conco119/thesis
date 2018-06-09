@@ -18,26 +18,28 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="product_item">
                             <div class="img">
-                                <a href="./?mc=productdetail&n={$list.link_name}">
+                                <a href="./?mc=product&site=detail&n={$list.link_name}">
                                     <img src="{$arg.product_folder_link}/{$list.image_name}" width="100%">
                                 </a>
                             </div>
                             <div class="name">
-                                <a href="{$list.link}">{$list.name}</a>
+                                <a href="./?mc=product&site=detail&n={$list.link_name}">{$list.name}</a>
                             </div>
                             <p class="price">
-                                {$list.price}đ
                                 {if $list.is_discount eq 1}
-                                        <span>{$list.sale_price}đ </span>
+                                    {$list.sale_price}đ
+                                    <span>{$list.price}đ </span>
+                                {else}
+                                    {$list.price}đ
                                 {/if}
                             </p>
 
                             <div class="num_star" id="Star{$list.id}">
-                                <i class="fa fa-star" onclick="SetStarProduct(32, 1);"></i>
-                                <i class="fa fa-star" onclick="SetStarProduct(32, 1);"></i>
-                                <i class="fa fa-star" onclick="SetStarProduct(32, 1);"></i>
-                                <i class="fa fa-star" onclick="SetStarProduct(32, 1);"></i>
-                                <i class="fa fa-star" onclick="SetStarProduct(32, 1);"></i>
+                                <i class="fa fa-star" onclick="SetStarProduct({$list.id}, 1);"></i>
+                                <i class="fa fa-star" onclick="SetStarProduct({$list.id}, 2);"></i>
+                                <i class="fa fa-star" onclick="SetStarProduct({$list.id}, 3);"></i>
+                                <i class="fa fa-star" onclick="SetStarProduct({$list.id}, 4);"></i>
+                                <i class="fa fa-star" onclick="SetStarProduct({$list.id}, 5);"></i>
                                 <span>{$list.number_point} đánh giá - {$list.avg_point} điểm</span>
                             </div>
                             <div class="btn_function">
@@ -66,7 +68,7 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="product_item">
                             <div class="img">
-                                <a href="./?mc=productdetail&n={$list.link_name}">
+                                <a href="./?mc=product&site=detail&n={$list.link_name}">
                                     <img src="{$arg.product_folder_link}/{$list.image_name}" width="100%">
                                 </a>
                             </div>
@@ -74,9 +76,11 @@
                                 <a href="{$list.link}">{$list.name}</a>
                             </div>
                             <p class="price">
-                                {$list.price}đ
                                 {if $list.is_discount eq 1}
-                                        <span>{$list.sale_price}đ </span>
+                                    {$list.sale_price}đ
+                                    <span>{$list.price}đ </span>
+                                {else}
+                                    {$list.price}đ
                                 {/if}
                             </p>
 
@@ -114,7 +118,7 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="product_item">
                             <div class="img">
-                                <a href="./?mc=productdetail&n={$list.link_name}">
+                                <a href="./?mc=product&site=detail&n={$list.link_name}">
                                     <img src="{$arg.product_folder_link}/{$list.image_name}" width="100%">
                                 </a>
                             </div>
@@ -122,9 +126,11 @@
                                 <a href="{$list.link}">{$list.name}</a>
                             </div>
                             <p class="price">
-                                {$list.price}đ
                                 {if $list.is_discount eq 1}
-                                        <span>{$list.sale_price}đ </span>
+                                    {$list.sale_price}đ
+                                    <span>{$list.price}đ </span>
+                                {else}
+                                    {$list.price}đ
                                 {/if}
                             </p>
 

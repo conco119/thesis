@@ -27,16 +27,18 @@
         {foreach from=$best_seller item=list}
             <li>
                 <div class="col-md-4 col-sm-4 col-xs-12 col-df text-center">
-                    <a href="./?mc=productdetail&n={$list.link_name}" title="{$list.name}"><img src="{$arg.product_folder_link}/{$list.image_name}" width="100%;"></a>
+                    <a href="./?mc=product&site=detail&n={$list.link_name}" title="{$list.name}"><img src="{$arg.product_folder_link}/{$list.image_name}" width="100%;"></a>
                 </div>
                 <div class="col-md-8 col-sm-8 col-xs-12 col-df">
                     <div class="info_prd">
-                        <a href="./?mc=productdetail&n={$list.link_name}" title="{$list.name}">{$list.name}</a>
+                        <a href="./?mc=product&site=detail&n={$list.link_name}" title="{$list.name}">{$list.name}</a>
                     </div>
                     <div class="price">
-                        {$list.price}đ
                         {if $list.is_discount eq 1}
-                                <span>{$list.sale_price}đ </span>
+                            {$list.sale_price}đ
+                            <span>{$list.price}đ </span>
+                        {else}
+                            {$list.price}đ
                         {/if}
                     </div>
                 </div>
@@ -56,16 +58,18 @@
         {foreach from=$sale_products item=list}
             <li>
                 <div class="col-md-4 col-sm-4 col-xs-12 col-df text-center">
-                    <a href="./?mc=productdetail&n={$list.link_name}" title="{$list.name}"><img src="{$arg.product_folder_link}/{$list.image_name}" width="100%;"></a>
+                    <a href="./?mc=product&site=detail&n={$list.link_name}" title="{$list.name}"><img src="{$arg.product_folder_link}/{$list.image_name}" width="100%;"></a>
                 </div>
                 <div class="col-md-8 col-sm-8 col-xs-12 col-df">
                     <div class="info_prd">
-                        <a href="./?mc=productdetail&n={$list.link_name}" title="{$list.name}">{$list.name}</a>
+                        <a href="./?mc=product&site=detail&n={$list.link_name}" title="{$list.name}">{$list.name}</a>
                     </div>
                     <div class="price">
-                        {$list.price}đ
                         {if $list.is_discount eq 1}
-                                <span>{$list.sale_price}đ </span>
+                            {$list.sale_price}đ
+                            <span>{$list.price}đ </span>
+                        {else}
+                            {$list.price}đ
                         {/if}
                     </div>
                 </div>

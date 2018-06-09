@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-09 00:05:08
+/* Smarty version 3.1.30, created on 2018-06-09 16:05:10
   from "C:\xampp\htdocs\~mtd\htaccess\app\site\view\product\index.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b1ab7448ba425_59138741',
+  'unifunc' => 'content_5b1b9846a821a9_42038939',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '4a4fc8c99d3529705bb074e16e35bd6862c9d80e' => 
     array (
       0 => 'C:\\xampp\\htdocs\\~mtd\\htaccess\\app\\site\\view\\product\\index.tpl',
-      1 => 1528477507,
+      1 => 1528535105,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b1ab7448ba425_59138741 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b1b9846a821a9_42038939 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="sidebar_title bg_34495e">
     <h1>SẢN PHẨM (<?php echo $_smarty_tpl->tpl_vars['number_product']->value;?>
@@ -48,11 +48,14 @@ foreach ($_from as $_smarty_tpl->tpl_vars['list']->value) {
 </a>
             </div>
             <p class="price">
-                <?php echo $_smarty_tpl->tpl_vars['list']->value['price'];?>
-đ
                 <?php if ($_smarty_tpl->tpl_vars['list']->value['is_discount'] == 1) {?>
-                        <span><?php echo $_smarty_tpl->tpl_vars['list']->value['sale_price'];?>
+                    <?php echo $_smarty_tpl->tpl_vars['list']->value['sale_price'];?>
+đ
+                    <span><?php echo $_smarty_tpl->tpl_vars['list']->value['price'];?>
 đ </span>
+                <?php } else { ?>
+                    <?php echo $_smarty_tpl->tpl_vars['list']->value['price'];?>
+đ
                 <?php }?>
             </p>
             <div class="num_star" id="Star<?php echo $_smarty_tpl->tpl_vars['list']->value['id'];?>

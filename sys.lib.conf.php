@@ -38,4 +38,9 @@ function lib_redirect_back(){
 function lib_alert($title){
 	echo "<meta charset=\"UTF-8\"><script> alert('".$title."'); </script>";
 }
+
+function lib_alert_with_exit($title){
+  echo "<meta charset=\"UTF-8\"><script> alert('".$title."'); </script>";
+  exit();
+}
  ?>

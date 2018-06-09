@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-09 00:01:23
+/* Smarty version 3.1.30, created on 2018-06-09 20:38:47
   from "C:\xampp\htdocs\~mtd\htaccess\app\site\view\product\detail.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b1ab66333e155_91267437',
+  'unifunc' => 'content_5b1bd867b37fe1_93454608',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '81b92a079f96fc804e5d1de8b6232c5df282e723' => 
     array (
       0 => 'C:\\xampp\\htdocs\\~mtd\\htaccess\\app\\site\\view\\product\\detail.tpl',
-      1 => 1528469385,
+      1 => 1528551522,
       2 => 'file',
     ),
   ),
@@ -20,34 +20,39 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b1ab66333e155_91267437 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b1bd867b37fe1_93454608 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 
 
 <div class="detail-product" id="product<?php echo $_smarty_tpl->tpl_vars['value']->value['id'];?>
 ">
     <div class="col-md-5 col-sm-5 col-xs-12 mar-top">
-
         <ul id="etalage">
             <li>
-                <img class="etalage_thumb_image" src="<?php echo $_smarty_tpl->tpl_vars['value']->value['avatar'];?>
+                <img class="etalage_thumb_image" src="<?php echo $_smarty_tpl->tpl_vars['arg']->value['product_folder_link'];?>
+/<?php echo $_smarty_tpl->tpl_vars['value']->value['images'][0]['name'];?>
 " width="100%">
-                <img class="etalage_source_image target" src="<?php echo $_smarty_tpl->tpl_vars['value']->value['avatar'];?>
+                <img class="etalage_source_image target" src="<?php echo $_smarty_tpl->tpl_vars['arg']->value['product_folder_link'];?>
+/<?php echo $_smarty_tpl->tpl_vars['value']->value['images'][0]['name'];?>
 " width="100%">
             </li>
-            <?php if ($_smarty_tpl->tpl_vars['images']->value != '') {?>
-            <?php
-$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['images']->value, 'list');
+            <?php if ($_smarty_tpl->tpl_vars['value']->value['images'] != '') {?>
+                <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['value']->value['images'], 'list', false, 'k');
 if ($_from !== null) {
-foreach ($_from as $_smarty_tpl->tpl_vars['list']->value) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['list']->value) {
 ?>
-                <li>
-                    <img class="etalage_thumb_image" src="<?php echo $_smarty_tpl->tpl_vars['list']->value;?>
+                <?php if ($_smarty_tpl->tpl_vars['k']->value != 0) {?>
+                    <li>
+                        <img class="etalage_thumb_image" src="<?php echo $_smarty_tpl->tpl_vars['arg']->value['product_folder_link'];?>
+/<?php echo $_smarty_tpl->tpl_vars['list']->value['name'];?>
 " width="100%">
-                    <img class="etalage_source_image target" src="<?php echo $_smarty_tpl->tpl_vars['list']->value;?>
+                        <img class="etalage_source_image target" src="<?php echo $_smarty_tpl->tpl_vars['arg']->value['product_folder_link'];?>
+/<?php echo $_smarty_tpl->tpl_vars['list']->value['name'];?>
 " width="100%">
-                </li>
-            <?php
+                    </li>
+                <?php }?>
+                <?php
 }
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
@@ -55,7 +60,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 
             <?php }?>
         </ul>
-        <img class="block-mobile" src="<?php echo $_smarty_tpl->tpl_vars['value']->value['avatar'];?>
+        <img class="block-mobile" src="<?php echo $_smarty_tpl->tpl_vars['arg']->value['product_folder_link'];?>
+/<?php echo $_smarty_tpl->tpl_vars['value']->value['images'][0]['name'];?>
 " width="100%" >
     </div>
     <div class="col-md-7 col-sm-7 col-xs-12">
@@ -64,8 +70,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 </h1>
             <p class="by"><i class="fa fa-barcode"></i> Mã Sản phẩm: <b><?php echo $_smarty_tpl->tpl_vars['value']->value['code'];?>
 </b></p>
-            <?php if ($_smarty_tpl->tpl_vars['value']->value['trademark'] != NULL) {?><p><i class="fa fa-trophy"></i> Nhãn Hiệu: <b><?php echo $_smarty_tpl->tpl_vars['value']->value['trademark'];?>
-</b></p><?php }?>
+            <p><i class="fa fa-trophy"></i> Nhãn Hiệu: <b><?php echo $_smarty_tpl->tpl_vars['value']->value['trademark_name'];?>
+</b></p>
             <div class="box">
                 <div class="show-small-info">
                     <ul>
@@ -78,15 +84,25 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
                     </ul>
                 </div>
                 <div class="show-small-info">
-                    <p><i class="fa fa-tags"></i> <?php echo $_smarty_tpl->tpl_vars['value']->value['category'];?>
+                    <p><i class="fa fa-tags"></i> <?php echo $_smarty_tpl->tpl_vars['value']->value['category_name'];?>
 </p>
+                </div>
+                <div class="show-small-info">
+                     <p><i class="fa fa-folder-open"></i> Tình trạng:
+                        <b>
+                        <?php if ($_smarty_tpl->tpl_vars['value']->value['imported']-$_smarty_tpl->tpl_vars['value']->value['exported'] > 0) {?>
+                            <span style='color:red'> Còn hàng </span>
+                        <?php } else { ?>
+                            <span style='color:red'>  Hết hàng  </span>
+                        <?php }?>
+                        </b>
+                    </p>
                 </div>
 
                 <div class="show-small-info">
                     <p id="Star<?php echo $_smarty_tpl->tpl_vars['value']->value['id'];?>
 " class="star-big">
-                        <?php echo $_smarty_tpl->tpl_vars['value']->value['stars'];?>
-
+                         <i class="fa fa-star" onclick="SetStarProduct(32, 1);"></i>
                         <span><?php echo $_smarty_tpl->tpl_vars['value']->value['number_point'];?>
  đánh giá - <?php echo $_smarty_tpl->tpl_vars['value']->value['avg_point'];?>
  điểm</span>
@@ -95,25 +111,30 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
             </div>
 
             <div class="price">
-                <p><label>Giá bán:</label> <?php echo $_smarty_tpl->tpl_vars['value']->value['price_sale'];?>
-</p>
+                <p>
+                <label>Giá bán:</label>
+                    <?php if ($_smarty_tpl->tpl_vars['value']->value['is_discount'] == 1) {?>
+                        <?php echo $_smarty_tpl->tpl_vars['value']->value['sale_price'];?>
+đ
+                        <span><?php echo $_smarty_tpl->tpl_vars['value']->value['price'];?>
+đ </span>
+                    <?php } else { ?>
+                        <?php echo $_smarty_tpl->tpl_vars['value']->value['price'];?>
+đ
+                    <?php }?>
+                </p>
             </div>
 
             <div class="addcart">
                Số Lượng: <input type="number" width="30" value="1" id="CartNumber<?php echo $_smarty_tpl->tpl_vars['value']->value['id'];?>
-"/>   <button onclick="addNumberToCart(<?php echo $_smarty_tpl->tpl_vars['value']->value['id'];?>
+"/>   <button onclick="addToCart(<?php echo $_smarty_tpl->tpl_vars['value']->value['id'];?>
 );"><i class="fa fa-opencart" ></i> Đặt Mua Ngay</button>
-                <button class="btn-like-big" type="button" onclick="likeProduct(<?php echo $_smarty_tpl->tpl_vars['value']->value['id'];?>
-);"><i class="fa fa-heart-o"></i> Yêu thích </button>
-                <button type="button" class="btn-compare-big" onclick="compareProduct(<?php echo $_smarty_tpl->tpl_vars['value']->value['id'];?>
-, <?php echo $_smarty_tpl->tpl_vars['value']->value['category_id'];?>
-);"><i class="fa fa-files-o"></i> So sánh</button>
             </div>
-            
+
             <div class="support-detail">
-                <label>Tel: <?php echo $_smarty_tpl->tpl_vars['output']->value['info_footer']['phone'];?>
+                <label>Tel: <?php echo $_smarty_tpl->tpl_vars['info']->value['info']['phone'];?>
 </label>
-                
+
                 <ul class="help-payal">
                     <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['output']->value['menu_p4'], 'list');
@@ -142,10 +163,9 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 ?>
 
                 </ul>
-
             </div>
-            
-            
+
+
             <!--<div class="pro-show-btn mar-top mar-btm">
                 <button class="btn-like-big" type="button" onclick="likeProduct(<?php echo $_smarty_tpl->tpl_vars['value']->value['id'];?>
 );"><i class="fa fa-heart-o"></i> Yêu thích </button>
@@ -161,21 +181,10 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 
 <div class="col-md-12 col-sm-12 col-xs-12 col-df">
     <div class="btn_tab_event">
-        <a href="javascript:void(0)" class="active" tab="tab0">Thống số kỹ thuật</a>
-        <a href="javascript:void(0)" tab="tab1">Mô tả sản phẩm</a>
-        <a href="javascript:void(0)" tab="tab2">Đánh giá (0)</a>
-
+        <a href="javascript:void(0)" class="active" tab="tab0">Mô tả sản phẩm</a>
         <div class="tab_cont block bg_white" id="tab0">
-            <?php echo $_smarty_tpl->tpl_vars['value']->value['description'];?>
+             <?php echo $_smarty_tpl->tpl_vars['value']->value['content'];?>
 
-        </div>
-        <div class="tab_cont bg_white" id="tab1">
-            <?php echo $_smarty_tpl->tpl_vars['value']->value['content'];?>
-
-        </div>
-        <div class="tab_cont bg_white" id="tab2">
-            <div class="fb-comments" data-href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['this_link'];?>
-" data-numposts="3"  data-width="100%" data-colorscheme="light"></div>	
         </div>
     </div>
     <br /><br />
@@ -189,16 +198,19 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 
 <div class="row">
     <?php
-$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['other']->value, 'list');
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['relate_product']->value, 'list');
 if ($_from !== null) {
 foreach ($_from as $_smarty_tpl->tpl_vars['list']->value) {
 ?>
         <div class="col-md-4 col-sm-4 col-xs-12">
             <div class="product_item">
                 <div class="img">
-                    <a href="<?php echo $_smarty_tpl->tpl_vars['list']->value['link'];?>
-"><img src="<?php echo $_smarty_tpl->tpl_vars['list']->value['img'];?>
-" width="100%"></a>
+                    <a href="./?mc=product&site=detail&n=<?php echo $_smarty_tpl->tpl_vars['list']->value['link_name'];?>
+">
+                        <img src="<?php echo $_smarty_tpl->tpl_vars['arg']->value['product_folder_link'];?>
+/<?php echo $_smarty_tpl->tpl_vars['list']->value['image_name'];?>
+" width="100%">
+                    </a>
                 </div>
                 <div class="name">
                     <a href="<?php echo $_smarty_tpl->tpl_vars['list']->value['link'];?>
@@ -206,30 +218,27 @@ foreach ($_from as $_smarty_tpl->tpl_vars['list']->value) {
 </a>
                 </div>
                 <div class="price">
-                    <?php echo $_smarty_tpl->tpl_vars['list']->value['price'];?>
-
-                    <p>
-                        <span class="old"> </span><span class="aft">  </span>
-                    </p>
+                    <?php if ($_smarty_tpl->tpl_vars['list']->value['is_discount'] == 1) {?>
+                        <?php echo $_smarty_tpl->tpl_vars['list']->value['sale_price'];?>
+đ
+                        <span><?php echo $_smarty_tpl->tpl_vars['list']->value['price'];?>
+đ </span>
+                    <?php } else { ?>
+                        <?php echo $_smarty_tpl->tpl_vars['list']->value['price'];?>
+đ
+                    <?php }?>
                 </div>
-                <div class="num_star full">
-                    <span></span> <span></span> <span></span> <span></span> <span></span>
+                <div class="num_star">
+                    <i class="fa fa-star" onclick="SetStarProduct(32, 1);"></i>
+                     <span><?php echo $_smarty_tpl->tpl_vars['list']->value['number_point'];?>
+ đánh giá - <?php echo $_smarty_tpl->tpl_vars['list']->value['avg_point'];?>
+ điểm</span>
                 </div>
                 <div class="btn_function">
-                    <div class="col-md-8 col-sm-8 col-xs-8 col-df">
+                    <div class="col-md-12 col-sm-12 col-xs-12 col-df">
                         <button type="button" class="btn_prd cart" onclick="addToCart(<?php echo $_smarty_tpl->tpl_vars['list']->value['id'];?>
 );">
                             <i class="fa fa-opencart"></i> Thêm vào giỏ hàng
-                        </button>
-                    </div>
-                    <div class="col-md-2 col-sm-2 col-xs-2 col-df">
-                        <button class="btn_prd like">
-                            <i class="fa fa-heart-o"></i>
-                        </button>
-                    </div>
-                    <div class="col-md-2 col-sm-2 col-xs-2 col-df">
-                        <button class="btn_prd btn-compare">
-                            <i class="fa fa-picture-o"></i>
                         </button>
                     </div>
                 </div>
@@ -247,6 +256,10 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 <?php echo '<script'; ?>
  src="<?php echo $_smarty_tpl->tpl_vars['arg']->value['stylesheet'];?>
 js/cart.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="<?php echo $_smarty_tpl->tpl_vars['arg']->value['stylesheet'];?>
+js/hoverZoomjquery.etalage.min.js"><?php echo '</script'; ?>
 >
 
     <?php echo '<script'; ?>

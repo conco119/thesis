@@ -14,9 +14,11 @@
                 <a href="?mc=product&site=detail&n={$list.link_name}">{$list.name}</a>
             </div>
             <p class="price">
-                {$list.price}đ
                 {if $list.is_discount eq 1}
-                        <span>{$list.sale_price}đ </span>
+                    {$list.sale_price}đ
+                    <span>{$list.price}đ </span>
+                {else}
+                    {$list.price}đ
                 {/if}
             </p>
             <div class="num_star" id="Star{$list.id}">

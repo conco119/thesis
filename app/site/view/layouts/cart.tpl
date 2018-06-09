@@ -33,10 +33,9 @@
         {include file="includes/header.tpl"}
 
         {include file="includes/menu.tpl"}
-        
-        <div class="container">
-            
-            {include file=$content}
+
+    <div class="container">
+            {include file=$tpl_file}
         </div>
 
         {include file="includes/footer.tpl"}

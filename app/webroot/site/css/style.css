@@ -120,7 +120,7 @@ html,body {
 }
 
 .nav_header ul li {
-    width: 100px;
+    width: 150px;
     height: 50px;
     display: inline-block;
     text-align: center;
@@ -524,6 +524,7 @@ html,body {
 .btn_function .cart {
     text-align: left;
     background: #f47524;
+    /* background: #ff5757; */
     text-transform: uppercase;
     font-size: 13px;
     color: white;

@@ -4,14 +4,14 @@
         </ul>
         <ul class="pull-right">
             {if $arg.user.id eq 0}
-                <li><a href="./cus/?site=login"><i class="fa fa-user"></i>
+                <li><a href="./?mc=customer&site=login"><i class="fa fa-user"></i>
                         Đăng nhập </a></li>
-                <li><a href="./cus/?site=register"><i class="fa fa-register"></i>
+                <li><a href="./?mc=customer&site=register"><i class="fa fa-register"></i>
                         Đăng ký</a></li>
             {else}
-                <li class="pull-right"><a href="./cus/?site=logout"><i
+                <li class="pull-right"><a href="./?mc=customer&site=logout"><i
                             class="fa fa-user"></i> Đăng Xuất</a></li>
-                <li class="pull-right"><a href="./cus/?site=detail"><i
+                <li class="pull-right"><a href="../?mc=customer&site=detail"><i
                             class="fa fa-user"></i> {$arg.user.name}</a></li>
             {/if}
             </ul>
@@ -45,8 +45,8 @@
                         </div>
                         <ul class="phone">
                             <li class="bg_f5791f">
-                                <a href="./gio-hang/">
-                                    <i class="fa fa-cart-plus"></i> <span>{$arg.number_cart} 0 item</span>
+                                <a href="./?mc=cart">
+                                    <i class="fa fa-cart-plus"></i> <span id='cart-number'>{$number_item} sản phẩm</span>
                                 </a>
                             </li>
                         </ul>

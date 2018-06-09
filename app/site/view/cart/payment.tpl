@@ -2,28 +2,28 @@
     <h3>Thanh toán đơn hàng</h3>
 </div>
 <div class="row bg_white col-df">
-    <form class="form" role="form" method="POST" action="?mod=cart&site=payment" id="validate">
+    <form class="form" role="form" method="POST" action="?mc=cart&site=payment" id="validate">
         <div class="col-md-7 col-sm-7 col-xs-12" id="payment_form">
             <h3>Nhập thông tin đơn hàng</h3>
 
             <div class="form-group">
-                <label for="cus_name">Họ tên *</label>
-                <input type="text" class="form-control required"  name="cus_name" value="{$customer.name}">
+                <label for="cus_name">Họ tên <span style='color:red'>*</span></label>
+                <input type="text" class="form-control required"  name="cus_name" value="{$arg.user.name}">
             </div>
 
             <div class="form-group">
-                <label for="cus_name">Điện thoại *</label>
-                <input type="text" class="form-control required"  name="cus_phone" value="{$customer.phone}">
+                <label for="cus_name">Điện thoại <span style='color:red'>*</span></label>
+                <input type="text" class="form-control required"  name="cus_phone" value="{$arg.user.phone}">
             </div>
 
             <div class="form-group">
-                <label for="pwd">Email liên hệ *</label>
-                <input type="text" class="form-control required email"   name="cus_email" id="email" value="{$customer.email}">
+                <label for="pwd">Email liên hệ <span style='color:red'>*</span></label>
+                <input type="text" class="form-control required email"   name="cus_email" id="email" value="{$arg.user.email}">
             </div>
 
             <div class="form-group">
-                <label for="pwd">Địa chỉ nhận hàng *</label>
-                <input type="text" class="form-control required"  name="cus_address" placeholder="Tên Phố"  value="{$customer.address}">
+                <label for="pwd">Địa chỉ nhận hàng <span style='color:red'>*</span></label>
+                <input type="text" class="form-control required"  name="cus_address" placeholder="Tên Phố"  value="{$arg.user.address}">
             </div>
 
             <div class="form-group">
@@ -43,26 +43,33 @@
                         <div><b>TỔNG</b></div>
                     </li>
 
-                    {foreach from=$result item=list}
+                    {foreach from=$cart.products item=list}
                         <li class="line bor-bottom itm_order">
                             <div>
-                                <a href="javascript:void(0)"> {$list.name} <span>x{$list.number}</span></a>
+                                <a href="javascript:void(0)"> {$list.name} <span>x{$list.number_count}</span></a>
                             </div>
+
                             <div class="price">
-                                <p>{$list.price}</p>
+                                <p>
+                                    {if $list.is_discount eq 1}
+                                        {($list.price_sale*$list.number_count)|number_format}đ
+                                    {else}
+                                        {($list.price*$list.number_count)|number_format}đ
+                                    {/if}
+                                </p>
                             </div>
                         </li>
                     {/foreach}
 
 
 
-                    
+
                     <li class="line total">
                         <div>
                             <p>Tổng:</p>
                         </div>
                         <div class="obama-total">
-                            <p>{$sum_cart}</p>
+                            <p>{$total|number_format}đ</p>
                         </div>
                     </li>
 

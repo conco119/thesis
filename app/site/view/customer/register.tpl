@@ -1,55 +1,51 @@
 <div class="log_title">
-	<div class="w-circle">
-        <span class="circle"><i class="fa fa-user"></i></span>
-    </div>
-  	<p>  
-  	Máy Tính Đông Tây <br />
+  	<h2>
 	Đăng ký tài khoản
-	</p>
+	</h2>
 </div>
 	<div class="col-md-12 col-xs-12 col-default">
 		<div id="login">
-			<form action="?mod=customer&site=register" method="post" id="validate">
-				
+			<form  method="post" id="validate">
+
 				<div class="login-fields">
 					<p>{$message}</p>
 					<div class="field">
-						<label>{$arg.trans.account}:</label> 
+						<label>Tài khoản:</label>
 						<input type="text" name="email" value="" placeholder="Email" class="form-control required" />
 					</div>
 					<!-- /field -->
 					<div class="field">
-						<label for="password">{$arg.trans.password}:</label> 
+						<label for="password">Mật khẩu:</label>
 						<input type="password" name="password" placeholder="Password" class="form-control required" />
 					</div>
 					<!-- /password -->
 					<div class="field">
-						<label for="password">{$arg.trans.re_pasword}:</label> 
+						<label for="password">Xác nhận mật khẩu:</label>
 						<input type="password" name="repassword" value="" placeholder="Password" class="form-control required" />
 					</div>
 					<!-- /password -->
 					<br>
-					
+
 					<div class="field">
-						<label>{$arg.trans.name}:</label> 
+						<label>Họ tên:</label>
 						<input type="text" name="name" value="" placeholder="Name" class="form-control required" />
 					</div>
 					<!-- /field -->
 					<div class="field">
-						<label>{$arg.trans.phone}:</label> 
+						<label>Điện thoại:</label>
 						<input type="text" name="phone" value="" placeholder="Phone" class="form-control required" />
 					</div>
 					<!-- /field -->
 					<div class="field">
-						<label>{$arg.trans.address}:</label> 
+						<label>Địa chỉ:</label>
 						<input type="text" name="address" value="" placeholder="Address" class="form-control required" />
 					</div>
 					<!-- /field -->
 				</div>
 				<!-- /login-fields -->
-			
+
 				<div class="login-actions">
-					<button class="button btn btn-success btn-large" name="submit">{$arg.trans.register}</button>
+					<button class="button btn btn-success btn-large" name="submit">Đăng ký</button>
 				</div>
 				<!-- .actions -->
 			</form>

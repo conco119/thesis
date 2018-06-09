@@ -8,7 +8,7 @@
 }
 
 .login_box .log_title {
-	background-color: #274279;
+
 	background-image: url(../images/mask-header.png);
 	background-repeat: no-repeat;
 	background-position: right top;
@@ -17,14 +17,36 @@
 	padding-bottom: 15px;
 	border-bottom: none;
 	height: 80px;
-	padding-left: 130px;
-	color: white;
+	color: black;
 	font-size: 20px;
 	text-align: left;
 	float: left;
 	width: 100%;
 }
-
+.login_box .log_title h2{
+	text-align: center;
+	font: normal 25px Helvetica, Arial, sans-serif;
+}
+.login_box .log_title h2::before{
+	content: "";
+	height: 1px;
+	position: absolute;
+	bottom: 30px;
+	left: 0px;
+	width: 100px;
+	color:black;
+	background: -webkit-linear-gradient(right, rgba(126, 126, 126, 1) 0%, rgba(255, 255, 255, 1) 100%);
+}
+.login_box .log_title h2::after{
+	content: "";
+	height: 1px;
+	position: absolute;
+	bottom: 30px;
+	right: 0px;
+	width: 100px;
+	color:black;
+	background: -webkit-linear-gradient(left, rgba(126, 126, 126, 1) 0%, rgba(255, 255, 255, 1) 100%)
+}
 .login_box .w-circle {
 	width: 86px;
 	height: 72px;
@@ -67,8 +89,10 @@
 
 .login_box .log_footer p {
 	margin: 0px;
-	color: #666;
+	color: red;
 	font-size: 13px;
+	text-align: center;
+
 }
 
 

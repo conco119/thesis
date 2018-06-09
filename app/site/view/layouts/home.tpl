@@ -17,7 +17,7 @@
         <link rel="stylesheet" type="text/css" href="{$arg.stylesheet}js/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="{$arg.stylesheet}js/bootstrap/css/bootstrap-theme.min.css">
         <link rel="stylesheet" type="text/css" href="{$arg.stylesheet}js/jquery.bxslider/jquery.bxslider.css">
-
+        <link rel="stylesheet" type="text/css" href="{$arg.stylesheet}css/hoverZoomEtalage.css" >
         <script src="{$arg.stylesheet}js/jquery-2.1.3.min.js"></script>
         <script src="{$arg.stylesheet}js/jquery.bxslider/plugins/jquery.fitvids.js"></script>
         <script src="{$arg.stylesheet}js/jquery.bxslider/jquery.bxslider.min.js"></script>

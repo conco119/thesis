@@ -12,6 +12,8 @@ class Home extends Main {
     {
         $this->set_sidebar();
         $this->set_footer();
+        // unset($_SESSION['cart']);
+        // pre($_SESSION);
         //random product
         $sql = "SELECT p.* ,
         (SELECT m.name FROM media m
@@ -70,6 +72,7 @@ class Home extends Main {
         foreach($plugin as $k => $item)
         {
             $plugin[$k]['price'] = number_format($item['price']);
+            $plugin[$k]['link_name'] = $this->dstring->str_convert($item['name']);
             if( $item['is_discount'] == 1)
             {
                 switch($item['discount_type'])
@@ -102,6 +105,7 @@ class Home extends Main {
         foreach($security as $k => $item)
         {
             $security[$k]['price'] = number_format($item['price']);
+            $security[$k]['link_name'] = $this->dstring->str_convert($item['name']);
             if( $item['is_discount'] == 1)
             {
                 switch($item['discount_type'])

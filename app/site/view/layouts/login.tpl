@@ -17,24 +17,25 @@
         <link rel="stylesheet" type="text/css" href="{$arg.stylesheet}js/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="{$arg.stylesheet}js/bootstrap/css/bootstrap-theme.min.css">
         <link rel="stylesheet" type="text/css" href="{$arg.stylesheet}js/jquery.bxslider/jquery.bxslider.css">
-        
+
         <script src="{$arg.stylesheet}js/jquery-2.1.3.min.js"></script>
         <script src="{$arg.stylesheet}js/jquery.bxslider/plugins/jquery.fitvids.js"></script>
         <script src="{$arg.stylesheet}js/jquery.bxslider/jquery.bxslider.min.js"></script>
         <script src="{$arg.stylesheet}js/bootstrap/js/bootstrap.min.js"></script>
-       
+
         <script src="{$arg.stylesheet}js/main.js"></script>
     </head>
     <body>
 
     <div class="container">
         <div class="login_box" style="margin-top: 70px;">
-            {include file=$content}
-
+            {include file=$tpl_file}
             <div class="log_footer">
-                <p>{$arg.trans.a_supplier}? <a href="?mod=customer&site=login">{$arg.trans.login_here}</a></p>
-                <p>{$arg.trans.authentic_account}? <a href="?mod=customer&site=register">{$arg.trans.register_here}</a></p>
-                <p class="text-center"><a href="./">{$arg.trans.back_to_home}</a></p>
+            {foreach from=$errors item=item }
+                <p >{$item}</p>
+            {/foreach}
+
+                <p class="text-center"><a href="./">Trở về trang chủ</a></p>
             </div>
         </div>
     </div>
