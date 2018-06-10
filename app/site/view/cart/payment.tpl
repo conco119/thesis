@@ -2,7 +2,7 @@
     <h3>Thanh toán đơn hàng</h3>
 </div>
 <div class="row bg_white col-df">
-    <form class="form" role="form" method="POST" action="?mc=cart&site=payment" id="validate">
+    <form class="form" role="form" method="POST" action="?mc=cart&site=order" id="validate">
         <div class="col-md-7 col-sm-7 col-xs-12" id="payment_form">
             <h3>Nhập thông tin đơn hàng</h3>
 
@@ -56,6 +56,26 @@
                                     {else}
                                         {($list.price*$list.number_count)|number_format}đ
                                     {/if}
+                                </p>
+                            </div>
+                        </li>
+                    {/foreach}
+
+                    <br>
+                    <li class="line bor-bottom">
+                        <div><b>DỊCH VỤ</b></div>
+                        <div><b>TỔNG</b></div>
+                    </li>
+
+                    {foreach from=$cart.services item=list}
+                        <li class="line bor-bottom itm_order">
+                            <div>
+                                <a href="javascript:void(0)"> {$list.name} <span>x{$list.number_count}</span></a>
+                            </div>
+
+                            <div class="price">
+                                <p>
+                                    {($list.price*$list.number_count)|number_format}đ
                                 </p>
                             </div>
                         </li>

@@ -209,7 +209,7 @@ class Product extends Main
           $item['price'] = number_format($item['price']);
           $item['price_sale'] = number_format($item['price_sale']);
           $item['price_import'] = number_format($item['price_import']);
-          $item['unit_id'] = $this->helper->get_option(1, 'product_units',$item['unit_id']);
+          $item['unit_id'] = $this->helper->get_option_with_status('product_units', $item['unit_id']);
           $item['trademark_id'] = $this->helper->get_option(1, 'product_trademarks',$item['trademark_id']);
           $item['discount_type'] = $this->helper->get_option(0, 'discount_type', $item['discount_type']);
           echo json_encode($item);

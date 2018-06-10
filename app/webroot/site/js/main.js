@@ -83,17 +83,21 @@ function SetStarProduct(id, point) {
     $.post('./?mc=product&site=set_star', {
         'id': id, "point": point
     }).done(function (rt) {
-        rt = JSON.parse(rt)
-        if (rt.status == '1') {
-            message = 'Đánh giá thành công. Cảm ơn bạn đã đánh giá sản phẩm của chúng tôi !';
+
+        if (rt == '1') {
+            window.location.reload(true);
+            // message = 'Đánh giá thành công. Cảm ơn bạn đã đánh giá sản phẩm của chúng tôi !';
+            // MessageModal(message);
+            // setTimeout(() => {
+
+            // },2000)
         }
-        if (rt.status == '0') {
+        if (rt == '0') {
             message = 'Bạn chưa đăng nhập, không thể đánh giá được sản phẩm.';
+            MessageModal(message);
             return;
         }
-        LoadStarProduct(id, point, rt.danhgia, rt.mark);
-        MessageModal(message);
-        return false;
+        // LoadStarProduct(id, point, rt.danhgia, rt.mark);
     });
 }
 

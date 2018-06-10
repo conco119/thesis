@@ -446,56 +446,10 @@ function ConvertMoney(money) {
     return rt;
 }
 
-function HandleDelete(table) {
-    var arr = [];
-    $(".item_checked").each(function() {
-        if ($(this).is(':checked')) {
-            var value = $(this).val();
-            arr.push(value);
-        }
-    });
-    if (arr.length < 1) {
-        alert("Chọn 1 mục để xử lý");
-        return false;
-    }
-    var str = arr.toString();
-    $.post("?mod=helps&site=ajax_delete", { 'table': table, 'id': str }).done(function() {
-        location.reload();
-    });
 
-}
 
-function HandleActive(table, type) {
-    var arr = [];
-    $(".item_checked").each(function() {
-        if ($(this).is(':checked')) {
-            var value = $(this).val();
-            arr.push(value);
-        }
-    });
-    if (arr.length < 1) {
-        alert("Chọn mục xử lý.")
-        return false;
-    }
-    var str = arr.toString();
-    $.post("?mod=helps&site=ajax_active", { 'table': table, 'type': type, 'id': str })
-        .done(function() {
-            alert("Xử lý thành công.");
-            location.reload();
-        });
-}
 
-function activeItem(table, id) {
-    $.post("?mod=helps&site=ajax_active_item", { 'table': table, 'id': id }).done(function(data) {
-        if (data == '0')
-            alert('khong the cap nhat trang thai');
-        if (data == '2') {
-            $('#UpdateBarcode').modal('show');
-            LoadBarcode(id);
-        } else
-            $("#stt" + id).html(data);
-    });
-}
+
 
 
 /**Chức năng xóa ajax

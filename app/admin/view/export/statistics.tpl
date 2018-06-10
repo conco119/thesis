@@ -15,10 +15,6 @@
                             <select class="form-control" id="date_ex" onchange="filter();">
                                 <option value="0">Tất cả hóa đơn</option> {$out.select_export}
                             </select>
-                            <select class="form-control" id="user" onchange="filter();">
-                                <option value="0" onchange="filter();">Người lập phiếu</option>
-                                {$out.user}
-                            </select>
                             <input class="form-control" id="key" value="{$out.key}" name="key" onchange="filter()" placeholder="Mã hóa đơn,id, Tên khách hàng">
                         </div>
                         <a href="./admin?mc=export&site=index" class="btn btn-primary"><i class="fa fa-pencil"></i> Tạo hóa đơn</a>
@@ -65,9 +61,9 @@
                                         </button>
                                         <a href="./admin?mc=exportedit&site=modify&id={$list.id}" class="btn btn-default"><i
                                                     class="fa fa-edit"></i></a>
-                                        <button type="button" title="In hóa đơn" data-toggle="modal"
+                                        {* <button type="button" title="In hóa đơn" data-toggle="modal"
                                                 class="btn btn-default" onclick="SetPrint({$list.id});"
-                                                data-dismiss="modal"><i class="fa fa-print"></i></button>
+                                                data-dismiss="modal"><i class="fa fa-print"></i></button> *}
                                             <button type="button" title="Xóa hóa đơn" class="btn btn-default"
                                                     data-toggle="modal" data-target="#DeleteForm"
                                                     onclick="LoadDeleteItem('export', {$list.id}, '', 'hóa đơn bán', 'vì còn tồn tại trong hóa đơn');">
@@ -156,7 +152,6 @@
         });
 
         function filter() {
-            var user = $("#user").val();
             var date = $("#date_ex").val();
             var key = $("#key").val();
             var url = "./admin?mc=export&site=statistics";

@@ -35,12 +35,25 @@
                             </p>
 
                             <div class="num_star" id="Star{$list.id}">
-                                <i class="fa fa-star" onclick="SetStarProduct({$list.id}, 1);"></i>
-                                <i class="fa fa-star" onclick="SetStarProduct({$list.id}, 2);"></i>
-                                <i class="fa fa-star" onclick="SetStarProduct({$list.id}, 3);"></i>
-                                <i class="fa fa-star" onclick="SetStarProduct({$list.id}, 4);"></i>
-                                <i class="fa fa-star" onclick="SetStarProduct({$list.id}, 5);"></i>
-                                <span>{$list.number_point} đánh giá - {$list.avg_point} điểm</span>
+                                {for $index=1 to 5}
+                                    {if $list.number_user_rate neq 0}
+                                        {if (($list.total_rate/$list.number_user_rate)|round) - $index gte 0}
+                                            <i class="fa fa-star checked" onclick="SetStarProduct({$list.id}, {$index});"></i>
+                                        {else}
+                                            <i class="fa fa-star" onclick="SetStarProduct({$list.id}, {$index});"></i>
+                                        {/if}
+                                    {else}
+                                            <i class="fa fa-star" onclick="SetStarProduct({$list.id}, {$index});"></i>
+                                    {/if}
+                                {/for}
+
+                                <span>{$list.number_user_rate} đánh giá -
+                                    {if $list.number_user_rate neq 0}
+                                        {($list.total_rate/$list.number_user_rate)|round}
+                                    {else}
+                                        0
+                                    {/if}
+                                điểm</span>
                             </div>
                             <div class="btn_function">
                                 <div class="col-md-12 col-sm-12 col-xs-12 col-df">
@@ -85,12 +98,25 @@
                             </p>
 
                             <div class="num_star" id="Star{$list.id}">
-                                <i class="fa fa-star" onclick="SetStarProduct(32, 1);"></i>
-                                <i class="fa fa-star" onclick="SetStarProduct(32, 1);"></i>
-                                <i class="fa fa-star" onclick="SetStarProduct(32, 1);"></i>
-                                <i class="fa fa-star" onclick="SetStarProduct(32, 1);"></i>
-                                <i class="fa fa-star" onclick="SetStarProduct(32, 1);"></i>
-                                <span>{$list.number_point} đánh giá - {$list.avg_point} điểm</span>
+                                {for $index=1 to 5}
+                                    {if $list.number_user_rate neq 0}
+                                        {if (($list.total_rate/$list.number_user_rate)|round) - $index gte 0}
+                                            <i class="fa fa-star checked" onclick="SetStarProduct({$list.id}, {$index});"></i>
+                                        {else}
+                                            <i class="fa fa-star" onclick="SetStarProduct({$list.id}, {$index});"></i>
+                                        {/if}
+                                    {else}
+                                            <i class="fa fa-star" onclick="SetStarProduct({$list.id}, {$index});"></i>
+                                    {/if}
+                                {/for}
+
+                                <span>{$list.number_user_rate} đánh giá -
+                                    {if $list.number_user_rate neq 0}
+                                        {($list.total_rate/$list.number_user_rate)|round}
+                                    {else}
+                                        0
+                                    {/if}
+                                điểm</span>
                             </div>
                             <div class="btn_function">
                                 <div class="col-md-12 col-sm-12 col-xs-12 col-df">
@@ -135,12 +161,25 @@
                             </p>
 
                             <div class="num_star" id="Star{$list.id}">
-                                <i class="fa fa-star" onclick="SetStarProduct(32, 1);"></i>
-                                <i class="fa fa-star" onclick="SetStarProduct(32, 1);"></i>
-                                <i class="fa fa-star" onclick="SetStarProduct(32, 1);"></i>
-                                <i class="fa fa-star" onclick="SetStarProduct(32, 1);"></i>
-                                <i class="fa fa-star" onclick="SetStarProduct(32, 1);"></i>
-                                <span>{$list.number_point} đánh giá - {$list.avg_point} điểm</span>
+                                {for $index=1 to 5}
+                                    {if $list.number_user_rate neq 0}
+                                        {if (($list.total_rate/$list.number_user_rate)|round) - $index gte 0}
+                                            <i class="fa fa-star checked" onclick="SetStarProduct({$list.id}, {$index});"></i>
+                                        {else}
+                                            <i class="fa fa-star" onclick="SetStarProduct({$list.id}, {$index});"></i>
+                                        {/if}
+                                    {else}
+                                            <i class="fa fa-star" onclick="SetStarProduct({$list.id}, {$index});"></i>
+                                    {/if}
+                                {/for}
+
+                                <span>{$list.number_user_rate} đánh giá -
+                                    {if $list.number_user_rate neq 0}
+                                        {($list.total_rate/$list.number_user_rate)|round}
+                                    {else}
+                                        0
+                                    {/if}
+                                điểm</span>
                             </div>
                             <div class="btn_function">
                                 <div class="col-md-12 col-sm-12 col-xs-12 col-df">

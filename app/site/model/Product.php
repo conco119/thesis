@@ -56,16 +56,22 @@ class Product extends Main {
             if( $this->dstring->str_convert($p['name']) == $c)
             {
                 $product_id = $p['id'];
+
                 $sql = "SELECT p.*, pt.name as trademark_name, pc.name as category_name , po.content as content
                 ,(SELECT SUM(number_count) FROM import_products im WHERE p.id=im.product_id) imported,
-                (SELECT SUM(number_count) FROM export_products ex WHERE p.id=ex.product_id) exported
+                (SELECT SUM(number_count) FROM export_products ex WHERE p.id=ex.product_id) exported,
+                (SELECT count(id) FROM product_rates pr WHERE p.id=pr.product_id ) as number_user_rate,
+                (SELECT sum(rate) FROM product_rates pr WHERE p.id=pr.product_id ) as total_rate
                 FROM products p
                 LEFT JOIN product_trademarks pt ON pt.id = p.trademark_id
                 LEFT JOIN product_categories pc ON pc.id = p.category_id
                 LEFT JOIN posts po ON po.product_id = p.id
                 WHERE p.id = $product_id AND p.status=1";
                 $product = $this->pdo->fetch_one($sql);
-
+                //cập nhật lượt xems
+                $this->pdo->update('products', ['views' => $product['views'] + 1], "id=".$product['id']);
+                //select lại product
+                $product = $this->pdo->fetch_one($sql);
                 $sql ="SELECT m.name, mp.is_showed FROM media m
                 LEFT JOIN media_product mp ON m.id = mp.media_id
                 WHERE mp.product_id = {$product['id']} ORDER BY mp.is_showed DESC";
@@ -94,6 +100,8 @@ class Product extends Main {
         $sql = "SELECT p.*,
         (SELECT m.name FROM media m
         RIGHT JOIN  media_product mp ON m.id = mp.media_id WHERE mp.product_id = p.id AND mp.is_showed = 1) as image_name,
+        (SELECT count(id) FROM product_rates pr WHERE p.id=pr.product_id ) as number_user_rate,
+        (SELECT sum(rate) FROM product_rates pr WHERE p.id=pr.product_id ) as total_rate,
         (SELECT count(id) FROM product_rates pr WHERE p.id=pr.product_id ) as number_user_rate,
         (SELECT sum(rate) FROM product_rates pr WHERE p.id=pr.product_id ) as total_rate
         FROM products p
@@ -150,8 +158,5 @@ class Product extends Main {
         $this->pdo->insert('product_rates', $data);
         echo 1;
     }
-    function get_point_rate()
-    {
 
-    }
 }

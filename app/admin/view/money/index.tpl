@@ -102,9 +102,9 @@
                                     </td>
                                     <td class="text-right">
                                         {$list.btn}
-                                        <button type="button" title="In phiếu" class="btn btn-default" data-dismiss="modal" onclick="SetPrint({$list.id})">
+                                        {* <button type="button" title="In phiếu" class="btn btn-default" data-dismiss="modal" onclick="SetPrint({$list.id})">
                                             <i class="fa fa-print"></i>
-                                        </button>
+                                        </button> *}
                                     </td>
                                 </tr>
                             {/foreach}
