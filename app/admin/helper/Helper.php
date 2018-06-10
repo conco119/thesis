@@ -194,7 +194,7 @@ class Helper extends HelpAbstract
 
     public function get_option_customer_export($id)
     {
-        $sql = "SELECT a.id, a.code, a.name, b.name as group_name FROM customers a LEFT JOIN customer_groups b  ON a.group_id = b.id";
+        $sql = "SELECT a.id, a.code, a.name, b.name as group_name FROM customers a LEFT JOIN customer_groups b  ON a.group_id = b.id WHERE a.status = 1";
         $customers = $this->pdo->fetch_all($sql);
 
         $result = "<option value='0'> Chọn khách hàng </option>";
@@ -224,6 +224,19 @@ class Helper extends HelpAbstract
             {
                 $result .= "<option value='$k'>" . $item . "</option>";
             }
+        }
+        return $result;
+    }
+
+    public function get_option_with_status($table, $match_id)
+    {
+        $query_result = $this->pdo->fetch_all("SELECT * FROM $table WHERE status = 1");
+        foreach($query_result as $key => $value)
+        {
+            if($value['id'] == $match_id)
+                $result .= "<option value='{$value['id']}' selected>{$value['name']}</option>";
+            else
+            $result .= "<option value='{$value['id']}'>{$value['name']}</option>";
         }
         return $result;
     }

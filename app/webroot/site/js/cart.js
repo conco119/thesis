@@ -1,32 +1,14 @@
 // JavaScript Document
 
-(function($) {
-	$(document).ready(function(e) {
-		/* --- CART --- */
-		$("#delete_cart").click(function(){
-			$.post('?mod=cart&site=handle',{
-				hand: 'delete'
-			}).done(function(){
-				alert("Xoá giỏ hàng thành công !");
-			},function(){
-				window.location.reload(true);
-			});
-			return false;
-		});
-
-		$(".cart-display").load("?mod=cart&site=ajax_load_cart_info");
-		$(".cart-display-list").load("?mod=cart&site=ajax_load_cart_list");
-
-	});
-
-}(jQuery));
 
 
 function addToCart(id){
 	$.post('./?mc=cart&site=add',{
 		'id': id
 	}).done(function(data){
-		$("#cart-number").html(`${data} sản phẩm`);
+		data = JSON.parse(data);
+		console.log(data);
+		$("#cart-number").html(`${data.product} sản phẩm  ${data.service} dịch vụ`);
 		MessageModal("Đã đưa sản phẩm vào giỏ hàng của bạn !");
 		return false;
 	});
@@ -67,6 +49,36 @@ function delateItemCart(id){
 function DeleteAll()
 {
 	$.post('./?mc=cart&site=delete_all').done(function(){
+		window.location.reload(true);
+	});
+}
+//service
+function addService(id){
+	$.post('./?mc=cart&site=addService',{
+		'id': id
+	}).done(function(data){
+		data = JSON.parse(data);
+		$("#cart-number").html(`${data.product} sản phẩm  ${data.service} dịch vụ`);
+		MessageModal("Đã đưa dịch vụ vào giỏ hàng của bạn !");
+		return false;
+	});
+	return false;
+}
+
+function updateService(value, id){
+	if(value <= 0)
+		value =1;
+	$.post('./?mc=cart&site=updateService',{
+		id: id, value: value
+	}).done(function(){
+		window.location.reload(true);
+	});
+}
+
+function deleteService(id){
+	$.post('./?mc=cart&site=deleteService',{
+		id: id
+	}).done(function(){
 		window.location.reload(true);
 	});
 }

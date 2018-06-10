@@ -56,9 +56,6 @@ class ProductHelper extends HelpAbstract
         return $products;
     }
 
-    public function get_option_with_status($table, $match_id)
-    {
 
-    }
 
 }

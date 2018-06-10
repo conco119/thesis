@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-09 20:38:47
+/* Smarty version 3.1.30, created on 2018-06-10 19:44:39
   from "C:\xampp\htdocs\~mtd\htaccess\app\site\view\product\detail.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b1bd867b37fe1_93454608',
+  'unifunc' => 'content_5b1d1d37cea432_65847865',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '81b92a079f96fc804e5d1de8b6232c5df282e723' => 
     array (
       0 => 'C:\\xampp\\htdocs\\~mtd\\htaccess\\app\\site\\view\\product\\detail.tpl',
-      1 => 1528551522,
+      1 => 1528634678,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b1bd867b37fe1_93454608 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b1d1d37cea432_65847865 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 
 
@@ -75,12 +75,9 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
             <div class="box">
                 <div class="show-small-info">
                     <ul>
-                        <li><i class="fa fa-clock-o"></i> Cập nhật lúc <?php echo $_smarty_tpl->tpl_vars['value']->value['updated'];?>
- </li>
-                        <li><i class="fa fa-eye"></i> <?php echo $_smarty_tpl->tpl_vars['value']->value['views'];?>
- lượt</li>
-                        <li><i class="fa fa-heart-o"></i> <?php echo $_smarty_tpl->tpl_vars['value']->value['likes'];?>
- lượt</li>
+                        
+                        <li><i class="fa fa-eye"></i> <b>Lượt xem</b> <?php echo $_smarty_tpl->tpl_vars['value']->value['views'];?>
+</li>
                     </ul>
                 </div>
                 <div class="show-small-info">
@@ -100,13 +97,43 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
                 </div>
 
                 <div class="show-small-info">
-                    <p id="Star<?php echo $_smarty_tpl->tpl_vars['value']->value['id'];?>
-" class="star-big">
-                         <i class="fa fa-star" onclick="SetStarProduct(32, 1);"></i>
-                        <span><?php echo $_smarty_tpl->tpl_vars['value']->value['number_point'];?>
- đánh giá - <?php echo $_smarty_tpl->tpl_vars['value']->value['avg_point'];?>
- điểm</span>
-                    </p>
+                    <div class="star-big" id="Star<?php echo $_smarty_tpl->tpl_vars['value']->value['id'];?>
+">
+                        <?php
+$_smarty_tpl->tpl_vars['index'] = new Smarty_Variable(null, $_smarty_tpl->isRenderingCache);$_smarty_tpl->tpl_vars['index']->step = 1;$_smarty_tpl->tpl_vars['index']->total = (int) ceil(($_smarty_tpl->tpl_vars['index']->step > 0 ? 5+1 - (1) : 1-(5)+1)/abs($_smarty_tpl->tpl_vars['index']->step));
+if ($_smarty_tpl->tpl_vars['index']->total > 0) {
+for ($_smarty_tpl->tpl_vars['index']->value = 1, $_smarty_tpl->tpl_vars['index']->iteration = 1;$_smarty_tpl->tpl_vars['index']->iteration <= $_smarty_tpl->tpl_vars['index']->total;$_smarty_tpl->tpl_vars['index']->value += $_smarty_tpl->tpl_vars['index']->step, $_smarty_tpl->tpl_vars['index']->iteration++) {
+$_smarty_tpl->tpl_vars['index']->first = $_smarty_tpl->tpl_vars['index']->iteration == 1;$_smarty_tpl->tpl_vars['index']->last = $_smarty_tpl->tpl_vars['index']->iteration == $_smarty_tpl->tpl_vars['index']->total;?>
+                            <?php if ($_smarty_tpl->tpl_vars['value']->value['number_user_rate'] != 0) {?>
+                                <?php if ((round(($_smarty_tpl->tpl_vars['value']->value['total_rate']/$_smarty_tpl->tpl_vars['value']->value['number_user_rate'])))-$_smarty_tpl->tpl_vars['index']->value >= 0) {?>
+                                    <i class="fa fa-star checked" onclick="SetStarProduct(<?php echo $_smarty_tpl->tpl_vars['value']->value['id'];?>
+, <?php echo $_smarty_tpl->tpl_vars['index']->value;?>
+);"></i>
+                                <?php } else { ?>
+                                    <i class="fa fa-star" onclick="SetStarProduct(<?php echo $_smarty_tpl->tpl_vars['value']->value['id'];?>
+, <?php echo $_smarty_tpl->tpl_vars['index']->value;?>
+);"></i>
+                                <?php }?>
+                            <?php } else { ?>
+                                    <i class="fa fa-star" onclick="SetStarProduct(<?php echo $_smarty_tpl->tpl_vars['value']->value['id'];?>
+, <?php echo $_smarty_tpl->tpl_vars['index']->value;?>
+);"></i>
+                            <?php }?>
+                        <?php }
+}
+?>
+
+
+                        <span><?php echo $_smarty_tpl->tpl_vars['value']->value['number_user_rate'];?>
+ đánh giá -
+                            <?php if ($_smarty_tpl->tpl_vars['value']->value['number_user_rate'] != 0) {?>
+                                <?php echo round(($_smarty_tpl->tpl_vars['value']->value['total_rate']/$_smarty_tpl->tpl_vars['value']->value['number_user_rate']));?>
+
+                            <?php } else { ?>
+                                0
+                            <?php }?>
+                        điểm</span>
+                    </div>
                 </div>
             </div>
 
@@ -126,8 +153,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
             </div>
 
             <div class="addcart">
-               Số Lượng: <input type="number" width="30" value="1" id="CartNumber<?php echo $_smarty_tpl->tpl_vars['value']->value['id'];?>
-"/>   <button onclick="addToCart(<?php echo $_smarty_tpl->tpl_vars['value']->value['id'];?>
+               
+               <button onclick="addToCart(<?php echo $_smarty_tpl->tpl_vars['value']->value['id'];?>
 );"><i class="fa fa-opencart" ></i> Đặt Mua Ngay</button>
             </div>
 
@@ -228,11 +255,42 @@ foreach ($_from as $_smarty_tpl->tpl_vars['list']->value) {
 đ
                     <?php }?>
                 </div>
-                <div class="num_star">
-                    <i class="fa fa-star" onclick="SetStarProduct(32, 1);"></i>
-                     <span><?php echo $_smarty_tpl->tpl_vars['list']->value['number_point'];?>
- đánh giá - <?php echo $_smarty_tpl->tpl_vars['list']->value['avg_point'];?>
- điểm</span>
+                <div class="num_star" id="Star<?php echo $_smarty_tpl->tpl_vars['list']->value['id'];?>
+">
+                    <?php
+$_smarty_tpl->tpl_vars['index'] = new Smarty_Variable(null, $_smarty_tpl->isRenderingCache);$_smarty_tpl->tpl_vars['index']->step = 1;$_smarty_tpl->tpl_vars['index']->total = (int) ceil(($_smarty_tpl->tpl_vars['index']->step > 0 ? 5+1 - (1) : 1-(5)+1)/abs($_smarty_tpl->tpl_vars['index']->step));
+if ($_smarty_tpl->tpl_vars['index']->total > 0) {
+for ($_smarty_tpl->tpl_vars['index']->value = 1, $_smarty_tpl->tpl_vars['index']->iteration = 1;$_smarty_tpl->tpl_vars['index']->iteration <= $_smarty_tpl->tpl_vars['index']->total;$_smarty_tpl->tpl_vars['index']->value += $_smarty_tpl->tpl_vars['index']->step, $_smarty_tpl->tpl_vars['index']->iteration++) {
+$_smarty_tpl->tpl_vars['index']->first = $_smarty_tpl->tpl_vars['index']->iteration == 1;$_smarty_tpl->tpl_vars['index']->last = $_smarty_tpl->tpl_vars['index']->iteration == $_smarty_tpl->tpl_vars['index']->total;?>
+                        <?php if ($_smarty_tpl->tpl_vars['list']->value['number_user_rate'] != 0) {?>
+                            <?php if ((round(($_smarty_tpl->tpl_vars['list']->value['total_rate']/$_smarty_tpl->tpl_vars['list']->value['number_user_rate'])))-$_smarty_tpl->tpl_vars['index']->value >= 0) {?>
+                                <i class="fa fa-star checked" onclick="SetStarProduct(<?php echo $_smarty_tpl->tpl_vars['list']->value['id'];?>
+, <?php echo $_smarty_tpl->tpl_vars['index']->value;?>
+);"></i>
+                            <?php } else { ?>
+                                <i class="fa fa-star" onclick="SetStarProduct(<?php echo $_smarty_tpl->tpl_vars['list']->value['id'];?>
+, <?php echo $_smarty_tpl->tpl_vars['index']->value;?>
+);"></i>
+                            <?php }?>
+                        <?php } else { ?>
+                                <i class="fa fa-star" onclick="SetStarProduct(<?php echo $_smarty_tpl->tpl_vars['list']->value['id'];?>
+, <?php echo $_smarty_tpl->tpl_vars['index']->value;?>
+);"></i>
+                        <?php }?>
+                    <?php }
+}
+?>
+
+
+                    <span><?php echo $_smarty_tpl->tpl_vars['list']->value['number_user_rate'];?>
+ đánh giá -
+                        <?php if ($_smarty_tpl->tpl_vars['list']->value['number_user_rate'] != 0) {?>
+                            <?php echo round(($_smarty_tpl->tpl_vars['list']->value['total_rate']/$_smarty_tpl->tpl_vars['list']->value['number_user_rate']));?>
+
+                        <?php } else { ?>
+                            0
+                        <?php }?>
+                    điểm</span>
                 </div>
                 <div class="btn_function">
                     <div class="col-md-12 col-sm-12 col-xs-12 col-df">

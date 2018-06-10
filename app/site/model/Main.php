@@ -170,8 +170,9 @@ class Main
 
   public function set_cart()
   {
-    $number_item = count($_SESSION['cart']['products']);
-    $this->smarty->assign('number_item', $number_item);
+    $number['product'] = count($_SESSION['cart']['products']);
+    $number['service'] = count($_SESSION['cart']['services']);
+    $this->smarty->assign('cart_number', $number);
   }
 
   public function check_user()

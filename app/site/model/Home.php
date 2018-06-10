@@ -13,7 +13,7 @@ class Home extends Main {
         $this->set_sidebar();
         $this->set_footer();
         // unset($_SESSION['cart']);
-        // pre($_SESSION);
+        // pre($_SESSION['cart']);
         //random product
         $sql = "SELECT p.* ,
         (SELECT m.name FROM media m
@@ -137,6 +137,17 @@ class Home extends Main {
 
     function contact()
     {
+        if(isset($_POST['submit']))
+        {
+            $data['name'] = $_POST['name'];
+            $data['email'] = $_POST['email'];
+            $data['phone'] = $_POST['phone'];
+            $data['description'] = $_POST['description'];
+            $data['status'] = 0;
+            $data['created_at'] = time();
+            $this->pdo->insert('contacts', $data);
+            lib_alert('Gửi thành công');
+        }
         $this->smarty->display('contact.tpl');
     }
 

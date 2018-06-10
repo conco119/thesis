@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-09 16:05:44
+/* Smarty version 3.1.30, created on 2018-06-10 10:13:58
   from "C:\xampp\htdocs\~mtd\htaccess\app\site\view\category\index.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b1b9868616026_72837100',
+  'unifunc' => 'content_5b1c97761363d6_45188521',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'de9bda0a00754236848ab06790470e72bbf02830' => 
     array (
       0 => 'C:\\xampp\\htdocs\\~mtd\\htaccess\\app\\site\\view\\category\\index.tpl',
-      1 => 1528535119,
+      1 => 1528600431,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b1b9868616026_72837100 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b1c97761363d6_45188521 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="sidebar_title bg_34495e">
     <h1><?php echo $_smarty_tpl->tpl_vars['category']->value['name'];?>
@@ -60,11 +60,40 @@ foreach ($_from as $_smarty_tpl->tpl_vars['list']->value) {
             </p>
             <div class="num_star" id="Star<?php echo $_smarty_tpl->tpl_vars['list']->value['id'];?>
 ">
-            	 <i class="fa fa-star" onclick="SetStarProduct(32, 1);"></i>
-                  <i class="fa fa-star" onclick="SetStarProduct(32, 1);"></i>
-            	<span><?php echo $_smarty_tpl->tpl_vars['list']->value['number_point'];?>
- x đánh giá - <?php echo $_smarty_tpl->tpl_vars['list']->value['avg_point'];?>
- x điểm</span>
+                <?php
+$_smarty_tpl->tpl_vars['index'] = new Smarty_Variable(null, $_smarty_tpl->isRenderingCache);$_smarty_tpl->tpl_vars['index']->step = 1;$_smarty_tpl->tpl_vars['index']->total = (int) ceil(($_smarty_tpl->tpl_vars['index']->step > 0 ? 5+1 - (1) : 1-(5)+1)/abs($_smarty_tpl->tpl_vars['index']->step));
+if ($_smarty_tpl->tpl_vars['index']->total > 0) {
+for ($_smarty_tpl->tpl_vars['index']->value = 1, $_smarty_tpl->tpl_vars['index']->iteration = 1;$_smarty_tpl->tpl_vars['index']->iteration <= $_smarty_tpl->tpl_vars['index']->total;$_smarty_tpl->tpl_vars['index']->value += $_smarty_tpl->tpl_vars['index']->step, $_smarty_tpl->tpl_vars['index']->iteration++) {
+$_smarty_tpl->tpl_vars['index']->first = $_smarty_tpl->tpl_vars['index']->iteration == 1;$_smarty_tpl->tpl_vars['index']->last = $_smarty_tpl->tpl_vars['index']->iteration == $_smarty_tpl->tpl_vars['index']->total;?>
+                    <?php if ($_smarty_tpl->tpl_vars['list']->value['number_user_rate'] != 0) {?>
+                        <?php if ((round(($_smarty_tpl->tpl_vars['list']->value['total_rate']/$_smarty_tpl->tpl_vars['list']->value['number_user_rate'])))-$_smarty_tpl->tpl_vars['index']->value >= 0) {?>
+                            <i class="fa fa-star checked" onclick="SetStarProduct(<?php echo $_smarty_tpl->tpl_vars['list']->value['id'];?>
+, <?php echo $_smarty_tpl->tpl_vars['index']->value;?>
+);"></i>
+                        <?php } else { ?>
+                            <i class="fa fa-star" onclick="SetStarProduct(<?php echo $_smarty_tpl->tpl_vars['list']->value['id'];?>
+, <?php echo $_smarty_tpl->tpl_vars['index']->value;?>
+);"></i>
+                        <?php }?>
+                    <?php } else { ?>
+                            <i class="fa fa-star" onclick="SetStarProduct(<?php echo $_smarty_tpl->tpl_vars['list']->value['id'];?>
+, <?php echo $_smarty_tpl->tpl_vars['index']->value;?>
+);"></i>
+                    <?php }?>
+                <?php }
+}
+?>
+
+
+                <span><?php echo $_smarty_tpl->tpl_vars['list']->value['number_user_rate'];?>
+ đánh giá -
+                    <?php if ($_smarty_tpl->tpl_vars['list']->value['number_user_rate'] != 0) {?>
+                        <?php echo round(($_smarty_tpl->tpl_vars['list']->value['total_rate']/$_smarty_tpl->tpl_vars['list']->value['number_user_rate']));?>
+
+                    <?php } else { ?>
+                        0
+                    <?php }?>
+                điểm</span>
             </div>
             <div class="btn_function">
                 <div class="col-md-12 col-sm-12 col-xs-12 col-df">

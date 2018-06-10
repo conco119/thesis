@@ -28,9 +28,8 @@
             <div class="box">
                 <div class="show-small-info">
                     <ul>
-                        <li><i class="fa fa-clock-o"></i> Cập nhật lúc {$value.updated} </li>
-                        <li><i class="fa fa-eye"></i> {$value.views} lượt</li>
-                        <li><i class="fa fa-heart-o"></i> {$value.likes} lượt</li>
+                        {* <li><i class="fa fa-clock-o"></i> Cập nhật lúc {$value.updated} </li> *}
+                        <li><i class="fa fa-eye"></i> <b>Lượt xem</b> {$value.views}</li>
                     </ul>
                 </div>
                 <div class="show-small-info">
@@ -49,10 +48,27 @@
                 </div>
 
                 <div class="show-small-info">
-                    <p id="Star{$value.id}" class="star-big">
-                         <i class="fa fa-star" onclick="SetStarProduct(32, 1);"></i>
-                        <span>{$value.number_point} đánh giá - {$value.avg_point} điểm</span>
-                    </p>
+                    <div class="star-big" id="Star{$value.id}">
+                        {for $index=1 to 5}
+                            {if $value.number_user_rate neq 0}
+                                {if (($value.total_rate/$value.number_user_rate)|round) - $index gte 0}
+                                    <i class="fa fa-star checked" onclick="SetStarProduct({$value.id}, {$index});"></i>
+                                {else}
+                                    <i class="fa fa-star" onclick="SetStarProduct({$value.id}, {$index});"></i>
+                                {/if}
+                            {else}
+                                    <i class="fa fa-star" onclick="SetStarProduct({$value.id}, {$index});"></i>
+                            {/if}
+                        {/for}
+
+                        <span>{$value.number_user_rate} đánh giá -
+                            {if $value.number_user_rate neq 0}
+                                {($value.total_rate/$value.number_user_rate)|round}
+                            {else}
+                                0
+                            {/if}
+                        điểm</span>
+                    </div>
                 </div>
             </div>
 
@@ -69,7 +85,8 @@
             </div>
 
             <div class="addcart">
-               Số Lượng: <input type="number" width="30" value="1" id="CartNumber{$value.id}"/>   <button onclick="addToCart({$value.id});"><i class="fa fa-opencart" ></i> Đặt Mua Ngay</button>
+               {* Số Lượng: <input type="number" width="30" value="1" id="CartNumber{$value.id}"/>    *}
+               <button onclick="addToCart({$value.id});"><i class="fa fa-opencart" ></i> Đặt Mua Ngay</button>
             </div>
 
             <div class="support-detail">
@@ -131,9 +148,26 @@
                         {$list.price}đ
                     {/if}
                 </div>
-                <div class="num_star">
-                    <i class="fa fa-star" onclick="SetStarProduct(32, 1);"></i>
-                     <span>{$list.number_point} đánh giá - {$list.avg_point} điểm</span>
+                <div class="num_star" id="Star{$list.id}">
+                    {for $index=1 to 5}
+                        {if $list.number_user_rate neq 0}
+                            {if (($list.total_rate/$list.number_user_rate)|round) - $index gte 0}
+                                <i class="fa fa-star checked" onclick="SetStarProduct({$list.id}, {$index});"></i>
+                            {else}
+                                <i class="fa fa-star" onclick="SetStarProduct({$list.id}, {$index});"></i>
+                            {/if}
+                        {else}
+                                <i class="fa fa-star" onclick="SetStarProduct({$list.id}, {$index});"></i>
+                        {/if}
+                    {/for}
+
+                    <span>{$list.number_user_rate} đánh giá -
+                        {if $list.number_user_rate neq 0}
+                            {($list.total_rate/$list.number_user_rate)|round}
+                        {else}
+                            0
+                        {/if}
+                    điểm</span>
                 </div>
                 <div class="btn_function">
                     <div class="col-md-12 col-sm-12 col-xs-12 col-df">

@@ -5,7 +5,8 @@
 <div class="row  mar-top">
     <div class="col-md-8 col-sm-8 col-xs-12" style="">
         <div class="bg_white pad-15">
-            <div class="table-responsive">
+            <h2>Sản phẩm </h2>
+            <div class="table-responsive ">
                 <table class="table">
                     <tr class="th">
                         <td>TT</td>
@@ -42,6 +43,40 @@
                             </td>
                             <td><a href="javascript:void(0);"
                                    onclick="delateItemCart({$list.id});"><i
+                                        class="fa fa-trash-o fa-2x"></i></a></td>
+                        </tr>
+                    {/foreach}
+
+                </table>
+            </div>
+            <br>
+            <h2>Dịch vụ </h2>
+            <div class="table-responsive">
+                <table class="table">
+                    <tr class="th">
+                        <td>TT</td>
+                        <td>Dịch vụ</td>
+                        <td>Giá</td>
+                        <td>Số lượng</td>
+                        <td>Thành tiền</td>
+                        <td>Xử lý</td>
+                    </tr>
+                    {foreach from=$cart.services key=k item=list}
+                        <tr>
+                            <td>{$k+1}</td>
+                            <td class="name">{$list.name}</td>
+
+                            <td class="price">
+                                 {$list.price|number_format}đ
+                            </td>
+                            <td>
+                            	<input type="number" min="0" step="1" class="number" value="{$list.number_count}" onchange="updateService(this.value, {$list.id});" />
+                            </td>
+                            <td class="price">
+                                {($list.price*$list.number_count)|number_format}đ
+                            </td>
+                            <td><a href="javascript:void(0);"
+                                   onclick="deleteService({$list.id});"><i
                                         class="fa fa-trash-o fa-2x"></i></a></td>
                         </tr>
                     {/foreach}

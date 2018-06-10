@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-09 10:13:02
+/* Smarty version 3.1.30, created on 2018-06-10 17:15:26
   from "C:\xampp\htdocs\~mtd\htaccess\app\site\view\layouts\home.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b1b45be08e4b4_75351184',
+  'unifunc' => 'content_5b1cfa3ea8aa37_58616264',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '39aaab75db087e01e0461515ab7bfa3abed716db' => 
     array (
       0 => 'C:\\xampp\\htdocs\\~mtd\\htaccess\\app\\site\\view\\layouts\\home.tpl',
-      1 => 1528513977,
+      1 => 1528625724,
       2 => 'file',
     ),
   ),
@@ -24,7 +24,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:includes/footer.tpl' => 1,
   ),
 ),false)) {
-function content_5b1b45be08e4b4_75351184 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b1cfa3ea8aa37_58616264 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html>
@@ -57,6 +57,9 @@ js/bootstrap/css/bootstrap-theme.min.css">
 js/jquery.bxslider/jquery.bxslider.css">
         <link rel="stylesheet" type="text/css" href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['stylesheet'];?>
 css/hoverZoomEtalage.css" >
+        <link rel="stylesheet" href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['stylesheet'];?>
+css/services.css">
+
         <?php echo '<script'; ?>
  src="<?php echo $_smarty_tpl->tpl_vars['arg']->value['stylesheet'];?>
 js/jquery-2.1.3.min.js"><?php echo '</script'; ?>

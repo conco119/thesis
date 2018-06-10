@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-09 21:29:50
+/* Smarty version 3.1.30, created on 2018-06-10 19:11:07
   from "C:\xampp\htdocs\~mtd\htaccess\app\site\view\layouts\includes\header.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b1be45e8c9a63_62214241',
+  'unifunc' => 'content_5b1d155b1ed143_81972605',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '604a2b6d317c1be57c2434b49cb2527edd56e4ae' => 
     array (
       0 => 'C:\\xampp\\htdocs\\~mtd\\htaccess\\app\\site\\view\\layouts\\includes\\header.tpl',
-      1 => 1528554567,
+      1 => 1528632663,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b1be45e8c9a63_62214241 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b1d155b1ed143_81972605 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="container">
     <div class="top_link bg_white">
@@ -67,14 +67,16 @@ function content_5b1be45e8c9a63_62214241 (Smarty_Internal_Template $_smarty_tpl)
 
                     <div class="col-md-12 col-sm-12 col-xs-12 col-df nav_header">
                         <div class="item_hd bg_a1aaaf">
-                            Call 12893543 <i class="fa fa-phone fa-2x"></i>
+                            Call <?php echo $_smarty_tpl->tpl_vars['info']->value['info']['phone'];?>
+ <i class="fa fa-phone fa-2x"></i>
                             <p>Thứ 2 - Thứ 7: 8h đến 18h</p>
                         </div>
                         <ul class="phone">
                             <li class="bg_f5791f">
                                 <a href="./?mc=cart">
-                                    <i class="fa fa-cart-plus"></i> <span id='cart-number'><?php echo $_smarty_tpl->tpl_vars['number_item']->value;?>
- sản phẩm</span>
+                                    <i class="fa fa-cart-plus"></i> <span id='cart-number'><?php echo $_smarty_tpl->tpl_vars['cart_number']->value['product'];?>
+ sản phẩm <?php echo $_smarty_tpl->tpl_vars['cart_number']->value['service'];?>
+ dịch vụ</span>
                                 </a>
                             </li>
                         </ul>

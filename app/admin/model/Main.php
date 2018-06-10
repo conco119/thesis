@@ -31,6 +31,7 @@ class Main implements Init
     $this->smarty->assign('tpl_file', $tpl_file);
     // config
     $this->set_value();
+    $this->before_main();
   }
 
    public function set_value()
@@ -83,6 +84,12 @@ class Main implements Init
         lib_redirect(LOGIN_PAGE);
     }
     return $user;
+  }
+
+  function before_main()
+  {
+      if($this->currentUser['permission'] == 4)
+        lib_redirect(DOMAIN);
   }
 }
 

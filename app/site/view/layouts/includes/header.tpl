@@ -40,13 +40,13 @@
 
                     <div class="col-md-12 col-sm-12 col-xs-12 col-df nav_header">
                         <div class="item_hd bg_a1aaaf">
-                            Call 12893543 <i class="fa fa-phone fa-2x"></i>
+                            Call {$info.info.phone} <i class="fa fa-phone fa-2x"></i>
                             <p>Thứ 2 - Thứ 7: 8h đến 18h</p>
                         </div>
                         <ul class="phone">
                             <li class="bg_f5791f">
                                 <a href="./?mc=cart">
-                                    <i class="fa fa-cart-plus"></i> <span id='cart-number'>{$number_item} sản phẩm</span>
+                                    <i class="fa fa-cart-plus"></i> <span id='cart-number'>{$cart_number.product} sản phẩm {$cart_number.service} dịch vụ</span>
                                 </a>
                             </li>
                         </ul>

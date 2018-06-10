@@ -15,6 +15,11 @@
 					</a></li>
 				</div>
 				<div class="col-md-2 col-sm-2 col-xs-12 col-df">
+					<li class="" style="background:rgb(31, 57, 245);"><i class="fa fa-camera-retro"></i>
+						<a href="./?mc=servicee" title="Sản phẩm">Dịch vụ
+					</a></li>
+				</div>
+				<div class="col-md-2 col-sm-2 col-xs-12 col-df">
 					<li class="" style="background: rgb(129, 142, 181);"><i class="fa fa-cc-paypal"></i>
 						<a href="./?site=intro" title="Giới thiệu">Giới thiệu
 							<p></p>

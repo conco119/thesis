@@ -33,7 +33,7 @@ class Money extends Main
         ";
 
 
-        $paging = $this->paging->get_content($this->pdo->count_rows($sql), 10);
+        $paging = $this->paging->get_content($this->pdo->count_rows($sql), 20);
         $sql .= $paging['sql_add'];
         // pre($sql);
         // die();

@@ -21,9 +21,10 @@ class Customer extends Main {
             $data['address'] = $_POST['address'];
             $data['gender'] = 1;
             $data['birthday'] = "2018/01/01";
-            $data['status'] = 0;
-            $data['permission'] = 0;
+            $data['status'] = 1;
+            $data['permission'] = 4;
             $data['created_at'] = time();
+            $data['updated_at'] = time();
             $data['avatar'] = '';
             if($_POST['password'] != $_POST['repassword'])
             {

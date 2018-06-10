@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-11 09:52:28
+/* Smarty version 3.1.30, created on 2018-06-10 22:34:34
   from "/Users/mtd/Sites/htaccess/app/admin/view/layouts/includes/header.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5af5056c3a1066_85366308',
+  'unifunc' => 'content_5b1d450a5a1191_30329600',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'b301ea25a38633316e818345db96e213a8545257' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/layouts/includes/header.tpl',
-      1 => 1526007142,
+      1 => 1528644872,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5af5056c3a1066_85366308 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b1d450a5a1191_30329600 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 
 <div class="top_nav">
@@ -41,8 +41,7 @@ function content_5af5056c3a1066_85366308 (Smarty_Internal_Template $_smarty_tpl)
 					<ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
 						<li><a href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['prefix_admin'];?>
 mc=user&site=profile"> Tài khoản</a></li>
-						<li><a href="?mod=install&site=index"> Thông tin sử dụng</a></li>
-            <li><a href="?mod=upgrade&site=index"> Phiên bản</a></li>
+						
 						<li><a href="admin?mc=user&site=logout"><i class="fa fa-sign-out pull-right"></i> Đăng xuất</a></li>
 					</ul>
 				</li>

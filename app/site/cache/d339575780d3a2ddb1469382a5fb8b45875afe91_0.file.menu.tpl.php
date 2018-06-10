@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-09 21:43:40
+/* Smarty version 3.1.30, created on 2018-06-10 17:15:38
   from "C:\xampp\htdocs\~mtd\htaccess\app\site\view\layouts\includes\menu.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b1be79c800ac4_79445815',
+  'unifunc' => 'content_5b1cfa4a305551_87821575',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd339575780d3a2ddb1469382a5fb8b45875afe91' => 
     array (
       0 => 'C:\\xampp\\htdocs\\~mtd\\htaccess\\app\\site\\view\\layouts\\includes\\menu.tpl',
-      1 => 1528555415,
+      1 => 1528625736,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b1be79c800ac4_79445815 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b1cfa4a305551_87821575 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="container mar-btm">
 	<div class="menu">
@@ -38,6 +38,11 @@ function content_5b1be79c800ac4_79445815 (Smarty_Internal_Template $_smarty_tpl)
 					<li class="" style="background: rgb(245, 121, 31);"><i class="fa fa-camera-retro"></i>
 						<a href="./?mc=product" title="Sản phẩm">Sản phẩm
 							<p>Phân phối linh kiện</p>
+					</a></li>
+				</div>
+				<div class="col-md-2 col-sm-2 col-xs-12 col-df">
+					<li class="" style="background:rgb(31, 57, 245);"><i class="fa fa-camera-retro"></i>
+						<a href="./?mc=servicee" title="Sản phẩm">Dịch vụ
 					</a></li>
 				</div>
 				<div class="col-md-2 col-sm-2 col-xs-12 col-df">

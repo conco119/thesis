@@ -170,48 +170,26 @@ class Export extends Main
                   LEFT JOIN users c ON a.creator=c.id
               WHERE 1=1 $sql_where
               ORDER BY id DESC";
+        if($date_export != 0)
+        {
+            switch($date_export)
+            {
+            case 1:
+                $sql .= " AND a.date = CURDATE()";
+                break;
+            case 2:
+                $sql .= " AND WEEK(a.date) = WEEK(CURDATE()) AND YEAR(a.date) = YEAR(CURDATE())";
+                break;
+            case 3:
+                $sql .= " AND MONTH(a.date) = MONTH(CURDATE()) AND YEAR(a.date) = YEAR(CURDATE())";
+                break;
+            }
+        }
       $paging = $this->paging->get_content($this->pdo->count_rows($sql), 10);
       $sql .= $paging['sql_add'];
 
       $exports = $this->pdo->fetch_all($sql);
-    //   pre($exports);
-      //filter this day, this week, this month
-      if ($date_export != 0)
-      {
-          switch($date_export)
-          {
-              case 1:
-                  $date = date("Y-m-d");
-                  foreach($exports as $key => $export)
-                  {
-                      if($export['date'] != $date)
-                          unset($export[$key]);
-                  }
-                  break;
-              case 2:
-                  $current_week = gmdate("W");
-                  $current_year = gmdate("Y");
-                  foreach($exports as $key => $export)
-                  {
-                      $week = gmdate("W", strtotime($export['date']) + 7 *3600);
-                      $year = gmdate("Y", strtotime($export['date']) + 7 *3600);
-                      if($current_week != $week && $current_year == $year)
-                          unset($exports[$key]);
-                  }
-                  break;
-              case 3:
-                  $current_month = gmdate("m");
-                  $current_year = gmdate("Y");
-                  foreach($exports as $key => $export)
-                  {
-                      $month = gmdate("m", strtotime($export['date']) + 7 *3600);
-                      $year = gmdate("Y", strtotime($export['date']) + 7 *3600);
-                      if($current_month != $month && $current_year == $year)
-                          unset($exports[$key]);
-                  }
-                  break;
-          }
-      }
+
       $total = 0;
       foreach ($exports as $key => $export)
       {

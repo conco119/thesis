@@ -7,8 +7,14 @@ class Import extends Main
         parent::__construct();
         $this->ImportHelper = new ImportHelper();
         $this->table = "imports";
+        $this->before();
     }
 
+    function before()
+    {
+        if($this->currentUser['permission'] == 3)
+            lib_redirect(DENIED_PAGE);
+    }
     public function index()
     {
         //testing

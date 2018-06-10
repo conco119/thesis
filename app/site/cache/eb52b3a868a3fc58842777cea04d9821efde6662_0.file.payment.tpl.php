@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-09 20:18:37
+/* Smarty version 3.1.30, created on 2018-06-10 19:54:35
   from "C:\xampp\htdocs\~mtd\htaccess\app\site\view\cart\payment.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b1bd3addba838_23308933',
+  'unifunc' => 'content_5b1d1f8b612fb1_99750086',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'eb52b3a868a3fc58842777cea04d9821efde6662' => 
     array (
       0 => 'C:\\xampp\\htdocs\\~mtd\\htaccess\\app\\site\\view\\cart\\payment.tpl',
-      1 => 1528550312,
+      1 => 1528635256,
       2 => 'file',
     ),
   ),
@@ -20,13 +20,13 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b1bd3addba838_23308933 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b1d1f8b612fb1_99750086 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="sidebar_title bg_34495e">
     <h3>Thanh toán đơn hàng</h3>
 </div>
 <div class="row bg_white col-df">
-    <form class="form" role="form" method="POST" action="?mc=cart&site=payment" id="validate">
+    <form class="form" role="form" method="POST" action="?mc=cart&site=order" id="validate">
         <div class="col-md-7 col-sm-7 col-xs-12" id="payment_form">
             <h3>Nhập thông tin đơn hàng</h3>
 
@@ -92,6 +92,38 @@ foreach ($_from as $_smarty_tpl->tpl_vars['list']->value) {
                                         <?php echo number_format(($_smarty_tpl->tpl_vars['list']->value['price']*$_smarty_tpl->tpl_vars['list']->value['number_count']));?>
 đ
                                     <?php }?>
+                                </p>
+                            </div>
+                        </li>
+                    <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
+?>
+
+
+                    <br>
+                    <li class="line bor-bottom">
+                        <div><b>DỊCH VỤ</b></div>
+                        <div><b>TỔNG</b></div>
+                    </li>
+
+                    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['cart']->value['services'], 'list');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['list']->value) {
+?>
+                        <li class="line bor-bottom itm_order">
+                            <div>
+                                <a href="javascript:void(0)"> <?php echo $_smarty_tpl->tpl_vars['list']->value['name'];?>
+ <span>x<?php echo $_smarty_tpl->tpl_vars['list']->value['number_count'];?>
+</span></a>
+                            </div>
+
+                            <div class="price">
+                                <p>
+                                    <?php echo number_format(($_smarty_tpl->tpl_vars['list']->value['price']*$_smarty_tpl->tpl_vars['list']->value['number_count']));?>
+đ
                                 </p>
                             </div>
                         </li>

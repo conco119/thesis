@@ -16,7 +16,9 @@ class Cart extends Main {
         {
             if($value['id'] == $id)
             {
-                echo count($_SESSION['cart']['products']);
+                $number['product'] =  count($_SESSION['cart']['products']);
+                $number['service'] =  count($_SESSION['cart']['services']);
+                echo json_encode($number);
                 die();
             }
 
@@ -44,7 +46,9 @@ class Cart extends Main {
         $product['number_count'] = 1;
         $cart['products'][] = $product;
         $_SESSION['cart'] = $cart;
-        echo count($_SESSION['cart']['products']);
+        $number['product'] =  count($_SESSION['cart']['products']);
+        $number['service'] =  count($_SESSION['cart']['services']);
+        echo json_encode($number);
     }
 
     function update()
@@ -77,6 +81,7 @@ class Cart extends Main {
     function index()
     {
         $total = 0;
+
         $cart = $_SESSION['cart'];
         foreach ($cart['products'] as $key => $value)
         {
@@ -85,6 +90,11 @@ class Cart extends Main {
             else
                 $total += $value['price'] * $value['number_count'];
         }
+
+        foreach ($cart['services'] as $key => $value)
+        {
+            $total += $value['price'] * $value['number_count'];
+        }
         $this->smarty->assign('cart', $cart);
         $this->smarty->assign('total', $total);
         $this->smarty->display("cart.tpl");
@@ -92,10 +102,9 @@ class Cart extends Main {
 
     function payment()
     {
-        $this->order();
         $total = 0;
         $cart = $_SESSION['cart'];
-        if(count($cart['products']) == 0)
+        if(count($cart['products']) == 0 && count($cart['services']) == 0 )
         {
             lib_alert("Không có sản phẩm nào trong giỏ hàng");
             lib_redirect("./");
@@ -107,6 +116,11 @@ class Cart extends Main {
                 $total += $value['price_sale'] * $value['number_count'];
             else
                 $total += $value['price'] * $value['number_count'];
+        }
+
+        foreach ($cart['services'] as $key => $value)
+        {
+            $total += $value['price'] * $value['number_count'];
         }
         $this->smarty->assign('cart', $cart);
         $this->smarty->assign('total', $total);
@@ -123,6 +137,7 @@ class Cart extends Main {
             $data['address'] = $_POST['cus_address'];
             $data['description'] = $_POST['content'];
             $data['status'] = 0;
+            $data['type'] = $_POST['type'];
             $data['created_at'] = time();
             $order_id = $this->pdo->insert('orders', $data);
             unset($data);
@@ -134,7 +149,67 @@ class Cart extends Main {
                 $data['number_count'] = $value['number_count'];
                 $this->pdo->insert('order_products', $data);
             }
+            unset($data);
+            $services = $_SESSION['cart']['services'];
+            foreach ($services as $key => $value) {
+                $data['order_id'] = $order_id;
+                $data['service_id'] = $value['id'];
+                $data['number_count'] = $value['number_count'];
+                $this->pdo->insert('order_services', $data);
+            }
             unset($_SESSION['cart']);
+            lib_alert("Gửi đơn đặt hàng thành công");
+            lib_redirect("./");
         }
+    }
+
+
+    /// service
+    function addService()
+    {
+        $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
+        $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : array();
+        foreach ($cart['services'] as $key => $value)
+        {
+            if($value['id'] == $id)
+            {
+                $number['product'] =  count($_SESSION['cart']['products']);
+                $number['service'] =  count($_SESSION['cart']['services']);
+                echo json_encode($number);
+                die();
+            }
+        }
+        $sql = "SELECT * FROM services WHERE id =$id";
+        $service = $this->pdo->fetch_one($sql);
+        $service['number_count'] = 1;
+        $cart['services'][] = $service;
+        $_SESSION['cart'] = $cart;
+        $number['product'] =  count($_SESSION['cart']['products']);
+        $number['service'] =  count($_SESSION['cart']['services']);
+        echo json_encode($number);
+    }
+
+    function updateService()
+    {
+        $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
+        $number = isset($_POST['value']) ? intval($_POST['value']) : 0;
+        $cart = $_SESSION['cart'];
+        foreach($cart['services'] as $k => $value)
+        {
+            if($value['id'] == $id)
+                $cart['services'][$k]['number_count'] = $number;
+        }
+        $_SESSION['cart'] = $cart;
+    }
+
+    function deleteService()
+    {
+        $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
+        $cart = $_SESSION['cart'];
+        foreach ($cart['services'] as $key => $value) {
+            if($value['id'] == $id)
+                unset($cart['services'][$key]);
+        }
+        $_SESSION['cart'] = $cart;
     }
 }
