@@ -31,7 +31,7 @@ class Product extends Main
                 (SELECT sum(number_count) FROM import_products i WHERE i.product_id = a.id) AS imported,
                 (SELECT sum(number_count) FROM export_products e WHERE e.product_id = a.id ) AS exported
         FROM {$this->table} a WHERE 1=1 $sql_filter ORDER BY id DESC";
-        $paging = $this->paging->get_content($this->pdo->count_rows($sql), 10);
+        $paging = $this->paging->get_content($this->pdo->count_rows($sql), 20);
         $sql .= $paging['sql_add'];
         $products = $this->pdo->fetch_all($sql);
 

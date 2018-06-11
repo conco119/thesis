@@ -20,6 +20,24 @@ class Money extends Main
     {
         $this->create();
         $this->edit();
+        $date_export = isset($_GET['date']) ? intval($_GET["date"]) : 0;
+        $out['select_export'] = $this->helper->get_option(0, 'select_export', $date_export);
+        if($date_export != 0)
+        {
+            switch($date_export)
+            {
+            case 1:
+                $sql_where .= " AND a.date = CURDATE()";
+                break;
+            case 2:
+                $sql_where .= " AND WEEK(a.date) = WEEK(CURDATE()) AND YEAR(a.date) = YEAR(CURDATE())";
+                break;
+            case 3:
+                $sql_where .= " AND MONTH(a.date) = MONTH(CURDATE()) AND YEAR(a.date) = YEAR(CURDATE())";
+                break;
+            }
+        }
+
         $sql = "SELECT a.*, c.name AS category,
             CASE a.object
                 WHEN 'cus' THEN (SELECT name FROM customers WHERE id = a.object_id)
@@ -29,6 +47,7 @@ class Money extends Main
             END as object_name
             FROM money AS a
             LEFT JOIN money_categories c ON a.category_id = c.id
+            WHERE 1=1 $sql_where
             ORDER BY id DESC
         ";
 

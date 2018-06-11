@@ -9,11 +9,14 @@ class CustomerHelper extends HelpAbstract
         $this->code_prefix = "CUSID";
     }
 
-    public function help_get_customer_category_option($customer_groups)
+    public function help_get_customer_category_option($customer_groups, $group_id)
     {
         $result = '';
         foreach($customer_groups as $key => $value)
         {
+            if($value['id'] == $group_id)
+                $result .= "<option value='{$value['id']}' selected>{$value['name']}</option>";
+            else
                 $result .= "<option value='{$value['id']}'>{$value['name']}</option>";
         }
         return $result;

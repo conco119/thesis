@@ -165,26 +165,28 @@ class Export extends Main
           $sql_where .= " AND  (a.code LIKE '%$key%' OR b.name LIKE '%$key%')";
       }
 
+      if($date_export != 0)
+      {
+          switch($date_export)
+          {
+          case 1:
+              $sql_where .= " AND a.date = CURDATE()";
+              break;
+          case 2:
+              $sql_where .= " AND WEEK(a.date) = WEEK(CURDATE()) AND YEAR(a.date) = YEAR(CURDATE())";
+              break;
+          case 3:
+              $sql_where .= " AND MONTH(a.date) = MONTH(CURDATE()) AND YEAR(a.date) = YEAR(CURDATE())";
+              break;
+          }
+      }
+
       $sql = "SELECT a.id, a.date, a.code, a.must_pay, a.total_money, a.payment, a.creator, a.updater, a.updated_at, b.name AS customer, c.name AS user FROM exports AS a
                   LEFT JOIN customers b ON a.customer_id=b.id
                   LEFT JOIN users c ON a.creator=c.id
               WHERE 1=1 $sql_where
               ORDER BY id DESC";
-        if($date_export != 0)
-        {
-            switch($date_export)
-            {
-            case 1:
-                $sql .= " AND a.date = CURDATE()";
-                break;
-            case 2:
-                $sql .= " AND WEEK(a.date) = WEEK(CURDATE()) AND YEAR(a.date) = YEAR(CURDATE())";
-                break;
-            case 3:
-                $sql .= " AND MONTH(a.date) = MONTH(CURDATE()) AND YEAR(a.date) = YEAR(CURDATE())";
-                break;
-            }
-        }
+
       $paging = $this->paging->get_content($this->pdo->count_rows($sql), 10);
       $sql .= $paging['sql_add'];
 

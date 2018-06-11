@@ -33,7 +33,7 @@ class User extends Main
     $out['key'] = $key;
     //query
     $sql = "SELECT * FROM users " . $sql_where;
-    $paging = $this->paging->get_content($this->pdo->count_rows($sql), 5);
+    $paging = $this->paging->get_content($this->pdo->count_rows($sql), 10);
     $sql .= $paging['sql_add'];
     $users = $this->pdo->fetch_all($sql);
     foreach($users as $key => $user)

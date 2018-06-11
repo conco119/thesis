@@ -16,14 +16,27 @@ class Customer extends Main
         $this->create();
         $this->edit();
         //query customer
-        $sql = "SELECT a.*,
-                    ( SELECT sum(must_pay) FROM exports WHERE  customer_id = a.id ) as must_pay,
-                    ( SELECT sum(payment) FROM exports WHERE customer_id = a.id ) as payment,
-                    ( SELECT sum(money) FROM money m WHERE m.object = 'cus' AND m.object_id = a.id AND m.is_auto = 0  AND m.is_import = 0) as pay_to_cus,
-                    ( SELECT sum(money) FROM money m WHERE m.object = 'cus' AND m.object_id = a.id AND m.is_auto = 0  AND m.is_import = 1) as cus_pay_to
 
-        FROM {$this->table} a";
-        $paging = $this->paging->get_content($this->pdo->count_rows($sql), 10);
+        $group_id = isset($_GET['group_id']) ? intval($_GET["group_id"]) : 0;
+        $key = isset($_GET['key']) ? $_GET["key"] : "";
+        $out['key'] = $key;
+        $sql_where = "";
+        if ($key != "")
+        {
+            $sql_where .= " AND  (a.code LIKE '%$key%' OR a.name LIKE '%$key%')";
+        }
+        if ($group_id != 0)
+        {
+            $sql_where .= " AND  cg.id = $group_id";
+        }
+        $sql = "SELECT a.*,
+            ( SELECT sum(must_pay) FROM exports WHERE  customer_id = a.id ) as must_pay,
+            ( SELECT sum(payment) FROM exports WHERE customer_id = a.id ) as payment,
+            ( SELECT sum(money) FROM money m WHERE m.object = 'cus' AND m.object_id = a.id AND m.is_auto = 0  AND m.is_import = 0) as pay_to_cus,
+            ( SELECT sum(money) FROM money m WHERE m.object = 'cus' AND m.object_id = a.id AND m.is_auto = 0  AND m.is_import = 1) as cus_pay_to
+            FROM {$this->table} a
+            LEFT JOIN customer_groups cg ON cg.id = a.group_id WHERE 1=1 $sql_where";
+        $paging = $this->paging->get_content($this->pdo->count_rows($sql), 20);
         $sql .= $paging['sql_add'];
         $customers = $this->pdo->fetch_all($sql);
         $total_money = 0;
@@ -44,7 +57,7 @@ class Customer extends Main
         //query customer group
         $sql = "SELECT * FROM customer_groups";
         $customer_groups = $this->pdo->fetch_all($sql);
-        $customer_groups = $this->CustomerHelper->help_get_customer_category_option($customer_groups);
+        $customer_groups = $this->CustomerHelper->help_get_customer_category_option($customer_groups, $group_id);
         // pre($customers);
         // return;
         //smarty

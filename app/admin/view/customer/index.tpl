@@ -17,7 +17,7 @@
                     </select>
                 </div>
                 <div class="form-group form-inline">
-                    <input class="form-control left" id="key" placeholder="Mã, Tên, SĐT" >
+                    <input class="form-control left" id="key" value="{$out.key}" placeholder="Mã, Tên" >
                 </div>
                 <button type="button" class="btn btn-primary left" onclick="filter();"><i class="fa fa-search"></i></button>
 
@@ -267,8 +267,8 @@ function filter()
 {
   var key = $("#key").val();
     var category = $("#group").val();
-    var url = "./?mod=customer&site=index";
-    url += "&group=" + category;
+    var url = "./admin?mc=customer&site=index";
+    url += "&group_id=" + category;
     url += "&key=" + key;
     window.location.href = url;
 }

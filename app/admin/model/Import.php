@@ -7,14 +7,8 @@ class Import extends Main
         parent::__construct();
         $this->ImportHelper = new ImportHelper();
         $this->table = "imports";
-        $this->before();
     }
 
-    function before()
-    {
-        if($this->currentUser['permission'] == 3)
-            lib_redirect(DENIED_PAGE);
-    }
     public function index()
     {
         //testing
@@ -211,7 +205,7 @@ class Import extends Main
         $sql = "SELECT a.id, a.date, a.code, a.must_pay, a.total_money, a.payment, a.creator, a.updater, a.updated_at, b.name AS supplier, c.name AS user FROM imports AS a
 					LEFT JOIN suppliers b ON a.supplier_id=b.id
 					LEFT JOIN users c ON a.creator=c.id
-				WHERE 1=1 $sql_where
+				WHERE 1=1 AND a.export_id is NULL $sql_where
 				ORDER BY id DESC";
         $paging = $this->paging->get_content($this->pdo->count_rows($sql), 10);
         $sql .= $paging['sql_add'];

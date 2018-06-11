@@ -3,7 +3,7 @@
         <div class="col-md-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Bảng tổng hợp sổ thu chi</h2>
+                    <h2>Bảng tổng hợp thu chi</h2>
                     <ul class="nav navbar-right panel_toolbox">
                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
                     </ul>
@@ -13,20 +13,9 @@
 
                     <div class="h_content">
                         <div class="form-group form-inline">
-                            <select class="form-control left" id="filter" onchange="filter();">
-                                {$out.filter}
+                            <select class="form-control left" id="date_ex" onchange="filter();">
+                                <option value="0">Tất cả hóa đơn</option> {$out.select_export}
                             </select>
-                            {if $out.value.filter eq '2'}
-                                <select class="form-control left" id="year" onchange="filter();">{$out.year}</select>
-                                <select class="form-control left" id="month" onchange="filter();">{$out.month}</select>
-                            {else if $out.value.filter eq '1'}
-                                <input type="text" class="form-control left" id="date_from" placeholder="Từ ngày" onchange="filter();" value="{$out.date_from}">
-                                <input type="text" class="form-control left" id="date_to" placeholder="Đến ngày" onchange="filter();" value="{$out.date_to}">
-                            {else}
-                                <select class="form-control left" id="date_ex" onchange="filter();">
-                                    <option value="0">Tất cả hóa đơn</option> {$out.select_export}
-                                </select>
-                            {/if}
                         </div>
                         <button data-toggle="modal" class="btn btn-primary" data-target="#MoneyCat" onclick="LoadMoneyCat(1);"><i class="fa fa-plus"></i> Thể loại</button>
                         <button data-toggle="modal" class="btn btn-primary" data-target="#Bill" onclick="LoadDataForAddEditMoney(1);"><i class="fa fa-plus"></i> Lập phiếu thu</button>
@@ -76,12 +65,12 @@
                                     <td>{$list.date|date_format:"%d-%m-%Y"}<br><small>{$list.updated_at}</small></td>
                                     <td class="text-right">
                                         {if $list.is_import neq 0}
-                                            {$list.money|number_format} đ
+                                            <span style='color:red'>{$list.money|number_format} đ </span>
                                         {/if}
                                     </td>
                                     <td class="text-right">
                                         {if $list.is_import eq 0}
-                                            {$list.money|number_format} đ
+                                            <span style='color:red'>{$list.money|number_format} đ </span>
                                         {/if}
                                     </td>
                                     <td>
@@ -701,7 +690,12 @@ function LoadDataForEdit(id, is_import)
 }
 
 
-
+function filter() {
+    var date = $("#date_ex").val();
+    var url = "./admin?mc=money&site=index";
+    url += "&date=" + date;
+    window.location.href = url;
+}
 
 
 // function filter() {

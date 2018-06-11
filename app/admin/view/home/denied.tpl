@@ -1,18 +1,18 @@
 <div class="error-container text-center">
 	<br><br><br>
-	<h1>Không thể truy cập</h1>
+	<h1>Access Denied</h1>
 
-	<h2>Không thể sử dụng chức năng này</h2>
+	<h2>Sorry, You can not access to this function.</h2>
 
 	<div class="error-details">
-		Quyền hạn không đủ
+		This function was deleted or your permissions was not enought!
 	</div> <!-- /error-details -->
 	<br><br>
 	<div class="error-actions">
 		<a href="./admin" class="btn btn-large btn-primary">
 			<i class="icon-chevron-left"></i>
 			&nbsp;
-			Trở về trang chủ
+			Back to Dashboard
 		</a>
 
 

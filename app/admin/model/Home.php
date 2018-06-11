@@ -28,8 +28,16 @@ class Home extends Main
             LEFT JOIN customers c on a.customer_id = c.id
             ORDER BY a.id DESC LIMIT 5";
     $statis_2 = $this->pdo->fetch_all($sql);
+    //import bill
+    $sql = "SELECT a.code, a.must_pay, a.date, a.created_at, c.name as supplier_name
+            FROM imports a
+            LEFT JOIN suppliers c on a.supplier_id = c.id
+            WHERE a.export_id is null
+            ORDER BY a.id DESC LIMIT 5";
+    $statis_3 = $this->pdo->fetch_all($sql);
     $this->smarty->assign('statis_1', $statis_1[0]);
     $this->smarty->assign('statis_2', $statis_2);
+    $this->smarty->assign('statis_3', $statis_3);
     $this->smarty->display('home.tpl');
   }
   public function denied()
