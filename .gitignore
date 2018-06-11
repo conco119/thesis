@@ -1,2 +1,3 @@
 ./constant/database.ini
 ./app/admin/cache
+./app/site/cache

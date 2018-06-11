@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-04 08:56:58
+/* Smarty version 3.1.30, created on 2018-06-10 22:18:06
   from "/Users/mtd/Sites/htaccess/app/admin/view/layouts/includes/sidebar.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b149c6a6acea2_58220883',
+  'unifunc' => 'content_5b1d412ecccda0_42056817',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '38fc8673bd4e8ba3d044a00c7e7b118f5e64dde2' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/layouts/includes/sidebar.tpl',
-      1 => 1528077410,
+      1 => 1528643415,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b149c6a6acea2_58220883 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b1d412ecccda0_42056817 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="left_col scroll-view">
 
@@ -99,6 +99,10 @@ mc=report&site=user">Nhân viên</a></li>
 						<!--<li><a href="?mc=cost&site=index"> Tính giá vốn </a></li>-->
 					</ul>
 				</li>
+				<li><a href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['prefix_admin'];?>
+mc=order&site=index"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Đặt hàng</a></li>
+				<li><a href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['prefix_admin'];?>
+mc=contact&site=index"><i class="fa fa-envelope-o" aria-hidden="true"></i>Liên hệ</a></li>
 				<li><a href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['prefix_admin'];?>
 mc=user&site=index"><i class="fa fa-user"></i> Quản lý người dùng</a></li>
 				<!--<li><a href="?mc=lock&site=index"><i class="fa fa-lock"></i> Khóa sổ </a></li>-->

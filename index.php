@@ -3,7 +3,7 @@ require 'vendor/autoload.php';
 
 $dsn = 'mysql:host=localhost;dbname=htaccess3;charset=utf8';
 $usr = 'root';
-$pwd = '';
+$pwd = '1234';
 
 $pdo = new \Slim\PDO\Database($dsn, $usr, $pwd);
 

@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-10 22:14:15
-  from "/Users/mtd/Sites/htaccess/app/site/view/layouts/home.tpl" */
+/* Smarty version 3.1.30, created on 2018-06-10 22:16:50
+  from "/Users/mtd/Sites/htaccess/app/site/view/layouts/cart.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b1d4047a7bd43_70992144',
+  'unifunc' => 'content_5b1d40e2033916_70932385',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    'b6add678f9f974d9113cab44417fe17c8c4154f1' => 
+    '82aed848f9291113046d960a6e3650057fb91bdf' => 
     array (
-      0 => '/Users/mtd/Sites/htaccess/app/site/view/layouts/home.tpl',
+      0 => '/Users/mtd/Sites/htaccess/app/site/view/layouts/cart.tpl',
       1 => 1528643415,
       2 => 'file',
     ),
@@ -20,11 +20,10 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
     'file:includes/header.tpl' => 1,
     'file:includes/menu.tpl' => 1,
-    'file:includes/sidebar.tpl' => 1,
     'file:includes/footer.tpl' => 1,
   ),
 ),false)) {
-function content_5b1d4047a7bd43_70992144 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b1d40e2033916_70932385 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html>
@@ -56,9 +55,7 @@ js/bootstrap/css/bootstrap-theme.min.css">
         <link rel="stylesheet" type="text/css" href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['stylesheet'];?>
 js/jquery.bxslider/jquery.bxslider.css">
         <link rel="stylesheet" type="text/css" href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['stylesheet'];?>
-css/hoverZoomEtalage.css" >
-        <link rel="stylesheet" href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['stylesheet'];?>
-css/services.css">
+css/hoverZoomEtalage.css">
 
         <?php echo '<script'; ?>
  src="<?php echo $_smarty_tpl->tpl_vars['arg']->value['stylesheet'];?>
@@ -77,11 +74,11 @@ js/jquery.bxslider/jquery.bxslider.min.js"><?php echo '</script'; ?>
 js/bootstrap/js/bootstrap.min.js"><?php echo '</script'; ?>
 >
 
-
         <?php echo '<script'; ?>
  src="<?php echo $_smarty_tpl->tpl_vars['arg']->value['stylesheet'];?>
 js/main.js"><?php echo '</script'; ?>
 >
+
     </head>
     <body>
 
@@ -94,40 +91,15 @@ js/main.js"><?php echo '</script'; ?>
 ?>
 
 
-
-		<div class="container">
-	        <div class="row mar-btm">
-	            <div class="col-md-3 col-sm-3 col-xs-12 hide-mobile">
-	                 <?php $_smarty_tpl->_subTemplateRender("file:includes/sidebar.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+    <div class="container">
+            <?php $_smarty_tpl->_subTemplateRender($_smarty_tpl->tpl_vars['tpl_file']->value, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, true);
 ?>
 
-	             </div>
-	             <div class="col-md-9 col-sm-9 col-xs-12">
-	                 <?php $_smarty_tpl->_subTemplateRender($_smarty_tpl->tpl_vars['tpl_file']->value, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, true);
-?>
-
-	             </div>
-	        </div>
         </div>
 
         <?php $_smarty_tpl->_subTemplateRender("file:includes/footer.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
-
-		<!-- Small message modal -->
-		<div class="modal fade bs-example-modal-sm" id="MessageModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-			<div class="modal-dialog modal-sm">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title" id="myModalLabel">Message box</h4>
-					</div>
-					<div class="modal-body">
-						<p></p>
-					</div>
-				</div>
-			</div>
-		</div>
 
     </body>
 </html><?php }

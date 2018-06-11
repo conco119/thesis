@@ -14,8 +14,8 @@
 					</a>
 					<ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
 						<li><a href="{$arg.prefix_admin}mc=user&site=profile"> Tài khoản</a></li>
-						<li><a href="?mod=install&site=index"> Thông tin sử dụng</a></li>
-            <li><a href="?mod=upgrade&site=index"> Phiên bản</a></li>
+						{* <li><a href="?mod=install&site=index"> Thông tin sử dụng</a></li>
+            <li><a href="?mod=upgrade&site=index"> Phiên bản</a></li> *}
 						<li><a href="admin?mc=user&site=logout"><i class="fa fa-sign-out pull-right"></i> Đăng xuất</a></li>
 					</ul>
 				</li>

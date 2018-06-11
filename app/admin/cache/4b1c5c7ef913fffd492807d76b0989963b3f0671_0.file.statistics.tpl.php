@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-28 16:50:35
+/* Smarty version 3.1.30, created on 2018-06-10 22:28:26
   from "/Users/mtd/Sites/htaccess/app/admin/view/export/statistics.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b0bd0eb7c4bf7_70528232',
+  'unifunc' => 'content_5b1d439a3eba86_84164844',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '4b1c5c7ef913fffd492807d76b0989963b3f0671' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/export/statistics.tpl',
-      1 => 1527501034,
+      1 => 1528643415,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b0bd0eb7c4bf7_70528232 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b1d439a3eba86_84164844 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="">
     <div class="row">
@@ -38,11 +38,6 @@ function content_5b0bd0eb7c4bf7_70528232 (Smarty_Internal_Template $_smarty_tpl)
                         <div class="form-group form-inline pull-left filter_form">
                             <select class="form-control" id="date_ex" onchange="filter();">
                                 <option value="0">Tất cả hóa đơn</option> <?php echo $_smarty_tpl->tpl_vars['out']->value['select_export'];?>
-
-                            </select>
-                            <select class="form-control" id="user" onchange="filter();">
-                                <option value="0" onchange="filter();">Người lập phiếu</option>
-                                <?php echo $_smarty_tpl->tpl_vars['out']->value['user'];?>
 
                             </select>
                             <input class="form-control" id="key" value="<?php echo $_smarty_tpl->tpl_vars['out']->value['key'];?>
@@ -108,10 +103,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['list']->value) {
                                         <a href="./admin?mc=exportedit&site=modify&id=<?php echo $_smarty_tpl->tpl_vars['list']->value['id'];?>
 " class="btn btn-default"><i
                                                     class="fa fa-edit"></i></a>
-                                        <button type="button" title="In hóa đơn" data-toggle="modal"
-                                                class="btn btn-default" onclick="SetPrint(<?php echo $_smarty_tpl->tpl_vars['list']->value['id'];?>
-);"
-                                                data-dismiss="modal"><i class="fa fa-print"></i></button>
+                                        
                                             <button type="button" title="Xóa hóa đơn" class="btn btn-default"
                                                     data-toggle="modal" data-target="#DeleteForm"
                                                     onclick="LoadDeleteItem('export', <?php echo $_smarty_tpl->tpl_vars['list']->value['id'];?>
@@ -222,7 +214,6 @@ js/datetimepicker/bootstrap-datetimepicker.min.js"><?php echo '</script'; ?>
         });
 
         function filter() {
-            var user = $("#user").val();
             var date = $("#date_ex").val();
             var key = $("#key").val();
             var url = "./admin?mc=export&site=statistics";

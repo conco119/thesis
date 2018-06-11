@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-05 09:12:42
+/* Smarty version 3.1.30, created on 2018-06-10 22:14:15
   from "/Users/mtd/Sites/htaccess/app/site/view/layouts/includes/footer.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b15f19a003879_65708869',
+  'unifunc' => 'content_5b1d4047c0a0f5_16578826',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd5c93a00b3ca8e1a94b16c415099aeac39848e95' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/site/view/layouts/includes/footer.tpl',
-      1 => 1528164761,
+      1 => 1528643415,
       2 => 'file',
     ),
   ),
@@ -20,108 +20,128 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b15f19a003879_65708869 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b1d4047c0a0f5_16578826 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
-<footer class="footer">
-    <div class="brand-logo ">
-      <div class="container">
-        <div class="slider-items-products">
-          <div id="brand-logo-slider" class="product-flexslider hidden-buttons">
-            <div class="slider-items slider-width-col6">
-              <!-- Item -->
-              <div class="item"> <a href="#x"><h4>#Đèn cảm ứng</h4></a> </div>
-              <!-- End Item -->
-              <!-- Item -->
-              <div class="item"> <a href="#x"><h4>#Đèn thông minh</h4></a> </div>
-              <!-- End Item -->
-              <!-- Item -->
-              <div class="item"> <a href="#x"><img src="images/b-logo3.png" alt="Image"></a> </div>
-              <!-- End Item -->
-              <!-- Item -->
-              <div class="item"> <a href="#x"><img src="images/b-logo4.png" alt="Image"></a> </div>
-              <!-- End Item -->
-              <!-- Item -->
-              <div class="item"> <a href="#x"><img src="images/b-logo5.png" alt="Image"></a> </div>
-              <!-- End Item -->
-              <!-- Item -->
-              <div class="item"> <a href="#x"><img src="images/b-logo6.png" alt="Image"></a> </div>
-              <!-- End Item -->
-              <!-- Item -->
-              <div class="item"> <a href="#x"><img src="images/b-logo1.png" alt="Image"></a> </div>
-              <!-- End Item -->
-              <!-- Item -->
-              <div class="item"> <a href="#x"><img src="images/b-logo4.png" alt="Image"></a> </div>
-              <!-- End Item -->
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="footer-middle container">
-        <div class="col-md-3 col-sm-4">
-            <div class="footer-logo"><a href="index.html" title="Logo"><img src="images/footer-logo.png" alt="logo"></a></div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus diam arcu. </p>
-            <div class="payment-accept">
-                <div><img src="images/payment-1.png" alt="payment"> <img src="images/payment-2.png" alt="payment"> <img src="images/payment-3.png" alt="payment"> <img src="images/payment-4.png" alt="payment"></div>
-            </div>
-        </div>
-        <div class="col-md-2 col-sm-4">
-            <h4>Mua sắm</h4>
-            <ul class="links">
-                <li class="first"><a href="#" title="How to buy">Phương thức thanh toán</a></li>
-                <li><a href="faq.html" title="FAQs">Danh mục sản phẩm</a></li>
-                <li><a href="#" title="Payment">Payment</a></li>
-                <li><a href="#" title="Shipment&lt;/a&gt;">Shipment</a></li>
-                <li><a href="delivery.html" title="delivery">Delivery</a></li>
-                <li class="last"><a href="#" title="Return policy">Return policy</a></li>
-            </ul>
-        </div>
-        <div class="col-md-2 col-sm-4">
-            <h4>Style Advisor</h4>
-            <ul class="links">
-                <li class="first"><a title="Your Account" href="login.html">Your Account</a></li>
-                <li><a title="Information" href="#">Information</a></li>
-                <li><a title="Addresses" href="#">Addresses</a></li>
-                <li><a title="Addresses" href="#">Discount</a></li>
-                <li><a title="Orders History" href="#">Orders History</a></li>
-                <li class="last"><a title=" Additional Information" href="#">Additional Information</a></li>
-            </ul>
-        </div>
-        <div class="col-md-2 col-sm-4">
-            <h4>Information</h4>
-            <ul class="links">
-                <li class="first"><a href="sitemap.html" title="Site Map">Site Map</a></li>
-                <li><a href="#/" title="Search Terms">Search Terms</a></li>
-                <li><a href="#" title="Advanced Search">Advanced Search</a></li>
-                <li><a href="contact_us.html" title="Contact Us">Contact Us</a></li>
-                <li><a href="#" title="Suppliers">Suppliers</a></li>
-                <li class=" last"><a href="#" title="Our stores" class="link-rss">Our stores</a></li>
-            </ul>
-        </div>
-        <div class="col-md-3 col-sm-4">
-            <h4>Contact us</h4>
-            <div class="contacts-info">
-                <address>
-                    <i class="add-icon">&nbsp;</i><?php echo $_smarty_tpl->tpl_vars['info']->value['info']['address'];?>
+<div class="row col-df footer">
+    <div class="container-fluid">
+        <div class="col-md-3 col-sm-3 col-xs-12">
+            <h3>Thông tin liên hệ</h3>
 
-                </address>
-                <div class="phone-footer"><i class="phone-icon">&nbsp;</i><?php echo $_smarty_tpl->tpl_vars['info']->value['info']['phone'];?>
-</div>
-                <div class="email-footer"><i class="email-icon">&nbsp;</i> <a href="mailto:support@magikcommerce.com"><?php echo $_smarty_tpl->tpl_vars['info']->value['info']['email'];?>
-</a> </div>
-            </div>
-        </div>
-    </div>
-    <div class="footer-bottom container">
-        <div class="col-sm-5 col-xs-12 coppyright"> &copy; 2018 Bán hàng & quản lý bán hàng MTD</div>
-        <div class="col-sm-7 col-xs-12 company-links">
-            <ul class="links">
-                <li><a href="#" title="Magento Themes">Magento Themes</a></li>
-                <li><a href="#" title="Premium Themes">Premium Themes</a></li>
-                <li><a href="#" title="Responsive Themes">Responsive Themes</a></li>
-                <li class="last"><a href="#" title="Magento Extensions">Magento Extensions</a></li>
+            <ul class="full">
+                <li><?php echo $_smarty_tpl->tpl_vars['info']->value['info']['name'];?>
+</li>
+                <li><?php echo $_smarty_tpl->tpl_vars['info']->value['info']['address'];?>
+</li>
+                <li>Call <?php echo $_smarty_tpl->tpl_vars['info']->value['info']['phone'];?>
+</li>
+                <li><?php echo $_smarty_tpl->tpl_vars['info']->value['info']['email'];?>
+</li>
             </ul>
         </div>
+        <div class="col-md-3 col-sm-3 col-xs-12">
+            <h3>Quy định - Chính sách</h3>
+
+            <ul class="full">
+                <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['output']->value['menu_footer'], 'list');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['list']->value) {
+?>
+                    <li><a href="<?php echo $_smarty_tpl->tpl_vars['list']->value['url'];?>
+"><?php echo $_smarty_tpl->tpl_vars['list']->value['name'];?>
+</a></li>
+                <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
+?>
+
+            </ul>
+        </div>
+        <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['output']->value['menu_p3'], 'list');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['list']->value) {
+?>
+        <div class="col-md-3 col-sm-3 col-xs-12">
+            <h3> <?php echo $_smarty_tpl->tpl_vars['list']->value['name'];?>
+ </h3>
+            <ul class="full">
+                <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['list']->value['child_menu'], 'child');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['child']->value) {
+?>
+                    <li><a href="<?php echo $_smarty_tpl->tpl_vars['child']->value['url'];?>
+"><?php echo $_smarty_tpl->tpl_vars['child']->value['name'];?>
+</a></li>
+                <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
+?>
+
+            </ul>
+        </div>
+        <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
+?>
+
+
+        <div class="col-md-3 col-sm-3 col-xs-12">
+            <h3>Kết nối</h3>
+
+            <ul class="full connect_footer">
+                <li class="bg_3a599f">
+                    <a href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['social']['facebook'];?>
+" target="_blank">
+                        <div class="fb_icon"><i class="fa fa-facebook"></i></div>
+                    </a>
+                </li>
+
+                <li class="bg_3096f1">
+                    <a href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['social']['twitter'];?>
+" target="_blank">
+                        <div class="fb_icon"><i class="fa fa-twitter"></i></div>
+                    </a>
+                </li>
+
+                 <li class="bg_dd4e42">
+                    <a href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['social']['google'];?>
+" target="_blank">
+                        <div class="fb_icon"><i class="fa fa-google-plus"></i></div>
+                    </a>
+                </li>
+
+                <li class="bg_f2802c">
+                    <a href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['social']['youtube'];?>
+" target="_blank">
+                        <div class="fb_icon"><i class="fa fa-youtube"></i></div>
+                    </a>
+                </li>
+
+            </ul>
+
+            <div class="mail_cont">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="usr" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-success">Subscribe</button>
+                </div>
+            </div>
+
+        </div>
     </div>
-</footer><?php }
+</div>
+
+
+<?php echo '<script'; ?>
+ type="text/javascript">
+(function(d,s,id){var z=d.createElement(s);z.type="text/javascript";z.id=id;z.async=true;z.src="//static.zotabox.com/7/e/7e6bd0dde9d6ef8fce0be070a1b9d6c5/widgets.js";var sz=d.getElementsByTagName(s)[0];sz.parentNode.insertBefore(z,sz)}(document,"script","zb-embed-code"));
+<?php echo '</script'; ?>
+>
+<?php }
 }
