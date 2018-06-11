@@ -48,15 +48,15 @@
                                 <textarea class="form-control"  name="description">{$out.description}</textarea>
                             </div>
                         </div>
-                        
-                       {if $arg.setting.use_logo eq 1}<div class="form-group">
+
+                       {* <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Logo</label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <input type="file" name="logo" class="mar-top-10" />
                                 <img class="logo" src="{$out.logo}" />
                             </div>
-                        </div>{/if}
-                            
+                        </div> *}
+
                         <div class="ln_solid"></div>
                         <div class="form-group">
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">

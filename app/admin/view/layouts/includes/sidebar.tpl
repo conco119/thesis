@@ -39,8 +39,7 @@
 					</ul>
 				</li>
 				<li><a><i class="fa fa-folder-open"></i> Lưu trữ <span class="fa fa-chevron-down"></span></a>
-					<ul class="nav child_menu" style="display: none">
-						<!--<li><a href="?mc=product&site=warehouse">Kho hàng</a></li>-->
+					<ul class="nav child_menu " style="display: none">
 						<li><a href="{$arg.prefix_admin}mc=export&site=statistics">Hóa đơn bán hàng</a></li>
 						<li><a href="{$arg.prefix_admin}mc=import&site=statistics">Hóa đơn nhập hàng</a></li>
 						<li><a href="{$arg.prefix_admin}mc=reimport&site=statistics">Phiếu khách trả hàng</a></li>
@@ -48,11 +47,11 @@
 				</li>
 				<li><a><i class="fa fa-bar-chart-o"></i> Báo cáo <span class="fa fa-chevron-down"></span></a>
 					<ul class="nav child_menu" style="display: none">
-						<li><a href="{$arg.prefix_admin}mc=report&site=daily">Ghi sổ ngày</a></li>
-						<li><a href="{$arg.prefix_admin}mc=product&site=statistics">Sản phẩm</a></li>
-						<li><a href="{$arg.prefix_admin}mc=service&site=statistics">Dịch vụ</a></li>
+						{* <li><a href="{$arg.prefix_admin}mc=report&site=daily">Ghi sổ ngày</a></li> *}
+						{* <li><a href="{$arg.prefix_admin}mc=product&site=statistics">Sản phẩm</a></li> *}
+						{* <li><a href="{$arg.prefix_admin}mc=service&site=statistics">Dịch vụ</a></li> *}
 						<li><a href="{$arg.prefix_admin}mc=report&site=performance">Lợi nhuận</a></li>
-						<li><a href="{$arg.prefix_admin}mc=report&site=user">Nhân viên</a></li>
+						{* <li><a href="{$arg.prefix_admin}mc=report&site=user">Nhân viên</a></li> *}
 						<!--<li><a href="?mc=cost&site=index"> Tính giá vốn </a></li>-->
 					</ul>
 				</li>
@@ -78,9 +77,11 @@
 			class="glyphicon glyphicon-cog"></span>
 		</a> <a data-toggle="tooltip" data-placement="top" title="FullScreen">
 			<span class="glyphicon glyphicon-fullscreen"></span>
-		</a> <a data-toggle="tooltip" data-placement="top" title="Lock"> <span
-			class="glyphicon glyphicon-eye-close"></span> *}
-		</a> <a data-toggle="tooltip" data-placement="top" title="Logout"> <span
+		</a> *}
+		<a href='{$arg.domain}' data-toggle="tooltip" data-placement="top" title="Trang bán hàng"> <span
+			class="glyphicon glyphicon-shopping-cart"></span>
+		</a>
+		<a   href='./admin?mc=user&site=logout' data-toggle="tooltip" data-placement="top" title="Logout"> <span
 			class="glyphicon glyphicon-off"></span>
 		</a>
 	</div>

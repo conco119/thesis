@@ -56,6 +56,20 @@ class ProductHelper extends HelpAbstract
         return $products;
     }
 
+    function get_category_option($cat_id)
+    {
+        $categories = $this->pdo->fetch_all("SELECT * FROM product_categories WHERE status =1");
+        $result = '';
+        foreach($categories as $key => $value)
+        {
+            if($value['id'] == $cat_id)
+                $result .= "<option value='{$value['id']}' selected>{$value['name']}</option>";
+            else
+                $result .= "<option value='{$value['id']}'>{$value['name']}</option>";
+        }
+        return $result;
+    }
+
 
 
 }

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-10 23:02:39
+/* Smarty version 3.1.30, created on 2018-06-11 22:20:56
   from "/Users/mtd/Sites/htaccess/app/admin/view/money/index.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b1d4b9f985e66_16885332',
+  'unifunc' => 'content_5b1e93580dc512_64752722',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '14a68f8721b6741a3e15b98c422391cdaf637729' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/money/index.tpl',
-      1 => 1528643415,
+      1 => 1528730309,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b1d4b9f985e66_16885332 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b1e93580dc512_64752722 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/Users/mtd/Sites/htaccess/library/smarty/plugins/modifier.date_format.php';
 ?>
 <div class="">
@@ -28,7 +28,7 @@ if (!is_callable('smarty_modifier_date_format')) require_once '/Users/mtd/Sites/
         <div class="col-md-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Bảng tổng hợp sổ thu chi</h2>
+                    <h2>Bảng tổng hợp thu chi</h2>
                     <ul class="nav navbar-right panel_toolbox">
                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
                     </ul>
@@ -38,26 +38,10 @@ if (!is_callable('smarty_modifier_date_format')) require_once '/Users/mtd/Sites/
 
                     <div class="h_content">
                         <div class="form-group form-inline">
-                            <select class="form-control left" id="filter" onchange="filter();">
-                                <?php echo $_smarty_tpl->tpl_vars['out']->value['filter'];?>
+                            <select class="form-control left" id="date_ex" onchange="filter();">
+                                <option value="0">Tất cả hóa đơn</option> <?php echo $_smarty_tpl->tpl_vars['out']->value['select_export'];?>
 
                             </select>
-                            <?php if ($_smarty_tpl->tpl_vars['out']->value['value']['filter'] == '2') {?>
-                                <select class="form-control left" id="year" onchange="filter();"><?php echo $_smarty_tpl->tpl_vars['out']->value['year'];?>
-</select>
-                                <select class="form-control left" id="month" onchange="filter();"><?php echo $_smarty_tpl->tpl_vars['out']->value['month'];?>
-</select>
-                            <?php } elseif ($_smarty_tpl->tpl_vars['out']->value['value']['filter'] == '1') {?>
-                                <input type="text" class="form-control left" id="date_from" placeholder="Từ ngày" onchange="filter();" value="<?php echo $_smarty_tpl->tpl_vars['out']->value['date_from'];?>
-">
-                                <input type="text" class="form-control left" id="date_to" placeholder="Đến ngày" onchange="filter();" value="<?php echo $_smarty_tpl->tpl_vars['out']->value['date_to'];?>
-">
-                            <?php } else { ?>
-                                <select class="form-control left" id="date_ex" onchange="filter();">
-                                    <option value="0">Tất cả hóa đơn</option> <?php echo $_smarty_tpl->tpl_vars['out']->value['select_export'];?>
-
-                                </select>
-                            <?php }?>
                         </div>
                         <button data-toggle="modal" class="btn btn-primary" data-target="#MoneyCat" onclick="LoadMoneyCat(1);"><i class="fa fa-plus"></i> Thể loại</button>
                         <button data-toggle="modal" class="btn btn-primary" data-target="#Bill" onclick="LoadDataForAddEditMoney(1);"><i class="fa fa-plus"></i> Lập phiếu thu</button>
@@ -117,14 +101,14 @@ foreach ($_from as $_smarty_tpl->tpl_vars['list']->value) {
 </small></td>
                                     <td class="text-right">
                                         <?php if ($_smarty_tpl->tpl_vars['list']->value['is_import'] != 0) {?>
-                                            <?php echo number_format($_smarty_tpl->tpl_vars['list']->value['money']);?>
- đ
+                                            <span style='color:red'><?php echo number_format($_smarty_tpl->tpl_vars['list']->value['money']);?>
+ đ </span>
                                         <?php }?>
                                     </td>
                                     <td class="text-right">
                                         <?php if ($_smarty_tpl->tpl_vars['list']->value['is_import'] == 0) {?>
-                                            <?php echo number_format($_smarty_tpl->tpl_vars['list']->value['money']);?>
- đ
+                                            <span style='color:red'><?php echo number_format($_smarty_tpl->tpl_vars['list']->value['money']);?>
+ đ </span>
                                         <?php }?>
                                     </td>
                                     <td>
@@ -761,7 +745,12 @@ function LoadDataForEdit(id, is_import)
 }
 
 
-
+function filter() {
+    var date = $("#date_ex").val();
+    var url = "./admin?mc=money&site=index";
+    url += "&date=" + date;
+    window.location.href = url;
+}
 
 
 // function filter() {

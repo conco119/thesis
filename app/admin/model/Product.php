@@ -205,7 +205,7 @@ class Product extends Main
           if(!$item) {
             $item['code'] = $this->ProductHelper->get_product_code();
           }
-          $item['category_id'] = $this->helper->get_option(1, 'product_categories',$item['category_id']);
+          $item['category_id'] = $this->ProductHelper->get_category_option($item['category_id']);
           $item['price'] = number_format($item['price']);
           $item['price_sale'] = number_format($item['price_sale']);
           $item['price_import'] = number_format($item['price_import']);

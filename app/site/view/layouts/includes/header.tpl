@@ -13,6 +13,10 @@
                             class="fa fa-user"></i> Đăng Xuất</a></li>
                 <li class="pull-right"><a href="../?mc=customer&site=detail"><i
                             class="fa fa-user"></i> {$arg.user.name}</a></li>
+                {if $arg.user.permission neq 4}
+                <li class="pull-right"><a href="./admin"><i
+                            class="glyphicon glyphicon-menu-hamburger"></i> Trang quản lý </a></li>
+                {/if}
             {/if}
             </ul>
             <div class="clear"></div>
@@ -24,7 +28,7 @@
 
             <div class="col-md-3 col-sm-3 col-xs-12 col-df">
                 <div class="logo">
-                    <a href=""><img src="{$arg.logo_folder_link}/{$info.logo}"> Máy tính đông tây</a>
+                    <a href=""><img src="{$arg.logo_folder_link}/logo.png"></a>
                 </div>
             </div>
             <div class="col-md-9 col-sm-9 col-xs-12 col-df">

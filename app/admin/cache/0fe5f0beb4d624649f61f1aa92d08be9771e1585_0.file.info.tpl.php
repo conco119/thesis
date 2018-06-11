@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-26 17:49:10
+/* Smarty version 3.1.30, created on 2018-06-11 23:40:14
   from "/Users/mtd/Sites/htaccess/app/admin/view/setting/info.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b093ba64167f8_70811374',
+  'unifunc' => 'content_5b1ea5eec0b644_49565267',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0fe5f0beb4d624649f61f1aa92d08be9771e1585' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/setting/info.tpl',
-      1 => 1522247267,
+      1 => 1528735213,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b093ba64167f8_70811374 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b1ea5eec0b644_49565267 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="">
     <div class="row">
@@ -78,16 +78,9 @@ function content_5b093ba64167f8_70811374 (Smarty_Internal_Template $_smarty_tpl)
 </textarea>
                             </div>
                         </div>
-                        
-                       <?php if ($_smarty_tpl->tpl_vars['arg']->value['setting']['use_logo'] == 1) {?><div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Logo</label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="file" name="logo" class="mar-top-10" />
-                                <img class="logo" src="<?php echo $_smarty_tpl->tpl_vars['out']->value['logo'];?>
-" />
-                            </div>
-                        </div><?php }?>
-                            
+
+                       
+
                         <div class="ln_solid"></div>
                         <div class="form-group">
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">

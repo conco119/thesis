@@ -50,11 +50,11 @@
                     <div class="clearfix"></div>
                 </div> *}
                 <div class="x_content">
-                    {* <div class="col-md-9 col-sm-12 col-xs-12">
+                    <div class="col-md-9 col-sm-12 col-xs-12" style='display:none'>
                         <div class="demo-container" style="height: 360px">
                             <div id="placeholder33x" class="demo-placeholder"></div>
                         </div>
-                    </div> *}
+                    </div>
 
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div>

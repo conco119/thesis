@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-26 17:06:39
+/* Smarty version 3.1.30, created on 2018-06-11 23:06:00
   from "/Users/mtd/Sites/htaccess/app/admin/view/product/index.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b0931afb26cf0_80101495',
+  'unifunc' => 'content_5b1e9de8d91a18_66308933',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '11e2da0f070331b568354ebe1ee07d9ee7fe64fa' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/product/index.tpl',
-      1 => 1527329187,
+      1 => 1528733160,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b0931afb26cf0_80101495 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b1e9de8d91a18_66308933 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="">
     <div class="row">
@@ -210,11 +210,6 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 						<div class="col-md-6 col-sm-6 col-xs-12">
 							<select class="form-control" name="category_id" onchange="AddIdCategory(this.value);"></select>
 						</div>
-						<div class="col-md-1 col-sm-1 col-xs-12">
-							<button type="button" class="btn btn-default" data-toggle="modal" data-target="#UpdateCategory" onclick="UpdateCategory(0);">
-								<i class="fa fa-pencil"></i>
-							</button>
-						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-md-2 col-sm-2 col-xs-12">Sản phẩm</label>
@@ -232,11 +227,6 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 						<div class="col-md-6 col-sm-6 col-xs-12">
 							<select name="trademark_id" class="form-control" onchange="AddIdTrademark(this.value);"></select>
 						</div>
-                        <div class="col-md-1 col-sm-1 col-xs-12">
-                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#UpdateTrademark" onclick="UpdateTrademark(0);">
-                                <i class="fa fa-pencil"></i>
-                            </button>
-                        </div>
 					</div>
 
 					<div class="form-group">

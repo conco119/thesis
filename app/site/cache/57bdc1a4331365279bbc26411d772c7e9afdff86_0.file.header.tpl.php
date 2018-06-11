@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-10 22:14:15
+/* Smarty version 3.1.30, created on 2018-06-11 23:35:59
   from "/Users/mtd/Sites/htaccess/app/site/view/layouts/includes/header.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b1d4047aa0360_05722449',
+  'unifunc' => 'content_5b1ea4ef9f2139_75932914',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '57bdc1a4331365279bbc26411d772c7e9afdff86' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/site/view/layouts/includes/header.tpl',
-      1 => 1528643415,
+      1 => 1528734956,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b1d4047aa0360_05722449 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b1ea4ef9f2139_75932914 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="container">
     <div class="top_link bg_white">
@@ -38,6 +38,10 @@ function content_5b1d4047aa0360_05722449 (Smarty_Internal_Template $_smarty_tpl)
                 <li class="pull-right"><a href="../?mc=customer&site=detail"><i
                             class="fa fa-user"></i> <?php echo $_smarty_tpl->tpl_vars['arg']->value['user']['name'];?>
 </a></li>
+                <?php if ($_smarty_tpl->tpl_vars['arg']->value['user']['permission'] != 4) {?>
+                <li class="pull-right"><a href="./admin"><i
+                            class="glyphicon glyphicon-menu-hamburger"></i> Trang quản lý </a></li>
+                <?php }?>
             <?php }?>
             </ul>
             <div class="clear"></div>
@@ -50,8 +54,7 @@ function content_5b1d4047aa0360_05722449 (Smarty_Internal_Template $_smarty_tpl)
             <div class="col-md-3 col-sm-3 col-xs-12 col-df">
                 <div class="logo">
                     <a href=""><img src="<?php echo $_smarty_tpl->tpl_vars['arg']->value['logo_folder_link'];?>
-/<?php echo $_smarty_tpl->tpl_vars['info']->value['logo'];?>
-"> Máy tính đông tây</a>
+/logo.png"></a>
                 </div>
             </div>
             <div class="col-md-9 col-sm-9 col-xs-12 col-df">

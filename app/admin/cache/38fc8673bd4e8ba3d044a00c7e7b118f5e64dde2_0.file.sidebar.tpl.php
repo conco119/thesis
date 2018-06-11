@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-10 22:18:06
+/* Smarty version 3.1.30, created on 2018-06-11 23:34:48
   from "/Users/mtd/Sites/htaccess/app/admin/view/layouts/includes/sidebar.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b1d412ecccda0_42056817',
+  'unifunc' => 'content_5b1ea4a8544dd0_39453107',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '38fc8673bd4e8ba3d044a00c7e7b118f5e64dde2' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/layouts/includes/sidebar.tpl',
-      1 => 1528643415,
+      1 => 1528734885,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b1d412ecccda0_42056817 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b1ea4a8544dd0_39453107 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="left_col scroll-view">
 
@@ -74,8 +74,7 @@ mc=supplier&site=index">Nhà cung cấp</a></li>
 					</ul>
 				</li>
 				<li><a><i class="fa fa-folder-open"></i> Lưu trữ <span class="fa fa-chevron-down"></span></a>
-					<ul class="nav child_menu" style="display: none">
-						<!--<li><a href="?mc=product&site=warehouse">Kho hàng</a></li>-->
+					<ul class="nav child_menu " style="display: none">
 						<li><a href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['prefix_admin'];?>
 mc=export&site=statistics">Hóa đơn bán hàng</a></li>
 						<li><a href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['prefix_admin'];?>
@@ -86,16 +85,12 @@ mc=reimport&site=statistics">Phiếu khách trả hàng</a></li>
 				</li>
 				<li><a><i class="fa fa-bar-chart-o"></i> Báo cáo <span class="fa fa-chevron-down"></span></a>
 					<ul class="nav child_menu" style="display: none">
-						<li><a href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['prefix_admin'];?>
-mc=report&site=daily">Ghi sổ ngày</a></li>
-						<li><a href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['prefix_admin'];?>
-mc=product&site=statistics">Sản phẩm</a></li>
-						<li><a href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['prefix_admin'];?>
-mc=service&site=statistics">Dịch vụ</a></li>
+						
+						
+						
 						<li><a href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['prefix_admin'];?>
 mc=report&site=performance">Lợi nhuận</a></li>
-						<li><a href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['prefix_admin'];?>
-mc=report&site=user">Nhân viên</a></li>
+						
 						<!--<li><a href="?mc=cost&site=index"> Tính giá vốn </a></li>-->
 					</ul>
 				</li>
@@ -122,7 +117,11 @@ mc=setting&site=info"><i class="fa fa-info"></i>Thiết lập thông tin</a></li
 	<!-- /menu footer buttons -->
 	<div class="sidebar-footer hidden-small">
 		
-		</a> <a data-toggle="tooltip" data-placement="top" title="Logout"> <span
+		<a href='<?php echo $_smarty_tpl->tpl_vars['arg']->value['domain'];?>
+' data-toggle="tooltip" data-placement="top" title="Trang bán hàng"> <span
+			class="glyphicon glyphicon-shopping-cart"></span>
+		</a>
+		<a   href='./admin?mc=user&site=logout' data-toggle="tooltip" data-placement="top" title="Logout"> <span
 			class="glyphicon glyphicon-off"></span>
 		</a>
 	</div>

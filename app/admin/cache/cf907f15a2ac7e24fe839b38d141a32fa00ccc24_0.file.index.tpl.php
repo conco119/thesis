@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-03 16:17:18
+/* Smarty version 3.1.30, created on 2018-06-11 22:20:57
   from "/Users/mtd/Sites/htaccess/app/admin/view/customer/index.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b13b21e8e2665_89357612',
+  'unifunc' => 'content_5b1e9359d77525_73668165',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'cf907f15a2ac7e24fe839b38d141a32fa00ccc24' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/customer/index.tpl',
-      1 => 1528003277,
+      1 => 1528730309,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b13b21e8e2665_89357612 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b1e9359d77525_73668165 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="">
     <div class="x_panel">
@@ -42,7 +42,8 @@ function content_5b13b21e8e2665_89357612 (Smarty_Internal_Template $_smarty_tpl)
                     </select>
                 </div>
                 <div class="form-group form-inline">
-                    <input class="form-control left" id="key" placeholder="Mã, Tên, SĐT" >
+                    <input class="form-control left" id="key" value="<?php echo $_smarty_tpl->tpl_vars['out']->value['key'];?>
+" placeholder="Mã, Tên" >
                 </div>
                 <button type="button" class="btn btn-primary left" onclick="filter();"><i class="fa fa-search"></i></button>
 
@@ -324,8 +325,8 @@ function filter()
 {
   var key = $("#key").val();
     var category = $("#group").val();
-    var url = "./?mod=customer&site=index";
-    url += "&group=" + category;
+    var url = "./admin?mc=customer&site=index";
+    url += "&group_id=" + category;
     url += "&key=" + key;
     window.location.href = url;
 }

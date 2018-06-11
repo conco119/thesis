@@ -152,11 +152,6 @@
 						<div class="col-md-6 col-sm-6 col-xs-12">
 							<select class="form-control" name="category_id" onchange="AddIdCategory(this.value);"></select>
 						</div>
-						<div class="col-md-1 col-sm-1 col-xs-12">
-							<button type="button" class="btn btn-default" data-toggle="modal" data-target="#UpdateCategory" onclick="UpdateCategory(0);">
-								<i class="fa fa-pencil"></i>
-							</button>
-						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-md-2 col-sm-2 col-xs-12">Sản phẩm</label>
@@ -174,11 +169,6 @@
 						<div class="col-md-6 col-sm-6 col-xs-12">
 							<select name="trademark_id" class="form-control" onchange="AddIdTrademark(this.value);"></select>
 						</div>
-                        <div class="col-md-1 col-sm-1 col-xs-12">
-                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#UpdateTrademark" onclick="UpdateTrademark(0);">
-                                <i class="fa fa-pencil"></i>
-                            </button>
-                        </div>
 					</div>
 
 					<div class="form-group">

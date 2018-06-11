@@ -46,7 +46,6 @@
                         </b>
                     </p>
                 </div>
-
                 <div class="show-small-info">
                     <div class="star-big" id="Star{$value.id}">
                         {for $index=1 to 5}
@@ -83,6 +82,10 @@
                     {/if}
                 </p>
             </div>
+            <div class="show-small-info">
+                <p>Bảo hành:  <b style='color:red'> {$value.warranty} tháng </b></p>
+            </div>
+
 
             <div class="addcart">
                {* Số Lượng: <input type="number" width="30" value="1" id="CartNumber{$value.id}"/>    *}
