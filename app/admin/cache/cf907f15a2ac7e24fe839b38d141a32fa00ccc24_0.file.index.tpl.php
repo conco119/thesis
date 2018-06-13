@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-11 22:20:57
+/* Smarty version 3.1.30, created on 2018-06-13 09:16:36
   from "/Users/mtd/Sites/htaccess/app/admin/view/customer/index.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b1e9359d77525_73668165',
+  'unifunc' => 'content_5b207e844a1690_92607858',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'cf907f15a2ac7e24fe839b38d141a32fa00ccc24' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/customer/index.tpl',
-      1 => 1528730309,
+      1 => 1528856195,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b1e9359d77525_73668165 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b207e844a1690_92607858 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="">
     <div class="x_panel">
@@ -63,7 +63,7 @@ mc=customergroup&site=index" class="btn btn-primary left"><i class="fa fa-pencil
                             <th>Khách hàng</th>
                             <th>Nhóm</th>
                             <th class="text-right">Tài khoản</th>
-                            <th class="text-right">Chi tiết mua hàng</th>
+                            
                             <th class="text-right">Tổng mua</th>
                             <th class="text-center">TT</th>
                             <th class="text-right"></th>
@@ -89,15 +89,13 @@ foreach ($_from as $_smarty_tpl->tpl_vars['list']->value) {
 </td>
                                 <td class="text-right">
                                 	<?php echo number_format($_smarty_tpl->tpl_vars['list']->value['money']);?>
-
+ đ
                                 </td>
-                                <td class="text-center"><a href="?mod=customer&site=detail&id=<?php echo $_smarty_tpl->tpl_vars['list']->value['id'];?>
-" class="btn btn btn-success"><i class="fa fa-search-plus"></i></a></td>
+                                
                                 <td class="text-right">
                                 	<?php echo number_format($_smarty_tpl->tpl_vars['list']->value['must_pay']);?>
-
-                                    <a href="?mod=customer&site=history&id=<?php echo $_smarty_tpl->tpl_vars['list']->value['id'];?>
-" class="btn btn btn-success"><i class="fa fa-search-plus"></i></a>
+ đ
+                                    
                                 </td>
                                 <td class="text-center" id="stt<?php echo $_smarty_tpl->tpl_vars['list']->value['id'];?>
 "><?php echo $_smarty_tpl->tpl_vars['list']->value['status'];?>

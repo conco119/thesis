@@ -41,7 +41,7 @@
                                     <tr id="field{$list.id}">
                                         <td>{$list.code} <br> <small>{$list.date}</small></td>
                                         <td>{$list.supplier}</td>
-                                        <td class="text-right">{$list.must_pay|number_format}</td>
+                                        <td class="text-right"> <b style='color:red'> {$list.must_pay|number_format}đ </b></td>
                                         <td class="text-right">{$list.discount}</td>
                                         <td class="text-right">{($list.payment - $list.must_pay)|number_format}</td>
                                         <td>{$list.user}</td>

@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{$seo.title}</title>
+        <title>Thiết bị nhà thông minh</title>
         <base href="{$domain}">
         <meta name="keywords" content="{$seo.keyword}" />
         <meta name="description" content="{$seo.description}" />

@@ -65,12 +65,12 @@
                                     <td>{$list.date|date_format:"%d-%m-%Y"}<br><small>{$list.updated_at}</small></td>
                                     <td class="text-right">
                                         {if $list.is_import neq 0}
-                                            <span style='color:red'>{$list.money|number_format} đ </span>
+                                            <b style='color:red'>{$list.money|number_format} đ </b>
                                         {/if}
                                     </td>
                                     <td class="text-right">
                                         {if $list.is_import eq 0}
-                                            <span style='color:red'>{$list.money|number_format} đ </span>
+                                            <b style='color:red'>{$list.money|number_format} đ </b>
                                         {/if}
                                     </td>
                                     <td>

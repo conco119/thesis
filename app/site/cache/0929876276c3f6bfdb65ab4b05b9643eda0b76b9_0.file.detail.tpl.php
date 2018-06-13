@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-11 23:13:19
+/* Smarty version 3.1.30, created on 2018-06-13 12:59:43
   from "/Users/mtd/Sites/htaccess/app/site/view/product/detail.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b1e9f9fb3ed91_98942449',
+  'unifunc' => 'content_5b20b2cf516146_80362389',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0929876276c3f6bfdb65ab4b05b9643eda0b76b9' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/site/view/product/detail.tpl',
-      1 => 1528733598,
+      1 => 1528869581,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b1e9f9fb3ed91_98942449 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b20b2cf516146_80362389 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 
 
@@ -88,9 +88,9 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
                      <p><i class="fa fa-folder-open"></i> Tình trạng:
                         <b>
                         <?php if ($_smarty_tpl->tpl_vars['value']->value['imported']-$_smarty_tpl->tpl_vars['value']->value['exported'] > 0) {?>
-                            <span style='color:red'> Còn hàng </span>
+                            <span style='color:green'> Còn hàng </span>
                         <?php } else { ?>
-                            <span style='color:red'>  Hết hàng  </span>
+                            <span style='color:red'>  Liên hệ  </span>
                         <?php }?>
                         </b>
                     </p>

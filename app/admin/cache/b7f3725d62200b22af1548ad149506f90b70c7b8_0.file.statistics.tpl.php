@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-28 16:51:29
+/* Smarty version 3.1.30, created on 2018-06-12 07:43:35
   from "/Users/mtd/Sites/htaccess/app/admin/view/import/statistics.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b0bd121d8dfb1_47111182',
+  'unifunc' => 'content_5b1f1737adc236_67106207',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'b7f3725d62200b22af1548ad149506f90b70c7b8' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/import/statistics.tpl',
-      1 => 1527501084,
+      1 => 1528764214,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b0bd121d8dfb1_47111182 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b1f1737adc236_67106207 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="">
     <div class="row">
@@ -75,8 +75,8 @@ foreach ($_from as $_smarty_tpl->tpl_vars['list']->value) {
 </small></td>
                                         <td><?php echo $_smarty_tpl->tpl_vars['list']->value['supplier'];?>
 </td>
-                                        <td class="text-right"><?php echo number_format($_smarty_tpl->tpl_vars['list']->value['must_pay']);?>
-</td>
+                                        <td class="text-right"> <b style='color:red'> <?php echo number_format($_smarty_tpl->tpl_vars['list']->value['must_pay']);?>
+đ </b></td>
                                         <td class="text-right"><?php echo $_smarty_tpl->tpl_vars['list']->value['discount'];?>
 </td>
                                         <td class="text-right"><?php echo number_format(($_smarty_tpl->tpl_vars['list']->value['payment']-$_smarty_tpl->tpl_vars['list']->value['must_pay']));?>

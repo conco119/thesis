@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-11 23:35:59
+/* Smarty version 3.1.30, created on 2018-06-13 20:34:23
   from "/Users/mtd/Sites/htaccess/app/site/view/layouts/includes/header.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b1ea4ef9f2139_75932914',
+  'unifunc' => 'content_5b211d5f6ce112_40634669',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '57bdc1a4331365279bbc26411d772c7e9afdff86' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/site/view/layouts/includes/header.tpl',
-      1 => 1528734956,
+      1 => 1528896844,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b1ea4ef9f2139_75932914 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b211d5f6ce112_40634669 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="container">
     <div class="top_link bg_white">
@@ -35,7 +35,7 @@ function content_5b1ea4ef9f2139_75932914 (Smarty_Internal_Template $_smarty_tpl)
             <?php } else { ?>
                 <li class="pull-right"><a href="./?mc=customer&site=logout"><i
                             class="fa fa-user"></i> Đăng Xuất</a></li>
-                <li class="pull-right"><a href="../?mc=customer&site=detail"><i
+                <li class="pull-right"><a href="./?mc=customer&site=detail"><i
                             class="fa fa-user"></i> <?php echo $_smarty_tpl->tpl_vars['arg']->value['user']['name'];?>
 </a></li>
                 <?php if ($_smarty_tpl->tpl_vars['arg']->value['user']['permission'] != 4) {?>
@@ -60,8 +60,9 @@ function content_5b1ea4ef9f2139_75932914 (Smarty_Internal_Template $_smarty_tpl)
             <div class="col-md-9 col-sm-9 col-xs-12 col-df">
                 <div class="col-md-7 col-sm-7 col-xs-12">
 
-                    <form action="./search/" method="get" id="search-form">
-                        <input type="text" name="skey" class="form-control" placeholder="Tìm kiếm">
+                    <form action="./?mc=product/" method="get" id="search-form">
+                    
+                        <input type="text" name="key" class="form-control" placeholder="Tìm kiếm">
                         <button type="submit"><i class="fa fa-search"></i></button>
                     </form>
 

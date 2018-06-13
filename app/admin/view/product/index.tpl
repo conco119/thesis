@@ -54,7 +54,7 @@
                                         <td class="text-right">{$data.exported|intval}</td>
 										{* Tồn kho *}
                                         <td class="text-right">{($data.imported - $data.exported)|intval}</td>
-										<td class="text-right">{(($data.imported - $data.exported)*$data.price_import)|number_format} đ</td>
+										<td class="text-right"> <b style='color:red'> {(($data.imported - $data.exported)*$data.price_import)|number_format} đ </b> </td>
                                         <td class="text-center" id="stt{$data.id}">{$data.status}</td>
                                         <td class="text-right" width="15%">
 											<a href='./admin?mc=product&site=imagepost&id={$data.id}'><button type="button" class="btn btn-default btn-xs" title="Hình ảnh sản phẩm"><i class="fa fa-image"></i></button><a/>
@@ -69,7 +69,7 @@
 								<td class="text-right">{$out.number_im}</td>
 								<td class="text-right">{$out.number_ex}</td>
 								<td class="text-right">{$out.number_im-$out.number_ex}</td>
-								<td class="text-right">{$out.total|number_format} đ</td>
+								<td class="text-right"><b style='color:red'> {$out.total|number_format} đ </b></td>
 								<td colspan="2"></td>
 							</tr>
                             </tbody>

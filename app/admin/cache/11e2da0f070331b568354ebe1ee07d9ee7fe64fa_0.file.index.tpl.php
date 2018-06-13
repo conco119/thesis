@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-11 23:06:00
+/* Smarty version 3.1.30, created on 2018-06-12 07:38:35
   from "/Users/mtd/Sites/htaccess/app/admin/view/product/index.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b1e9de8d91a18_66308933',
+  'unifunc' => 'content_5b1f160befe067_71990822',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '11e2da0f070331b568354ebe1ee07d9ee7fe64fa' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/product/index.tpl',
-      1 => 1528733160,
+      1 => 1528763915,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b1e9de8d91a18_66308933 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b1f160befe067_71990822 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="">
     <div class="row">
@@ -93,8 +93,8 @@ foreach ($_from as $_smarty_tpl->tpl_vars['data']->value) {
 										
                                         <td class="text-right"><?php echo intval(($_smarty_tpl->tpl_vars['data']->value['imported']-$_smarty_tpl->tpl_vars['data']->value['exported']));?>
 </td>
-										<td class="text-right"><?php echo number_format((($_smarty_tpl->tpl_vars['data']->value['imported']-$_smarty_tpl->tpl_vars['data']->value['exported'])*$_smarty_tpl->tpl_vars['data']->value['price_import']));?>
- đ</td>
+										<td class="text-right"> <b style='color:red'> <?php echo number_format((($_smarty_tpl->tpl_vars['data']->value['imported']-$_smarty_tpl->tpl_vars['data']->value['exported'])*$_smarty_tpl->tpl_vars['data']->value['price_import']));?>
+ đ </b> </td>
                                         <td class="text-center" id="stt<?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
 "><?php echo $_smarty_tpl->tpl_vars['data']->value['status'];?>
 </td>
@@ -123,8 +123,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 </td>
 								<td class="text-right"><?php echo $_smarty_tpl->tpl_vars['out']->value['number_im']-$_smarty_tpl->tpl_vars['out']->value['number_ex'];?>
 </td>
-								<td class="text-right"><?php echo number_format($_smarty_tpl->tpl_vars['out']->value['total']);?>
- đ</td>
+								<td class="text-right"><b style='color:red'> <?php echo number_format($_smarty_tpl->tpl_vars['out']->value['total']);?>
+ đ </b></td>
 								<td colspan="2"></td>
 							</tr>
                             </tbody>

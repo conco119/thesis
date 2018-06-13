@@ -11,7 +11,7 @@
             {else}
                 <li class="pull-right"><a href="./?mc=customer&site=logout"><i
                             class="fa fa-user"></i> Đăng Xuất</a></li>
-                <li class="pull-right"><a href="../?mc=customer&site=detail"><i
+                <li class="pull-right"><a href="./?mc=customer&site=detail"><i
                             class="fa fa-user"></i> {$arg.user.name}</a></li>
                 {if $arg.user.permission neq 4}
                 <li class="pull-right"><a href="./admin"><i
@@ -34,8 +34,9 @@
             <div class="col-md-9 col-sm-9 col-xs-12 col-df">
                 <div class="col-md-7 col-sm-7 col-xs-12">
 
-                    <form action="./search/" method="get" id="search-form">
-                        <input type="text" name="skey" class="form-control" placeholder="Tìm kiếm">
+                    <form action="./?mc=product/" method="get" id="search-form">
+                    {* <form action="./search" method="get" id="search-form"> *}
+                        <input type="text" name="key" class="form-control" placeholder="Tìm kiếm">
                         <button type="submit"><i class="fa fa-search"></i></button>
                     </form>
 

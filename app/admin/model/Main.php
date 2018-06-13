@@ -31,7 +31,8 @@ class Main implements Init
     $this->smarty->assign('tpl_file', $tpl_file);
     // config
     $this->set_value();
-    $this->before_main();
+    $this->redirectIfCustomer();
+    $this->header_avatar();
   }
 
    public function set_value()
@@ -66,6 +67,11 @@ class Main implements Init
             'prefix_admin' => "./admin?",
     );
     //user avatar to header view
+
+  }
+
+  public function header_avatar()
+  {
     if($this->currentUser['avatar'] != '')
       $this->arg['avatar_link'] = $this->arg['image_folder_link'] . $this->currentUser['avatar'];
     else
@@ -86,11 +92,24 @@ class Main implements Init
     return $user;
   }
 
-  function before_main()
+  function redirectIfCustomer()
   {
       if($this->currentUser['permission'] == 4)
         lib_redirect(DOMAIN);
   }
+
+  function redirectIfEmployee()
+  {
+    if($this->currentUser['permission'] == 3)
+        lib_redirect(DOMAIN . '/admin');
+  }
+
+  function redirectIfManager()
+  {
+    if($this->currentUser['permission'] == 2)
+        lib_redirect(DOMAIN . '/admin');
+  }
+
 }
 
  ?>

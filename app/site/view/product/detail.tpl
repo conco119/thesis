@@ -39,9 +39,9 @@
                      <p><i class="fa fa-folder-open"></i> Tình trạng:
                         <b>
                         {if $value.imported-$value.exported  gt 0}
-                            <span style='color:red'> Còn hàng </span>
+                            <span style='color:green'> Còn hàng </span>
                         {else}
-                            <span style='color:red'>  Hết hàng  </span>
+                            <span style='color:red'>  Liên hệ  </span>
                         {/if}
                         </b>
                     </p>

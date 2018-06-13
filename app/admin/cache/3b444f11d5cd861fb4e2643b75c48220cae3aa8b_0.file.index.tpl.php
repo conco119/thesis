@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-03 10:06:26
+/* Smarty version 3.1.30, created on 2018-06-12 07:41:14
   from "/Users/mtd/Sites/htaccess/app/admin/view/supplier/index.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b135b328d6644_86360220',
+  'unifunc' => 'content_5b1f16aa7f87a4_65804314',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '3b444f11d5cd861fb4e2643b75c48220cae3aa8b' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/supplier/index.tpl',
-      1 => 1527995184,
+      1 => 1528764073,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b135b328d6644_86360220 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b1f16aa7f87a4_65804314 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="">
     <div class="x_panel">
@@ -76,14 +76,14 @@ foreach ($_from as $_smarty_tpl->tpl_vars['data']->value) {
 </td>
                                 <td><?php echo $_smarty_tpl->tpl_vars['data']->value['phone'];?>
 </td>
-                                <td class="text-right"><?php echo number_format($_smarty_tpl->tpl_vars['data']->value['money']);?>
- <a href="?mod=supplier&site=detail&id=<?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
+                                <td class="text-right"> <b style='color:red'> <?php echo number_format($_smarty_tpl->tpl_vars['data']->value['money']);?>
+ <b/> <a href="?mod=supplier&site=detail&id=<?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
 "
                                     class="btn btn btn-success">
                                     <i class="fa fa-search-plus"></i></a>
                                 </td>
-                                <td class="text-right"><?php echo number_format($_smarty_tpl->tpl_vars['data']->value['must_pay']);?>
-
+                                <td class="text-right"> <b style='color:red'> <?php echo number_format($_smarty_tpl->tpl_vars['data']->value['must_pay']);?>
+đ </b>
                                     <a href="?mod=supplier&site=history&id=<?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
 "
                                     class="btn btn btn-success"><i class="fa fa-search-plus"></i></a>

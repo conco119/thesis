@@ -49,11 +49,11 @@
                                 <td>{$data.code}</td>
                                 <td>{$data.name}</td>
                                 <td>{$data.phone}</td>
-                                <td class="text-right">{$data.money|number_format} <a href="?mod=supplier&site=detail&id={$data.id}"
+                                <td class="text-right"> <b style='color:red'> {$data.money|number_format} <b/> <a href="?mod=supplier&site=detail&id={$data.id}"
                                     class="btn btn btn-success">
                                     <i class="fa fa-search-plus"></i></a>
                                 </td>
-                                <td class="text-right">{$data.must_pay|number_format}
+                                <td class="text-right"> <b style='color:red'> {$data.must_pay|number_format}đ </b>
                                     <a href="?mod=supplier&site=history&id={$data.id}"
                                     class="btn btn btn-success"><i class="fa fa-search-plus"></i></a>
                                     </td>

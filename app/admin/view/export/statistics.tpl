@@ -43,7 +43,7 @@
                                         <small>{$list.date}</small>
                                     </td>
                                     <td>{$list.customer}</td>
-                                    <td class="text-right">{$list.must_pay|number_format}</td>
+                                    <td class="text-right"> <b style='color:red'> {$list.must_pay|number_format}đ </b></td>
                                     <td class="text-right">{$list.discount}</td>
                                     <td class="text-right">{($list.must_pay - $list.payment)|number_format}</td>
                                     <td>{$list.user}</td>

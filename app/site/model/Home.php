@@ -10,6 +10,12 @@ class Home extends Main {
 
     function index()
     {
+        //for searching
+        $key = isset($_GET['key']) ? trim($_GET['key']) : '';
+        if($key)
+        {
+            lib_redirect('./?mc=product&site=search&key=' . $key);
+        }
         $this->set_sidebar();
         $this->set_footer();
         // unset($_SESSION['cart']);
@@ -155,4 +161,6 @@ class Home extends Main {
     {
         $this->smarty->display('home.tpl');
     }
+
+
 }

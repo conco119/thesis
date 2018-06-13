@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-11 22:20:56
+/* Smarty version 3.1.30, created on 2018-06-12 07:36:32
   from "/Users/mtd/Sites/htaccess/app/admin/view/money/index.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b1e93580dc512_64752722',
+  'unifunc' => 'content_5b1f15907e0684_69922105',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '14a68f8721b6741a3e15b98c422391cdaf637729' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/money/index.tpl',
-      1 => 1528730309,
+      1 => 1528763791,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b1e93580dc512_64752722 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b1f15907e0684_69922105 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/Users/mtd/Sites/htaccess/library/smarty/plugins/modifier.date_format.php';
 ?>
 <div class="">
@@ -101,14 +101,14 @@ foreach ($_from as $_smarty_tpl->tpl_vars['list']->value) {
 </small></td>
                                     <td class="text-right">
                                         <?php if ($_smarty_tpl->tpl_vars['list']->value['is_import'] != 0) {?>
-                                            <span style='color:red'><?php echo number_format($_smarty_tpl->tpl_vars['list']->value['money']);?>
- đ </span>
+                                            <b style='color:red'><?php echo number_format($_smarty_tpl->tpl_vars['list']->value['money']);?>
+ đ </b>
                                         <?php }?>
                                     </td>
                                     <td class="text-right">
                                         <?php if ($_smarty_tpl->tpl_vars['list']->value['is_import'] == 0) {?>
-                                            <span style='color:red'><?php echo number_format($_smarty_tpl->tpl_vars['list']->value['money']);?>
- đ </span>
+                                            <b style='color:red'><?php echo number_format($_smarty_tpl->tpl_vars['list']->value['money']);?>
+ đ </b>
                                         <?php }?>
                                     </td>
                                     <td>

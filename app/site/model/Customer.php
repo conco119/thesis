@@ -20,12 +20,15 @@ class Customer extends Main {
             $data['phone'] = $_POST['phone'];
             $data['address'] = $_POST['address'];
             $data['gender'] = 1;
+            $data['email'] = '';
             $data['birthday'] = "2018/01/01";
             $data['status'] = 1;
             $data['permission'] = 4;
             $data['created_at'] = time();
             $data['updated_at'] = time();
             $data['avatar'] = '';
+            // pre($data);
+            // die;
             if($_POST['password'] != $_POST['repassword'])
             {
                 $errors['err_password'] = 'Mật khẩu không trùng nhau';
@@ -67,5 +70,50 @@ class Customer extends Main {
             }
         }
         $this->smarty->display('login.tpl');
+    }
+
+    function detail()
+    {
+        if( isset($_POST['submit']) )
+        {
+            $data['name'] = $_POST['name'];
+            $data['phone'] = $_POST['phone'];
+            $data['address'] = $_POST['address'];
+            $this->pdo->update('users', $data, 'id=' . $this->currentUser['id']);
+        }
+
+
+        $user = $this->pdo->fetch_one("SELECT * FROM users WHERE id=" . $this->currentUser['id']);
+        $this->smarty->assign('user', $user);
+        $this->smarty->display('home.tpl');
+    }
+
+    function pass()
+    {
+        $error = [];
+        if( isset($_POST['submit']) )
+        {
+            if($this->currentUser['password'] == $_POST['old_password'])
+            {
+                if($_POST['password'] == $_POST['repassword'])
+                {
+                    $data['password'] = $_POST['password'];
+                    $this->pdo->update('users', $data, 'id=' . $this->currentUser['id']);
+                    lib_redirect('./?mc=customer&site=detail');
+                }
+                else
+                {
+                    $error['new_pass'] = "Mật khẩu mới không trùng nhau";
+                }
+
+            }
+            else
+            {
+                $error['old_pass'] = "Mật khẩu cũ không chính xác";
+            }
+
+        }
+        $this->smarty->assign('error', $error);
+        $this->smarty->display('home.tpl');
     }
 }

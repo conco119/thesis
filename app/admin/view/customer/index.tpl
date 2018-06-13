@@ -40,7 +40,7 @@
                             <th>Khách hàng</th>
                             <th>Nhóm</th>
                             <th class="text-right">Tài khoản</th>
-                            <th class="text-right">Chi tiết mua hàng</th>
+                            {* <th class="text-right">Chi tiết mua hàng</th> *}
                             <th class="text-right">Tổng mua</th>
                             <th class="text-center">TT</th>
                             <th class="text-right"></th>
@@ -55,12 +55,12 @@
                                 </td>
                                 <td>{$list.group.name}</td>
                                 <td class="text-right">
-                                	{$list.money|number_format}
+                                	{$list.money|number_format} đ
                                 </td>
-                                <td class="text-center"><a href="?mod=customer&site=detail&id={$list.id}" class="btn btn btn-success"><i class="fa fa-search-plus"></i></a></td>
+                                {* <td class="text-center"><a href="?mod=customer&site=detail&id={$list.id}" class="btn btn btn-success"><i class="fa fa-search-plus"></i></a></td> *}
                                 <td class="text-right">
-                                	{$list.must_pay|number_format}
-                                    <a href="?mod=customer&site=history&id={$list.id}" class="btn btn btn-success"><i class="fa fa-search-plus"></i></a>
+                                	{$list.must_pay|number_format} đ
+                                    {* <a href="?mod=customer&site=history&id={$list.id}" class="btn btn btn-success"><i class="fa fa-search-plus"></i></a> *}
                                 </td>
                                 <td class="text-center" id="stt{$list.id}">{$list.status}</td>
                                 <td class="text-center">

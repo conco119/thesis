@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-10 22:14:15
+/* Smarty version 3.1.30, created on 2018-06-13 16:01:21
   from "/Users/mtd/Sites/htaccess/app/site/view/layouts/includes/menu.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b1d4047ab48f4_80990728',
+  'unifunc' => 'content_5b20dd61207ab9_28933312',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '6474faec32961a4fa99d80d3b9a9fb937d63a80c' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/site/view/layouts/includes/menu.tpl',
-      1 => 1528643415,
+      1 => 1528880480,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b1d4047ab48f4_80990728 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b20dd61207ab9_28933312 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="container mar-btm">
 	<div class="menu">
@@ -35,6 +35,12 @@ function content_5b1d4047ab48f4_80990728 (Smarty_Internal_Template $_smarty_tpl)
 					</a></li>
 				</div>
 				<div class="col-md-2 col-sm-2 col-xs-12 col-df">
+					<li class="" style="background: rgb(129, 142, 181);"><i class="fa fa-cc-paypal"></i>
+						<a href="./?site=intro" title="Giới thiệu">Giới thiệu
+							<p></p>
+					</a></li>
+				</div>
+				<div class="col-md-2 col-sm-2 col-xs-12 col-df">
 					<li class="" style="background: rgb(245, 121, 31);"><i class="fa fa-camera-retro"></i>
 						<a href="./?mc=product" title="Sản phẩm">Sản phẩm
 							<p>Phân phối linh kiện</p>
@@ -46,15 +52,9 @@ function content_5b1d4047ab48f4_80990728 (Smarty_Internal_Template $_smarty_tpl)
 					</a></li>
 				</div>
 				<div class="col-md-2 col-sm-2 col-xs-12 col-df">
-					<li class="" style="background: rgb(129, 142, 181);"><i class="fa fa-cc-paypal"></i>
-						<a href="./?site=intro" title="Giới thiệu">Giới thiệu
-							<p></p>
-					</a></li>
-				</div>
-				<div class="col-md-2 col-sm-2 col-xs-12 col-df">
 					<li class="" style="background: rgb(53, 152, 219);"><i class="fa fa-cc-paypal"></i>
 						<a href="./?site=payment" title="Giới thiệu">Thanh Toán
-							<p>Phương thức thanh toán</p>
+							<p>Hướng dẫn thanh toán</p>
 					</a></li>
 				</div>
 				<div class="col-md-2 col-sm-2 col-xs-12 col-df">

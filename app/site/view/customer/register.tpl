@@ -11,7 +11,7 @@
 					<p>{$message}</p>
 					<div class="field">
 						<label>Tài khoản:</label>
-						<input type="text" name="email" value="" placeholder="Email" class="form-control required" />
+						<input type="text" name="email" value="" placeholder="Account name" class="form-control required" />
 					</div>
 					<!-- /field -->
 					<div class="field">

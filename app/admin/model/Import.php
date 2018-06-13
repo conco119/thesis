@@ -11,6 +11,7 @@ class Import extends Main
 
     public function index()
     {
+        $this->redirectIfEmployee();
         //testing
         //add or edit
         $this->create();
@@ -190,65 +191,44 @@ class Import extends Main
     // hóa đơn nhập hàng
     public function statistics()
     {
-
+        $this->redirectIfEmployee();
         $date_export = isset($_GET['date']) ? intval($_GET["date"]) : 0;
         $out['select_export'] = $this->ImportHelper->get_select_from_array($date_export);
         $key = isset($_GET['key']) ? $_GET["key"] : "";
         $out['key'] = $key;
         $sql_where = "";
-        $sql_where_p = "1=1";
         if ($key != "")
         {
             $sql_where .= " AND  (a.code LIKE '%$key%' OR b.name LIKE '%$key%')";
         }
 
-        $sql = "SELECT a.id, a.date, a.code, a.must_pay, a.total_money, a.payment, a.creator, a.updater, a.updated_at, b.name AS supplier, c.name AS user FROM imports AS a
-					LEFT JOIN suppliers b ON a.supplier_id=b.id
-					LEFT JOIN users c ON a.creator=c.id
-				WHERE 1=1 AND a.export_id is NULL $sql_where
-				ORDER BY id DESC";
-        $paging = $this->paging->get_content($this->pdo->count_rows($sql), 10);
-        $sql .= $paging['sql_add'];
-
-        $imports = $this->pdo->fetch_all($sql);
 
         //filter this day, this week, this month
-        if ($date_export != 0)
+        if($date_export != 0)
         {
             switch($date_export)
             {
                 case 1:
-                    $date = date("Y-m-d");
-                    foreach($imports as $key => $import)
-                    {
-                        if($import['date'] != $date)
-                            unset($imports[$key]);
-                    }
-                    break;
+                $sql_where .= " AND a.date = CURDATE()";
+                break;
                 case 2:
-                    $current_week = gmdate("W");
-                    $current_year = gmdate("Y");
-                    foreach($imports as $key => $import)
-                    {
-                        $week = gmdate("W", strtotime($import['date']) + 7 *3600);
-                        $year = gmdate("Y", strtotime($import['date']) + 7 *3600);
-                        if($current_week != $week && $current_year != $year)
-                            unset($imports[$key]);
-                    }
-                    break;
+                $sql_where .= " AND WEEK(a.date) = WEEK(CURDATE()) AND YEAR(a.date) = YEAR(CURDATE())";
+                break;
                 case 3:
-                    $current_month = gmdate("m");
-                    $current_year = gmdate("Y");
-                    foreach($imports as $key => $import)
-                    {
-                        $month = gmdate("m", strtotime($import['date']) + 7 *3600);
-                        $year = gmdate("Y", strtotime($import['date']) + 7 *3600);
-                        if($current_month != $month && $current_year != $year)
-                            unset($imports[$key]);
-                    }
-                    break;
+                $sql_where .= " AND MONTH(a.date) = MONTH(CURDATE()) AND YEAR(a.date) = YEAR(CURDATE())";
+                break;
             }
         }
+
+        $sql = "SELECT a.id, a.date, a.code, a.must_pay, a.total_money, a.payment, a.creator, a.updater, a.updated_at, b.name AS supplier, c.name AS user FROM imports AS a
+                    LEFT JOIN suppliers b ON a.supplier_id=b.id
+                    LEFT JOIN users c ON a.creator=c.id
+                WHERE 1=1 AND a.export_id is NULL $sql_where
+                ORDER BY id DESC";
+        $paging = $this->paging->get_content($this->pdo->count_rows($sql), 10);
+        $sql .= $paging['sql_add'];
+
+        $imports = $this->pdo->fetch_all($sql);
         ///
         foreach ($imports as $key => $import)
         {

@@ -5,6 +5,7 @@
 <div class="row  mar-top">
     <div class="col-md-8 col-sm-8 col-xs-12" style="">
         <div class="bg_white pad-15">
+        {if $cart.products|@count gt 0}
             <h2>Sản phẩm </h2>
             <div class="table-responsive ">
                 <table class="table">
@@ -49,7 +50,10 @@
 
                 </table>
             </div>
+        {/if}
+
             <br>
+        {if $cart.services|@count gt 0}
             <h2>Dịch vụ </h2>
             <div class="table-responsive">
                 <table class="table">
@@ -83,6 +87,7 @@
 
                 </table>
             </div>
+        {/if}
         </div>
     </div>
 

@@ -41,7 +41,7 @@
                     {foreach from=$services item=data}
                         <tr id="field{$data.id}">
                             <td>{$data.name}<br /> <small><i class="fa fa-star"></i> {$data.code}</small></td>
-                            <td class="text-right">{$data.price}</td>
+                            <td class="text-right"> <b style='color:red'> {$data.price} </b> </td>
                             <td class="text-center" id="stt{$data.id}">{$data.status}</td>
                             <td class="text-right">{$data.updated_at}</td>
                             <td class="text-right">{$data.created_at}</td>
