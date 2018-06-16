@@ -25,7 +25,7 @@ class HomeHelper extends HelpAbstract
                 (SELECT sum(rate) FROM product_rates pr WHERE p.id=pr.product_id ) as total_rate
                 FROM products p
                 LEFT JOIN product_categories pc ON p.category_id = pc.id
-                WHERE p.category_id = {$value['id']}
+                WHERE p.category_id = {$value['id']} AND p.status = 1
                 ORDER BY id
                 DESC LIMIT 10";
 

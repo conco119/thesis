@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-26 17:29:40
+/* Smarty version 3.1.30, created on 2018-06-16 16:53:27
   from "/Users/mtd/Sites/htaccess/app/admin/view/customergroup/index.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b0937141a7ae8_79687947',
+  'unifunc' => 'content_5b24de179e78f4_69917873',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'a18643eeee7add21edfc1db76cf05f1d237bfd1d' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/customergroup/index.tpl',
-      1 => 1527330568,
+      1 => 1529142805,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b0937141a7ae8_79687947 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b24de179e78f4_69917873 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="">
 	<div class="row">
@@ -74,9 +74,11 @@ foreach ($_from as $_smarty_tpl->tpl_vars['data']->value) {
     								<td class="text-right">
     									<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#UpdateFrom" onclick="LoadDataForForm(<?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
 );"><i class="fa fa-pencil"></i></button>
-    									<button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#DeleteForm" onclick="LoadDeleteItem('<?php echo $_smarty_tpl->tpl_vars['arg']->value['mc'];?>
+										<?php if ($_smarty_tpl->tpl_vars['arg']->value['user']['permission'] != 3) {?>
+											<button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#DeleteForm" onclick="LoadDeleteItem('<?php echo $_smarty_tpl->tpl_vars['arg']->value['mc'];?>
 ', <?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
 , '', 'nhóm', 'vì có chứa khách hàng');"><i class="fa fa-trash-o"></i></button>
+										<?php }?>
     								</td>
     							</tr>
     							<?php
@@ -221,6 +223,11 @@ function LoadDataForForm(id) {
 <?php echo '<script'; ?>
 >
 $(document).ready(function() {
+
+	$(".mc_customergroup").addClass('active');
+	$(".mc_customergroup ul").css('display', 'block');
+	$("#customergroup_index").addClass('current-page');
+
 	if( "<?php echo $_smarty_tpl->tpl_vars['notification']->value['status'];?>
 " == "success" || "<?php echo $_smarty_tpl->tpl_vars['notification']->value['status'];?>
 " == "error")

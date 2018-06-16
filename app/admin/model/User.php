@@ -11,7 +11,8 @@ class User extends Main
   public function index()
   {
 
-
+    $this->redirectIfEmployee();
+    $this->redirectIfManager();
     //adding or editing
     $this->create();
     $this->edit();
@@ -252,8 +253,8 @@ class User extends Main
     $sql = "SELECT a.code, a.must_pay, a.description, c.name as customer_name
             FROM exports a
             LEFT JOIN customers c ON a.customer_id = c.id
-            LEFT JOIN users u ON u.id = {$this->currentUser['id']}
-            WHERE 1=1";
+            LEFT JOIN users u ON u.id = a.creator
+            WHERE 1=1 AND u.id = {$this->currentUser['id']}";
         if($date_export != 0)
         {
           switch($date_export)
@@ -269,7 +270,7 @@ class User extends Main
               break;
           }
         }
-    $paging = $this->paging->get_content($this->pdo->count_rows($sql), 10);
+    $paging = $this->paging->get_content($this->pdo->count_rows($sql), 20);
     $sql .= $paging['sql_add'];
     $exports = $this->pdo->fetch_all($sql);
 

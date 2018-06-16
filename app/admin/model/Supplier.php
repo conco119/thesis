@@ -11,6 +11,7 @@ class Supplier extends Main
 
     public function index()
     {
+        $this->redirectIfEmployee();
         //testing
         //add or edit
         $this->create();

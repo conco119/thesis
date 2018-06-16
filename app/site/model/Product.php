@@ -17,6 +17,7 @@ class Product extends Main {
         (SELECT count(id) FROM product_rates pr WHERE p.id=pr.product_id ) as number_user_rate,
         (SELECT sum(rate) FROM product_rates pr WHERE p.id=pr.product_id ) as total_rate
         FROM products p
+        WHERE p.status = 1
         ORDER BY p.id DESC";
         $paging = $this->paging->get_content($this->pdo->count_rows($sql), 15);
         $sql .= $paging['sql_add'];
@@ -40,9 +41,11 @@ class Product extends Main {
                 }
             }
         }
-        $this->smarty->assign('number_product',$this->pdo->count_rows("SELECT * FROM products"));
+        $product_count = $this->pdo->count_rows("SELECT * FROM products WHERE status = 1");
+        if($product_count > 0)
+            $this->smarty->assign('paging', $paging);
+        $this->smarty->assign('number_product', $product_count);
         $this->smarty->assign('products', $products);
-        $this->smarty->assign('paging', $paging);
         $this->smarty->display('home.tpl');
     }
 
@@ -68,6 +71,11 @@ class Product extends Main {
                 LEFT JOIN posts po ON po.product_id = p.id
                 WHERE p.id = $product_id AND p.status=1";
                 $product = $this->pdo->fetch_one($sql);
+                //check status
+                if($product['status'] == 0)
+                {
+                    lib_redirect(DOMAIN . './?mc=product&site=not_found');
+                }
                 //cập nhật lượt xems
                 $this->pdo->update('products', ['views' => $product['views'] + 1], "id=".$product['id']);
                 //select lại product
@@ -200,6 +208,11 @@ class Product extends Main {
         $this->smarty->assign('number_product', $number_count);
         $this->smarty->assign('products', $products);
         $this->smarty->assign('paging', $paging);
+        $this->smarty->display('home.tpl');
+    }
+
+    function not_found()
+    {
         $this->smarty->display('home.tpl');
     }
 

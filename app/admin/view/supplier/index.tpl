@@ -49,13 +49,17 @@
                                 <td>{$data.code}</td>
                                 <td>{$data.name}</td>
                                 <td>{$data.phone}</td>
-                                <td class="text-right"> <b style='color:red'> {$data.money|number_format} <b/> <a href="?mod=supplier&site=detail&id={$data.id}"
+                                <td class="text-right"> <b style='color:red'> {$data.money|number_format} <b/>
+                                    {* <a href="?mod=supplier&site=detail&id={$data.id}"
                                     class="btn btn btn-success">
-                                    <i class="fa fa-search-plus"></i></a>
+                                        <i class="fa fa-search-plus"></i>
+                                    </a> *}
                                 </td>
                                 <td class="text-right"> <b style='color:red'> {$data.must_pay|number_format}đ </b>
-                                    <a href="?mod=supplier&site=history&id={$data.id}"
-                                    class="btn btn btn-success"><i class="fa fa-search-plus"></i></a>
+                                    {* <a href="?mod=supplier&site=history&id={$data.id}"
+                                    class="btn btn btn-success">
+                                        <i class="fa fa-search-plus"></i>
+                                    </a> *}
                                     </td>
                                 <td class="text-center" id="stt{$data.id}">{$data.status}</td>
                                 <td class="text-center">
@@ -215,6 +219,11 @@
 {/literal}
 <script>
 $(document).ready(function() {
+
+	$(".mc_supplier").addClass('active');
+	$(".mc_supplier ul").css('display', 'block');
+	$("#supplier_index").addClass('current-page');
+
 	if( "{$notification.status}" == "success" || "{$notification.status}" == "error")
 	{
 		var notice = new PNotify({

@@ -20,7 +20,7 @@ class Contact extends Main
 
     public function ajax_active()
     {
-      if(isset($_POST['table']) && isset($_POST['id']) && ($this->currentUser['permission'] == 1 || $this->currentUser['permission'] == 2))
+      if( isset($_POST['table']) && isset($_POST['id']) )
       {
         $user = $this->pdo->fetch_one("SELECT status FROM " . $_POST['table'] . " WHERE id=" . $_POST['id']);
         $status = $user['status'] == 1 ? 0 : 1;

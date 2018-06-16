@@ -169,6 +169,11 @@ function LoadDataForForm(id) {
 {/literal}
 <script>
 $(document).ready(function() {
+
+	$(".mc_productcat").addClass('active');
+	$(".mc_productcat ul").css('display', 'block');
+	$("#productcat_index").addClass('current-page');
+
 	if( "{$notification.status}" == "success" || "{$notification.status}" == "error")
 	{
 		var notice = new PNotify({

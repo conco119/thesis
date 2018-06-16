@@ -56,7 +56,9 @@
 
 <div class="mar-top">
     <ul class="paging">
-        {$paging.paging}
+        {if $paging}
+            {$paging.paging}
+        {/if}
     </ul>
 </div>
 

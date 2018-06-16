@@ -24,7 +24,10 @@ class Home extends Main {
         $sql = "SELECT p.* ,
         (SELECT m.name FROM media m
         RIGHT JOIN  media_product mp ON m.id = mp.media_id WHERE mp.product_id = p.id AND mp.is_showed = 1) as image_name
-        FROM products p ORDER BY RAND() LIMIT 10";
+        FROM products p
+        WHERE p.status = 1
+        ORDER BY RAND()
+        LIMIT 10";
         $random_product = $this->pdo->fetch_all($sql);
 
         // pre($random_product);
@@ -37,10 +40,11 @@ class Home extends Main {
         (SELECT sum(rate) FROM product_rates pr WHERE p.id=pr.product_id ) as total_rate
         FROM products p
         LEFT JOIN product_categories pc ON p.category_id = pc.id
-        WHERE p.category_id = 1
+        WHERE p.category_id = 1 AND p.status = 1
         ORDER BY id
         DESC LIMIT 10";
         $smart_light = $this->pdo->fetch_all($sql);
+        pre($smart_light);
         $smart_light = $this->HomeHelper->get_child_products(1, $smart_light);
         foreach($smart_light as $k => $item)
         {
@@ -70,7 +74,7 @@ class Home extends Main {
         (SELECT sum(rate) FROM product_rates pr WHERE p.id=pr.product_id ) as total_rate
         FROM products p
         LEFT JOIN product_categories pc ON p.category_id = pc.id
-        WHERE p.category_id = 33
+        WHERE p.category_id = 33 AND p.status = 1
         ORDER BY id
         DESC LIMIT 10";
         $plugin = $this->pdo->fetch_all($sql);
@@ -103,7 +107,7 @@ class Home extends Main {
         (SELECT sum(rate) FROM product_rates pr WHERE p.id=pr.product_id ) as total_rate
         FROM products p
         LEFT JOIN product_categories pc ON p.category_id = pc.id
-        WHERE p.category_id = 32
+        WHERE p.category_id = 32 AND p.status = 1
         ORDER BY id
         DESC LIMIT 10";
         $security = $this->pdo->fetch_all($sql);

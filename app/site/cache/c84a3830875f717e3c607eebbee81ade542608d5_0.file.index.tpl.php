@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-10 22:14:44
+/* Smarty version 3.1.30, created on 2018-06-16 20:51:47
   from "/Users/mtd/Sites/htaccess/app/site/view/product/index.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b1d4064dbcdd7_13163853',
+  'unifunc' => 'content_5b2515f31070a1_13937557',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'c84a3830875f717e3c607eebbee81ade542608d5' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/site/view/product/index.tpl',
-      1 => 1528643415,
+      1 => 1529157102,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b1d4064dbcdd7_13163853 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b2515f31070a1_13937557 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="sidebar_title bg_34495e">
     <h1>SẢN PHẨM (<?php echo $_smarty_tpl->tpl_vars['number_product']->value;?>
@@ -115,8 +115,10 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 
 <div class="mar-top">
     <ul class="paging">
-        <?php echo $_smarty_tpl->tpl_vars['paging']->value['paging'];?>
+        <?php if ($_smarty_tpl->tpl_vars['paging']->value) {?>
+            <?php echo $_smarty_tpl->tpl_vars['paging']->value['paging'];?>
 
+        <?php }?>
     </ul>
 </div>
 

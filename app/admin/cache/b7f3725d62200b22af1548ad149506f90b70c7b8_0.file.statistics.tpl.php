@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-12 07:43:35
+/* Smarty version 3.1.30, created on 2018-06-16 16:56:10
   from "/Users/mtd/Sites/htaccess/app/admin/view/import/statistics.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b1f1737adc236_67106207',
+  'unifunc' => 'content_5b24deba34fdd9_41236551',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'b7f3725d62200b22af1548ad149506f90b70c7b8' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/import/statistics.tpl',
-      1 => 1528764214,
+      1 => 1529142967,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b1f1737adc236_67106207 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b24deba34fdd9_41236551 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="">
     <div class="row">
@@ -178,6 +178,12 @@ js/datepicker/daterangepicker.js"><?php echo '</script'; ?>
     <?php echo '<script'; ?>
 >
         $(document).ready(function () {
+
+
+            $(".mc_import").addClass('active');
+            $(".mc_import ul").css('display', 'block');
+            $("#import_statistics").addClass('current-page');
+
             $('#date_from').daterangepicker({singleDatePicker: true, calender_style: "picker_4", format: 'DD-MM-YYYY'}, function () {
                 $('#date_from').change();
             });

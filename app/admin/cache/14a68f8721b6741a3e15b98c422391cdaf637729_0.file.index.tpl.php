@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-12 07:36:32
+/* Smarty version 3.1.30, created on 2018-06-16 15:28:58
   from "/Users/mtd/Sites/htaccess/app/admin/view/money/index.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b1f15907e0684_69922105',
+  'unifunc' => 'content_5b24ca4a7c5e12_09746608',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '14a68f8721b6741a3e15b98c422391cdaf637729' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/money/index.tpl',
-      1 => 1528763791,
+      1 => 1529137730,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b1f15907e0684_69922105 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b24ca4a7c5e12_09746608 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/Users/mtd/Sites/htaccess/library/smarty/plugins/modifier.date_format.php';
 ?>
 <div class="">
@@ -46,6 +46,8 @@ if (!is_callable('smarty_modifier_date_format')) require_once '/Users/mtd/Sites/
                         <button data-toggle="modal" class="btn btn-primary" data-target="#MoneyCat" onclick="LoadMoneyCat(1);"><i class="fa fa-plus"></i> Thể loại</button>
                         <button data-toggle="modal" class="btn btn-primary" data-target="#Bill" onclick="LoadDataForAddEditMoney(1);"><i class="fa fa-plus"></i> Lập phiếu thu</button>
                         <button data-toggle="modal" class="btn btn-primary" data-target="#Bill" onclick="LoadDataForAddEditMoney(0);"><i class="fa fa-mail-reply-all"></i> Lập phiếu chi</button>
+                        <input type='hidden' id='permission' value='<?php echo $_smarty_tpl->tpl_vars['arg']->value['user']['permission'];?>
+'>
 						
 
 						<div class="clearfix"></div>
@@ -475,7 +477,9 @@ function activeStatus(table, id)
 function LoadMoneyCat()
 {
     $.post("./admin?mc=money&site=ajax_load_all_money_cat").done(function(data){
-         data = JSON.parse(data);
+        data = JSON.parse(data);
+        var permission = $("#permission").val();
+
         let append = '';
         $.each(data, function(key, item){
             append += `
@@ -486,11 +490,17 @@ function LoadMoneyCat()
                 <td class="text-right">${item.description}</td>
                 <td class="text-center" id='stt${item.id}'>${item.status}</td>
                 <td class="text-right">
-                <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#UpdateForm" onclick="LoadDataForForm(${item.id});"><i class="fa fa-pencil"></i></button>
-                <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#DeleteForm" onclick="LoadDeleteItemRow('money', ${item.id}, 'ajax_delete_cat', 'thể loại', 'vì còn tồn tại trong phiếu thu chi');"><i class="fa fa-trash-o"></i></button>
-                </td>
-            </tr>
-            `;
+
+                <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#UpdateForm" onclick="LoadDataForForm(${item.id});"><i class="fa fa-pencil"></i></button>`;
+
+                 if(permission != 3)
+                {
+                        append += `
+                        <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#DeleteForm" onclick="LoadDeleteItemRow('money', ${item.id}, 'ajax_delete_cat', 'thể loại', 'vì còn tồn tại trong phiếu thu chi');"><i class="fa fa-trash-o"></i></button>
+                        </td>
+                    </tr>
+                    `;
+                }
         })
         $("#body_table_mon_cat").html(append);
     })

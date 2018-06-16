@@ -38,7 +38,9 @@
     								<td class="text-right">{$data.updated_at}</td>
     								<td class="text-right">
     									<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#UpdateFrom" onclick="LoadDataForForm({$data.id});"><i class="fa fa-pencil"></i></button>
-    									<button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#DeleteForm" onclick="LoadDeleteItem('{$arg.mc}', {$data.id}, '', 'nhóm', 'vì có chứa khách hàng');"><i class="fa fa-trash-o"></i></button>
+										{if $arg.user.permission neq 3}
+											<button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#DeleteForm" onclick="LoadDeleteItem('{$arg.mc}', {$data.id}, '', 'nhóm', 'vì có chứa khách hàng');"><i class="fa fa-trash-o"></i></button>
+										{/if}
     								</td>
     							</tr>
     							{/foreach}
@@ -172,6 +174,11 @@ function LoadDataForForm(id) {
 {/literal}
 <script>
 $(document).ready(function() {
+
+	$(".mc_customergroup").addClass('active');
+	$(".mc_customergroup ul").css('display', 'block');
+	$("#customergroup_index").addClass('current-page');
+
 	if( "{$notification.status}" == "success" || "{$notification.status}" == "error")
 	{
 		var notice = new PNotify({

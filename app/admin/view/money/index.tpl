@@ -20,6 +20,7 @@
                         <button data-toggle="modal" class="btn btn-primary" data-target="#MoneyCat" onclick="LoadMoneyCat(1);"><i class="fa fa-plus"></i> Thể loại</button>
                         <button data-toggle="modal" class="btn btn-primary" data-target="#Bill" onclick="LoadDataForAddEditMoney(1);"><i class="fa fa-plus"></i> Lập phiếu thu</button>
                         <button data-toggle="modal" class="btn btn-primary" data-target="#Bill" onclick="LoadDataForAddEditMoney(0);"><i class="fa fa-mail-reply-all"></i> Lập phiếu chi</button>
+                        <input type='hidden' id='permission' value='{$arg.user.permission}'>
 						{* <form method="post" style="display: inline;">
 							<button type="submit" class="btn btn-success" name="export_request">
 								<i class="fa fa-share-square-o"></i> Xuất file
@@ -420,7 +421,9 @@ function activeStatus(table, id)
 function LoadMoneyCat()
 {
     $.post("./admin?mc=money&site=ajax_load_all_money_cat").done(function(data){
-         data = JSON.parse(data);
+        data = JSON.parse(data);
+        var permission = $("#permission").val();
+
         let append = '';
         $.each(data, function(key, item){
             append += `
@@ -431,11 +434,17 @@ function LoadMoneyCat()
                 <td class="text-right">${item.description}</td>
                 <td class="text-center" id='stt${item.id}'>${item.status}</td>
                 <td class="text-right">
-                <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#UpdateForm" onclick="LoadDataForForm(${item.id});"><i class="fa fa-pencil"></i></button>
-                <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#DeleteForm" onclick="LoadDeleteItemRow('money', ${item.id}, 'ajax_delete_cat', 'thể loại', 'vì còn tồn tại trong phiếu thu chi');"><i class="fa fa-trash-o"></i></button>
-                </td>
-            </tr>
-            `;
+
+                <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#UpdateForm" onclick="LoadDataForForm(${item.id});"><i class="fa fa-pencil"></i></button>`;
+
+                 if(permission != 3)
+                {
+                        append += `
+                        <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#DeleteForm" onclick="LoadDeleteItemRow('money', ${item.id}, 'ajax_delete_cat', 'thể loại', 'vì còn tồn tại trong phiếu thu chi');"><i class="fa fa-trash-o"></i></button>
+                        </td>
+                    </tr>
+                    `;
+                }
         })
         $("#body_table_mon_cat").html(append);
     })

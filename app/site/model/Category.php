@@ -10,13 +10,14 @@ class Category extends Main {
 
     function index()
     {
-        $this->set_sidebar();
-        $this->set_footer();
         //random product
         $sql = "SELECT p.* ,
         (SELECT m.name FROM media m
         RIGHT JOIN  media_product mp ON m.id = mp.media_id WHERE mp.product_id = p.id AND mp.is_showed = 1) as image_name
-        FROM products p ORDER BY RAND() LIMIT 10";
+        FROM products p
+        WHERE p.status = 1
+        ORDER BY RAND()
+        LIMIT 10";
         $random_product = $this->pdo->fetch_all($sql);
 
         //find product id
@@ -39,7 +40,7 @@ class Category extends Main {
         (SELECT sum(rate) FROM product_rates pr WHERE p.id=pr.product_id ) as total_rate
         FROM products p
         LEFT JOIN product_categories pc ON p.category_id = pc.id
-        WHERE pc.id = $cat_id OR pc.parent_id = $cat_id
+        WHERE (pc.id = $cat_id OR pc.parent_id = $cat_id) AND p.status = 1
         ORDER BY p.id DESC";
         $paging = $this->paging->get_content($this->pdo->count_rows($sql), 10);
         $sql .= $paging['sql_add'];

@@ -64,10 +64,13 @@
                                         {* <button type="button" title="In hóa đơn" data-toggle="modal"
                                                 class="btn btn-default" onclick="SetPrint({$list.id});"
                                                 data-dismiss="modal"><i class="fa fa-print"></i></button> *}
+                                         {if $arg.user.permission neq 3}
                                             <button type="button" title="Xóa hóa đơn" class="btn btn-default"
                                                     data-toggle="modal" data-target="#DeleteForm"
                                                     onclick="LoadDeleteItem('export', {$list.id}, '', 'hóa đơn bán', 'vì còn tồn tại trong hóa đơn');">
-                                                <i class="fa fa-trash-o"></i></button>
+                                                <i class="fa fa-trash-o"></i>
+                                            </button>
+                                        {/if}
                                     </td>
                                 </tr>
                             {/foreach}
@@ -143,6 +146,11 @@
 {literal}
     <script>
         $(document).ready(function () {
+
+            $(".mc_export").addClass('active');
+            $(".mc_export ul").css('display', 'block');
+            $("#export_statistics").addClass('current-page');
+
             $('#date_from').daterangepicker({singleDatePicker: true, calender_style: "picker_4", format: 'DD-MM-YYYY'}, function () {
                 $('#date_from').change();
             });

@@ -99,7 +99,7 @@ $(document).ready(function () {
 });
 
 function activeStatus(table, id) {
-    $.post(`./admin?mc=order&site=ajax_active`, {'table': table, 'id': id}).done(function (data) {
+    $.post(`./admin?mc=contact&site=ajax_active`, {'table': table, 'id': id}).done(function (data) {
             if(data == 0)
               alert('You can not change');
             else

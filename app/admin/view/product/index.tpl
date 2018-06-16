@@ -434,6 +434,10 @@ function DiscountChange(value)
 {/literal}
 <script>
 $(document).ready(function() {
+	$(".mc_product").addClass('active');
+	$(".mc_product ul").css('display', 'block');
+	$("#product_index").addClass('current-page');
+
 	$("#UpdateForm select[name=discount_type]").prop('disabled', true);
 	$("#UpdateForm input[name=discount]").prop('disabled', true);
 	if( "{$notification.status}" == "success" || "{$notification.status}" == "error")

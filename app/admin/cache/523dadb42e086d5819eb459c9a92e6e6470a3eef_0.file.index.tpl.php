@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-06 15:23:10
+/* Smarty version 3.1.30, created on 2018-06-16 16:49:34
   from "/Users/mtd/Sites/htaccess/app/admin/view/productunit/index.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aeebb6e195741_45041841',
+  'unifunc' => 'content_5b24dd2ee8aa74_22982851',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '523dadb42e086d5819eb459c9a92e6e6470a3eef' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/productunit/index.tpl',
-      1 => 1525594982,
+      1 => 1529142571,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5aeebb6e195741_45041841 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b24dd2ee8aa74_22982851 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="">
 	<div class="row">
@@ -214,6 +214,11 @@ function LoadDataForForm(id) {
 <?php echo '<script'; ?>
 >
 $(document).ready(function() {
+
+	$(".mc_productunit").addClass('active');
+	$(".mc_productunit ul").css('display', 'block');
+	$("#productunit_index").addClass('current-page');
+
 	if( "<?php echo $_smarty_tpl->tpl_vars['notification']->value['status'];?>
 " == "success" || "<?php echo $_smarty_tpl->tpl_vars['notification']->value['status'];?>
 " == "error")

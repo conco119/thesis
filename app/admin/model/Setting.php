@@ -8,6 +8,8 @@ class Setting extends Main
         $this->Image = new Image();
         $this->Filehandle = new FileHandle();
         $this->SettingHelper = new SettingHelper();
+        $this->redirectIfEmployee();
+        $this->redirectIfManager();
     }
 
 

@@ -109,6 +109,11 @@
 {literal}
 <script>
 	$(document).ready(function() {
+
+		$(".mc_report").addClass('active');
+		$(".mc_report ul").css('display', 'block');
+		$("#report_performance").addClass('current-page');
+
 		$('#date_from').daterangepicker({
 			singleDatePicker : true,
 			calender_style : "picker_4",

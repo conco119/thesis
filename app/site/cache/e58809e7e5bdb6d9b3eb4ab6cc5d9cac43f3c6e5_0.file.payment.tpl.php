@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-10 22:16:55
+/* Smarty version 3.1.30, created on 2018-06-16 22:39:45
   from "/Users/mtd/Sites/htaccess/app/site/view/cart/payment.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b1d40e72162b7_93915830',
+  'unifunc' => 'content_5b252f41e95fb3_33834849',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'e58809e7e5bdb6d9b3eb4ab6cc5d9cac43f3c6e5' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/site/view/cart/payment.tpl',
-      1 => 1528643415,
+      1 => 1529163584,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b1d40e72162b7_93915830 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b252f41e95fb3_33834849 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="sidebar_title bg_34495e">
     <h3>Thanh toán đơn hàng</h3>
@@ -150,9 +150,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
                 </ul>
 
                 <div class="radio">
-                    <label><input type="radio" name="type" checked="" value="1">Chuyển khoản ngân hàng</label>
-                    <p class="bor-bottom">Chúng tôi sẽ gửi hàng ngay sau khi nhận được thanh toán chuyển khoản của bạn</p>
-                    <label><input type="radio" name="type" value="0">Trả tiền mặt khi nhận hàng (COD)</label>
+                    
+                    <label><input type="radio" name="type" value="0" checked>Trả tiền mặt khi nhận hàng (COD)</label>
                 </div>
 
                 <div class="button-btn text-center mar-top mar-btm">

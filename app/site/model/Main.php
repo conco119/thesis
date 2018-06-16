@@ -77,11 +77,11 @@ class Main
 
   public function set_sidebar()
   {
-    $menu = $this->pdo->fetch_all("SELECT * FROM product_categories WHERE parent_id = 0");
+    $menu = $this->pdo->fetch_all("SELECT * FROM product_categories WHERE parent_id = 0 AND status = 1");
     foreach ($menu as $key => $value)
     {
         $menu[$key]['menu_link'] = $this->dstring->str_convert($value['name']);
-        $menu[$key]['child_menu'] = $this->pdo->fetch_all("SELECT * FROM product_categories WHERE parent_id = {$value['id']}");
+        $menu[$key]['child_menu'] = $this->pdo->fetch_all("SELECT * FROM product_categories WHERE parent_id = {$value['id']} AND status = 1");
         foreach ($menu[$key]['child_menu'] as $k => $v)
         {
           $menu[$key]['child_menu'][$k]['menu_link'] = $this->dstring->str_convert($v['name']);

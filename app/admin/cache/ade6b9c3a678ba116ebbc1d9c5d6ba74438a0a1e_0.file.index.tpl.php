@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-11 23:40:36
+/* Smarty version 3.1.30, created on 2018-06-14 21:13:16
   from "/Users/mtd/Sites/htaccess/app/admin/view/contact/index.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b1ea6043c3be7_70982823',
+  'unifunc' => 'content_5b2277fcc98293_28589335',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ade6b9c3a678ba116ebbc1d9c5d6ba74438a0a1e' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/contact/index.tpl',
-      1 => 1528643415,
+      1 => 1528985591,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b1ea6043c3be7_70982823 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b2277fcc98293_28589335 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="">
     <div class="x_panel">
@@ -148,7 +148,7 @@ $(document).ready(function () {
 });
 
 function activeStatus(table, id) {
-    $.post(`./admin?mc=order&site=ajax_active`, {'table': table, 'id': id}).done(function (data) {
+    $.post(`./admin?mc=contact&site=ajax_active`, {'table': table, 'id': id}).done(function (data) {
             if(data == 0)
               alert('You can not change');
             else

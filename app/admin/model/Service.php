@@ -11,7 +11,7 @@ class Service extends Main
 
     public function index()
     {
-        //testing
+        $this->redirectIfEmployee();
 
         //add or edit
         $this->create();

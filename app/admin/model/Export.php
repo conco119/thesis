@@ -70,7 +70,6 @@ class Export extends Main
         $data['payment'] = $export['payment'];
         $data['total_money'] = $export['total'];
         $data['date'] = gmdate("Y-m-d", strtotime($export['date']) + 7 * 3600);
-        $data['updater'] = $this->currentUser['id'];
         $data['creator'] = $this->currentUser['id'];
         $data['created_at'] = time();
         $data['updated_at'] = time();
@@ -144,7 +143,7 @@ class Export extends Main
             unset($_SESSION['export_session']);
             unset($_SESSION['export_session_products']);
             unset($_SESSION['export_session_services']);
-            lib_alert("Lap hoa don thanh cong");
+            lib_alert("Lập hóa đơn thành công");
             lib_redirect("./admin?mc=export&site=index");
 
         }
@@ -198,11 +197,8 @@ class Export extends Main
           $exports[$key]['date'] = gmdate('d.m.Y', strtotime($export['date']) + 7 * 3600);
           $exports[$key]['discount'] = $this->dstring->get_price($export['total_money'] - $export['must_pay']);
           $total += $export['must_pay'];
-          if( $export['creator'] != $export['updater'] )
-          {
-              $exports[$key]['updater'] = $this->pdo->fetch_one("SELECT name FROM users WHERE id =" . $export['updater'] );
-              $exports[$key]['updated_at'] = gmdate('H:i d/m/Y', $export['updated_at']+7*3600);
-          }
+          $exports[$key]['updater'] = $this->pdo->fetch_one("SELECT name FROM users WHERE id =" . $export['updater'] );
+          $exports[$key]['updated_at'] = gmdate('H:i d/m/Y', $export['updated_at']+7*3600);
       }
       $out['total'] = $total;
 

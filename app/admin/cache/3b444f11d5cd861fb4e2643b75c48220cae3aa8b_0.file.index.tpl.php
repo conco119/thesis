@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-12 07:41:14
+/* Smarty version 3.1.30, created on 2018-06-16 16:53:57
   from "/Users/mtd/Sites/htaccess/app/admin/view/supplier/index.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b1f16aa7f87a4_65804314',
+  'unifunc' => 'content_5b24de35b65891_04647302',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '3b444f11d5cd861fb4e2643b75c48220cae3aa8b' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/supplier/index.tpl',
-      1 => 1528764073,
+      1 => 1529142834,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b1f16aa7f87a4_65804314 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b24de35b65891_04647302 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="">
     <div class="x_panel">
@@ -77,16 +77,12 @@ foreach ($_from as $_smarty_tpl->tpl_vars['data']->value) {
                                 <td><?php echo $_smarty_tpl->tpl_vars['data']->value['phone'];?>
 </td>
                                 <td class="text-right"> <b style='color:red'> <?php echo number_format($_smarty_tpl->tpl_vars['data']->value['money']);?>
- <b/> <a href="?mod=supplier&site=detail&id=<?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
-"
-                                    class="btn btn btn-success">
-                                    <i class="fa fa-search-plus"></i></a>
+ <b/>
+                                    
                                 </td>
                                 <td class="text-right"> <b style='color:red'> <?php echo number_format($_smarty_tpl->tpl_vars['data']->value['must_pay']);?>
 đ </b>
-                                    <a href="?mod=supplier&site=history&id=<?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
-"
-                                    class="btn btn btn-success"><i class="fa fa-search-plus"></i></a>
+                                    
                                     </td>
                                 <td class="text-center" id="stt<?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
 "><?php echo $_smarty_tpl->tpl_vars['data']->value['status'];?>
@@ -262,6 +258,11 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 <?php echo '<script'; ?>
 >
 $(document).ready(function() {
+
+	$(".mc_supplier").addClass('active');
+	$(".mc_supplier ul").css('display', 'block');
+	$("#supplier_index").addClass('current-page');
+
 	if( "<?php echo $_smarty_tpl->tpl_vars['notification']->value['status'];?>
 " == "success" || "<?php echo $_smarty_tpl->tpl_vars['notification']->value['status'];?>
 " == "error")

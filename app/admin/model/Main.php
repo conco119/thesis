@@ -101,13 +101,13 @@ class Main implements Init
   function redirectIfEmployee()
   {
     if($this->currentUser['permission'] == 3)
-        lib_redirect(DOMAIN . '/admin');
+        lib_redirect(DOMAIN . 'admin');
   }
 
   function redirectIfManager()
   {
     if($this->currentUser['permission'] == 2)
-        lib_redirect(DOMAIN . '/admin');
+        lib_redirect(DOMAIN . 'admin');
   }
 
 }

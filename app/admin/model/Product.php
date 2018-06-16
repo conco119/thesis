@@ -11,6 +11,7 @@ class Product extends Main
 
     public function index()
     {
+        $this->redirectIfEmployee();
         //testing
         //add or edit
         $this->create();
@@ -283,7 +284,7 @@ class Product extends Main
     //chi tiết sản phẩm cho hóa đơn
     function detail()
     {
-
+        $this->redirectIfEmployee();
         $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
         $detail_export = []; //smarty assign
         $detail_import = []; //smarty assign
@@ -324,6 +325,8 @@ class Product extends Main
 
     function imagepost()
     {
+        //permission checking
+        $this->redirectIfEmployee();
         $this->add_product_image();
         $this->add_post();
         $id = isset($_GET['id']) ? intval($_GET['id']) : 0;

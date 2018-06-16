@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-12 07:42:34
+/* Smarty version 3.1.30, created on 2018-06-16 23:24:34
   from "/Users/mtd/Sites/htaccess/app/admin/view/export/statistics.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b1f16fa93e0e3_86654221',
+  'unifunc' => 'content_5b2539c2cc6bb6_86736930',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '4b1c5c7ef913fffd492807d76b0989963b3f0671' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/export/statistics.tpl',
-      1 => 1528764153,
+      1 => 1529166273,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b1f16fa93e0e3_86654221 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b2539c2cc6bb6_86736930 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="">
     <div class="row">
@@ -104,11 +104,14 @@ foreach ($_from as $_smarty_tpl->tpl_vars['list']->value) {
 " class="btn btn-default"><i
                                                     class="fa fa-edit"></i></a>
                                         
+                                         <?php if ($_smarty_tpl->tpl_vars['arg']->value['user']['permission'] != 3) {?>
                                             <button type="button" title="Xóa hóa đơn" class="btn btn-default"
                                                     data-toggle="modal" data-target="#DeleteForm"
                                                     onclick="LoadDeleteItem('export', <?php echo $_smarty_tpl->tpl_vars['list']->value['id'];?>
 , '', 'hóa đơn bán', 'vì còn tồn tại trong hóa đơn');">
-                                                <i class="fa fa-trash-o"></i></button>
+                                                <i class="fa fa-trash-o"></i>
+                                            </button>
+                                        <?php }?>
                                     </td>
                                 </tr>
                             <?php
@@ -205,6 +208,11 @@ js/datetimepicker/bootstrap-datetimepicker.min.js"><?php echo '</script'; ?>
     <?php echo '<script'; ?>
 >
         $(document).ready(function () {
+
+            $(".mc_export").addClass('active');
+            $(".mc_export ul").css('display', 'block');
+            $("#export_statistics").addClass('current-page');
+
             $('#date_from').daterangepicker({singleDatePicker: true, calender_style: "picker_4", format: 'DD-MM-YYYY'}, function () {
                 $('#date_from').change();
             });

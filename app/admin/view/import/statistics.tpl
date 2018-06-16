@@ -122,6 +122,12 @@
 {literal}
     <script>
         $(document).ready(function () {
+
+
+            $(".mc_import").addClass('active');
+            $(".mc_import ul").css('display', 'block');
+            $("#import_statistics").addClass('current-page');
+
             $('#date_from').daterangepicker({singleDatePicker: true, calender_style: "picker_4", format: 'DD-MM-YYYY'}, function () {
                 $('#date_from').change();
             });

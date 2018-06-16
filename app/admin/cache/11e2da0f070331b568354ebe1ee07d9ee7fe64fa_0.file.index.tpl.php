@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-12 07:38:35
+/* Smarty version 3.1.30, created on 2018-06-16 16:47:47
   from "/Users/mtd/Sites/htaccess/app/admin/view/product/index.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b1f160befe067_71990822',
+  'unifunc' => 'content_5b24dcc3843592_70377944',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '11e2da0f070331b568354ebe1ee07d9ee7fe64fa' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/product/index.tpl',
-      1 => 1528763915,
+      1 => 1529142466,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b1f160befe067_71990822 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b24dcc3843592_70377944 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="">
     <div class="row">
@@ -493,6 +493,10 @@ function DiscountChange(value)
 <?php echo '<script'; ?>
 >
 $(document).ready(function() {
+	$(".mc_product").addClass('active');
+	$(".mc_product ul").css('display', 'block');
+	$("#product_index").addClass('current-page');
+
 	$("#UpdateForm select[name=discount_type]").prop('disabled', true);
 	$("#UpdateForm input[name=discount]").prop('disabled', true);
 	if( "<?php echo $_smarty_tpl->tpl_vars['notification']->value['status'];?>

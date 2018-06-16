@@ -65,7 +65,9 @@
                                 <td class="text-center" id="stt{$list.id}">{$list.status}</td>
                                 <td class="text-center">
                                     <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#UpdateFrom" onclick="LoadDataForForm({$list.id});"><i class="fa fa-pencil"></i></button>
-                                    <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#DeleteForm" onclick="LoadDeleteItem('customer', {$list.id}, '', 'khách hàng', 'vì còn tồn tại hóa đơn');"><i class="fa fa-trash-o"></i></button>
+                                    {if $arg.user.permission neq 3}
+                                        <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#DeleteForm" onclick="LoadDeleteItem('customer', {$list.id}, '', 'khách hàng', 'vì còn tồn tại hóa đơn');"><i class="fa fa-trash-o"></i></button>
+                                    {/if}
                                 </td>
                             </tr>
                         {/foreach}
@@ -277,6 +279,11 @@ function filter()
 {/literal}
 <script>
 $(document).ready(function() {
+
+	$(".mc_customer").addClass('active');
+	$(".mc_customer ul").css('display', 'block');
+	$("#customer_index").addClass('current-page');
+
 	if( "{$notification.status}" == "success" || "{$notification.status}" == "error")
 	{
 		var notice = new PNotify({

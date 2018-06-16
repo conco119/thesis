@@ -11,6 +11,8 @@ class ProductUnit extends Main
 
     public function index()
     {
+        //permission checking
+        $this->redirectIfEmployee();
         //add or edit
         $this->create();
         $this->edit();

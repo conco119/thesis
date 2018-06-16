@@ -9,6 +9,8 @@ class Report extends Main
 
     function performance()
     {
+        $this->redirectIfEmployee();
+        $this->redirectIfManager();
         // doanh thu sản phẩm, vốn sản phẩm
         $date_export = isset($_GET['date']) ? intval($_GET["date"]) : 0;
         $out['select_export'] = $this->helper->get_option(0, 'select_export', $date_export);
