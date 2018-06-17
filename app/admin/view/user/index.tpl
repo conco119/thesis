@@ -61,7 +61,7 @@
                     </td>
                     <td class="text-right">
                       {* <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#ContentModal" onclick="LoadDataContent({$data.id});"><i class="fa fa-warning"></i></button> *}
-                      <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#UpdateFrom" onclick="LoadDataForForm({$data.id});"><i class="fa fa-pencil"></i></button>
+                      <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#UpdateFrom" onclick="LoadDataForForm({$data.id});"><i class="fa fa-pencil"></i></button>
                       <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#DeleteForm" onclick="LoadDeleteItem('user', {$data.id}, '', 'nhân viên');"><i class="fa fa-trash-o"></i></button>
                     </td>
                   </tr>

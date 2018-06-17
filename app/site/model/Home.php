@@ -44,7 +44,6 @@ class Home extends Main {
         ORDER BY id
         DESC LIMIT 10";
         $smart_light = $this->pdo->fetch_all($sql);
-        pre($smart_light);
         $smart_light = $this->HomeHelper->get_child_products(1, $smart_light);
         foreach($smart_light as $k => $item)
         {

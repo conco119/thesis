@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-16 16:53:04
+/* Smarty version 3.1.30, created on 2018-06-17 11:22:13
   from "/Users/mtd/Sites/htaccess/app/admin/view/customer/index.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b24de005fbb91_03014091',
+  'unifunc' => 'content_5b25e1f50f75d8_18323772',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'cf907f15a2ac7e24fe839b38d141a32fa00ccc24' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/customer/index.tpl',
-      1 => 1529142779,
+      1 => 1529209331,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b24de005fbb91_03014091 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b25e1f50f75d8_18323772 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="">
     <div class="x_panel">
@@ -101,7 +101,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['list']->value) {
 "><?php echo $_smarty_tpl->tpl_vars['list']->value['status'];?>
 </td>
                                 <td class="text-center">
-                                    <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#UpdateFrom" onclick="LoadDataForForm(<?php echo $_smarty_tpl->tpl_vars['list']->value['id'];?>
+                                    <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#UpdateFrom" onclick="LoadDataForForm(<?php echo $_smarty_tpl->tpl_vars['list']->value['id'];?>
 );"><i class="fa fa-pencil"></i></button>
                                     <?php if ($_smarty_tpl->tpl_vars['arg']->value['user']['permission'] != 3) {?>
                                         <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#DeleteForm" onclick="LoadDeleteItem('customer', <?php echo $_smarty_tpl->tpl_vars['list']->value['id'];?>

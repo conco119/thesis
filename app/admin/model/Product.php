@@ -30,8 +30,10 @@ class Product extends Main
         $out['key'] = $key;
         $sql = "SELECT a.*,
                 (SELECT sum(number_count) FROM import_products i WHERE i.product_id = a.id) AS imported,
-                (SELECT sum(number_count) FROM export_products e WHERE e.product_id = a.id ) AS exported
-        FROM {$this->table} a WHERE 1=1 $sql_filter ORDER BY id DESC";
+                (SELECT sum(number_count) FROM export_products e WHERE e.product_id = a.id ) AS exported,
+                (SELECT m.name FROM media m
+        RIGHT JOIN  media_product mp ON m.id = mp.media_id WHERE mp.product_id = a.id AND mp.is_showed = 1) as image_name
+        FROM products a WHERE 1=1 $sql_filter ORDER BY id DESC";
         $paging = $this->paging->get_content($this->pdo->count_rows($sql), 20);
         $sql .= $paging['sql_add'];
         $products = $this->pdo->fetch_all($sql);

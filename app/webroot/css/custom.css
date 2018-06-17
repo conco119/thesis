@@ -2396,6 +2396,11 @@ button,
     margin-right: 0;
 }
 
+.order-status {
+    width: 50%!important;
+    font-size: 10px!important;
+}
+
 .btn-status {
     width: 24px;
 }

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-10 22:18:17
+/* Smarty version 3.1.30, created on 2018-06-17 10:21:28
   from "/Users/mtd/Sites/htaccess/app/admin/view/order/index.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b1d4139774ce5_55551006',
+  'unifunc' => 'content_5b25d3b830ee13_42615649',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '55911be9fe75d8d9ac47517cea1b032a75888b68' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/order/index.tpl',
-      1 => 1528643415,
+      1 => 1529205687,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b1d4139774ce5_55551006 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b25d3b830ee13_42615649 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="">
     <div class="x_panel">
@@ -153,10 +153,8 @@ $(document).ready(function () {
 
 function activeStatus(table, id) {
     $.post(`./admin?mc=order&site=ajax_active`, {'table': table, 'id': id}).done(function (data) {
-            if(data == 0)
-              alert('You can not change');
-            else
-            $("#stt" + id).html(data);
+            if(data != 0)
+              $("#stt" + id).html(data);
     });
 }
 

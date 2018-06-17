@@ -63,7 +63,7 @@
                                     </td>
                                 <td class="text-center" id="stt{$data.id}">{$data.status}</td>
                                 <td class="text-center">
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#UpdateFrom" onclick="LoadDataForForm({$data.id});"><i class="fa fa-pencil"></i></button>
+                                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#UpdateFrom" onclick="LoadDataForForm({$data.id});"><i class="fa fa-pencil"></i></button>
                                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#DeleteForm" onclick="LoadDeleteItem('supplier', {$data.id}, '', 'nhà cung cấp', 'vì còn tồn tại trong hóa đơn');"><i class="fa fa-trash-o"></i></button>
                                 </td>
                             </tr>

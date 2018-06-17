@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-16 16:49:34
+/* Smarty version 3.1.30, created on 2018-06-17 11:21:34
   from "/Users/mtd/Sites/htaccess/app/admin/view/productunit/index.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b24dd2ee8aa74_22982851',
+  'unifunc' => 'content_5b25e1ce294158_35854393',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '523dadb42e086d5819eb459c9a92e6e6470a3eef' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/productunit/index.tpl',
-      1 => 1529142571,
+      1 => 1529209292,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b24dd2ee8aa74_22982851 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b25e1ce294158_35854393 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="">
 	<div class="row">
@@ -77,7 +77,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['data']->value) {
 								<td class="text-right"><?php echo $_smarty_tpl->tpl_vars['data']->value['updated_at'];?>
 </td>
 								<td class="text-right">
-									<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#UpdateFrom" onclick="LoadDataForForm(<?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
+									<button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#UpdateFrom" onclick="LoadDataForForm(<?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
 );"><i class="fa fa-pencil"></i></button>
 									<button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#DeleteForm" onclick="LoadDeleteItem('productunit', <?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
 , '', 'đơn vị');"><i class="fa fa-trash-o"></i></button>

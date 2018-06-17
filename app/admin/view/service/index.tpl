@@ -46,7 +46,7 @@
                             <td class="text-right">{$data.updated_at}</td>
                             <td class="text-right">{$data.created_at}</td>
                             <td class="text-right">
-                                <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#UpdateForm" onclick="LoadDataForForm({$data.id});"><i class="fa fa-pencil"></i></button>
+                                <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#UpdateForm" onclick="LoadDataForForm({$data.id});"><i class="fa fa-pencil"></i></button>
                                 <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#DeleteForm" onclick="LoadDeleteItem('{$arg.mc}', {$data.id}, '', 'dịch vụ', 'vì còn tồn tại trong hóa đơn');"><i class="fa fa-trash-o"></i></button>
                             </td>
                         </tr>

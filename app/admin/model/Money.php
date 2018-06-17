@@ -64,7 +64,7 @@ class Money extends Main
             $money_statistic[$k]['category'] = $this->from_type[$item['from_type']];
             $money_statistic[$k]['money_type'] = $item['is_import'] == 1 ? "<i class=\"fa fa-plus\"/></i> Phiếu thu" : "<i class=\"fa fa-mail-reply-all\"/></i> Phiếu chi";
             $money_statistic[$k]['updated_at'] = gmdate('H:i d/m/Y', $item['updated_at']+7*3600);
-            $money_statistic[$k]['btn'] = $this->MoneyHelper->get_money_btn($item['id'], $item['is_import'], $item['from_type'], $this->currentUser);
+            $money_statistic[$k]['btn'] = $this->MoneyHelper->get_money_btn($item['id'], $item['is_import'], $item['from_type'], $this->currentUser, $item);
         }
         $this->smarty->assign('result', $money_statistic);
         //

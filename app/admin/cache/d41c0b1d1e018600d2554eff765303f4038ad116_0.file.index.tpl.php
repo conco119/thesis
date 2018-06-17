@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-12 07:39:21
+/* Smarty version 3.1.30, created on 2018-06-17 11:21:55
   from "/Users/mtd/Sites/htaccess/app/admin/view/service/index.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b1f1639947b33_99671204',
+  'unifunc' => 'content_5b25e1e33bcfd7_31159120',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd41c0b1d1e018600d2554eff765303f4038ad116' => 
     array (
       0 => '/Users/mtd/Sites/htaccess/app/admin/view/service/index.tpl',
-      1 => 1528763960,
+      1 => 1529209314,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b1f1639947b33_99671204 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b25e1e33bcfd7_31159120 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="">
     <div class="x_panel">
@@ -84,7 +84,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['data']->value) {
                             <td class="text-right"><?php echo $_smarty_tpl->tpl_vars['data']->value['created_at'];?>
 </td>
                             <td class="text-right">
-                                <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#UpdateForm" onclick="LoadDataForForm(<?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
+                                <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#UpdateForm" onclick="LoadDataForForm(<?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
 );"><i class="fa fa-pencil"></i></button>
                                 <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#DeleteForm" onclick="LoadDeleteItem('<?php echo $_smarty_tpl->tpl_vars['arg']->value['mc'];?>
 ', <?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>

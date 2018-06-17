@@ -18,7 +18,7 @@ class Order extends Main
         $orders = $this->pdo->fetch_all($sql);
         foreach($orders as $key => $order)
         {
-            $orders[$key]['status'] = $this->helper->help_get_status($order['status'], 'orders', $order['id']);
+            $orders[$key]['status'] = $this->OrderHelper->help_get_status($order['status'], 'orders', $order['id']);
             $orders[$key]['created_at'] =  gmdate("H:i A d/m/Y", time() + 7 * 3600);
         }
 
@@ -34,8 +34,10 @@ class Order extends Main
       {
         $user = $this->pdo->fetch_one("SELECT status FROM " . $_POST['table'] . " WHERE id=" . $_POST['id']);
         $status = $user['status'] == 1 ? 0 : 1;
+        if($user['status'] == 1)
+            exit();
         $this->pdo->query("UPDATE " . $_POST['table'] . " SET status = '$status' WHERE id=" . $_POST['id']);
-        echo $this->helper->help_get_status($status, $_POST['table'], $_POST['id']);
+        echo $this->OrderHelper->help_get_status($status, $_POST['table'], $_POST['id']);
         exit();
       }
       else

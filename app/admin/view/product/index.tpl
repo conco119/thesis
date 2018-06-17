@@ -29,6 +29,7 @@
                                 <tr>
                                     <th>Mã sản phẩm</th>
                                     <th>Tên Sản phẩm</th>
+                                    <th>Hình ảnh</th>
                                     <th>Thuộc danh mục</th>
 									<th class="text-right">Giá bán</th>
                                     <th class="text-right">Nhập</th>
@@ -48,18 +49,19 @@
                                         <td>
                                         	{$data.name}
                                         </td>
+                                        <td><img width='50px' src="{$arg.product_folder_link}/{$data.image_name}"></td>
                                         <td>{$data.category_id.name}</td>
 										<td class="text-right">{$data.price}</td>
                                         <td class="text-right">{$data.imported|intval}</td>
                                         <td class="text-right">{$data.exported|intval}</td>
 										{* Tồn kho *}
                                         <td class="text-right">{($data.imported - $data.exported)|intval}</td>
-										<td class="text-right"> <b style='color:red'> {(($data.imported - $data.exported)*$data.price_import)|number_format} đ </b> </td>
+										<td class="text-right"> <b style='color:black'> {(($data.imported - $data.exported)*$data.price_import)|number_format} đ </b> </td>
                                         <td class="text-center" id="stt{$data.id}">{$data.status}</td>
                                         <td class="text-right" width="15%">
 											<a href='./admin?mc=product&site=imagepost&id={$data.id}'><button type="button" class="btn btn-default btn-xs" title="Hình ảnh sản phẩm"><i class="fa fa-image"></i></button><a/>
-											<a href="./admin?mc=product&site=detail&id={$data.id}" class="btn btn btn-success" title="Chi tiết nhập xuất"><i class="fa fa-search-plus"></i></a>
-                                            <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#UpdateForm" title="Sửa thông tin sản phẩm" onclick="LoadDataForForm({$data.id});"><i class="fa fa-pencil"></i></button>
+											<a href="./admin?mc=product&site=detail&id={$data.id}" class="btn btn btn-default" title="Chi tiết nhập xuất"><i class="fa fa-search-plus"></i></a>
+                                            <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#UpdateForm" title="Sửa thông tin sản phẩm" onclick="LoadDataForForm({$data.id});"><i class="fa fa-pencil"></i></button>
                                             <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#DeleteForm" title="Xóa sản phẩm" onclick="LoadDeleteItem('product', {$data.id}, '', 'sản phẩm', 'vì còn tồn tại hóa đơn');"><i class="fa fa-trash-o"></i></button>
                                         </td>
                                     </tr>
@@ -69,7 +71,7 @@
 								<td class="text-right">{$out.number_im}</td>
 								<td class="text-right">{$out.number_ex}</td>
 								<td class="text-right">{$out.number_im-$out.number_ex}</td>
-								<td class="text-right"><b style='color:red'> {$out.total|number_format} đ </b></td>
+								<td class="text-right"><b style='color:black'> {$out.total|number_format} đ </b></td>
 								<td colspan="2"></td>
 							</tr>
                             </tbody>

@@ -52,17 +52,28 @@ class MoneyHelper extends HelpAbstract
         return $this->code_prefix . ($rows['id']+1);
     }
 
-    function get_money_btn($money_id=0, $is_import=0, $from_type=NULL, $user){
+    function get_money_btn($money_id=0, $is_import=0, $from_type=NULL, $user, $money){
 		$str = "";
         if($from_type ==null && $from_type == NULL)
         {
-            // if( $user['permission'] == 3 && )
-            $str .= "<button type=\"button\" data-toggle=\"modal\" class=\"btn btn-default\" data-target=\"#Bill\" onclick=\"LoadDataForEdit($money_id, $is_import);\">";
-            $str .= "<i class=\"fa fa-pencil\"/></i>";
-            $str .= "</button>";
-            $str .= "<button type=\"button\" data-toggle=\"modal\" class=\"btn btn-default\" data-target=\"#DeleteForm\" onclick=\"LoadDeleteItem('money', $money_id, '', 'sổ thu chi', '');\">";
-            $str .= "<i class=\"fa fa-trash-o\"/></i>";
-            $str .= "</button>";
+            if( $user['permission'] != 3 )
+            {
+                $str .= "<button type=\"button\" data-toggle=\"modal\" class=\"btn btn-default\" data-target=\"#Bill\" onclick=\"LoadDataForEdit($money_id, $is_import);\">";
+                $str .= "<i class=\"fa fa-pencil\"/></i>";
+                $str .= "</button>";
+                $str .= "<button type=\"button\" data-toggle=\"modal\" class=\"btn btn-danger\" data-target=\"#DeleteForm\" onclick=\"LoadDeleteItem('money', $money_id, '', 'sổ thu chi', '');\">";
+                $str .= "<i class=\"fa fa-trash-o\"/></i>";
+                $str .= "</button>";
+            }
+            if( $user['permission'] == 3 && $money['creator'] == $user['id'])
+            {
+                $str .= "<button type=\"button\" data-toggle=\"modal\" class=\"btn btn-default\" data-target=\"#Bill\" onclick=\"LoadDataForEdit($money_id, $is_import);\">";
+                $str .= "<i class=\"fa fa-pencil\"/></i>";
+                $str .= "</button>";
+                $str .= "<button type=\"button\" data-toggle=\"modal\" class=\"btn btn-danger\" data-target=\"#DeleteForm\" onclick=\"LoadDeleteItem('money', $money_id, '', 'sổ thu chi', '');\">";
+                $str .= "<i class=\"fa fa-trash-o\"/></i>";
+                $str .= "</button>";
+            }
 		}
 		return $str;
 	}
