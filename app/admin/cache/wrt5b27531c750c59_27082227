@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-18 13:46:57
+/* Smarty version 3.1.30, created on 2018-06-18 13:37:16
   from "D:\DocumentRoot24\~mtd\htaccess\app\admin\view\home\index.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b2755617fa4d0_02091255',
+  'unifunc' => 'content_5b27531c7502f6_41291072',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b2755617fa4d0_02091255 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b27531c7502f6_41291072 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once 'D:\\DocumentRoot24\\~mtd\\htaccess\\library\\smarty\\plugins\\modifier.date_format.php';
 ?>
 <div class="">

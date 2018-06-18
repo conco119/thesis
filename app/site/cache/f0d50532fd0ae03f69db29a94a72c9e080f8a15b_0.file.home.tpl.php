@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-08 15:57:06
+/* Smarty version 3.1.30, created on 2018-06-18 13:36:50
   from "D:\DocumentRoot24\~mtd\htaccess\app\site\view\layouts\home.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b1a44e2aa69c0_46142531',
+  'unifunc' => 'content_5b275302ae91a8_09758674',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'f0d50532fd0ae03f69db29a94a72c9e080f8a15b' => 
     array (
       0 => 'D:\\DocumentRoot24\\~mtd\\htaccess\\app\\site\\view\\layouts\\home.tpl',
-      1 => 1528448220,
+      1 => 1529303517,
       2 => 'file',
     ),
   ),
@@ -24,14 +24,13 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:includes/footer.tpl' => 1,
   ),
 ),false)) {
-function content_5b1a44e2aa69c0_46142531 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b275302ae91a8_09758674 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
-        <title><?php echo $_smarty_tpl->tpl_vars['seo']->value['title'];?>
-</title>
+        <title>Thiết bị nhà thông minh</title>
         <base href="<?php echo $_smarty_tpl->tpl_vars['domain']->value;?>
 ">
         <meta name="keywords" content="<?php echo $_smarty_tpl->tpl_vars['seo']->value['keyword'];?>
@@ -55,6 +54,10 @@ js/bootstrap/css/bootstrap.min.css">
 js/bootstrap/css/bootstrap-theme.min.css">
         <link rel="stylesheet" type="text/css" href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['stylesheet'];?>
 js/jquery.bxslider/jquery.bxslider.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['stylesheet'];?>
+css/hoverZoomEtalage.css" >
+        <link rel="stylesheet" href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['stylesheet'];?>
+css/services.css">
 
         <?php echo '<script'; ?>
  src="<?php echo $_smarty_tpl->tpl_vars['arg']->value['stylesheet'];?>

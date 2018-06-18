@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-08 17:08:13
+/* Smarty version 3.1.30, created on 2018-06-18 13:36:50
   from "D:\DocumentRoot24\~mtd\htaccess\app\site\view\layouts\includes\sidebar.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b1a558dce4e88_29997449',
+  'unifunc' => 'content_5b275302ca7c82_87741459',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '82b70bd4ee94070be3cd12243cf6c1189a1786bb' => 
     array (
       0 => 'D:\\DocumentRoot24\\~mtd\\htaccess\\app\\site\\view\\layouts\\includes\\sidebar.tpl',
-      1 => 1528452478,
+      1 => 1528691475,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b1a558dce4e88_29997449 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b275302ca7c82_87741459 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="sidebar_title bg_34495e">
     <h3><i class="fa fa-tasks"></i> Danh Mục</h3>
@@ -77,7 +77,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['list']->value) {
 ?>
             <li>
                 <div class="col-md-4 col-sm-4 col-xs-12 col-df text-center">
-                    <a href="./?mc=productdetail&n=<?php echo $_smarty_tpl->tpl_vars['list']->value['link_name'];?>
+                    <a href="./?mc=product&site=detail&n=<?php echo $_smarty_tpl->tpl_vars['list']->value['link_name'];?>
 " title="<?php echo $_smarty_tpl->tpl_vars['list']->value['name'];?>
 "><img src="<?php echo $_smarty_tpl->tpl_vars['arg']->value['product_folder_link'];?>
 /<?php echo $_smarty_tpl->tpl_vars['list']->value['image_name'];?>
@@ -85,17 +85,20 @@ foreach ($_from as $_smarty_tpl->tpl_vars['list']->value) {
                 </div>
                 <div class="col-md-8 col-sm-8 col-xs-12 col-df">
                     <div class="info_prd">
-                        <a href="./?mc=productdetail&n=<?php echo $_smarty_tpl->tpl_vars['list']->value['link_name'];?>
+                        <a href="./?mc=product&site=detail&n=<?php echo $_smarty_tpl->tpl_vars['list']->value['link_name'];?>
 " title="<?php echo $_smarty_tpl->tpl_vars['list']->value['name'];?>
 "><?php echo $_smarty_tpl->tpl_vars['list']->value['name'];?>
 </a>
                     </div>
                     <div class="price">
-                        <?php echo $_smarty_tpl->tpl_vars['list']->value['price'];?>
-đ
                         <?php if ($_smarty_tpl->tpl_vars['list']->value['is_discount'] == 1) {?>
-                                <span><?php echo $_smarty_tpl->tpl_vars['list']->value['sale_price'];?>
+                            <?php echo $_smarty_tpl->tpl_vars['list']->value['sale_price'];?>
+đ
+                            <span><?php echo $_smarty_tpl->tpl_vars['list']->value['price'];?>
 đ </span>
+                        <?php } else { ?>
+                            <?php echo $_smarty_tpl->tpl_vars['list']->value['price'];?>
+đ
                         <?php }?>
                     </div>
                 </div>
@@ -124,7 +127,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['list']->value) {
 ?>
             <li>
                 <div class="col-md-4 col-sm-4 col-xs-12 col-df text-center">
-                    <a href="./?mc=productdetail&n=<?php echo $_smarty_tpl->tpl_vars['list']->value['link_name'];?>
+                    <a href="./?mc=product&site=detail&n=<?php echo $_smarty_tpl->tpl_vars['list']->value['link_name'];?>
 " title="<?php echo $_smarty_tpl->tpl_vars['list']->value['name'];?>
 "><img src="<?php echo $_smarty_tpl->tpl_vars['arg']->value['product_folder_link'];?>
 /<?php echo $_smarty_tpl->tpl_vars['list']->value['image_name'];?>
@@ -132,17 +135,20 @@ foreach ($_from as $_smarty_tpl->tpl_vars['list']->value) {
                 </div>
                 <div class="col-md-8 col-sm-8 col-xs-12 col-df">
                     <div class="info_prd">
-                        <a href="./?mc=productdetail&n=<?php echo $_smarty_tpl->tpl_vars['list']->value['link_name'];?>
+                        <a href="./?mc=product&site=detail&n=<?php echo $_smarty_tpl->tpl_vars['list']->value['link_name'];?>
 " title="<?php echo $_smarty_tpl->tpl_vars['list']->value['name'];?>
 "><?php echo $_smarty_tpl->tpl_vars['list']->value['name'];?>
 </a>
                     </div>
                     <div class="price">
-                        <?php echo $_smarty_tpl->tpl_vars['list']->value['price'];?>
-đ
                         <?php if ($_smarty_tpl->tpl_vars['list']->value['is_discount'] == 1) {?>
-                                <span><?php echo $_smarty_tpl->tpl_vars['list']->value['sale_price'];?>
+                            <?php echo $_smarty_tpl->tpl_vars['list']->value['sale_price'];?>
+đ
+                            <span><?php echo $_smarty_tpl->tpl_vars['list']->value['price'];?>
 đ </span>
+                        <?php } else { ?>
+                            <?php echo $_smarty_tpl->tpl_vars['list']->value['price'];?>
+đ
                         <?php }?>
                     </div>
                 </div>

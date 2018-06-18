@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-18 13:49:53
-  from "D:\DocumentRoot24\~mtd\htaccess\app\admin\view\productcat\index.tpl" */
+/* Smarty version 3.1.30, created on 2018-06-18 14:18:39
+  from "D:\DocumentRoot24\~mtd\htaccess\app\admin\view\customergroup\index.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b27561174e079_74725667',
+  'unifunc' => 'content_5b275ccf676ef7_49016227',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    '2b5f27f359903bb518e102dc395745a90a67d2d6' => 
+    '884527cd2eaae244151366afc2592b3abf44a3b7' => 
     array (
-      0 => 'D:\\DocumentRoot24\\~mtd\\htaccess\\app\\admin\\view\\productcat\\index.tpl',
+      0 => 'D:\\DocumentRoot24\\~mtd\\htaccess\\app\\admin\\view\\customergroup\\index.tpl',
       1 => 1529303516,
       2 => 'file',
     ),
@@ -20,74 +20,78 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b27561174e079_74725667 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b275ccf676ef7_49016227 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="">
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-xs-12">
 			<div class="x_panel">
 				<div class="x_title">
-		            <h2>Quản lý danh mục sản phẩm</h2>
-		            <ul class="nav navbar-right panel_toolbox">
-		                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
-		                <li><a class="close-link"><i class="fa fa-close"></i></a></li>
-		            </ul>
-		            <div class="clearfix"></div>
+					<h2>Quản lý nhóm khách hàng</h2>
+					<ul class="nav navbar-right panel_toolbox">
+						<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+					</ul>
+					<div class="clearfix"></div>
 				</div>
 				<div class="x_content">
-
 					<div class="h_content">
+						<a href="<?php echo $_smarty_tpl->tpl_vars['arg']->value['prefix_admin'];?>
+mc=customer&site=index" class="btn btn-primary left"><i class="fa fa-bars"></i> Quản lý khách hàng</a>
+
 						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#UpdateFrom" onclick="LoadDataForForm(0);"><i class="fa fa-pencil"></i> Thêm mới</button>
-						
 						<div class="clearfix"></div>
 					</div>
 
 					<!-- start project list -->
-					<table class="table  projects">
-						<thead>
-							<tr>
-								<th>Mã</th>
-								<th style="width: 25%">Danh mục</th>
-								<th class="text-center">Trạng thái</th>
-								<th class="text-right">Cập nhật</th>
-								<th style="width: 20%" class="text-right"></th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php
-$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['cats']->value, 'data');
+					<div class="table-responsive">
+    					<table class="table table-striped table-hover projects">
+    						<thead>
+    							<tr>
+    								<th>Mã</th>
+    								<th style="width: 25%">Tên nhóm</th>
+    								<th class="text-center">Trạng thái</th>
+    								<th class="text-right">Cập nhật</th>
+    								<th style="width: 20%" class="text-right"></th>
+    							</tr>
+    						</thead>
+    						<tbody>
+    							<?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['customergroups']->value, 'data');
 if ($_from !== null) {
 foreach ($_from as $_smarty_tpl->tpl_vars['data']->value) {
 ?>
-							<tr id="field<?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
+    							<tr id="field<?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
 ">
-								<td><?php echo $_smarty_tpl->tpl_vars['data']->value['code'];?>
+    								<td><?php echo $_smarty_tpl->tpl_vars['data']->value['code'];?>
 </td>
-								<td>
-								<ol class="breadcrumb"><?php echo $_smarty_tpl->tpl_vars['data']->value['name'];?>
-</ol>
-								</td>
-								<td class="text-center" id="stt<?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
+    								<td><?php echo $_smarty_tpl->tpl_vars['data']->value['name'];?>
+</td>
+    								<td class="text-center" id="stt<?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
 "><?php echo $_smarty_tpl->tpl_vars['data']->value['status'];?>
 </td>
-								<td class="text-right"><?php echo $_smarty_tpl->tpl_vars['data']->value['updated_at'];?>
+    								<td class="text-right"><?php echo $_smarty_tpl->tpl_vars['data']->value['updated_at'];?>
 </td>
-								<td class="text-right">
-									<button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#UpdateFrom" onclick="LoadDataForForm(<?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
+    								<td class="text-right">
+    									<button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#UpdateFrom" onclick="LoadDataForForm(<?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
 );"><i class="fa fa-pencil"></i></button>
-									<button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#DeleteForm" onclick="LoadDeleteItem('productcat', <?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
-, '', 'danh mục');"><i class="fa fa-trash-o"></i></button>
-								</td>
-							</tr>
-							<?php
+										<?php if ($_smarty_tpl->tpl_vars['arg']->value['user']['permission'] != 3) {?>
+											<button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#DeleteForm" onclick="LoadDeleteItem('<?php echo $_smarty_tpl->tpl_vars['arg']->value['mc'];?>
+', <?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
+, '', 'nhóm', 'vì có chứa khách hàng');"><i class="fa fa-trash-o"></i></button>
+										<?php }?>
+    								</td>
+    							</tr>
+    							<?php
 }
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 ?>
 
-						</tbody>
-					</table>
+    						</tbody>
+    					</table>
+					</div>
 					<!-- end project list -->
+
 					<div class="paging"><?php echo $_smarty_tpl->tpl_vars['paging']->value['paging'];?>
 </div>
 				</div>
@@ -104,10 +108,10 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 				<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
 				<h4 class="modal-title" id="myModalLabel">Xóa mục này</h4>
 			</div>
-			<div class="modal-body">Bạn chắc chắn rằng muốn xóa mục này chứ ?</div>
+			<div class="modal-body">Bạn chắc chắn muốn xóa mục này chứ?</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Hủy bỏ</button>
-				<button type="button" class="btn btn-primary" onclick="DeleteItem();" id="DeleteItem">Đồng ý</button>
+				<button type="button" class="btn btn-danger" onclick="DeleteItem();" id="DeleteItem">Xóa</button>
 			</div>
 		</div>
 	</div>
@@ -126,6 +130,10 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 					<div class="form-group">
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<input type="hidden" name="id">
+							<input type="hidden" name="prefix_admin" value='<?php echo $_smarty_tpl->tpl_vars['arg']->value['prefix_admin'];?>
+'>
+							<input type="hidden" name="mc" value='<?php echo $_smarty_tpl->tpl_vars['arg']->value['mc'];?>
+'>
 						</div>
 					</div>
 					<div class="form-group">
@@ -135,15 +143,9 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-2 col-sm-2 col-xs-12">Tên danh mục</label>
+						<label class="control-label col-md-2 col-sm-2 col-xs-12">Tên nhóm</label>
 						<div class="col-md-8 col-sm-8 col-xs-12">
-							<input type="text" name="name" required="required" class="form-control" placeholder="Tên...">
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-md-2 col-sm-2 col-xs-12">Danh mục cha</label>
-						<div class="col-md-6 col-sm-6 col-xs-12">
-							<select class="form-control" name="parent_id"></select>
+							<input type="text" name="name" required="required" class="form-control" placeholder="Tên nhóm">
 						</div>
 					</div>
 					<div class="form-group">
@@ -171,8 +173,10 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 
 <?php echo '<script'; ?>
 >
-function activeCat(table, id) {
-    $.post("./admin?mc=productcat&site=ajax_active_cat", {'table': table, 'id': id}).done(function (data) {
+
+function activeStatus(table, id) {
+	let prefix_admin = $("#UpdateFrom input[name=prefix_admin]").val();
+    $.post(`${prefix_admin}mc=customergroup&site=ajax_active`, {'table': table, 'id': id}).done(function (data) {
             if(data == 0)
               alert('You can not change');
             else
@@ -181,19 +185,24 @@ function activeCat(table, id) {
 }
 
 function LoadDataForForm(id) {
+	let mc = $("#UpdateFrom input[name=mc]").val();
+	let prefix_admin = $("#UpdateFrom input[name=prefix_admin]").val();
+	console.log(mc, prefix_admin);
 	$("#UpdateFrom input[type=text]").val('');
-	$.post("./admin?mc=productcat&site=ajax_load_category", {'id' : id}).done(function(data) {
+	$("#UpdateFrom input[type=number]").val('');
+	$.post(`${prefix_admin}mc=${mc}&site=ajax_load`, {'id' : id}).done(function(data) {
 		var data = JSON.parse(data);
 		console.log(data);
 		if (data.id == undefined) {
 			$("#UpdateFrom input[name=id]").val(0);
 			$("#UpdateFrom input[name=status]").attr("checked", "checked");
 			$("#UpdateFrom input[name=status]").prop('checked', true);
-			$("#title").html("<p>Thêm danh mục sản phẩm</p>");
+			$("#title").html("Thêm nhóm khách hàng mới");
 		} else {
 			$("#UpdateFrom input[name=id]").val(data.id);
 			$("#UpdateFrom input[name=name]").val(data.name);
-			$("#title").html("<p>Sửa danh mục sản phẩm</p>");
+			$("#UpdateFrom input[name=discount]").val(data.discount);
+			$("#title").html("Sửa thông tin nhóm khách hàng");
 			if (data.status == '1'){
 				$("#UpdateFrom input[name=status]").attr("checked", "checked");
 				$("#UpdateFrom input[name=status]").prop('checked', true);
@@ -203,10 +212,11 @@ function LoadDataForForm(id) {
 				$("#UpdateFrom input[name=status]").prop('checked', false);
 			}
 		}
-		$("#UpdateFrom select[name=parent_id]").html(data.parent_option);
 		$("#UpdateFrom input[name=code]").val(data.code);
+		$("#UpdateFrom select[name=discount_type]").html(data.discount_type);
 	});
 }
+
 <?php echo '</script'; ?>
 >
 
@@ -214,9 +224,9 @@ function LoadDataForForm(id) {
 >
 $(document).ready(function() {
 
-	$(".mc_productcat").addClass('active');
-	$(".mc_productcat ul").css('display', 'block');
-	$("#productcat_index").addClass('current-page');
+	$(".mc_customergroup").addClass('active');
+	$(".mc_customergroup ul").css('display', 'block');
+	$("#customergroup_index").addClass('current-page');
 
 	if( "<?php echo $_smarty_tpl->tpl_vars['notification']->value['status'];?>
 " == "success" || "<?php echo $_smarty_tpl->tpl_vars['notification']->value['status'];?>

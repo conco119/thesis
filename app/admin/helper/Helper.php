@@ -228,7 +228,7 @@ class Helper extends HelpAbstract
         return $result;
     }
 
-    public function get_option_with_status($table, $match_id)
+    public function get_option_with_status($table, $match_id = 0)
     {
         $query_result = $this->pdo->fetch_all("SELECT * FROM $table WHERE status = 1");
         foreach($query_result as $key => $value)
@@ -237,6 +237,19 @@ class Helper extends HelpAbstract
                 $result .= "<option value='{$value['id']}' selected>{$value['name']}</option>";
             else
             $result .= "<option value='{$value['id']}'>{$value['name']}</option>";
+        }
+        return $result;
+    }
+
+    public function get_option_properties($property, $match_id = 0)
+    {
+        $result = '';
+        foreach($this->$property as $key => $value)
+        {
+            if($key == $match_id)
+                $result .= "<option value='{$key}' selected>{$value}</option>";
+            else
+                $result .= "<option value='{$key}'>{$value}</option>";
         }
         return $result;
     }

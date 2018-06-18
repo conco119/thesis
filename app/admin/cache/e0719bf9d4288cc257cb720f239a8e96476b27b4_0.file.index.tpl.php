@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-08 13:59:56
+/* Smarty version 3.1.30, created on 2018-06-18 14:26:24
   from "D:\DocumentRoot24\~mtd\htaccess\app\admin\view\product\index.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b1a296c3d7fc9_93126947',
+  'unifunc' => 'content_5b275ea04e79a7_06266582',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'e0719bf9d4288cc257cb720f239a8e96476b27b4' => 
     array (
       0 => 'D:\\DocumentRoot24\\~mtd\\htaccess\\app\\admin\\view\\product\\index.tpl',
-      1 => 1528431886,
+      1 => 1529303516,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b1a296c3d7fc9_93126947 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b275ea04e79a7_06266582 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="">
     <div class="row">
@@ -55,6 +55,7 @@ function content_5b1a296c3d7fc9_93126947 (Smarty_Internal_Template $_smarty_tpl)
                                 <tr>
                                     <th>Mã sản phẩm</th>
                                     <th>Tên Sản phẩm</th>
+                                    <th>Hình ảnh</th>
                                     <th>Thuộc danh mục</th>
 									<th class="text-right">Giá bán</th>
                                     <th class="text-right">Nhập</th>
@@ -82,6 +83,9 @@ foreach ($_from as $_smarty_tpl->tpl_vars['data']->value) {
                                         	<?php echo $_smarty_tpl->tpl_vars['data']->value['name'];?>
 
                                         </td>
+                                        <td><img width='50px' src="<?php echo $_smarty_tpl->tpl_vars['arg']->value['product_folder_link'];?>
+/<?php echo $_smarty_tpl->tpl_vars['data']->value['image_name'];?>
+"></td>
                                         <td><?php echo $_smarty_tpl->tpl_vars['data']->value['category_id']['name'];?>
 </td>
 										<td class="text-right"><?php echo $_smarty_tpl->tpl_vars['data']->value['price'];?>
@@ -93,8 +97,8 @@ foreach ($_from as $_smarty_tpl->tpl_vars['data']->value) {
 										
                                         <td class="text-right"><?php echo intval(($_smarty_tpl->tpl_vars['data']->value['imported']-$_smarty_tpl->tpl_vars['data']->value['exported']));?>
 </td>
-										<td class="text-right"><?php echo number_format((($_smarty_tpl->tpl_vars['data']->value['imported']-$_smarty_tpl->tpl_vars['data']->value['exported'])*$_smarty_tpl->tpl_vars['data']->value['price_import']));?>
- đ</td>
+										<td class="text-right"> <b style='color:black'> <?php echo number_format((($_smarty_tpl->tpl_vars['data']->value['imported']-$_smarty_tpl->tpl_vars['data']->value['exported'])*$_smarty_tpl->tpl_vars['data']->value['price_import']));?>
+ đ </b> </td>
                                         <td class="text-center" id="stt<?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
 "><?php echo $_smarty_tpl->tpl_vars['data']->value['status'];?>
 </td>
@@ -102,8 +106,8 @@ foreach ($_from as $_smarty_tpl->tpl_vars['data']->value) {
 											<a href='./admin?mc=product&site=imagepost&id=<?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
 '><button type="button" class="btn btn-default btn-xs" title="Hình ảnh sản phẩm"><i class="fa fa-image"></i></button><a/>
 											<a href="./admin?mc=product&site=detail&id=<?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
-" class="btn btn btn-success" title="Chi tiết nhập xuất"><i class="fa fa-search-plus"></i></a>
-                                            <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#UpdateForm" title="Sửa thông tin sản phẩm" onclick="LoadDataForForm(<?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
+" class="btn btn btn-default" title="Chi tiết nhập xuất"><i class="fa fa-search-plus"></i></a>
+                                            <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#UpdateForm" title="Sửa thông tin sản phẩm" onclick="LoadDataForForm(<?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
 );"><i class="fa fa-pencil"></i></button>
                                             <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#DeleteForm" title="Xóa sản phẩm" onclick="LoadDeleteItem('product', <?php echo $_smarty_tpl->tpl_vars['data']->value['id'];?>
 , '', 'sản phẩm', 'vì còn tồn tại hóa đơn');"><i class="fa fa-trash-o"></i></button>
@@ -123,8 +127,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 </td>
 								<td class="text-right"><?php echo $_smarty_tpl->tpl_vars['out']->value['number_im']-$_smarty_tpl->tpl_vars['out']->value['number_ex'];?>
 </td>
-								<td class="text-right"><?php echo number_format($_smarty_tpl->tpl_vars['out']->value['total']);?>
- đ</td>
+								<td class="text-right"><b style='color:black'> <?php echo number_format($_smarty_tpl->tpl_vars['out']->value['total']);?>
+ đ </b></td>
 								<td colspan="2"></td>
 							</tr>
                             </tbody>
@@ -210,11 +214,6 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 						<div class="col-md-6 col-sm-6 col-xs-12">
 							<select class="form-control" name="category_id" onchange="AddIdCategory(this.value);"></select>
 						</div>
-						<div class="col-md-1 col-sm-1 col-xs-12">
-							<button type="button" class="btn btn-default" data-toggle="modal" data-target="#UpdateCategory" onclick="UpdateCategory(0);">
-								<i class="fa fa-pencil"></i>
-							</button>
-						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-md-2 col-sm-2 col-xs-12">Sản phẩm</label>
@@ -232,11 +231,6 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 						<div class="col-md-6 col-sm-6 col-xs-12">
 							<select name="trademark_id" class="form-control" onchange="AddIdTrademark(this.value);"></select>
 						</div>
-                        <div class="col-md-1 col-sm-1 col-xs-12">
-                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#UpdateTrademark" onclick="UpdateTrademark(0);">
-                                <i class="fa fa-pencil"></i>
-                            </button>
-                        </div>
 					</div>
 
 					<div class="form-group">
@@ -503,6 +497,10 @@ function DiscountChange(value)
 <?php echo '<script'; ?>
 >
 $(document).ready(function() {
+	$(".mc_product").addClass('active');
+	$(".mc_product ul").css('display', 'block');
+	$("#product_index").addClass('current-page');
+
 	$("#UpdateForm select[name=discount_type]").prop('disabled', true);
 	$("#UpdateForm input[name=discount]").prop('disabled', true);
 	if( "<?php echo $_smarty_tpl->tpl_vars['notification']->value['status'];?>

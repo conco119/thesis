@@ -116,7 +116,10 @@
                                         </button>
                                     </div>
                                     <div class="col-md-9 col-sm-9 col-xs-12">
-                                        <select name="suppliers_id" class="select2_single form-control" tabindex="-1" onchange="SetExportValue('supplier_id', this.value);"><option>Chọn nhà cung cấp</option>{$out.suppliers}</select>
+                                        <select name="suppliers_id" class="select2_single form-control" tabindex="-1" onchange="SetExportValue('supplier_id', this.value);">
+                                            <option value=0>Chọn nhà cung cấp</option>
+                                            {$out.suppliers}
+                                        </select>
                                     </div>
                                 </div>
                         </div>
@@ -265,10 +268,16 @@
 						<input type="text" name="FilterKey" class="form-control" oninput="LoadProduct();" placeholder="Mã / Tên sản phẩm">
 					</div>
 					<div class="col-md-6 col-sm-6 col-xs-12">
-						<select class="form-control" name="FilterCate" onchange="LoadProduct();">{$out.categories}</select>
+						<select class="form-control" name="FilterCate" onchange="LoadProduct();">
+                            <option value=0> Danh mục sản phẩm </option>
+                            {$out.categories}
+                        </select>
 					</div>
 					<div class="col-md-6 col-sm-6 col-xs-12">
-						<select class="form-control" name="FilterTrademark" onchange="LoadProduct();">{$out.trademarks}</select>
+						<select class="form-control" name="FilterTrademark" onchange="LoadProduct();">
+                            <option value=0> Hãng sản xuất </option>
+                            {$out.trademarks}
+                        </select>
 					</div>
 				</div>
 				<div style="max-height: 400px; overflow-y: auto">

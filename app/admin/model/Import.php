@@ -32,6 +32,7 @@ class Import extends Main
             $import['code'] = $this->ImportHelper->get_import_code();
             $_SESSION['import_session'] = $import;
         }
+
         $this->smarty->assign('value', $import);
         $total = 0;
         foreach ($products AS $k => $item) {
@@ -43,12 +44,12 @@ class Import extends Main
         // return;
         //set cac gia tri dau ra
 
-        $out['categories'] = $this->helper->get_option(1, 'product_categories', 0, 1, "Danh mục sản phẩm");
-        $out['suppliers'] = $this->helper->get_option(1, 'suppliers', $import['supplier_id']);
-        $out['trademarks'] = $this->helper->get_option(1, 'product_trademarks', 0, 1, "Hãng sản xuất");
+        $out['categories'] = $this->helper->get_option_with_status('product_categories');
+        $out['suppliers'] = $this->helper->get_option_with_status('suppliers', $import['supplier_id']);
+        $out['trademarks'] = $this->helper->get_option_with_status('product_trademarks');
         // $out['origins'] = $this->product->get_select_origins($this->dbo);
         // $out['afprint'] = "?mod=import&site=afprint&id=";
-        $out['discount'] = $this->helper->get_option(0, 'discount_type', $import['discount_type']);
+        $out['discount'] = $this->helper->get_option_properties('discount_type', $import['discount_type']);
         // $out['print'] = "?mod=import&site=c" . $this->set->print_type[$this->arg['setting']['imprint']];
         $this->smarty->assign('out', $out);
 
