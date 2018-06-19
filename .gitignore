@@ -1,4 +1,3 @@
-*.txt
 app/admin/cache/*
 app/site/cache/*
-
+vendor
