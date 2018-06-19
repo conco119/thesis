@@ -11,7 +11,7 @@
             </ul>
         </div>
         <div class="col-md-3 col-sm-3 col-xs-12">
-            <h3>Quy định - Chính sách</h3>
+            {* <h3>Quy định - Chính sách</h3> *}
 
             <ul class="full">
                 {foreach from=$output.menu_footer item=list}

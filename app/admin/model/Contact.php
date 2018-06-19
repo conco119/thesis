@@ -10,7 +10,7 @@ class Contact extends Main
         $contacts = $this->pdo->fetch_all($sql);
         foreach($contacts as $key => $contact)
         {
-            $contacts[$key]['status'] = $this->helper->help_get_status($contact['status'], 'contacts', $contact['id']);
+            $contacts[$key]['status'] = $this->helper->help_get_text_status($contact['status'], 'contacts', $contact['id']);
             $contacts[$key]['created_at'] =  gmdate("H:i A d/m/Y", time() + 7 * 3600);
         }
         $this->smarty->assign('paging', $paging);
@@ -24,8 +24,10 @@ class Contact extends Main
       {
         $user = $this->pdo->fetch_one("SELECT status FROM " . $_POST['table'] . " WHERE id=" . $_POST['id']);
         $status = $user['status'] == 1 ? 0 : 1;
+        if($user['status'] == 1)
+            exit();
         $this->pdo->query("UPDATE " . $_POST['table'] . " SET status = '$status' WHERE id=" . $_POST['id']);
-        echo $this->helper->help_get_status($status, $_POST['table'], $_POST['id']);
+        echo $this->helper->help_get_text_status($status, $_POST['table'], $_POST['id']);
         exit();
       }
       else

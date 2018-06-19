@@ -100,10 +100,8 @@ $(document).ready(function () {
 
 function activeStatus(table, id) {
     $.post(`./admin?mc=contact&site=ajax_active`, {'table': table, 'id': id}).done(function (data) {
-            if(data == 0)
-              alert('You can not change');
-            else
-            $("#stt" + id).html(data);
+            if(data != 0)
+                $("#stt" + id).html(data);
     });
 }
 
