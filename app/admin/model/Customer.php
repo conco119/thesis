@@ -152,7 +152,7 @@ class Customer extends Main
     }
     public function ajax_active()
     {
-      if(isset($_POST['table']) && isset($_POST['id']) && ($this->currentUser['permission'] == 1 || $this->currentUser['permission'] == 2))
+      if(isset($_POST['table']) && isset($_POST['id']))
       {
         $item = $this->pdo->fetch_one("SELECT status FROM " . $_POST['table'] . " WHERE id=" . $_POST['id']);
         $status = $item['status'] == 1 ? 0 : 1;
@@ -191,7 +191,7 @@ class Customer extends Main
             echo 0;
             exit();
         }
-        if(($this->currentUser['permission'] == 1 || $this->currentUser['permission'] == 2) && $this->pdo->query("DELETE FROM {$this->table} WHERE id=$id"))
+        if($this->pdo->query("DELETE FROM {$this->table} WHERE id=$id"))
         {
             echo 1;
             exit();
