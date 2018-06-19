@@ -1,5 +1,4 @@
 *.txt
 app/admin/cache/*
 app/site/cache/*
-constant/database.ini
-index.php
+
