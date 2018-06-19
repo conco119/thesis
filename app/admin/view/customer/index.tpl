@@ -65,9 +65,7 @@
                                 <td class="text-center" id="stt{$list.id}">{$list.status}</td>
                                 <td class="text-center">
                                     <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#UpdateFrom" onclick="LoadDataForForm({$list.id});"><i class="fa fa-pencil"></i></button>
-                                    {if $arg.user.permission neq 3}
-                                        <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#DeleteForm" onclick="LoadDeleteItem('customer', {$list.id}, '', 'khách hàng', 'vì còn tồn tại hóa đơn');"><i class="fa fa-trash-o"></i></button>
-                                    {/if}
+                                    <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#DeleteForm" onclick="LoadDeleteItem('customer', {$list.id}, '', 'khách hàng', 'vì còn tồn tại hóa đơn');"><i class="fa fa-trash-o"></i></button>
                                 </td>
                             </tr>
                         {/foreach}
