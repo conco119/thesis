@@ -61,9 +61,9 @@
                                         </button>
                                         <a href="./admin?mc=exportedit&site=modify&id={$list.id}" class="btn btn-default"><i
                                                     class="fa fa-edit"></i></a>
-                                        {* <button type="button" title="In hóa đơn" data-toggle="modal"
+                                        <button type="button" title="In hóa đơn" data-toggle="modal"
                                                 class="btn btn-default" onclick="SetPrint({$list.id});"
-                                                data-dismiss="modal"><i class="fa fa-print"></i></button> *}
+                                                data-dismiss="modal"><i class="fa fa-print"></i></button>
                                          {if $arg.user.permission neq 3}
                                             <button type="button" title="Xóa hóa đơn" class="btn btn-default"
                                                     data-toggle="modal" data-target="#DeleteForm"
@@ -141,7 +141,7 @@
 <script type="text/javascript" src="{$arg.stylesheet}js/datepicker/daterangepicker.js"></script>
 <script src="{$arg.stylesheet}js/datetimepicker/bootstrap-datetimepicker.min.js"></script>
 <script>
-    var print = '{$out.print}';
+
 </script>
 {literal}
     <script>
@@ -169,7 +169,7 @@
         }
 
         function SetPrint(id) {
-            $("#PrintContent").attr("src", print + id);
+            $("#PrintContent").attr("src", "./admin?mc=export&site=export_print&id=" + id);
             return false;
         }
 

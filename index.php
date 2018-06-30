@@ -1,11 +1,7 @@
 <?php
 require 'vendor/autoload.php';
 
-$dsn = 'mysql:host=localhost;dbname=htaccess3;charset=utf8';
-$usr = 'root';
-$pwd = '';
 
-$pdo = new \Slim\PDO\Database($dsn, $usr, $pwd);
 
 require_once('configs/config.php');
 require_once('sys.lib.conf.php');

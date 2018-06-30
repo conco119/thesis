@@ -83,7 +83,7 @@ function UpdateNumberProduct(id, number, max_number) {
     // Xoa field vua duoc them
     $.post('./admin?mc=exportEdit&site=ajax_update_product_number', { 'id': id, 'number': number, "max_number": max_number })
         .done(function(data) {
-            var data = JSON.parse(data);
+            data = JSON.parse(data);
             $("#proNumber" + id).val(data.number_count);
             $("#proTotal" + id).html(data.total_item_money);
             GetTotalSession();

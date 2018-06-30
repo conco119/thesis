@@ -139,7 +139,8 @@ class Export extends Main
                     $this->pdo->insert('export_services', $service);
                 }
             }
-
+            if(isset($_POST['submit_print']))
+                $_SESSION['export_id'] = $export_id;
             unset($_SESSION['export_session']);
             unset($_SESSION['export_session_products']);
             unset($_SESSION['export_session_services']);
@@ -226,6 +227,38 @@ class Export extends Main
     $this->pdo->close();
     exit();
 
+  }
+
+
+  public function export_print()
+  {
+    unset($_SESSION['export_id']);
+    $id = isset($_GET[id]) ? intval($_GET['id']) : 0;
+    $export = $this->pdo->fetch_one("SELECT * FROM exports WHERE id = $id");
+    $export['creator'] = $this->pdo->fetch_one("SELECT * FROM users WHERE id = {$export['creator']}");
+    $export['customer_id'] = $this->pdo->fetch_one("SELECT * FROM customers WHERE id = {$export['customer_id']}");
+    $export['date'] = gmdate('d-m-Y', strtotime($export['date'])+7*3600);
+    //products
+    $sql = "SELECT ex.*, p.name, pu.name as unit_name FROM export_products ex
+            LEFT JOIN products p ON p.id=ex.product_id
+            LEFT JOIN product_units pu ON pu.id = p.unit_id
+            WHERE export_id = {$export['id']}";
+    $products = $this->pdo->fetch_all($sql);
+    $this->smarty->assign('products', $products);
+    //services
+    $sql = "SELECT es.*, s.name FROM export_services es
+    LEFT JOIN services s ON s.id=es.service_id
+    WHERE export_id = {$export['id']}";
+    $services = $this->pdo->fetch_all($sql);
+    $this->smarty->assign('services', $services);
+
+    $out['payment'] = $export['payment'];
+    $out['total_money'] = $export['total_money'];
+    $out['must_pay'] = $export['must_pay'];
+
+    $this->smarty->assign('out', $out);
+    $this->smarty->assign('export', $export);
+    $this->smarty->display('print.tpl');
   }
 
 

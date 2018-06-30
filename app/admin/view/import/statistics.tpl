@@ -58,6 +58,9 @@
                                                 <a href="./admin?mc=importedit&site=modify&id={$list.id}" class="btn btn-default">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
+                                            <button type="button" title="In hóa đơn" data-toggle="modal"
+                                                class="btn btn-default" onclick="SetPrint({$list.id});"
+                                                data-dismiss="modal"><i class="fa fa-print"></i></button>
                                             <button type="button" title="Xóa hóa đơn" class="btn btn-default"
                                                     data-toggle="modal" data-target="#DeleteForm"
                                                     onclick="LoadDeleteItem('import', {$list.id}, '', 'hóa đơn bán', 'vì còn tồn tại trong hóa đơn');">
@@ -149,7 +152,7 @@
         }
 
         function SetPrint(id) {
-            $("#PrintContent").attr("src", "?mod=import&site=cprint&id=" + id);
+            $("#PrintContent").attr("src", "./admin?mc=import&site=import_print&id=" + id);
             return false;
         }
 

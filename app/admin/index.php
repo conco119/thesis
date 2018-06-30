@@ -1,7 +1,8 @@
 <?php
 ob_start();
+// ini_set('display_errors', 1);
 session_start();
-error_reporting(0);
+// error_reporting(1);
 
 
 require_once '../../index.php';

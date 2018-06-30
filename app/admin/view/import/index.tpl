@@ -338,21 +338,15 @@
 
 <script src="{$arg.stylesheet}js/wh.import.js"></script>
 <script type="text/javascript">
-var cprint = '{$out.cprint}';
-var afid = '{if isset($smarty.session.import_id) and $smarty.session.import_id neq ''}{$smarty.session.import_id}{/if}';
-var afprint = '{$out.afprint}'+afid;
+    var print_id = '{if isset($smarty.session.import_id) and $smarty.session.import_id neq ''}{$smarty.session.import_id}{/if}';
+    console.log(print_id);
 </script>
 {literal}
 <script>
-    $(function() {
-        if (afid != '') {
-            SetafPrint();
-        }
-    });
-    function SetafPrint() {
-        $("#PrintContent").attr("src", afprint);
-        return false;
-    }
+window.onload = (function()
+{
+	print();
+})()
 $(document).ready(function () {
     $('#exportday').daterangepicker({
         singleDatePicker: true,
@@ -370,6 +364,13 @@ function GetAllPayment() {
     $('input[name=payment]').change();
 }
 
+function print()
+{	if(!print_id)
+		return
+	var link = './admin?mc=import&site=import_print&id=' + print_id;
+	$("#PrintContent").attr("src", link);
+	console.log(link);
+}
 
 function SetPrint() {
     $("#PrintContent").attr("src", cprint);

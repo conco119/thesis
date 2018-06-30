@@ -9,42 +9,36 @@ lib_use(CORE_ZEBRA);
 lib_use(CORE_IMAGE);
 class Main implements Init
 {
-  protected $arg, $conf_info;
+  protected $arg, $conf_info, $slim_pdo;
   function __construct()
   {
-    global $smarty, $tpl_file, $mc, $site, $login_id, $pdo;
+    global $smarty, $tpl_file, $mc, $site, $login_id;
     $this->currentUser = '';
 
     $this->login_id = $login_id;
     $this->mc = $mc;
     $this->site = $site;
 
-    $this->slim_pdo = $pdo;
     $this->pdo = new DPDO();
     $this->paging = new pagination();
     $this->times = new Times();
     $this->dstring = new DString();
     $this->helper = new Helper();
 
-    $this->file_setting = "../../constant/setting.ini";
     $this->smarty = $smarty;
     $this->smarty->assign('tpl_file', $tpl_file);
     // config
+    $this->set_setting();
     $this->set_value();
+    $this->setdb();
     $this->redirectIfCustomer();
     $this->header_avatar();
   }
 
    public function set_value()
   {
-    $dbo = new DPDO();
-    //content getting
-    $content = array();
-    if (file_exists($this->file_setting)) {
-        $content = parse_ini_file($this->file_setting, true);
-    }
-    $this->conf_info = $content;
-    //end content getting
+
+
     $this->currentUser = $this->check_user();
     $this->arg = array(
             'stylesheet' => DOMAIN . "app/webroot/",
@@ -62,12 +56,32 @@ class Main implements Init
             'mc' => $this->mc,
             'site' => $this->site,
             'user' => $this->currentUser,
-            'setting' => $content['info'],
+            'setting' => $this->conf_info,
             'macos' => MACOS,
             'prefix_admin' => "./admin?",
     );
     //user avatar to header view
 
+  }
+  function setdb()
+  {
+    $content = array();
+    if (file_exists(FILE_CONF_DATABASE)) {
+        $content = parse_ini_file(FILE_CONF_DATABASE, true);
+        $dsn = "mysql:host={$content['server']};dbname={$content['data_base']};charset=utf8";
+        $usr = $content['user'];
+        $pwd = $content['password'];
+    }
+    $this->slim_pdo = new \Slim\PDO\Database($dsn, $usr, $pwd);
+  }
+
+  function set_setting()
+  {
+        $content = array();
+        if (file_exists(SETTING_FILE)) {
+            $content = parse_ini_file(SETTING_FILE, true);
+        }
+        $this->conf_info = $content;
   }
 
   public function header_avatar()

@@ -137,7 +137,8 @@ class Import extends Main
                      $data2['price_import'] = $item['price_import'];
                      $this->pdo->insert('import_products', $data2);
                  }
-
+                 if(isset($_POST['submit_print']))
+                    $_SESSION['import_id'] = $import_id;
                  $this->ajax_refresh();
                  lib_alert("Lập hóa đơn thành công");
                  lib_redirect("./admin?mc=import&site=index");
@@ -540,6 +541,35 @@ class Import extends Main
 
         echo json_encode($import);
         die();
+    }
+
+    function import_print()
+    {
+        //printing
+        unset($_SESSION['import_id']);
+
+        $id = isset($_GET[id]) ? intval($_GET['id']) : 0;
+        $import = $this->pdo->fetch_one("SELECT * FROM imports WHERE id = $id");
+        $import['creator'] = $this->pdo->fetch_one("SELECT * FROM users WHERE id = {$import['creator']}");
+        $import['supplier_id'] = $this->pdo->fetch_one("SELECT * FROM suppliers WHERE id = {$import['supplier_id']}");
+        $import['date'] = gmdate('d-m-Y', strtotime($import['date'])+7*3600);
+        // pre($import);
+        //products
+        $sql = "SELECT ip.*, p.name, pu.name as unit_name FROM import_products ip
+                LEFT JOIN products p ON p.id=ip.product_id
+                LEFT JOIN product_units pu ON pu.id = p.unit_id
+                WHERE import_id = {$import['id']}";
+        $products = $this->pdo->fetch_all($sql);
+        $this->smarty->assign('products', $products);
+
+
+        $out['payment'] = $import['payment'];
+        $out['total_money'] = $import['total_money'];
+        $out['must_pay'] = $import['must_pay'];
+
+        $this->smarty->assign('out', $out);
+        $this->smarty->assign('import', $import);
+        $this->smarty->display('print.tpl');
     }
 
 }

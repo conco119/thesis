@@ -400,9 +400,15 @@
 <!-- /.modal -->
 
 <script src="{$arg.stylesheet}js/wh.export.js"></script>
+<script>
+	var print_id = '{if isset($smarty.session.export_id) and $smarty.session.export_id neq ''}{$smarty.session.export_id}{/if}';
+</script>
 {literal}
 <script>
-//
+window.onload = (function()
+{
+	print();
+})()
 $(document).ready(function () {
     $('#exportday').daterangepicker({
         singleDatePicker: true,
@@ -464,6 +470,13 @@ function GetAllPayment() {
     $('input[name=payment]').change();
 }
 
+function print()
+{	if(!print_id)
+		return
+	var link = './admin?mc=export&site=export_print&id=' + print_id;
+	$("#PrintContent").attr("src", link);
+	console.log(link);
+}
 function SetcPrint() {
     $("#PrintContent").attr("src", cprint);
     return false;
@@ -480,12 +493,19 @@ function GetOrderDetail() {
         alert('Vui lòng chọn khách hàng');
         return;
     }
-	$('#orderDetail').modal('toggle');
+
 
 		var detail = '1';
 	    $.get("./admin?mc=exportajax&site=ajax_get_export_session_detail").done( (data) => {
 
 			 data = JSON.parse(data);
+			 if(Object.keys(data.products).length > 0 || Object.keys(data.services).length > 0)
+			 	$('#orderDetail').modal('toggle');
+			else
+				{
+					alert('Vui lòng lựa chọn mặt hàng');
+					return;
+				}
 			 console.log(data);
 				 detail = `
 
