@@ -13,13 +13,13 @@
         <div class="col-md-3 col-sm-3 col-xs-12">
             {* <h3>Quy định - Chính sách</h3> *}
 
-            <ul class="full">
+            {* <ul class="full">
                 {foreach from=$output.menu_footer item=list}
                     <li><a href="{$list.url}">{$list.name}</a></li>
                 {/foreach}
-            </ul>
+            </ul> *}
         </div>
-        {foreach from=$output.menu_p3 item=list}
+        {* {foreach from=$output.menu_p3 item=list}
         <div class="col-md-3 col-sm-3 col-xs-12">
             <h3> {$list.name} </h3>
             <ul class="full">
@@ -29,7 +29,7 @@
             </ul>
         </div>
         {/foreach}
-
+ *}
         <div class="col-md-3 col-sm-3 col-xs-12">
             <h3>Kết nối</h3>
 

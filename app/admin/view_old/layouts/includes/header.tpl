@@ -10,7 +10,7 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li class="">
 					<a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown">
-						<img src="{$arg.avatar_link}" alt="">{$arg.user.username} <span class=" fa fa-angle-down"></span>
+						{* <img src="{base_url($arg.avatar)}" alt="">{$arg.user.username} <span class=" fa fa-angle-down"></span> *}
 					</a>
 					<ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
 						<li><a href="{$arg.prefix_admin}mc=user&site=profile"> Tài khoản</a></li>

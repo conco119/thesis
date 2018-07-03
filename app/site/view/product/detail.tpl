@@ -1,24 +1,23 @@
-
-
 <div class="detail-product" id="product{$value.id}">
     <div class="col-md-5 col-sm-5 col-xs-12 mar-top">
         <ul id="etalage">
             <li>
-                <img class="etalage_thumb_image" src="{$arg.product_folder_link}/{$value.images[0].name}" width="100%">
-                <img class="etalage_source_image target" src="{$arg.product_folder_link}/{$value.images[0].name}" width="100%">
+                <img class="etalage_thumb_image" src="{base_url($value.images[0].path)}/{$value.images[0].name}" width="90%">
+                <img class="etalage_source_image target" src="{base_url($value.images[0].path)}/{$value.images[0].name}" width="90%">
             </li>
+
             {if $value.images neq ""}
                 {foreach from=$value.images key=k item=list}
                 {if $k  neq 0}
                     <li>
-                        <img class="etalage_thumb_image" src="{$arg.product_folder_link}/{$list.name}" width="100%">
-                        <img class="etalage_source_image target" src="{$arg.product_folder_link}/{$list.name}" width="100%">
+                        <img class="etalage_thumb_image" src="{base_url($list.path)}/{$list.name}" width="100%">
+                        <img class="etalage_source_image target" src="{base_url($list.path)}/{$list.name}" width="100%">
                     </li>
                 {/if}
                 {/foreach}
             {/if}
         </ul>
-        <img class="block-mobile" src="{$arg.product_folder_link}/{$value.images[0].name}" width="100%" >
+        <img class="block-mobile" src="{base_url($value.images[0].path)}/{$value.images[0].name}" width="100%" >
     </div>
     <div class="col-md-7 col-sm-7 col-xs-12">
         <div class="info_prd_detail">
@@ -95,13 +94,13 @@
             <div class="support-detail">
                 <label>Tel: {$info.info.phone}</label>
 
-                <ul class="help-payal">
+                {* <ul class="help-payal">
                     {foreach from=$output.menu_p4 item=list}
                         {foreach from=$list.child_menu key = k item=child}
                             <li><a href="{$child.link}">{$k+1}:  {$child.name}</a></li>
                         {/foreach}
                     {/foreach}
-                </ul>
+                </ul> *}
             </div>
 
 
@@ -137,7 +136,7 @@
             <div class="product_item">
                 <div class="img">
                     <a href="./?mc=product&site=detail&n={$list.link_name}">
-                        <img src="{$arg.product_folder_link}/{$list.image_name}" width="100%">
+                        <img src="{base_url($list.image_path)}/{$list.image_name}" width="100%">
                     </a>
                 </div>
                 <div class="name">

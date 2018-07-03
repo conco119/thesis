@@ -144,7 +144,7 @@ class ExportAjax extends Main
           $result .= '<tr id="prd' . $item['id'] . '">';
           $result .= '<td>' . $item['code'] . '</td>';
           $result .= '<td>' . $item['name'] . '</td>';
-          $result .= '<td class="text-right">' . $item['price'] . '</td>';
+          $result .= '<td class="text-right">' . number_format($item['price']) . '</td>';
           $result .= '<td class="text-right">' . ($item['imported'] - $item['exported']) . '</td>';
 
           $result .= '<td class="text-right">';

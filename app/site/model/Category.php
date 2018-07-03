@@ -11,14 +11,14 @@ class Category extends Main {
     function index()
     {
         //random product
-        $sql = "SELECT p.* ,
-        (SELECT m.name FROM media m
-        RIGHT JOIN  media_product mp ON m.id = mp.media_id WHERE mp.product_id = p.id AND mp.is_showed = 1) as image_name
-        FROM products p
-        WHERE p.status = 1
-        ORDER BY RAND()
-        LIMIT 10";
-        $random_product = $this->pdo->fetch_all($sql);
+        // $sql = "SELECT p.* ,
+        // (SELECT m.name FROM media m
+        // RIGHT JOIN  media_product mp ON m.id = mp.media_id WHERE mp.product_id = p.id AND mp.is_showed = 1) as image_name
+        // FROM products p
+        // WHERE p.status = 1
+        // ORDER BY RAND()
+        // LIMIT 10";
+        // $random_product = $this->pdo->fetch_all($sql);
 
         //find product id
         $c = isset($_GET['n']) ? $_GET['n'] : "";
@@ -35,7 +35,9 @@ class Category extends Main {
         // tìm product có category là $cat_id
         $sql = "SELECT p.* ,
         (SELECT m.name FROM media m
-        RIGHT JOIN  media_product mp ON m.id = mp.media_id WHERE mp.product_id = p.id AND mp.is_showed = 1) as image_name,
+        INNER JOIN  media_product mp ON m.id = mp.media_id WHERE mp.product_id = p.id AND mp.is_showed = 1) as image_name,
+        (SELECT m.path FROM media m
+        INNER JOIN  media_product mp ON m.id = mp.media_id WHERE mp.product_id = p.id AND mp.is_showed = 1) as image_path,
         (SELECT count(id) FROM product_rates pr WHERE p.id=pr.product_id ) as number_user_rate,
         (SELECT sum(rate) FROM product_rates pr WHERE p.id=pr.product_id ) as total_rate
         FROM products p
@@ -68,7 +70,7 @@ class Category extends Main {
 
         $this->smarty->assign('paging', $paging);
         $this->smarty->assign('products', $products);
-        $this->smarty->assign('random_product', $random_product);
+        // $this->smarty->assign('random_product', $random_product);
         $this->smarty->assign('category', $category);
         $this->smarty->display('home.tpl');
     }

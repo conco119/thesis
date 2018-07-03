@@ -17,7 +17,8 @@ class DPDO {
 	 * Build PDO connection
 	 * @param string $conn
 	 */
-	function __construct($conn=DB_INFO) {
+	function __construct($conn) {
+
 		$this->getConnection($conn);
 		try {
 			$this->conn = new PDO("mysql:host=$this->server;dbname=$this->database", $this->username, $this->password);

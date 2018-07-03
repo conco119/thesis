@@ -57,15 +57,7 @@ class User extends Main
     if( isset($_POST['submit']) && $_POST['id'] == 0)
     {
 
-      // $img = $_FILES['avatar'];
-      // pre($img);
-      // if($img['error'] == UPLOAD_ERR_OK) {
-      //   $az = explode(".", $img['name']);
-			// 	$type = $az[count($az)-1];
-			// 	$name = gmdate("Y.m.d.His", time()+7*3600) . "." . $type;
-      //   move_uploaded_file($img['tmp_name'], "/Users/mtd/Sites/htaccess/app/upload/image/xxx.jpg");
-      //   echo "ok1";
-      // }
+
       $data['code'] = $this->userHelper->get_user_code($_POST['permission']);
       $data['name'] = $_POST['name'];
       $data['username'] = $_POST['username'];
@@ -233,6 +225,7 @@ class User extends Main
   }
 
   function profile(){
+
     // searching
     $date_export = isset($_GET['date']) ? intval($_GET["date"]) : 0;
     $out['select_export'] = $this->helper->get_option(0, 'select_export', $date_export);
@@ -241,14 +234,10 @@ class User extends Main
     $this->delete_avatar();
     $this->change_info();
     $this->change_pass();
-    $sql = "SELECT * FROM users where id = {$this->currentUser['id']}";
-    $user = $this->pdo->fetch_one($sql);
-    $user['avatar'] = $this->userHelper->get_user_avatar($this->arg['image_folder_link'], $user['avatar']);
-    $this->arg['avatar_link'] = $user['avatar'];
-    $this->smarty->assign('arg', $this->arg);
+    $user = $this->currentUser;
     $user['birthday'] = $this->helper->get_user_birthday_select($user['birthday']);
     $user['gender'] = $this->helper->get_user_gender_select($user['gender']);
-    $this->smarty->assign('result', $user);
+    $this->smarty->assign('user', $user);
     //exports
     $sql = "SELECT a.code, a.must_pay, a.description, c.name as customer_name
             FROM exports a
@@ -289,47 +278,27 @@ class User extends Main
       $avatar = new Zebra();
       if ( isset($_FILES['avatar_file']) && $this->helper->check_type($_FILES['avatar_file']['type']) )
       {
-        // echo "ok";
-        // die();
+
 				$avatar->source_path = $_FILES['avatar_file']['tmp_name'];
 				$upload_file_name = $this->userHelper->get_image_name_upload_from_dollar_files($_FILES['avatar_file']['type']);
-        $avatar->target_path = $this->arg['image_folder_path'] . $upload_file_name;
+        $avatar->target_path = base_path($this->arg['avatar_path']) . '/' . $upload_file_name;
+
         $avatar->jpeg_quality = 100;
         $avatar->preserve_aspect_ratio = true;
-        if($_FILES['avatar_file']['type'] == "image/gif")
+        // if($_FILES['avatar_file']['type'] == "image/gif")
           move_uploaded_file($_FILES['avatar_file']['tmp_name'], $avatar->target_path);
-        else
-          $avatar->crop($_POST['avatar_x'], $_POST['avatar_y'], $_POST['avatar_width']+$_POST['avatar_x'], $_POST['avatar_height']+$_POST['avatar_y']);
-        $data['avatar'] = $upload_file_name;
-        if($this->currentUser['avatar'] != '' && $this->currentUser['avatar'] != $upload_file_name)
+        // else
+        //   $avatar->crop($_POST['avatar_x'], $_POST['avatar_y'], $_POST['avatar_width']+$_POST['avatar_x'], $_POST['avatar_height']+$_POST['avatar_y']);
+
+        $data['avatar'] = $this->arg['avatar_path'] . '/' . $upload_file_name;
+        if($this->currentUser['avatar'] != '')
         {
-          unlink($this->arg['image_folder_path'] . $this->currentUser['avatar'] );
+          unlink(base_path($this->currentUser['avatar']));
           // chmod($this->arg['image_folder_path'] . $this->['avatar'], 0777);
         }
         $this->pdo->update('users', $data, 'id='.$this->currentUser['id']);
+        lib_redirect();
      }
-     else if($this->currentUser['avatar'] != '')
-     {
-        $avatar->source_path = $this->userHelper->get_avatar_path($this->arg['image_folder_path'], $this->currentUser['avatar']);
-        $ext = pathinfo($this->currentUser['avatar'], PATHINFO_EXTENSION);
-        $upload_file_name = $this->userHelper->get_image_name_upload_from_extension($ext);
-        $avatar->target_path = $this->arg['image_folder_path'] . $upload_file_name;
-        $avatar->jpeg_quality = 100;
-        $avatar->preserve_aspect_ratio = true;
-        if($_FILES['avatar_file']['type'] == "image/gif")
-            move_uploaded_file($_FILES['avatar_file']['tmp_name'], $avatar->target_path);
-        else
-            $avatar->crop($_POST['avatar_x'], $_POST['avatar_y'], $_POST['avatar_width']+$_POST['avatar_x'], $_POST['avatar_height']+$_POST['avatar_y']);
-        $data['avatar'] = $upload_file_name;
-        if($this->currentUser['avatar'] != '' && $this->currentUser['avatar'] != $upload_file_name)
-        {
-          unlink($this->arg['image_folder_path'] . $this->currentUser['avatar'] );
-          // chmod($this->arg['image_folder_path'] . $this->['avatar'], 0777);
-        }
-        $this->pdo->update('users', $data, 'id='.$this->currentUser['id']);
-     }
-
-
 		}
   }
   // end of change avatar
@@ -340,9 +309,10 @@ class User extends Main
     {
 			$data['avatar'] = '';
 			if($this->currentUser['avatar'] != ''){
-        unlink($this->arg['image_folder_path'] . $this->currentUser['avatar'] );
+        unlink(base_path($this->currentUser['avatar']));
 			}
       $this->pdo->update('users', $data, 'id=' . $this->currentUser['id'] );
+      lib_redirect();
 		}
   }
 

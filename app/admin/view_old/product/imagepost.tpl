@@ -20,13 +20,13 @@
     </div>
 </div>
 <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#product-image">Hình ảnh sản phẩm</a></li>
+    <li class="active"><a data-toggle="tab" href="#product-image">Hình ảnh sản phẩmx</a></li>
     <li><a class="data-toggle=" data-toggle="tab" href="#product-post">Bài viết sản phẩm</a></li>
 </ul>
 <div class='tab-content' style='margin-top:20px'>
     <div id='product-image' class='tab-pane fade in active'>
         <div class="avatar-view" title="Thêm mới hình ảnh">
-            <img id="avatar_cur" src="{$arg.product_folder_link}/product_take.gif" alt="Avatar">
+            <img id="avatar_cur" src="{base_url($arg.product_path_link)}/product_take.gif" alt="Avatar">
         </div>
         <!-- Cropping modal -->
         <div class="modal fade" id="avatar-modal">
@@ -86,8 +86,8 @@
                 <div class="row">
                     {foreach from=$images item=$image}
                     <div class="col-sm-6 col-md-4 image-container">
-                        <a class="lightbox" href="{$arg.product_folder_link}/{$image.name}">
-                            <img  src="{$arg.product_folder_link}/{$image.name}" alt="Park">
+                        <a class="lightbox" href="{base_url($arg.product_path_link)}/{$image.name}">
+                            <img  src="{base_url($arg.product_path_link)}/{$image.name}" alt="Park">
                         </a>
                         {if $image.is_showed eq 1}
                             <button class="edit btn btn-success" ><i class='fa fa-check'></i>Đại diện</button>

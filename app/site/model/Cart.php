@@ -25,7 +25,9 @@ class Cart extends Main {
         }
         $sql = "SELECT p.*,
         (SELECT m.name FROM media m
-        RIGHT JOIN  media_product mp ON m.id = mp.media_id WHERE mp.product_id = p.id AND mp.is_showed = 1) as image_name
+        INNER JOIN  media_product mp ON m.id = mp.media_id WHERE mp.product_id = p.id AND mp.is_showed = 1) as image_name,
+        (SELECT m.path FROM media m
+        INNER JOIN  media_product mp ON m.id = mp.media_id WHERE mp.product_id = p.id AND mp.is_showed = 1) as image_path
         ,((SELECT SUM(number_count) FROM import_products WHERE p.id=product_id) -
         (SELECT SUM(number_count) FROM export_products WHERE p.id=product_id)) max_number
         FROM products p

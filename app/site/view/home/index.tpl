@@ -2,7 +2,7 @@
     <div class="img_cate_bg mar-btm">
         <ul class="bxslider">
             {foreach from=$random_product item=list}
-                <li><img src="{$arg.product_folder_link}/{$list.image_name}"></li>
+                <li><img src="{base_url($list.image_path)}/{$list.image_name}"></li>
             {/foreach}
         </ul>
     </div>
@@ -19,7 +19,7 @@
                         <div class="product_item">
                             <div class="img">
                                 <a href="./?mc=product&site=detail&n={$list.link_name}">
-                                    <img src="{$arg.product_folder_link}/{$list.image_name}" width="100%">
+                                    <img src="{base_url($list.image_path)}/{$list.image_name}" width="100%">
                                 </a>
                             </div>
                             <div class="name">
@@ -82,7 +82,7 @@
                         <div class="product_item">
                             <div class="img">
                                 <a href="./?mc=product&site=detail&n={$list.link_name}">
-                                    <img src="{$arg.product_folder_link}/{$list.image_name}" width="100%">
+                                    <img src="{base_url($list.image_path)}/{$list.image_name}" width="100%">
                                 </a>
                             </div>
                             <div class="name">
@@ -145,7 +145,7 @@
                         <div class="product_item">
                             <div class="img">
                                 <a href="./?mc=product&site=detail&n={$list.link_name}">
-                                    <img src="{$arg.product_folder_link}/{$list.image_name}" width="100%">
+                                    <img src="{base_url($list.image_path)}/{$list.image_name}" width="100%">
                                 </a>
                             </div>
                             <div class="name">

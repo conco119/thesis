@@ -28,7 +28,7 @@
 
             <div class="col-md-3 col-sm-3 col-xs-12 col-df">
                 <div class="logo">
-                    <a href="{$arg.domain}"><img src="{$arg.logo_folder_link}/logo.png"></a>
+                    <a href="{$arg.domain}"><img src="{base_url($arg.logo_path)}/logo.png"></a>
                 </div>
             </div>
             <div class="col-md-9 col-sm-9 col-xs-12 col-df">

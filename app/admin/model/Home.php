@@ -9,6 +9,7 @@ class Home extends Main
 
   public function index()
   {
+
     $sql = " SELECT count(id) as exports,
             (SELECT count(id) FROM customers WHERE status = 1) AS customers,
             (SELECT count(id) FROM suppliers WHERE status = 1) AS suppliers,

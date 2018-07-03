@@ -5,7 +5,7 @@ abstract class HelpAbstract {
 
  function __construct()
  {
-     $this->pdo = new DPDO();
+     $this->pdo = new DPDO(DB_INFO);
 
      $this->permission_type = [
         1 => 'Quản trị hệ thống',

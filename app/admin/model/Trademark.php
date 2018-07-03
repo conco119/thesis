@@ -52,7 +52,7 @@ class Trademark extends Main
                 $notification = [
                     'status' => 'success',
                     'title'  => 'Thêm thành công',
-                    'text'   => "Thêm hãng sản xuất thành công"
+                    'text'   => "Thêm thương hiệu thành công"
                 ];
                 $this->smarty->assign('notification', $notification );
             }
@@ -61,7 +61,7 @@ class Trademark extends Main
                 $notification = [
                     'status' => 'error',
                     'title'  => 'Thêm không thành công',
-                    'text'   => "Thêm hãng sản xuất không thành công"
+                    'text'   => "Thêm thương hiệu không thành công"
                 ];
                 $this->smarty->assign('notification', $notification);
             }
@@ -90,7 +90,7 @@ class Trademark extends Main
                 $notification = [
                     'status' => 'success',
                     'title'  => 'Sửa thành công',
-                    'text'   => "Sửa hãng sản xuất thành công"
+                    'text'   => "Sửa thương hiệu thành công"
                 ];
                 $this->smarty->assign('notification', $notification );
             }

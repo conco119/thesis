@@ -32,7 +32,7 @@
 							<div id="crop-avatar">
 								<!-- Current avatar -->
 								<div class="avatar-view" title="Thay đổi avatar">
-									<img id="avatar_cur" src="{$result.avatar}" alt="Avatar">
+									<img id="avatar_cur" src="{base_url($arg.avatar)}" alt="Avatar">
 								</div>
 
 								<!-- Cropping modal -->
@@ -53,7 +53,7 @@
 														<div class="row">
 															<div style="padding-left: 0;" id="avatar_wrap" class="col-md-7 col-sm-7 col-xs-12">
 																<div style="position: relative; width: 100%; margin-top: 0;" id="avatar_wrap_child" class="avatar-wrapper">
-																	<img id="avatar_image" style="max-width: 100%" src="{$result.avatar}">
+																	<img id="avatar_image" style="max-width: 100%" src="{base_url($user.avatar)}">
 																</div>
 															</div>
 															<div style="padding-right: 0;" class="col-md-5 col-sm-5 col-xs-12">
@@ -102,16 +102,16 @@
 							<!-- end of image cropping -->
 
 						</div>
-						<h3>{$result.name}</h3>
+						<h3>{$user.name}</h3>
 
 						<ul class="list-unstyled user_data">
-							<li><i class="fa fa-map-marker user-profile-icon"></i>&ensp;{$result.address}</li>
+							<li><i class="fa fa-map-marker user-profile-icon"></i>&ensp;{$user.address}</li>
 
 							<li><i class="fa fa-phone" aria-hidden="true"></i>
-								{$result.phone}</li>
+								{$user.phone}</li>
 
 							<li class="m-top-xs"><i class="fa fa-envelope-o" aria-hidden="true"></i>
-							     <a href="{$result.email}" target="_blank">{$result.email}</a>
+							     <a href="{$user.email}" target="_blank">{$user.email}</a>
 							</li>
 						</ul>
 
@@ -180,7 +180,7 @@
                     <div class="row form-group">
                         <div class="col-lg-2"><label class="control-label" for="firstname">Tên đầy đủ</label></div>
                         <div class="col-lg-10"><div class="controls">
-                            <input type="text" class="form-control" name="name" id="firstname" value="{$result.name}">
+                            <input type="text" class="form-control" name="name" id="firstname" value="{$user.name}">
                         </div></div>
                         <!-- /controls -->
                     </div>
@@ -188,17 +188,17 @@
                             <div class="col-lg-2"><label class="control-label" for="selectError3">Sinh nhật</label></div>
                             <div class="col-lg-3">
                                 <select id="" name="day" class="form-control required">
-                                    {$result.birthday.day}
+                                    {$user.birthday.day}
                                 </select>
                             </div>
                             <div class="col-lg-3">
                                 <select id="" name="month" class="form-control required">
-                                    {$result.birthday.month}
+                                    {$user.birthday.month}
                                 </select>
                                 </div>
                                 <div class="col-lg-4">
                                 <select id="" name="year" class="form-control required">
-                                    {$result.birthday.year}
+                                    {$user.birthday.year}
                                 </select>
                                 </div>
                     </div>
@@ -208,7 +208,7 @@
                         </div>
                         <div class="col-lg-10">
                             <select id="" name="gender" class="form-control required">
-                                {$result.gender}
+                                {$user.gender}
                             </select>
                         </div>
                     </div>
@@ -217,14 +217,14 @@
                             <label class="control-label" for="firstname">Địa chỉ</label>
                         </div>
                         <div class="col-lg-10">
-                                <textarea type="text" class="form-control" name="address" id="firstname">{$result.address}</textarea>
+                                <textarea type="text" class="form-control" name="address" id="firstname">{$user.address}</textarea>
                         </div>
                     </div>
 
                     <div class=" row form-group">
                         <div class="col-lg-2"><label class="control-label" for="firstname">Email</label></div>
                         <div class="col-lg-10">
-                            <input type="email" class="form-control" name="email" id="firstname" value="{$result.email}">
+                            <input type="email" class="form-control" name="email" id="firstname" value="{$user.email}">
                         </div>
                         <!-- /controls -->
                     </div>
@@ -233,7 +233,7 @@
                     <div class="row form-group">
                         <div class="col-lg-2"><label class="control-label" for="firstname">Điện thoại</label></div>
                         <div class="col-lg-10 controls">
-                            <input type="text" class="form-control" name="phone" id="firstname" value="{$result.phone}">
+                            <input type="text" class="form-control" name="phone" id="firstname" value="{$user.phone}">
                         </div>
                         <!-- /controls -->
                     </div>

@@ -23,7 +23,9 @@ class Home extends Main {
         //random product
         $sql = "SELECT p.* ,
         (SELECT m.name FROM media m
-        RIGHT JOIN  media_product mp ON m.id = mp.media_id WHERE mp.product_id = p.id AND mp.is_showed = 1) as image_name
+        INNER JOIN  media_product mp ON m.id = mp.media_id WHERE mp.product_id = p.id AND mp.is_showed = 1) as image_name,
+        (SELECT m.path FROM media m
+        INNER JOIN  media_product mp ON m.id = mp.media_id WHERE mp.product_id = p.id AND mp.is_showed = 1) as image_path
         FROM products p
         WHERE p.status = 1
         ORDER BY RAND()
@@ -35,7 +37,9 @@ class Home extends Main {
         //đèn thông minh
         $sql = "SELECT p.*,
         (SELECT m.name FROM media m
-        RIGHT JOIN  media_product mp ON m.id = mp.media_id WHERE mp.product_id = p.id AND mp.is_showed = 1) as image_name,
+        INNER JOIN  media_product mp ON m.id = mp.media_id WHERE mp.product_id = p.id AND mp.is_showed = 1) as image_name,
+        (SELECT m.path FROM media m
+        INNER JOIN  media_product mp ON m.id = mp.media_id WHERE mp.product_id = p.id AND mp.is_showed = 1) as image_path,
         (SELECT count(id) FROM product_rates pr WHERE p.id=pr.product_id ) as number_user_rate,
         (SELECT sum(rate) FROM product_rates pr WHERE p.id=pr.product_id ) as total_rate
         FROM products p
@@ -45,6 +49,7 @@ class Home extends Main {
         DESC LIMIT 10";
         $smart_light = $this->pdo->fetch_all($sql);
         $smart_light = $this->HomeHelper->get_child_products(1, $smart_light);
+        // pre($smart_light);
         foreach($smart_light as $k => $item)
         {
             $smart_light[$k]['price'] = number_format($item['price']);
@@ -68,7 +73,9 @@ class Home extends Main {
         //ổ cắm thông minh
         $sql = "SELECT p.*,
         (SELECT m.name FROM media m
-        RIGHT JOIN  media_product mp ON m.id = mp.media_id WHERE mp.product_id = p.id AND mp.is_showed = 1) as image_name,
+        INNER JOIN  media_product mp ON m.id = mp.media_id WHERE mp.product_id = p.id AND mp.is_showed = 1) as image_name,
+        (SELECT m.path FROM media m
+        INNER JOIN  media_product mp ON m.id = mp.media_id WHERE mp.product_id = p.id AND mp.is_showed = 1) as image_path,
         (SELECT count(id) FROM product_rates pr WHERE p.id=pr.product_id ) as number_user_rate,
         (SELECT sum(rate) FROM product_rates pr WHERE p.id=pr.product_id ) as total_rate
         FROM products p
@@ -101,7 +108,9 @@ class Home extends Main {
         //thiết bị an ninh
         $sql = "SELECT p.*,
         (SELECT m.name FROM media m
-        RIGHT JOIN  media_product mp ON m.id = mp.media_id WHERE mp.product_id = p.id AND mp.is_showed = 1) as image_name,
+        INNER JOIN  media_product mp ON m.id = mp.media_id WHERE mp.product_id = p.id AND mp.is_showed = 1) as image_name,
+        (SELECT m.path FROM media m
+        INNER JOIN  media_product mp ON m.id = mp.media_id WHERE mp.product_id = p.id AND mp.is_showed = 1) as image_path,
         (SELECT count(id) FROM product_rates pr WHERE p.id=pr.product_id ) as number_user_rate,
         (SELECT sum(rate) FROM product_rates pr WHERE p.id=pr.product_id ) as total_rate
         FROM products p

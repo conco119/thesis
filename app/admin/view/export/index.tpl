@@ -267,7 +267,7 @@
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                         <select class="form-control" id="FilterTrademark" onchange="LoadProduct();">
-							<option value=0>Hãng sản xuất</option>
+							<option value=0>Thương hiệu</option>
 							{$out.trademarks}
 						</select>
                     </div>

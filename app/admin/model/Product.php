@@ -32,7 +32,9 @@ class Product extends Main
                 (SELECT sum(number_count) FROM import_products i WHERE i.product_id = a.id) AS imported,
                 (SELECT sum(number_count) FROM export_products e WHERE e.product_id = a.id ) AS exported,
                 (SELECT m.name FROM media m
-        RIGHT JOIN  media_product mp ON m.id = mp.media_id WHERE mp.product_id = a.id AND mp.is_showed = 1) as image_name
+        INNER JOIN  media_product mp ON m.id = mp.media_id WHERE mp.product_id = a.id AND mp.is_showed = 1) AS image_name,
+        (SELECT m.path FROM media m
+        INNER JOIN  media_product mp ON m.id = mp.media_id WHERE mp.product_id = a.id AND mp.is_showed = 1) AS image_path
         FROM products a WHERE 1=1 $sql_filter ORDER BY id DESC";
         $paging = $this->paging->get_content($this->pdo->count_rows($sql), 20);
         $sql .= $paging['sql_add'];
@@ -342,9 +344,9 @@ class Product extends Main
 
         //post
         $sql = "SELECT * FROM posts WHERE product_id =$id";
-        $post = $this->pdo->fetch_all($sql);
+        $post = $this->pdo->fetch_one($sql);
         $this->smarty->assign('images', $images);
-        $this->smarty->assign('post', $post[0]);
+        $this->smarty->assign('post', $post);
         $this->smarty->assign('product_info', $product_info);
         $this->smarty->assign('id', $id);
         $this->smarty->display(DEFAULT_LAYOUT);
@@ -387,27 +389,37 @@ class Product extends Main
         $avatar = new Zebra();
         if ( isset($_FILES['avatar_file']) && $this->helper->check_type($_FILES['avatar_file']['type']) )
         {
-          // echo "ok";
-          // die();
+
           $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
           $product = $this->pdo->fetch_one("SELECT * FROM products WHERE id= $id");
           $avatar->source_path = $_FILES['avatar_file']['tmp_name'];
           $upload_file_name = $this->ProductHelper->get_image_name_upload_from_dollar_files($product['code'], $_FILES['avatar_file']['type']);
-          $avatar->target_path = $this->arg['product_folder_path'] . "/" . $upload_file_name;
+          $avatar->target_path = base_path($this->arg['product_path']) . "/" . $upload_file_name;
           $data['name'] = $upload_file_name;
-          $data['path'] = $this->arg['product_folder_path'];
+          $data['path'] = $this->arg['product_path'];
           $avatar->jpeg_quality = 100;
           $avatar->preserve_aspect_ratio = true;
+
           if($_FILES['avatar_file']['type'] == "image/gif")
+          {
+            mkdir(base_path($this->arg['product_path']), 0775);
             move_uploaded_file($_FILES['avatar_file']['tmp_name'], $avatar->target_path);
+          }
+
           else
+          {
+            mkdir(base_path($this->arg['product_path']), 0775);
+            // move_uploaded_file($_FILES['avatar_file']['tmp_name'], $avatar->target_path);
             $avatar->crop($_POST['avatar_x'], $_POST['avatar_y'], $_POST['avatar_width']+$_POST['avatar_x'], $_POST['avatar_height']+$_POST['avatar_y']);
+          }
+
+
           $media_id = $this->pdo->insert('media', $data);
           unset($data);
           $data['product_id'] = $id;
           $data['media_id'] = $media_id;
           $data['is_showed'] = 0;
-          $media_id = $this->pdo->insert('media_product', $data);
+          $this->pdo->insert('media_product', $data);
           lib_redirect();
         }
       }
@@ -418,19 +430,22 @@ class Product extends Main
 
         if(isset($_POST['media_product_id']) && isset($_POST['media_id']))
         {
-            $media = $this->pdo->fetch_all("SELECT * FROM media WHERE id=". $_POST['media_id']);
+            $media = $this->pdo->fetch_one("SELECT * FROM media WHERE id=". $_POST['media_id']);
             // pre( $_POST);
             // die();
             $this->pdo->query("DELETE FROM media WHERE id=".$_POST['media_id']);
             $this->pdo->query("DELETE FROM media_product WHERE id=".$_POST['media_product_id']);
-            unlink($this->arg['product_folder_path'] . "/" . $media[0]['name'] );
+            unlink(base_path($media['path']) . "/" . $media['name'] );
 
-            $sql = "SELECT p.*, m.id as media_id, m.name, m.path,'{$this->arg['product_folder_link']}' as link
+            $sql = "SELECT p.*, m.id as media_id, m.name, m.path
             FROM media_product p
             LEFT JOIN media m ON m.id = p.media_id
             WHERE p.product_id =" . $_POST['product_id'];
             $images = $this->pdo->fetch_all($sql);
-
+            foreach($images as $key => $image)
+            {
+                $images[$key]['link'] = base_url($image['path']);
+            }
             echo json_encode($images);
             die();
         }
@@ -454,8 +469,11 @@ class Product extends Main
             FROM media_product p
             LEFT JOIN media m ON m.id = p.media_id
             WHERE p.product_id =" . $_POST['product_id'];
-            $images = $this->pdo->fetch_all($sql);
-
+        $images = $this->pdo->fetch_all($sql);
+        foreach($images as $key => $image)
+        {
+            $images[$key]['link'] = base_url($image['path']);
+        }
         echo json_encode($images);
         die();
     }

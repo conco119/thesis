@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>{$arg.setting.name}</title>
+<title>{$arg.setting.info.name}</title>
 <base href="{$arg.domain}">
 <link href="./mtd.ico" rel="shortcut icon">
 
@@ -39,7 +39,8 @@
 
 </head>
 <body class="nav-md">
-
+	{base_url('upload/product')}
+	{base_path('upload/product')}
 	<div class="container body">
 
 

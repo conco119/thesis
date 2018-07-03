@@ -49,7 +49,7 @@
                                         <td>
                                         	{$data.name}
                                         </td>
-                                        <td><img width='50px' src="{$arg.product_folder_link}/{$data.image_name}"></td>
+                                        <td><img width='50px' src="{base_url($data.image_path)}/{$data.image_name}"></td>
                                         <td>{$data.category_id.name}</td>
 										<td class="text-right">{$data.price}</td>
                                         <td class="text-right">{$data.imported|intval}</td>

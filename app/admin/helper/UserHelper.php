@@ -12,9 +12,6 @@ class UserHelper extends HelpAbstract
             3 => "EM"
         ];
         $this->prefix_img_name = 'mtd-avatar';
-
-        $this->avatar_folder = "../upload/user/avatars/";
-        $this->default_avatar = 'user-default.png';
     }
     public function get_user_permission_select($user_permission)
     {
@@ -54,13 +51,6 @@ class UserHelper extends HelpAbstract
         return $result;
     }
 
-    function get_user_avatar($path, $file)
-    {
-        if($file == '')
-            return $path . $this->default_avatar;
-        return $path . $file;
-    }
-
     function get_image_name_upload_from_dollar_files($type)
     {
 		$ext_arr = explode("/", $type);
@@ -68,19 +58,4 @@ class UserHelper extends HelpAbstract
 		return $this->prefix_img_name . time() . "." . $ext;
     }
 
-    function get_image_name_upload_from_extension($ext)
-    {
-        return $this->prefix_img_name . time() . "." . $ext;
-    }
-
-    function get_avatar_path($image_folder_path, $image=""){
-        $result = '';
-		if(is_file($image_folder_path . $image)){
-			$result = $image_folder_path . $image;
-		}
-		else{
-			$result = $image_folder_path . $this->default_avatar;
-		}
-		return $result;
-	}
 }

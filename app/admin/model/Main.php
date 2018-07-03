@@ -19,7 +19,7 @@ class Main implements Init
     $this->mc = $mc;
     $this->site = $site;
 
-    $this->pdo = new DPDO();
+    $this->pdo = new DPDO(DB_INFO);
     $this->paging = new pagination();
     $this->times = new Times();
     $this->dstring = new DString();
@@ -32,7 +32,7 @@ class Main implements Init
     $this->set_value();
     $this->setdb();
     $this->redirectIfCustomer();
-    $this->header_avatar();
+    $this->set_user_avatar();
   }
 
    public function set_value()
@@ -42,12 +42,16 @@ class Main implements Init
     $this->currentUser = $this->check_user();
     $this->arg = array(
             'stylesheet' => DOMAIN . "app/webroot/",
-            'image_folder_link' => DOMAIN . 'upload/image/',
-            'image_folder_path' => ROOT_PATH . "/upload/image/",
-            'product_folder_link' => DOMAIN . 'upload/product',
-            'product_folder_path' => ROOT_PATH . "/upload/product",
-            'logo_folder_link' => DOMAIN . "/upload/logo",
-            'logo_folder_path' => ROOT_PATH . "/upload/logo",
+            // 'image_folder_link' => DOMAIN . 'upload/image/',
+            // 'image_folder_path' => ROOT_PATH . "/upload/image/",
+
+            // 'product_folder_link' => DOMAIN . 'upload/product',
+            // 'product_folder_path' => ROOT_PATH . "/upload/product",
+            'avatar_path' => 'upload/avatar',
+            'product_path' => 'upload/product',
+
+            // 'logo_folder_link' => DOMAIN . "/upload/logo",
+            // 'logo_folder_path' => ROOT_PATH . "/upload/logo",
             'today' => gmdate("d-m-Y", time() + 7 * 3600),
             'this_month' => gmdate("m", time() + 7 * 3600),
             'this_year' => gmdate("Y", time() + 7 * 3600),
@@ -57,7 +61,6 @@ class Main implements Init
             'site' => $this->site,
             'user' => $this->currentUser,
             'setting' => $this->conf_info,
-            'macos' => MACOS,
             'prefix_admin' => "./admin?",
     );
     //user avatar to header view
@@ -84,12 +87,12 @@ class Main implements Init
         $this->conf_info = $content;
   }
 
-  public function header_avatar()
+  public function set_user_avatar()
   {
     if($this->currentUser['avatar'] != '')
-      $this->arg['avatar_link'] = $this->arg['image_folder_link'] . $this->currentUser['avatar'];
+      $this->arg['avatar'] = $this->currentUser['avatar'];
     else
-      $this->arg['avatar_link'] = $this->arg['image_folder_link'] . 'user-default.png';
+      $this->arg['avatar'] = 'upload/avatar/fallback-avatar.png';
     $this->smarty->assign('arg', $this->arg);
   }
 

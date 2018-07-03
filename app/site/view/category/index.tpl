@@ -8,7 +8,7 @@
     <div class="col-md-4 col-sm-4 col-xs-12">
         <div class="product_item">
             <div class="img">
-               <a href="?mc=product&site=detail&n={$list.link_name}"><img src="{$arg.product_folder_link}/{$list.image_name}" width="100%"></a>
+               <a href="?mc=product&site=detail&n={$list.link_name}"><img src="{base_url($list.image_path)}/{$list.image_name}" width="100%"></a>
             </div>
             <div class="name">
                 <a href="?mc=product&site=detail&n={$list.link_name}">{$list.name}</a>

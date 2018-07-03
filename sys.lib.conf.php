@@ -10,7 +10,6 @@ define("CORE_ZEBRA","core:Zebra");
 define("CORE_IMAGE","core:Image");
 define('DEFAULT_LAYOUT', 'default.tpl');
 define("USER", "user");
-define("MACOS", '/~mtd/htaccess/');
 define("ROOT_PATH", __DIR__);
 // define()
 
@@ -43,4 +42,18 @@ function lib_alert_with_exit($title){
   echo "<meta charset=\"UTF-8\"><script> alert('".$title."'); </script>";
   exit();
 }
+function base_path($path = null) {
+  if($path == null)
+    return ROOT_PATH . '/';
+  else
+    return ROOT_PATH . "/" . $path;
+}
+
+function base_url($url = null) {
+  if($url == null)
+      return DOMAIN;
+  else
+      return DOMAIN . $url;
+}
+
  ?>

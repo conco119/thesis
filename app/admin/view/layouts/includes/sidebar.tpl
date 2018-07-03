@@ -35,7 +35,7 @@
 					<li><a href="{$arg.prefix_admin}mc=service&site=index"><i style="width:26px;" class="glyphicon glyphicon-list-alt"></i>    Quản lý dịch vụ</a></li>
 				{/if}
 				{if $arg.user.permission neq 3}
-					<li><a href="{$arg.prefix_admin}mc=trademark&site=index"><i style="width:26px;" class="fa fa-industry"></i>    Hãng sản xuất</a></li>
+					<li><a href="{$arg.prefix_admin}mc=trademark&site=index"><i style="width:26px;" class="fa fa-industry"></i>    Thương hiệu</a></li>
 				{/if}
 				<li class='mc_customer mc_customergroup mc_supplier'><a><i class="fa fa-user-md"></i> Đối tác <span class="fa fa-chevron-down"></span></a>
 					<ul class="nav child_menu" style="display: none">

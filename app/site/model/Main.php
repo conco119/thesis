@@ -20,7 +20,7 @@ class Main
     $this->site = $site;
 
     $this->slim_pdo = $pdo;
-    $this->pdo = new DPDO();
+    $this->pdo = new DPDO(DB_INFO);
     $this->paging = new pagination();
     $this->times = new Times();
     $this->dstring = new DString();
@@ -35,7 +35,7 @@ class Main
 
    public function set_value()
   {
-    $dbo = new DPDO();
+    $dbo = new DPDO(DB_INFO);
     //content getting
     $content = array();
     if (file_exists($this->file_setting)) {
@@ -46,13 +46,14 @@ class Main
     $this->currentUser = $this->check_user();
     $this->arg = array(
             'stylesheet' => DOMAIN . "app/webroot/site/",
-            'common_stylesheet' => DOMAIN . "app/webroot/",
-            'image_folder_link' => DOMAIN . 'upload/image/',
-            'image_folder_path' => ROOT_PATH . "/upload/image/",
-            'product_folder_link' => DOMAIN . 'upload/product',
-            'product_folder_path' => ROOT_PATH . "/upload/product",
-            'logo_folder_link' => DOMAIN . "/upload/logo",
-            'logo_folder_path' => ROOT_PATH . "/upload/logo",
+            // 'common_stylesheet' => DOMAIN . "app/webroot/",
+            // 'image_folder_link' => DOMAIN . 'upload/image/',
+            // 'image_folder_path' => ROOT_PATH . "/upload/image/",
+            // 'product_folder_link' => DOMAIN . 'upload/product',
+            // 'product_folder_path' => ROOT_PATH . "/upload/product",
+            // 'logo_folder_link' => DOMAIN . "/upload/logo",
+            // 'logo_folder_path' => ROOT_PATH . "/upload/logo",
+            'logo_path' => 'upload/logo',
             'today' => gmdate("d-m-Y", time() + 7 * 3600),
             'this_month' => gmdate("m", time() + 7 * 3600),
             'this_year' => gmdate("Y", time() + 7 * 3600),
@@ -64,10 +65,10 @@ class Main
             'setting' => $content['info'],
     );
     //user avatar to header view
-    if($this->currentUser['avatar'] != '')
-      $this->arg['avatar_link'] = $this->arg['image_folder_link'] . $this->currentUser['avatar'];
-    else
-      $this->arg['avatar_link'] = $this->arg['image_folder_link'] . 'user-default.png';
+    // if($this->currentUser['avatar'] != '')
+    //   $this->arg['avatar_link'] = $this->arg['image_folder_link'] . $this->currentUser['avatar'];
+    // else
+    //   $this->arg['avatar_link'] = $this->arg['image_folder_link'] . 'user-default.png';
     $this->smarty->assign('arg', $this->arg);
     $this->set_sidebar();
     $this->set_footer();
@@ -93,7 +94,9 @@ class Main
     // sản phẩm bán chạy
     $sql = "SELECT p.*, sum(ex.number_count) as exported,
     (SELECT m.name FROM media m
-    RIGHT JOIN  media_product mp ON m.id = mp.media_id WHERE mp.product_id = p.id AND mp.is_showed = 1) as image_name,
+    INNER JOIN  media_product mp ON m.id = mp.media_id WHERE mp.product_id = p.id AND mp.is_showed = 1) as image_name,
+    (SELECT m.path FROM media m
+    INNER JOIN  media_product mp ON m.id = mp.media_id WHERE mp.product_id = p.id AND mp.is_showed = 1) as image_path,
     (SELECT count(id) FROM product_rates pr WHERE p.id=pr.product_id ) as number_user_rate,
     (SELECT sum(rate) FROM product_rates pr WHERE p.id=pr.product_id ) as total_rate
     FROM products p RIGHT JOIN export_products ex ON p.id = ex.product_id
@@ -127,7 +130,9 @@ class Main
     //sản phẩm khuyến mãi
     $sql = "SELECT p.*,
     (SELECT m.name FROM media m
-    RIGHT JOIN  media_product mp ON m.id = mp.media_id WHERE mp.product_id = p.id AND mp.is_showed = 1) as image_name,
+    INNER JOIN  media_product mp ON m.id = mp.media_id WHERE mp.product_id = p.id AND mp.is_showed = 1) as image_name,
+    (SELECT m.path FROM media m
+    INNER JOIN  media_product mp ON m.id = mp.media_id WHERE mp.product_id = p.id AND mp.is_showed = 1) as image_path,
     (SELECT count(id) FROM product_rates pr WHERE p.id=pr.product_id ) as number_user_rate,
     (SELECT sum(rate) FROM product_rates pr WHERE p.id=pr.product_id ) as total_rate
     FROM products p

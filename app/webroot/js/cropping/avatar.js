@@ -18,7 +18,7 @@ function readURL(input) {
 
 function check_avatar(){
 	var cur_avt = $('#avatar_cur').attr('src');
-	if(cur_avt.match(/user-default/g)){
+	if(cur_avt.match(/fallback-avatar/g)){
 		$('#del_avt_btn').attr('disabled','');
 		console.log('wat');
 	}

@@ -1,7 +1,7 @@
 <div class="">
     <div class="x_panel">
         <div class="x_title">
-            <h2>Hãng sản xuất</h2>
+            <h2>Thương hiệu</h2>
             <ul class="nav navbar-right panel_toolbox">
                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                 </li>
@@ -45,7 +45,7 @@
                             <td class="text-right">{$data.created_at}</td>
                             <td class="text-right">
                                 <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#UpdateForm" onclick="LoadDataForForm({$data.id});"><i class="fa fa-pencil"></i></button>
-                                <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#DeleteForm" onclick="LoadDeleteItem('{$arg.mc}', {$data.id}, '', 'hãng sản xuất', 'vì còn tồn tại trong sản phẩm');"><i class="fa fa-trash-o"></i></button>
+                                <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#DeleteForm" onclick="LoadDeleteItem('{$arg.mc}', {$data.id}, '', 'Thương hiệu', 'vì còn tồn tại trong sản phẩm');"><i class="fa fa-trash-o"></i></button>
                             </td>
                         </tr>
                     {/foreach}
@@ -92,9 +92,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-2 col-sm-2 col-xs-12">Tên hãng sản xuất</label>
+                        <label class="control-label col-md-2 col-sm-2 col-xs-12">Tên thương hiệu</label>
                         <div class="col-md-8 col-sm-8 col-xs-12">
-                            <input type="text" name="name" required="required" class="form-control" placeholder="Tên hãng sản xuất...">
+                            <input type="text" name="name" required="required" class="form-control" placeholder="Tên thương hiệu...">
                         </div>
                     </div>
                     <div class="form-group">
@@ -153,7 +153,7 @@ function LoadDataForForm(id) {
             $("#UpdateForm input[name=name]").val("");
             $("#UpdateForm input[name=status]").attr("checked", "checked");
             $("#UpdateForm input[name=status]").prop('checked', true);
-            $("#update_title").html('Thêm hãng sản xuất');
+            $("#update_title").html('Thêm thương hiệu');
         } else {
             $("#update_title").html('Sửa dịch vụ');
             $("#UpdateForm input[name=id]").val(data.id);

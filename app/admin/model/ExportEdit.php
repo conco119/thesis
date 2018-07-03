@@ -77,7 +77,7 @@ class ExportEdit extends Main
 
         $out['categories'] = $this->helper->get_option(1, 'product_categories', 0, 1, "Danh mục sản phẩm");
         $out['customers'] = $this->helper->get_option(1, 'customers', $export['customer_id']);
-        $out['trademarks'] = $this->helper->get_option(1, 'product_trademarks', 0, 1, "Hãng sản xuất");
+        $out['trademarks'] = $this->helper->get_option(1, 'product_trademarks', 0, 1, "Thương hiệu");
         // $out['origins'] = $this->product->get_select_origins($this->dbo);
         // $out['afprint'] = "?mod=import&site=afprint&id=";
         $out['discount'] = $this->helper->get_option(0, 'discount_type', $export['discount_type']);

@@ -96,8 +96,8 @@
                 </ul>
 
                 <div class="radio">
-                    {* <label><input type="radio" name="type"  value="1">Chuyển khoản ngân hàng</label>
-                    <p class="bor-bottom">Chúng tôi sẽ gửi hàng ngay sau khi nhận được thanh toán chuyển khoản của bạn</p> *}
+                    <label><input type="radio" name="type"  value="1">Chuyển khoản ngân hàng</label>
+                    <p class="bor-bottom">Chúng tôi sẽ gửi hàng ngay sau khi nhận được thanh toán chuyển khoản của bạn</p>
                     <label><input type="radio" name="type" value="0" checked>Trả tiền mặt khi nhận hàng (COD)</label>
                 </div>
 

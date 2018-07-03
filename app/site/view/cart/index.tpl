@@ -22,7 +22,7 @@
                     {foreach from=$cart.products key=k item=list}
                         <tr>
                             <td>{$k+1}</td>
-                            <td><img src="{$arg.product_folder_link}/{$list.image_name}" width="60" height="60"></td>
+                            <td><img src="{base_url($list.image_path)}/{$list.image_name}" width="60" height="60"></td>
                             <td class="name">{$list.name}</td>
 
                             <td class="price">

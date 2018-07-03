@@ -27,7 +27,7 @@
         {foreach from=$best_seller item=list}
             <li>
                 <div class="col-md-4 col-sm-4 col-xs-12 col-df text-center">
-                    <a href="./?mc=product&site=detail&n={$list.link_name}" title="{$list.name}"><img src="{$arg.product_folder_link}/{$list.image_name}" width="100%;"></a>
+                    <a href="./?mc=product&site=detail&n={$list.link_name}" title="{$list.name}"><img src="{base_url($list.image_path)}/{$list.image_name}" width="100%;"></a>
                 </div>
                 <div class="col-md-8 col-sm-8 col-xs-12 col-df">
                     <div class="info_prd">
@@ -58,7 +58,7 @@
         {foreach from=$sale_products item=list}
             <li>
                 <div class="col-md-4 col-sm-4 col-xs-12 col-df text-center">
-                    <a href="./?mc=product&site=detail&n={$list.link_name}" title="{$list.name}"><img src="{$arg.product_folder_link}/{$list.image_name}" width="100%;"></a>
+                    <a href="./?mc=product&site=detail&n={$list.link_name}" title="{$list.name}"><img src="{base_url($list.image_path)}/{$list.image_name}" width="100%;"></a>
                 </div>
                 <div class="col-md-8 col-sm-8 col-xs-12 col-df">
                     <div class="info_prd">
@@ -80,12 +80,12 @@
     <div class="clear"></div>
 </div>
 
-<div class="slider bg_white mar-btm">
+{* <div class="slider bg_white mar-btm">
     <ul class="sidebar_slider">
         {foreach from=$output.gallery_p6 item=list}
             <li><a href="{$list.link}" title="{$list.name}"><img src="{$list.img}" width="100%;"></a></li>
                 {/foreach}
     </ul>
-</div>
+</div> *}
 
 

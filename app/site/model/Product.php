@@ -13,7 +13,9 @@ class Product extends Main {
 
         $sql = "SELECT p.* ,
         (SELECT m.name FROM media m
-        RIGHT JOIN  media_product mp ON m.id = mp.media_id WHERE mp.product_id = p.id AND mp.is_showed = 1) as image_name,
+        INNER JOIN  media_product mp ON m.id = mp.media_id WHERE mp.product_id = p.id AND mp.is_showed = 1) as image_name,
+        (SELECT m.path FROM media m
+        INNER JOIN  media_product mp ON m.id = mp.media_id WHERE mp.product_id = p.id AND mp.is_showed = 1) as image_path,
         (SELECT count(id) FROM product_rates pr WHERE p.id=pr.product_id ) as number_user_rate,
         (SELECT sum(rate) FROM product_rates pr WHERE p.id=pr.product_id ) as total_rate
         FROM products p
@@ -80,7 +82,7 @@ class Product extends Main {
                 $this->pdo->update('products', ['views' => $product['views'] + 1], "id=".$product['id']);
                 //select lại product
                 $product = $this->pdo->fetch_one($sql);
-                $sql ="SELECT m.name, mp.is_showed FROM media m
+                $sql ="SELECT m.name, mp.is_showed, m.path FROM media m
                 LEFT JOIN media_product mp ON m.id = mp.media_id
                 WHERE mp.product_id = {$product['id']} ORDER BY mp.is_showed DESC";
 
@@ -107,7 +109,9 @@ class Product extends Main {
         // sản phẩm liên quan
         $sql = "SELECT p.*,
         (SELECT m.name FROM media m
-        RIGHT JOIN  media_product mp ON m.id = mp.media_id WHERE mp.product_id = p.id AND mp.is_showed = 1) as image_name,
+        INNER JOIN  media_product mp ON m.id = mp.media_id WHERE mp.product_id = p.id AND mp.is_showed = 1) as image_name,
+        (SELECT m.path FROM media m
+        INNER JOIN  media_product mp ON m.id = mp.media_id WHERE mp.product_id = p.id AND mp.is_showed = 1) as image_path,
         (SELECT count(id) FROM product_rates pr WHERE p.id=pr.product_id ) as number_user_rate,
         (SELECT sum(rate) FROM product_rates pr WHERE p.id=pr.product_id ) as total_rate,
         (SELECT count(id) FROM product_rates pr WHERE p.id=pr.product_id ) as number_user_rate,
