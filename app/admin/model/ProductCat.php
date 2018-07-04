@@ -134,7 +134,7 @@ class Productcat extends Main
     {
         if( isset($_POST['id']) )
         {
-          $cat = $this->pdo->fetch_one("SELECT * FROM product_categories WHERE id = " . $_POST['id']);
+          $cat = $this->pdo->fetch_one("SELECT * FROM product_categories WHERE id = " . $_POST['id'] . " and status = 1");
           if(!$cat) {
             $cat['code'] = $this->ProductCatHelper->get_cat_code();
           }

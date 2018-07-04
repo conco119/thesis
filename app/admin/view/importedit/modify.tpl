@@ -23,9 +23,9 @@
                 <div class="x_content">
 
                     <div class="h_content">
-                        <div class="form-group form-inline">
+                        {* <div class="form-group form-inline">
                             <input class="left form-control" id="UseBarcode" placeholder="Mã vạch">
-                        </div>
+                        </div> *}
 
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#GetProduct"
                                 onclick="LoadProduct();"><i class="fa fa-pencil"></i> Chọn sản phẩm

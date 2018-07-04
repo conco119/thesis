@@ -194,16 +194,16 @@ class Helper extends HelpAbstract
 
     public function get_option_customer_export($id)
     {
-        $sql = "SELECT a.id, a.code, a.name, b.name as group_name FROM customers a LEFT JOIN customer_groups b  ON a.group_id = b.id WHERE a.status = 1";
+        $sql = "SELECT a.id, a.code, a.name, a.phone, b.name as group_name FROM customers a LEFT JOIN customer_groups b  ON a.group_id = b.id WHERE a.status = 1";
         $customers = $this->pdo->fetch_all($sql);
 
         $result = "<option value='0'> Chọn khách hàng </option>";
         foreach($customers as $k => $customer)
         {
             if($customer['id'] == $id)
-                $result .= "<option value='{$customer['id']}' selected>{$customer['code']}-{$customer['name']}-{$customer['group_name']}</option>";
+                $result .= "<option value='{$customer['id']}' selected>{$customer['name']} - {$customer['phone']} - {$customer['group_name']}</option>";
             else
-                $result .= "<option value='{$customer['id']}'>{$customer['code']}-{$customer['name']}-{$customer['group_name']}</option>";
+                $result .= "<option value='{$customer['id']}'>{$customer['name']} - {$customer['phone']} - {$customer['group_name']}</option>";
         }
         return $result;
     }

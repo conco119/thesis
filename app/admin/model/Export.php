@@ -40,7 +40,8 @@ class Export extends Main
     // $out['categories'] = $this->product->get_select_categories($this->dbo);
     // $out['eid'] = $id;
     // $out['customers'] = $this->customer->get_select_customers_payment($this->dbo, $export['customer_id'], 0);
-      $out['customers'] = $this->helper->get_option_with_status('customers', $export['customer_id']);
+    //   $out['customers'] = $this->helper->get_option_with_status('customers', $export['customer_id']);
+      $out['customers'] = $this->ExportHelper->get_customers_with_status($export['customer_id']);
     // $out['discount'] = $this->help->get_select_from_array($this->discount_type, @$export['discount_type']);
     // $out['price_sale'] = $this->help->get_select_from_array($this->price_sale, @$export['price_sale'], 0);
     // $out['date'] = gmdate("d-m-Y", time() + 7 * 3600);

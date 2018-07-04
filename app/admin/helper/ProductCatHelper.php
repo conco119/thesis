@@ -16,7 +16,7 @@ class ProductCatHelper extends HelpAbstract
         if( $cat['parent_id'] != 0)
         {
             if($count == 0) {
-                $fullName = "<li><a style='color:red' href='#'>". $cat['name'] . "</a></li>" . $fullName;
+                $fullName = "<li><a style='color:' href='#'>". $cat['name'] . "</a></li>" . $fullName;
                 $count++;
             }
             else
@@ -30,7 +30,7 @@ class ProductCatHelper extends HelpAbstract
         else
         {
             if ($fullName == '')
-                return $fullName = "<li class='active'><a style='color:red' href='#'>" .  $cat['name'] . "</a></li>";
+                return $fullName = "<li class='active'><a style='color:' href='#'>" .  $cat['name'] . "</a></li>";
             else
                 return  "<li class='active'><a href='#'>". $cat['name'] .$fullName;
         }
@@ -38,7 +38,7 @@ class ProductCatHelper extends HelpAbstract
 
     public function get_product_cat_parent_select($cat_id, $parent_id)
     {
-        $cats = $this->pdo->fetch_all("SELECT * FROM product_categories WHERE id <> '$cat_id'");
+        $cats = $this->pdo->fetch_all("SELECT * FROM product_categories WHERE id <> '$cat_id' and status = 1 and parent_id = 0");
         $result = '<option value=0> Danh mục sản phẩm </option>';
         foreach($cats as $key => $value)
         {

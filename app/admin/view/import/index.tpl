@@ -110,11 +110,13 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <div class="col-md-3 col-sm-3 col-xs-12">
-                                        <button type="button" class="btn btn-primary" onclick="LoadDataForForm(0);" data-toggle="modal" data-target="#UpdateFrom">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                        {* <button type="button" class="btn btn-primary" onclick="LoadDataForForm(0);" data-toggle="modal" data-target="#UpdateFrom">
                                             <i class="fa fa-plus" aria-hidden="true"></i>
-                                        </button>
-                                    </div>
+                                        </button> *}
+                                        Nhà cung cấp
+                                        {* <label class="control-label"></label> *}
+                                    </label>
                                     <div class="col-md-9 col-sm-9 col-xs-12">
                                         <select name="suppliers_id" class="select2_single form-control" tabindex="-1" onchange="SetExportValue('supplier_id', this.value);">
                                             <option value=0>Chọn nhà cung cấp</option>

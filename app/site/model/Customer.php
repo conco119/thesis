@@ -59,9 +59,16 @@ class Customer extends Main {
             $user = $this->pdo->fetch_one("SELECT * FROM users WHERE username='{$username}' and password='{$password}'");
             if($user)
             {
-                $_SESSION['LOGIN_MEMBER'] = $user['id'];
-                lib_redirect('./');
-                exit();
+                if($user['status'] == 0)
+                {
+                    $errors['err_login'] = 'Tài khoản bị vô hiệu hóa';
+                    $this->smarty->assign('errors', $errors);
+                }
+                else
+                {
+                    $_SESSION['LOGIN_MEMBER'] = $user['id'];
+                    lib_redirect(DOMAIN);
+                }
             }
             else
             {

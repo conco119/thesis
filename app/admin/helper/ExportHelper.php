@@ -58,4 +58,19 @@ class ExportHelper extends HelpAbstract
         }
         return $result;
     }
+
+    public function get_customers_with_status($customer_id)
+    {
+        $customers = $this->pdo->fetch_all("SELECT * FROM customers WHERE status = 1");
+        $result = '';
+        foreach($customers as $key => $value)
+        {
+            $customer_group = $this->pdo->fetch_one("SELECT * FROM customer_groups WHERE id = {$value['group_id']}");
+            if($value['id'] == $customer_id)
+                $result .= "<option value='{$value['id']}' selected> {$value['name']} - {$value['phone']} - {$customer_group['name']} </option>";
+            else
+            $result .= "<option value='{$value['id']}'> {$value['name']} - {$value['phone']} - {$customer_group['name']} </option>";
+        }
+        return $result;
+    }
 }

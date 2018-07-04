@@ -62,6 +62,10 @@ class Product extends Main
                         break;
                 }
             }
+            else
+            {
+                $products[$key]['price'] = $this->dstring->get_price($product['price']);
+            }
 
             $products[$key]['category_id'] = $this->ProductHelper->help_get_category($product['category_id']);
             $products[$key]['updated_at'] = gmdate('d.m.Y', $product['updated_at'] + 7 * 3600);
@@ -409,8 +413,8 @@ class Product extends Main
           else
           {
             mkdir(base_path($this->arg['product_path']), 0775);
-            // move_uploaded_file($_FILES['avatar_file']['tmp_name'], $avatar->target_path);
-            $avatar->crop($_POST['avatar_x'], $_POST['avatar_y'], $_POST['avatar_width']+$_POST['avatar_x'], $_POST['avatar_height']+$_POST['avatar_y']);
+            move_uploaded_file($_FILES['avatar_file']['tmp_name'], $avatar->target_path);
+            // $avatar->crop($_POST['avatar_x'], $_POST['avatar_y'], $_POST['avatar_width']+$_POST['avatar_x'], $_POST['avatar_height']+$_POST['avatar_y']);
           }
 
 

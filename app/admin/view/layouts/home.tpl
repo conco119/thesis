@@ -39,8 +39,6 @@
 
 </head>
 <body class="nav-md">
-	{base_url('upload/product')}
-	{base_path('upload/product')}
 	<div class="container body">
 
 
